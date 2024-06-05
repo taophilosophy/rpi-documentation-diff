@@ -1,0 +1,99 @@
+== Displays
+
+To configure your Raspberry Pi to use a non-default display mode, set the resolution or rotation manually.
+
+=== Support for HDMI monitors
+
+With most HDMI monitors, Raspberry Pi OS uses the highest resolution and refresh rate supported by the monitor.
+
+The Raspberry Pi Zero, Zero W and Zero 2 W have a mini HDMI port, so you need a mini-HDMI-to-full-size-HDMI lead or adapter.
+
+Raspberry Pi 4, Raspberry Pi 5 and Raspberry Pi 400 have two micro HDMI ports, so you need a micro-HDMI-to-full-size-HDMI lead or adapter for each display you wish to attach. Connect the cables before turning on the Raspberry Pi.
+
+Raspberry Pi 4 and 400 can drive up to two displays, with a resolution up to 1080p at a 60Hz refresh rate. These devices support two 4K displays at a 30Hz refresh rate. You can also drive a single display at 4K with a 60Hz refresh rate if you connect the display to the `HDMI0` port and set the `hdmi_enable_4kp60=1` flag in xref:../computers/config_txt.adoc#what-is-config-txt[`/boot/firmware/config.txt`].
+
+Raspberry Pi 5 can drive up to two displays at 4K resolution at a 60hz refresh rate with no additional configuration.
+
+=== Set resolution and rotation
+
+==== via the desktop
+
+On the Raspberry Pi Desktop, open the *Preferences* menu and select the **Screen Configuration** utility. You should see a graphical representation of the displays connected to the Raspberry Pi. Right click on the display you wish to modify, and select an option. Click **Apply** to and close **Screen Configuration** to save your changes.
+
+==== via CLI
+
+Use the following command to open the **Screen Configuration** utility:
+
+[source,console]
+----
+$ arandr
+----
+
+You should see a graphical representation of the displays connected to the Raspberry Pi. Right click on the display you wish to modify, and select an option. Click **Apply** to and close **Screen Configuration** to save your changes.
+
+=== Manually set resolution and rotation
+
+==== Determine display device name
+
+To manually configure resolution and rotation, you'll need to know the names of your display devices. To determine the device names, run the following command to display information about attached devices:
+
+[source,console]
+----
+$ kmsprint | grep Connector
+----
+
+==== Set a custom resolution
+
+If you run the Wayland desktop compositor, you can set a custom display resolution by editing the `.config/wayfire.ini` file in your home directory. Edit the existing `[output:<device>]` section, or add a new `[output:<device>]` section for your xref:configuration.adoc#determine-display-device-name[display device] if one doesn't exist. To change your display resolution, add a `mode` line. For example, the following example shows a configuration for the device named `HDMI-A-1` with a resolution of 1080p at 60Hz:
+
+[source,ini]
+----
+[output:HDMI-A-1]
+mode = 1920x1080@60
+----
+
+For information about supported modes and the `mode` syntax, see the https://github.com/WayfireWM/wayfire-wiki/blob/master/Configuration.md#output-configuration[Wayfire documentation].
+
+Add the same configuration block to `/usr/share/greeter.ini` to configure the login screen resolution.
+
+==== Set a custom rotation
+
+If you run the Wayland desktop compositor, you can set a custom display rotation with `wlr-randr`. The following commands rotate the display by 0°, 90°, 180°, and 270°:
+
+[source,console]
+----
+$ wlr-randr --output HDMI-A-1 --transform normal
+$ wlr-randr --output HDMI-A-1 --transform 90
+$ wlr-randr --output HDMI-A-1 --transform 180
+$ wlr-randr --output HDMI-A-1 --transform 270
+----
+
+The `--output` option specifies the device to be rotated.
+
+NOTE: To run this command over SSH, add the following prefix: `WAYLAND_DISPLAY=wayland-1`, e.g. `WAYLAND_DISPLAY=wayland-1 wlr-randr --output HDMI-A-1 --transform 90`.
+
+You can also use one of the following `--transform` options to mirror the display at the same time as rotating it: `flipped`, `flipped-90`, `flipped-180`, `flipped-270`
+
+Alternatively, you can rotate the display using by editing the `.config/wayfire.ini` file in your home directory. Edit the existing `[output:<device>]` section, or add a new `[output:<device>]` section for your xref:configuration.adoc#determine-display-device-name[display device] if one doesn't exist. To rotate your display, add a `transform` line. For example, the following example shows a configuration for the device named `HDMI-A-1` with a resolution of 1080p at 60Hz and a 270° transform:
+
+[source,ini]
+----
+[output:HDMI-A-1]
+mode = 1920x1080@60
+transform = 270
+----
+
+Wayland supports the following `transform` options:
+
+* `normal`
+* `90`
+* `180`
+* `270`
+
+Add the same configuration block to `/usr/share/greeter.ini` to configure the login screen rotation.
+
+=== Console resolution and rotation
+
+To change the resolution and rotation of your Raspberry Pi in console mode, use the KMS settings. For more information, see <<kernel-command-line-cmdline-txt,configuring the kernel command line>>.
+
+NOTE: When using console mode with multiple displays, all connected displays share the same rotation settings.
