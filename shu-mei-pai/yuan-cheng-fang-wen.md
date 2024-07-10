@@ -1,65 +1,69 @@
-# 远程访问
+# Remote access
 
-## 远程访问简介
+## Introduction to remote access
 
-有时候您需要访问树莓派，但不使用连接显示器、键盘和鼠标。也许树莓派被嵌入在机器人中或安装在难以触及的地方。或者您可能没有多余的显示器。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/introduction.adoc)
 
-### 在本地网络上的远程控制
+Sometimes you need to access a Raspberry Pi without connecting it to a monitor, keyboard, and mouse. Perhaps the Raspberry Pi is embedded in a robot or mounted in an inconvenient location. Or maybe you don’t have a spare monitor.
 
-从本地网络上的另一台设备远程控制您的树莓派，请使用以下服务之一：
+### Remote control over the local network
+
+To remotely control your Raspberry Pi from another device on your local network, use one of the following services:
 
 * [SSH](https://www.raspberrypi.com/documentation/computers/remote-access.html#ssh)
 * [VNC](https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc)
-* [Raspberry Pi connect](https://www.raspberrypi.com/documentation/computers/remote-access.html#raspberry-pi-connect)
+* [Raspberry Pi Connect](https://www.raspberrypi.com/documentation/computers/remote-access.html#raspberry-pi-connect)
 
-SSH（Secure SHell）提供了对树莓派上终端会话的安全访问。VNC（Virtual Network Computing）提供了对树莓派桌面屏幕共享的安全访问。您只需要另一台计算机、本地网络和树莓派的本地 IP 地址。Raspberry Pi Connect 可安全地共享您的树莓派屏幕，且无需确认树莓派的 IP 地址。
+SSH (**S**ecure **SH**ell) provides secure access to a terminal session on your Raspberry Pi. VNC (**V**irtual **N**etwork **C**omputing) provides secure access to a desktop screen share on your Raspberry Pi. All you need is another computer, a local network, and the local [IP address](https://en.wikipedia.org/wiki/IP_address) of your Raspberry Pi. Raspberry Pi Connect shares your Raspberry Pi’s screen securely with no need to determine your local IP address.
 
-### 在本地网络上在设备之间共享文件
+### Share files between devices over the local network
 
-NFS（网络文件系统）、SCP（安全复制协议）、Samba 等服务使您能够在本地网络上的设备之间共享文件，而无需直接控制远程设备。当您需要从另一台设备访问存储在一台设备上的数据时，这些服务可能会很有用。
+Services like [NFS](https://www.raspberrypi.com/documentation/computers/remote-access.html#nfs) (Network File System), [SCP](https://www.raspberrypi.com/documentation/computers/remote-access.html#scp) (Secure Copy Protocol), [Samba](https://www.raspberrypi.com/documentation/computers/remote-access.html#samba), and [`rsync`](https://www.raspberrypi.com/documentation/computers/remote-access.html#rsync) enable you to share files between devices on the local network without directly controlling the remote device. These services can be useful when you need to access data stored on one device from another device.
 
-### 通过互联网远程控制
+### Remote control over the Internet
 
-要从连接到互联网的任何设备远程控制您的树莓派，您需要：
+To remotely control your Raspberry Pi from any device connected to the Internet, you can:
 
-* 在树莓派上放开 SSH 或 VNC，可以通过互联网、内部 VPN，或使用 RealVNC 的云 VNC Viewer 等外部服务。
-* 使用 Raspberry Pi Connect，这是由树莓派提供的免费屏幕共享服务。
+* Expose [SSH](https://www.raspberrypi.com/documentation/computers/remote-access.html#ssh) or [VNC](https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc) on your Raspberry Pi over the open internet, within a VPN, or using an external service like RealVNC’s cloud [VNC Viewer](https://www.realvnc.com/download/viewer/).
+* Use [Raspberry Pi Connect](https://www.raspberrypi.com/documentation/computers/remote-access.html#raspberry-pi-connect), a free screen sharing and remote shell service provided by Raspberry Pi.
 
-## 查找树莓派的 IP 地址
+## Find the IP address of your Raspberry Pi
 
-大多数连接到树莓派的方法都需要您知道树莓派的本地 IP 地址。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/find-your-ip-address.adoc)
 
-分配给连接到局域网的任何设备一个 IP 地址。要使用 SSH 或 VNC 从另一台机器连接到树莓派，您需要知道树莓派的 IP 地址。如果连接了显示器，这很容易，还有许多方法可以从网络上的另一台机器远程查找它。
+Most methods of connecting to your Raspberry Pi from another machine require you to know the local IP address of your Raspberry Pi.
 
-要查找树莓派的本地 IP 地址，请使用以下方法之一。
+Any device connected to a Local Area Network is assigned an IP address. In order to connect to your Raspberry Pi from another machine using [SSH](https://www.raspberrypi.com/documentation/computers/remote-access.html#ssh) or [VNC](https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc), you need to know the Raspberry Pi’s IP address. This is easy if you have a display connected, and there are a number of methods for finding it remotely from another machine on the network.
 
-### 桌面
+To find the local IP address of your Raspberry Pi, use one of the following methods.
 
-将鼠标悬停在系统托盘中的网络图标上，将显示一个工具提示。该工具提示会显示您当前连接的网络名称和 IP 地址。
+### Desktop
 
-![the Network Manager tooltip displaying a Wi-Fi network name and IP address](https://www.raspberrypi.com/documentation/computers/images/network-tooltip.png)
+Hover over the network icon in the system tray, and a tooltip will appear. This tooltip displays the name of the network you’re currently connected to and your IP address.
 
-### 命令行
+![the Network Manager tooltip displaying a Wi-Fi network name and IP address](https://www.raspberrypi.com/documentation/computers/images/network-tooltip.png?hash=baedf4def59f6a23b99903fcd48516ce)
 
-运行以下命令将您的本地 IP 地址输出到命令行：
+### Command line
+
+Run the following command to output your local IP address to the command line:
 
 ```
 $ hostname -I
 ```
 
-### 引导输出
+### Boot output
 
-如果您在树莓派上使用显示器，并且引导到命令行而不是桌面，则引导顺序将在登录提示符之前的最后几条输出信息中包含您的 IP 地址。
+If you use a display with your Raspberry Pi and you boot to the command line instead of the desktop, the boot sequence includes your IP address as one of the last few output messages before your login prompt.
 
-### 网络管理器
+### Network Manager
 
-您可以使用内置的网络管理器 CLI（ nmcli ）来访问有关您的网络的详细信息。运行以下命令：
+You can use the built-in Network Manager CLI (`nmcli`) to access details about your network. Run the following command:
 
 ```
 $ nmcli device show
 ```
 
-您应该看到类似以下内容的输出：
+You should see output similar to the following:
 
 ```
 GENERAL.DEVICE:                         wlan0
@@ -110,74 +114,70 @@ IP4.GATEWAY:                            --
 IP6.GATEWAY:                            --
 ```
 
-此命令输出有关树莓派上可访问的各种网络接口的信息。检查 GENERAL.TYPE 行，以查看每个块描述的网络接口类型。例如，“ethernet”是设备上的以太网端口，“wifi”是一些设备内置的 Wi-Fi 芯片。根据设备访问互联网的方式，您将查看不同的输出块以查找您的 IP 地址：
+This command outputs information about the various network interfaces accessible on your Raspberry Pi. Check the `GENERAL.TYPE` row to see which kind of network interface each block describes. For example, "ethernet" is the Ethernet port on your device, and "wifi" refers to the Wi-Fi chip built into some devices. You’ll look at different blocks of output to find your IP address depending on the way your device accesses the internet:
 
-* 如果您的设备使用 Wi-Fi 连接到互联网，请检查“wifi”块
-* 如果您的设备使用以太网端口连接到互联网，请检查“ethernet”块
+* if your device connects to the internet using Wi-Fi, check the "wifi" block
+* if your device connects to the internet using the Ethernet port, check the "ethernet" block
 
-在确定了正确的网络接口块后，请查找名为 IP4.ADDRESS[1] 的字段以获取 IPv4 地址，或者查找名为 IP6.ADDRESS[1] 的字段以获取 IPv6 地址。您可以忽略这些字段中的斜杠和数字（例如 /24 ）。
+Once you’ve identified the correct network interface block, look for a field named `IP4.ADDRESS[1]` for an IPv4 address or `IP6.ADDRESS[1]` for an IPv6 address. You can ignore the trailing slash and number (e.g. `/24`) in those fields.
 
-在上面的示例中，树莓派使用 Wi-Fi 访问互联网。检查 GENERAL.TYPE 字段为“wifi”的块，以查找 IP 地址。在这种情况下，您可以使用 IP4.ADDRESS[1] 字段中的 IPv4 地址访问此设备： 192.168.1.42 。
+In the example above, the Raspberry Pi uses Wi-Fi to access the internet. Check the block where the `GENERAL.TYPE` field reads "wifi" to find the IP address. In this case, you can access this device using the IPv4 address in the `IP4.ADDRESS[1]` field: `192.168.1.42`.
 
-### 使用 mDNS 解析 `raspberrypi.local` 。
+### Resolve `raspberrypi.local` with mDNS
 
-Raspberry Pi OS 支持 Avahi 服务的多播 DNS。
+Raspberry Pi OS supports multicast DNS as part of the Avahi service.
 
-如果您的设备支持 mDNS，您可以通过使用其主机名和 .local 后缀来访问您的树莓派。在新安装的 Raspberry Pi OS 上，默认主机名为 raspberrypi ，因此默认情况下，任何运行 Raspberry Pi OS 的树莓派都会响应：
+If your device supports mDNS, you can reach your Raspberry Pi by using its hostname and the `.local` suffix. The default hostname on a fresh Raspberry Pi OS install is `raspberrypi`, so by default any Raspberry Pi running Raspberry Pi OS responds to:
 
 ```
 $ ping raspberrypi.local
 ```
 
-如果可以访问树莓派，则 ping 将显示其 IP 地址：
+If the Raspberry Pi is reachable, `ping` will show its IP address:
 
 ```
 PING raspberrypi.local (192.168.1.131): 56 data bytes
 64 bytes from 192.168.1.131: icmp_seq=0 ttl=255 time=2.618 ms
 ```
 
->**技巧**
->
->如果您使用 Raspberry Pi Configuration、 raspi-config 或 /etc/hostname 更改树莓派的系统主机名，Avahi 会更新 .local 的 mDNS 地址。如果您忘记了树莓派的主机名，您可以在另一台设备上安装 Avahi，然后使用 avahi-browse 浏览本地网络上的所有主机和服务。 
+| TIP | If you change the system hostname of your Raspberry Pi using Raspberry Pi Configuration, `raspi-config`, or `/etc/hostname`, Avahi updates the `.local` mDNS address. If you don’t remember the hostname of your Raspberry Pi, you can install Avahi on another device, then use [`avahi-browse`](https://linux.die.net/man/1/avahi-browse) to browse all the hosts and services on your local network. |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-### 检查路由器的设备列表
+### Check your router’s list of devices
 
-在 Web 浏览器中，导航到您的路由器 IP 地址。然后，使用您的凭据登录。
+In a web browser, navigate to your router’s IP address. Then, log in using your credentials.
 
->**技巧**
->
->您的路由器 IP 地址通常为 `http://192.168.1.1` ，但并非总是如此。您可能会在路由器的标签上找到路由器的地址和凭据。 
+| TIP | Your router’s IP address is often [`http://192.168.1.1`](http://192.168.1.1/), but not always. You may be able to find your router’s address and credentials printed on a label on your router. |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-这将带您进入控制面板。浏览到连接设备列表或类似内容（所有路由器都不同），您应该能看到一些您认识的设备。一些设备被检测为 PC、平板电脑、手机、打印机等，因此您应该能识别一些并排除它们，以找出哪个是您的树莓派。
+This will take you to a control panel. Browse to the list of connected devices or similar (all routers are different), and you should see some devices you recognise. Some devices are detected as PCs, tablets, phones, printers, etc. so you should recognise some and rule them out to figure out which is your Raspberry Pi.
 
->**技巧**
->
->如果您用网线将您的树莓派连接到网络，请尝试在列表中筛选有线设备。应该会有较少的设备可供选择。 
+| TIP | If you connect your Raspberry Pi to your network with a wire, try filtering for wired devices in the list. There should be fewer devices to choose from. |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-### 查找带有 nmap 的设备
+### Find devices with `nmap`
 
-网络映射器命令 ( nmap ) 是用于网络发现的免费开源工具。可用于 Linux、macOS 和 Windows。
+The Network Mapper command (`nmap`) is a free and open source tool for network discovery. It is available for Linux, macOS, and Windows.
 
-* 要在 Linux 上安装，请安装 nmap 软件包，例如 apt install nmap 。
-* 要在 macOS 或 Windows 上安装，请参阅 nmap.org 下载页面。
+* To install on **Linux**, install the `nmap` package e.g. `apt install nmap`.
+* To install on **macOS** or **Windows**, see the [nmap.org download page](http://nmap.org/download.html).
 
-要使用 nmap 扫描您的网络上的设备，您需要知道您连接到的子网。首先，找到您正在使用的计算机的本地 IP 地址：
+To use `nmap` to scan the devices on your network, you need to know the subnet you are connected to. First, find the local IP address of the computer you’re using:
 
-* 在 Linux 上，将 hostname -I 输入到终端窗口中。
-* 在 macOS 上，转到系统设置 > 网络，选择您的活动网络连接，然后单击“详细信息...”按钮
-* 在 Windows 上，转到控制面板，然后在“网络和共享中心”下，单击“查看网络连接”，选择您的活动网络连接，然后单击“查看此连接的状态”
+* On **Linux**, type `hostname -I` into a terminal window
+* On **macOS**, go to **System Settings** > **Network**, select your active network connection, then click the **Details…**  button
+* On **Windows**, go to the Control Panel, then under **Network and Sharing Center**, click **View network connections**, select your active network connection and click **View status of this connection**
 
-接下来，扫描整个子网以查找其他设备。大多数本地网络使用 IPv4，它使用四个数值为 1 到 255 之间的数字来表示每个 IP 地址。您子网上的设备都使用相同的前三个数字。例如，如果您的 IP 地址是 192.168.1.5 ，其他设备将使用类似 192.168.1.2 ， 192.168.1.6 和 192.168.1.200 的地址。要使用 nmap 扫描此子网，请传递字符串 192.168.1.0/24 ，该字符串覆盖子网范围 192.168.1.0 到 192.168.1.255 。使用 -sn 标志在整个子网范围上运行 ping 扫描：
+Next, scan the whole **subnet** for other devices. Most local networks use IPv4, which uses four numbers with values between 1 and 255 for each IP address. Devices on your subnet all use the same first three numbers. For example, if your IP address is `192.168.1.5`, other devices will use addresses like `192.168.1.2`, `192.168.1.6` and `192.168.1.200`. To scan this subnet with `nmap`, pass the string `192.168.1.0/24`, which covers the subnet range `192.168.1.0` to `192.168.1.255`. Use the `-sn` flag to run a **ping scan** on the entire subnet range:
 
 ```
 $ sudo nmap -sn 192.168.1.0/24
 ```
 
->**技巧**
->
->根据您的本地网络速度，可能需要一分钟左右。 
+| TIP | This may take up to a minute depending on your local network speed. |
+| ----- | --------------------------------------------------------------------- |
 
-Ping 扫描查询范围内所有 IP 地址是否有响应。对于每个响应 ping 的设备，输出显示主机名和 IP 地址如下：
+A ping scan queries all IP addresses in the range for a response. For each device that responds to the ping, the output shows the hostname and IP address as follows:
 
 ```
 Starting Nmap 6.40 ( http://nmap.org ) at 2014-03-10 12:46 GMT
@@ -192,345 +192,358 @@ Host is up (0.0030s latency).
 Nmap done: 256 IP addresses (4 hosts up) scanned in 2.41 seconds
 ```
 
-上面的输出显示主机名为 raspberrypi 的设备具有 IP 地址 192.168.1.8 。
+The output above shows a device with hostname `raspberrypi` has IP address `192.168.1.8`.
 
-### 使用智能手机应用程序查找设备
+### Find devices with a smartphone app
 
-Fing 应用程序是一款免费的智能手机网络扫描器。它适用于 Android 和 iOS。
+The Fing app is a free network scanner for smartphones. It is available for [Android](https://play.google.com/store/apps/details?id=com.overlook.android.fing) and [iOS](https://itunes.apple.com/gb/app/fing-network-scanner/id430921107?mt=8).
 
-1. 将手机连接到与您的树莓派相同的网络。
-2. 当您打开 Fing 应用时，请触摸屏幕右上角的刷新按钮。
-3. 几秒钟后，您应该看到一个列出所有连接到您的网络的设备的列表。
-4. 滚动到制造商为"Raspberry Pi"的条目。 IP 地址显示在条目左下角，MAC 地址显示在条目右下角。
+1. Connect your phone to the same network as your Raspberry Pi.
+2. When you open the Fing app, touch the refresh button in the upper right-hand corner of the screen.
+3. After a few seconds, you should see a list with all the devices connected to your network.
+4. Scroll down to the entry with the manufacturer "Raspberry Pi". The IP address appears in the bottom left corner, and the MAC address in the bottom right corner of the entry.
 
-## 使用 SSH 访问远程终端
+## Access a remote terminal with SSH
 
-您可以使用安全外壳（SSH）协议从同一网络上的另一台计算机远程访问树莓派的终端。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/ssh.adoc)
 
-### 启用 SSH 服务器
+You can access the terminal of a Raspberry Pi remotely from another computer on the same network using the **S**ecure **SH**ell (SSH) protocol.
 
-默认情况下，Raspberry Pi OS 禁用了 SSH 服务器。可以通过以下一种方式启用 SSH：
+### Enable the SSH server
 
-#### 在桌面上
+By default, Raspberry Pi OS disables the SSH server. Enable SSH in one of the following ways:
 
-1. 从“首选项”菜单中启动树莓派配置。
-2. 转到“接口”选项卡。
-3. 选择“SSH”旁边的“已启用”。
-4. 单击“确定”。
+#### On the desktop
 
-#### 刷新全新的操作系统映像时
+1. From the **Preferences** menu, launch **Raspberry Pi Configuration**.
+2. Navigate to the **Interfaces** tab.
+3. Select **Enabled** next to **SSH**.
+4. Click **OK**.
 
-在全新安装的 Raspberry Pi OS 上配置 SSH：
+#### While flashing a fresh OS image
 
-1. 按照 Imager 指南中的说明进行安装。
-2. 在 OS 自定义步骤中，导航到服务选项卡。
-3. 选中复选框以启用 SSH。
-4. 选择密码身份验证以使用与在物理上使用树莓派时相同的用户名和密码登录。选择仅允许公钥身份验证以配置用于无密码登录的 SSH 密钥。
+To configure SSH on a completely new installation of Raspberry Pi OS:
 
-#### 从终端
+1. Follow the instructions in the [Install with Imager](https://www.raspberrypi.com/documentation/computers/getting-started.html#raspberry-pi-imager) guide.
+2. During the **OS Customisation** step, navigate to the **Services** tab.
+3. Tick the checkbox to **Enable SSH**.
+4. Select **password authentication** to log in using the same username and password you use while physically using your Raspberry Pi. Select **Allow public-key authentication only** to [configure an SSH key](https://www.raspberrypi.com/documentation/computers/remote-access.html#configure-ssh-without-a-password) for passwordless login.
 
-1. 在终端窗口中输入 sudo raspi-config 。
-2. 选择 Interfacing Options 。
-3. 导航到并选择 SSH 。
-4. 选择 Yes 。
-5. 选择 Ok 。
-6. 选择 Finish 。
+#### From the terminal
 
-#### 手动
+1. Enter `sudo raspi-config` in a terminal window.
+2. Select `Interfacing Options`.
+3. Navigate to and select `SSH`.
+4. Choose `Yes`.
+5. Select `Ok`.
+6. Choose `Finish`.
 
-1. 在引导分区中创建一个名为 ssh 的空文件：
+#### Manually
+
+1. Create an empty file named `ssh` in the boot partition:
 
     ```
     $ sudo touch /boot/firmware/ssh
     ```
-2. 重新启动计算机：
+2. Reboot the machine:
 
     ```
     $ sudo reboot
     ```
 
-### 连接到一个 SSH 服务器
+### Connect to an SSH server
 
-在您的计算机上打开一个终端窗口，并输入以下命令，将 `<ip address>` 占位符替换为您要连接到的树莓派的 IP 地址，将 `<username>` 替换为您的用户名：
+Open a terminal window on your computer and enter the following command, replacing the `<ip address>` placeholder with the [IP address of the Raspberry Pi you’re trying to connect to](https://www.raspberrypi.com/documentation/computers/remote-access.html#ip-address) and `<username>` with your username:
 
 ```
 $ ssh <username>@<ip address>
 ```
 
-当连接成功时，您将看到一个安全警告。输入 yes 继续。您只会在第一次连接时看到此警告。
+When the connection works, you will see a security warning. Type `yes` to continue. You will only see this warning the first time you connect.
 
-在提示时输入您的账户密码。
+Enter your account password when prompted.
 
-您现在应该看到了树莓派的命令提示符：
+You should now see the Raspberry Pi command prompt:
 
 ```
 <username>@<hostname> ~ $
 ```
 
-您现在已远程连接到树莓派，并可以执行命令。
+You are now connected to the Raspberry Pi remotely, and can execute commands.
 
->**注意**
->
->如果收到错误消息 connection timed out，则可能输入的树莓派 IP 地址不正确。请检查树莓派的 IP 地址。 
+| NOTE | If you receive a `connection timed out` error, you may have entered the wrong IP address for the Raspberry Pi. Check the [IP address of the Raspberry Pi](https://www.raspberrypi.com/documentation/computers/remote-access.html#ip-address). |
+| ------ | ------------------------------------------------------------------------------------------------------ |
 
-#### 通过 SSH 转发 X11
+#### Forward X11 over SSH
 
->**注意**
->
->在树莓派 4 和 5 上，Raspberry Pi OS Bookworm 默认使用 Wayland 窗口服务器。只有在使用 X 窗口服务器时才能转发 X11。要在 X11 上启用窗口转发，请在 Raspberry Pi Configuration 中将桌面切换到 X 窗口服务器。
+| NOTE | On Raspberry Pi 4 and 5, Raspberry Pi OS Bookworm uses the Wayland window server by default. You can only forward X11 if you use the X window server. To enable window forwarding over X11, switch your desktop to the X window server in Raspberry Pi Configuration. |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
->**注意**
->
->在许多桌面环境中都不再默认安装 X11。可安装第三方 X 服务器，如 XQuartz，以使用 X11 转发。
+| NOTE | X11 is no longer installed by default on many desktop environments. Install a third-party X server such as [XQuartz](https://www.xquartz.org/) to use X11 forwarding. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 
-X11 可以通过 SSH 启用图形应用程序。传递 -Y 参数以通过 SSH 转发 X 会话：
+X11 enables graphical applications over SSH. Pass the `-Y` flag to forward an X session over SSH:
 
 ```
 $ ssh -Y <username>@<ip address>
 ```
 
-经过身份验证后，您将像往常一样看到命令行。但是，您还可以打开图形窗口，X 服务器可以为您渲染。例如，键入以下命令以启动 Geany 窗口：
+Once authenticated, you will see the command line as usual. However, you can also open graphical windows that an X server can render for you. For example, type the following command to launch a [Geany](https://www.geany.org/) window:
 
 ```
 $ geany &
 ```
 
-### 配置无密码的 SSH
+### Configure SSH without a password
 
-要远程访问您的树莓派而无需每次连接时提供密码，请使用 SSH 密钥对。
+To remotely access your Raspberry Pi without providing a password each time you connect, use an SSH keypair.
 
-#### 使用 Raspberry Pi Imager 预配置 OS 镜像
+#### Preconfigure an OS image with Raspberry Pi Imager
 
-使用 Raspberry Pi Imager 配置启动镜像时，您可以预配置 SSH 密钥。您可以生成新的 SSH 密钥对或使用现有的 SSH 密钥。
+When configuring a boot image with Raspberry Pi Imager, you can preconfigure SSH keys. You can generate a new SSH keypair or an existing SSH key.
 
-1. 按照使用 Imager 指南安装来配置您的启动镜像。
-2. 在 OS 自定义步骤中，导航到服务选项卡，选中启用 SSH 复选框。
-3. 选择仅允许公钥身份验证单选按钮。如果您已经在 ~/.ssh/id_rsa.pub 中存储了一个 SSH 公钥，Imager 会自动使用该公钥来预填文本框。如果 Imager 没有找到 SSH 公钥，您可以单击“运行 SSH-KEYGEN”按钮生成新的密钥对。
+1. Follow the [install using Imager](https://www.raspberrypi.com/documentation/computers/getting-started.html#raspberry-pi-imager) guide to configure your boot image.
+2. During the **OS Customisation** step, navigate to the **Services** tab and tick the **Enable SSH** checkbox.
+3. Select the **Allow public-key authentication only** radio button. If you already have an SSH public key stored in `~/.ssh/id_rsa.pub`, Imager automatically uses that public key to prefill the text box. If Imager doesn’t find an SSH public key, you can click the **RUN SSH-KEYGEN** button to generate a new keypair.
 
-#### 手动配置 SSH 密钥
+#### Manually configure an SSH key
 
-如果您已经安装了 Raspberry Pi OS，您可以更新现有配置以使用 SSH 密钥认证。
+If you already have an installation of Raspberry Pi OS, you can update your existing configuration to use SSH key authentication.
 
-#### 检查现有的 SSH 公钥
+#### Check for existing SSH public keys
 
-要检查远程连接到树莓派的计算机上是否存在现有的 SSH 公钥，请运行以下命令：
+To check for an existing SSH public key on the computer you use to remotely connect to the Raspberry Pi, run the following command:
 
 ```
 $ ls ~/.ssh
 ```
 
-如果您看到名为 id_ed25519.pub ， id_rsa.pub 或 id_dsa.pub 的文件，则已经拥有一个 SSH 密钥。跳过 SSH 密钥对生成，并继续将 SSH 密钥添加到您的 SSH 身份列表中。
+If you see files named `id_ed25519.pub`, `id_rsa.pub`, or `id_dsa.pub`, you already have an SSH key. Skip SSH keypair generation and proceed to [add the SSH key to your list of SSH identities](https://www.raspberrypi.com/documentation/computers/remote-access.html#add-ssh-key-identity).
 
-#### 生成新的 SSH 密钥对
+#### Generate new SSH keypair
 
->**技巧**
->
->本指南提供了生成新 RSA 密钥的说明。为了增加安全性，您可以选择生成一个 Ed25519 密钥。在引用您的公钥和私钥文件名称时，将 -t ed25519 传递给 ssh-keygen ，并将 rsa 替换为 ed25519 以使用 Ed25519 密钥。 
+| TIP | This guide provides instructions to generate a new RSA key. For additional security, you can instead generate a [Ed25519](http://ed25519.cr.yp.to/) key. Pass `-t ed25519` to `ssh-keygen` and replace `rsa` with `ed25519` when referencing your public and private key file names to use an Ed25519 key. |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-生成新的 SSH 密钥对，请输入以下命令：
+To generate a new SSH keypair, enter the following command:
 
 ```
 $ ssh-keygen
 ```
 
-当询问要将密钥保存在哪里时，请按 Enter 键使用默认位置 ~/.ssh/id_rsa 。
+When asked where to save the key, press **Enter** to use the default location, `~/.ssh/id_rsa`.
 
-当询问是否要使用可选密语时，请按 Enter 键不使用密语。
+When asked for an optional keyphrase, press **Enter** to use no keyphrase.
 
-运行以下命令以检查 .ssh 目录的内容：
+Run the following command to check the contents of the `.ssh` directory:
 
 ```
 $ ls ~/.ssh
 ```
 
-您应该看到文件 id_rsa 和 id_rsa.pub ：
+You should see the files `id_rsa` and `id_rsa.pub`:
 
 ```
 authorized_keys  id_rsa  id_rsa.pub  known_hosts
 ```
 
-id_rsa 文件包含您的私钥。请将其安全保存在用于远程连接到 树莓派的计算机上。
+The `id_rsa` file contains your private key. Keep this secure on the computer you use to remotely connect to the Raspberry Pi.
 
-id_rsa.pub 文件包含您的公钥。您将与您的树莓派共享此密钥。当您远程连接到树莓派 时，它将使用此密钥来验证您的身份。
+The `id_rsa.pub` file contains your public key. You will share this key with your Raspberry Pi. When you connect with the Raspberry Pi remotely, it will use this key to verify your identity.
 
-#### 将 SSH 密钥添加到您的 SSH 身份列表中
+#### Add the SSH key to your list of SSH identities
 
-启动 SSH 代理：
+Start the SSH agent:
 
 ```
 $ eval "$(ssh-agent -s)"
 ```
 
-接下来，使用以下命令将您的关键标识添加到 ssh-agent 中：
+Next, add your key identities to `ssh-agent` with the following command:
 
 ```
 $ ssh-add ~/.ssh/id_rsa
 ```
 
-#### 将公钥复制到您的树莓派
+#### Copy a public key to your Raspberry Pi
 
-在您用于远程连接到树莓派的计算机上，使用以下命令将您的公钥安全地复制到树莓派：
+On the computer you use to remotely connect to the Raspberry Pi, use the following command to securely copy your public key to the Raspberry Pi:
 
 ```
 $ ssh-copy-id <username>@<ip address>
 ```
 
-当提示时，在树莓派上输入用户账户的密码。现在您可以连接到树莓派而无需输入密码。
+When prompted, enter the password for your user account on the Raspberry Pi. You can now connect to your Raspberry Pi without entering a password.
 
-#### 手动将公钥复制到您的树莓派
+#### Manually copy a public key to your Raspberry Pi
 
-如果您的操作系统不支持 ssh-copy-id ，您可以使用 scp 来复制您的公钥。
+If your operating system does not support `ssh-copy-id`, you can instead copy your public key with [`scp`](https://www.raspberrypi.com/documentation/computers/remote-access.html#scp).
 
-首先，在您的树莓派上，创建 Linux 希望找到密钥的目录：
+First, *on your Raspberry Pi*, create the directory where Linux expects to find keys:
 
 ```
 $ mkdir .ssh
 ```
 
-然后，为 .ssh 目录配置适当的权限：
+Then, configure the proper permissions for the `.ssh` directory:
 
 ```
 $ chmod 700 .ssh
 ```
 
-在您的常用计算机上，使用 scp 将您的公钥复制到名为 .ssh/authorized_keys 的文件中，存储在您的树莓派上：
+*On your usual computer*, use `scp` to copy your public key to a file named `.ssh/authorized_keys` on your Raspberry Pi:
 
 ```
 $ scp .ssh/id_rsa.pub <username>@<ip address>:.ssh/authorized_keys
 ```
 
->**技巧**
->
->上面的命令假定您以前从未授权任何密钥访问您的树莓派。如果您之前至少添加了一个密钥，您应该在 authorized_keys 文件的末尾添加包含公钥的新行，以保留现有的密钥。 
+| TIP | The command above assumes you have never before authorized any keys to access your Raspberry Pi. If you have previously added at least one key, you should instead add a new line containing the public key to the end of the `authorized_keys` file to preserve your existing keys. |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-在提示时，在树莓派上输入您的用户账户的密码。
+When prompted, enter the password for your user account on the Raspberry Pi.
 
-然后，在您的树莓派上，配置 authorized_keys 文件的权限：
+Then, *on your Raspberry Pi*, configure permissions for the `authorized_keys` file:
 
 ```
 $ chmod 644 .ssh/authorized_keys
 ```
 
-您现在可以在不输入密码的情况下连接到您的树莓派。
+You can now connect to your Raspberry Pi without entering a password.
 
-## 使用 VNC 进行屏幕共享
+## Screen share with VNC
 
-有时候在物理上操作设备并不方便。虚拟网络计算（VNC）可让您通过另一台设备控制某台设备的桌面。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/vnc.adoc)
 
-VNC 依赖于客户端和服务器。客户端运行在您可以直接与之交互的设备上，例如个人笔记本电脑、台式机、平板电脑或手机。服务器运行在您的树莓派上。当您使用 VNC 时，客户端将键盘和鼠标事件传输到服务器。服务器在您的树莓派上执行这些事件，并将屏幕更新返回给客户端。
+Sometimes it is not convenient to physically work with a device. Virtual Network Computing (VNC) allows you to control the desktop of one device from another.
 
-VNC 客户端在窗口中显示您的树莓派的桌面。您可以像在树莓派本身上工作一样与桌面交互。
+VNC relies upon a client and a server. The client runs on a device you can physically interact with, such as a personal laptop, desktop, tablet, or phone. The server runs on your Raspberry Pi. When you use VNC, the client transmits keyboard and mouse events to the server. The server executes those events on your Raspberry Pi, and returns screen updates to the client.
 
-Raspberry Pi OS 包含 wayvnc。它提供了一个 VNC 服务器，您可以在设备首选项中启用。
+The VNC client displays the desktop of your Raspberry Pi in a window. You can interact with the desktop as though you were working on the Raspberry Pi itself.
 
-在您的树莓派上使用 VNC 之前，您必须启用 VNC 服务器。
+Raspberry Pi OS includes [wayvnc](https://github.com/any1/wayvnc). This provides a VNC server that you can enable in your device preferences.
 
-### 启用 VNC 服务器
+Before you can use VNC on your Raspberry Pi, you must enable the VNC server.
 
-Raspberry Pi OS 支持在图形界面和命令行两种方式下启用 VNC 服务器。
+### Enable the VNC server
 
->**技巧**
->
->启用后，您可以在 /etc/wayvnc/ 访问您的 WayVNC 配置。 
+Raspberry Pi OS supports enabling the VNC server both graphically and at the command line.
 
-#### 图形化启用 VNC 服务器
+| TIP | Once enabled, you can access your WayVNC configuration at `/etc/wayvnc/`. |
+| ----- | ------------------------------------------------------------- |
 
-1. 在树莓派上启动图形桌面。
-2. 单击桌面系统托盘中的树莓派图标。
-3. 从菜单中选择 Preferences > Raspberry Pi Configuration。![Select Raspberry Pi Configuration from the Preferences menu in the system tray](https://www.raspberrypi.com/documentation/computers/images/raspberry-pi-configuration.png)
-4. 导航到 Interfaces 选项卡。
-5. 单击活动位置旁边的单选按钮以 VNC。![In the Interfaces tab](https://www.raspberrypi.com/documentation/computers/images/vnc-enable.png)
-6. 单击“确定”按钮以保存配置更改。
+#### Enable VNC Server Graphically
 
-#### 在命令行上启用 VNC 服务器。
+1. Boot into the graphical desktop on your Raspberry Pi.
+2. Click the Raspberry Pi icon in the system tray of your desktop.
+3. Select **Preferences** > **Raspberry Pi Configuration** from the menu.
+    ![Select Raspberry Pi Configuration from the Preferences menu in the system tray](https://www.raspberrypi.com/documentation/computers/images/raspberry-pi-configuration.png?hash=42124ba2d6a0a1046032f20a510c8170)
+4. Navigate to the **Interfaces** tab.
+5. Click the radio button next to **VNC** into the active position.
+    ![In the Interfaces tab](https://www.raspberrypi.com/documentation/computers/images/vnc-enable.png?hash=1202a570422ffb337acff32ebbe7e1ba)
+6. Click the **OK** button to save your configuration changes.
 
-使用 raspi-config 命令行启用 VNC 服务器。
+#### Enable the VNC server on the command line
 
-1. 打开 raspi-config 并输入以下内容：
+Use using [raspi-config](https://www.raspberrypi.com/documentation/computers/configuration.html#raspi-config) to enable the VNC server on the command line.
+
+1. Open `raspi-config` with the following line:
 
     ```
     $ sudo raspi-config
     ```
-2. 导航至接口选项。按 Enter 选择。
-3. 选择 VNC。按 Enter 选择。
-4. 在您想要启用 VNC 服务器吗? 下，突出显示 <Yes> 并按 Enter 。
-5. 按 Enter 返回菜单。按 Esc 退出 raspi-config 。
+2. Navigate to **Interface Options**. Press `Enter` to select.
+3. Select **VNC**. Press `Enter` to select.
+4. Under **Would you like the VNC Server to be enabled?** , highlight `<Yes>` and press `Enter`.
+5. Press `Enter` to return to the menu. Press `Esc` to exit `raspi-config`.
 
-### 连接到 VNC 服务器
+### Connect to a VNC server
 
-要连接到您的树莓派，您需要以下内容：
+To connect to your Raspberry Pi, you’ll need the following:
 
-* 您的树莓派和运行 VNC 客户端的设备连接到同一网络（例如家庭无线网络或 VPN）
-* 您的树莓派的主机名或 IP 地址
-* 树莓派上账户的有效用户名和密码组合
+* your Raspberry Pi and the device running the VNC client, connected to the same network (e.g. a home wireless network or VPN)
+* the hostname or IP address of your Raspberry Pi
+* a valid username and password combination for an account on your Raspberry Pi
 
-如果您不知道设备的 IP 地址，请参阅有关查找 IP 地址的说明。
+If you don’t know the IP address of your device, see [our instructions on finding your IP address](https://www.raspberrypi.com/documentation/computers/remote-access.html#ip-address).
 
-1. 下载 TigerVNC。您可以从其 GitHub 存储库的 Releases 页面安装最新版本。单击最新版本中的链接，找到适用于您平台的二进制文件。Windows 用户应下载 exe ；macOS 用户应下载 dmg ；Linux 用户应安装 jar 。
-2. 在您的客户端设备上启动 TigerVNC。在 macOS 和 Windows 上，您可以双击二进制文件。在 Linux 上，安装 java，然后运行 `java -jar VncViewer-<version>.jar` ，将 `<version>` 占位符替换为您下载的版本。
-3. 在“VNC 服务器”字段中输入您树莓派的 IP 地址。![Entering the Raspberry Pi’s local IP address into TigerVNC](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-enter-ip.png)
-4. 单击“Options”按钮。导航到“Input”选项卡。选中“在没有光标时显示点”旧版，以确保您始终可以在 TigerVNC 中看到光标。![TigerVNC option to render the cursor at all times as a dot](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-show-dot.png)
-5. 单击“Connect”按钮以与服务器建立连接。
-    * 如果 TigerVNC 警告“主机名与服务器证书不匹配”，请单击“是”按钮继续。![TigerVNC warning about mismatched certificates](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-cert-warning.png)
-    * 如果 TigerVNC 警告您“证书由未知机构签署”，请单击“是”按钮以为您的树莓派授予异常。![TigerVNC warning about certificates signed by an unknown authority](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-cert-signer-warning.png)
-6. 在提示输入用户名和密码时，请输入您的凭据。![Entering a username and password to authenticate via TigerVNC](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-username-password.png)
-7. 单击“确定”按钮以与 VNC 服务器进行身份验证。如果您的凭据正确，TigerVNC 应打开一个包含与树莓派上您账户对应的桌面的窗口。您应该能够移动鼠标和键盘以输入文本并与桌面交互。![The desktop of a Raspberry Pi after successfully authenticating with TigerVNC](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-desktop.png)
+1. Download [TigerVNC](https://tigervnc.org/). You can install the latest version from the [Releases page of their GitHub repository](https://github.com/TigerVNC/tigervnc/releases). Click on the link in the latest release, and find the binary for your platform. Windows users should download an `exe`; macOS users should download the `dmg`; Linux users should install the `jar`.
+2. On your client device, launch TigerVNC. On macOS and Windows, you can double-click the binary. On Linux, install java with `sudo apt install default-jre`, then run `java -jar VncViewer-<version>.jar`, replacing the `<version>` placeholder with the version you downloaded.
+3. In the "VNC server" field, enter the IP address of your Raspberry Pi.
+    ![Entering the Raspberry Pi’s local IP address into TigerVNC](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-enter-ip.png?hash=d5850756b11e22af16b61a506ecc57a9)
+4. Click the "Options" button. Navigate to the "Input" tab. Check the box next to "Show dot when no cursor" to ensure that you can always see a cursor in TigerVNC.
+    ![TigerVNC option to render the cursor at all times as a dot](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-show-dot.png?hash=fd38f036dfff015ecc767c744d1d86dc)
+5. Click the "Connect" button to initiate a connection with the server.
 
-## 通过 Raspberry Pi Connect 进行屏幕共享
+    * If TigerVNC warns you that the "Hostname does not match the server certificate", click the "Yes" button to continue.
+      ![TigerVNC warning about mismatched certificates](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-cert-warning.png?hash=ef5f95ae0b8df70e7d52088c266738ed)
+    * If TigerVNC warns you that the "certificate has been signed by an unknown authority", click the "Yes" button to grant an exception for your Raspberry Pi.
+      ![TigerVNC warning about certificates signed by an unknown authority](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-cert-signer-warning.png?hash=6b0016ada8bb81eaeab2a96f38e54d45)
+6. When prompted for a username and password, enter your credentials.
+    ![Entering a username and password to authenticate via TigerVNC](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-username-password.png?hash=1b25dda28ba1fce02ab1dac7dc55b65f)
+7. Click the "OK" button to authenticate with the VNC server. If your credentials are correct, TigerVNC should open a window containing the desktop corresponding to your account on the Raspberry Pi. You should be able to move your mouse and keyboard to input text and interact with the desktop.
+    ![The desktop of a Raspberry Pi after successfully authenticating with TigerVNC](https://www.raspberrypi.com/documentation/computers/images/vnc-tigervnc-desktop.png?hash=c237b5851d8df9410441238cc911dc2b)
 
-您可以使用 Raspberry Pi Connect 从另一设备的浏览器远程访问树莓派的桌面。 Raspberry Pi Connect 会自动处理配置，因此您无需查找树莓派的本地 IP 地址或修改本地网络。
+## Remote access with Raspberry Pi Connect
 
-欲了解更多信息，请参阅 Connect 文档。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/raspberry-pi-connect.adoc)
 
-## 使用 SCP 共享文件
+You can access a Raspberry Pi remotely from a browser on another device using Raspberry Pi Connect. Connect handles configuration automatically, so you don’t have to find your Raspberry Pi’s local IP address, your network’s public IP address, or modify your local network firewall to enable external access.
 
-安全复制协议（ scp ）通过 SSH 发送文件。您可以使用 scp 在您的树莓派和另一台计算机之间复制文件。
+Connect includes the ability to screen share on Raspberry Pi models running the Wayland window server and remote shell (terminal) access on all Raspberry Pi models.
 
-要使用 scp ，请查找您树莓派的 IP 地址。
+For more information, see [the Connect documentation](https://www.raspberrypi.com/documentation/services/connect.html).
 
-### 将文件复制到您的树莓派
+## Share files with SCP
 
-要将名为 myfile.txt 的文件从您的个人计算机复制到树莓派上用户的主文件夹，请从包含 myfile.txt 的目录中运行以下命令，将 `<username>` 占位符替换为您用于登录到树莓派的用户名，将 `<pi_ip_address>` 占位符替换为您的树莓派的 IP 地址：
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/scp.adoc)
+
+Secure Copy Protocol (`scp`) sends files over SSH. You can use `scp` to copy files between your Raspberry Pi and another computer.
+
+To use `scp`, [find your Raspberry Pi’s IP address](https://www.raspberrypi.com/documentation/computers/remote-access.html#ip-address).
+
+### Copy files to your Raspberry Pi
+
+To copy a file named `myfile.txt` from your personal computer to a user’s home folder on your Raspberry Pi, run the following command from the directory containing `myfile.txt`, replacing the `<username>` placeholder with the username you use to log in to your Raspberry Pi and the `<pi_ip_address>` placeholder with your Raspberry Pi’s IP address:
 
 ```
 $ scp myfile.txt <username>@<pi_ip_address>:
 ```
 
-要将文件复制到特定目录，请在 scp 命令中的 `:` 后附加目录路径。在运行 scp 之前创建文件夹，因为 scp 不会自动创建文件夹。例如，以下命令将名为 myfile.txt 的文件复制到用户主文件夹中的 project/ 目录中：
+To copy a file to a specific directory, append the directory path after the `:` in the `scp` command. Create the folder before you run `scp`, since `scp` won’t create folders automatically. For instance, the following command copies a file named `myfile.txt` into the `project/` directory within a user’s home folder:
 
 ```
 $ scp myfile.txt <username>@<pi_ip_address>:project/
 ```
 
-### 从您的树莓派复制文件
+### Copy files from your Raspberry Pi
 
-要将名为 myfile.txt 的文件从树莓派上的用户主目录复制到另一台计算机的当前目录，请运行以下命令：
+To copy a file named `myfile.txt` from a user’s home directory on a Raspberry Pi to the current directory on another computer, run the following command:
 
 ```
 $ scp <username>@<pi_ip_address>:myfile.txt .
 ```
 
-### 一次性使用一个命令复制多个文件
+### Copy multiple files with one command
 
-复制多个文件，请在单个命令中列出以空格分隔的文件名：
+To copy multiple files, list the file names in a single command, separated by spaces:
 
 ```
 $ scp myfile.txt myfile2.txt <username>@<pi_ip_address>:
 ```
 
-或者，使用通配符复制所有匹配特定筛选器的文件。以下命令复制所有以 .txt 结尾的文件：
+Alternatively, use a wildcard to copy all files matching a particular filter. The following command copies all files that end with `.txt`:
 
 ```
 $ scp *.txt <username>@<pi_ip_address>:
 ```
 
-以下命令复制所有以 m 开头的文件：
+The following command copies all files that start with `m`:
 
 ```
 $ scp m* <username>@<pi_ip_address>:
 ```
 
-以下命令复制所有以 m 开头且以 .txt 结尾的文件：
+The following command copies all files that start with `m` and end with `.txt`:
 
 ```
 $ scp m*.txt <username>@<pi_ip_address>:
@@ -540,100 +553,103 @@ $ scp m*.txt <username>@<pi_ip_address>:
 $ scp "my file.txt" <username>@<pi_ip_address>:
 ```
 
-### 复制文件夹
+### Copy a folder
 
-要复制文件夹及其所有内容，请传递文件夹名称和 -r （递归）参数：
+To copy a folder and all of its contents, pass the folder name with the `-r` (recursive) flag:
 
 ```
 $ scp -r project/ <username>@<pi_ip_address>:
 ```
 
-## 使用 rsync 在计算机之间同步文件夹
+## Synchronise folders between computers with `rsync`
 
-您可以使用 rsync 在计算机之间同步文件夹。例如，您可以使用 rsync 将树莓派拍摄的新照片自动传输到个人电脑。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/rsync.adoc)
 
-在配置 rsync 之前，确定以下数值的值：
+You can use `rsync` to synchronise folders between computers. For example, you could use `rsync` to transfer new pictures taken by your Raspberry Pi to your personal computer automatically.
 
-* `<pi_ip_address>` ：您树莓派的本地 IP 地址：有关更多信息，请参阅查找您的树莓派的 IP 地址
-* `<pi_username>` ：您用于登录到树莓派的用户名
-* `<pi_folder_name>` ：您要从树莓派复制文件的文件夹名称
-* `<pc_folder_name>` ：您想要在个人计算机上同步的文件夹名称
+Before you can configure `rsync`, determine values for the following:
 
-要配置 rsync 以同步文件，请在个人计算机上完成以下步骤，并使用上面确定的值替换命令中的占位符：
+* `<pi_ip_address>`: your Raspberry Pi’s local IP address: see [Find your Raspberry Pi’s IP address](https://www.raspberrypi.com/documentation/computers/remote-access.html#ip-address) for more information
+* `<pi_username>`: the username you use to log into your Raspberry Pi
+* `<pi_folder_name>`: the name of the folder you want to copy files from on your Raspberry Pi
+* `<pc_folder_name>`: the name of the folder you would like to synchronise on your personal computer
 
-1. 创建您想要同步到的文件夹：
+To configure `rsync` to synchronise files, complete the following steps on your personal computer, replacing placeholders in the commands with the values you determined above:
+
+1. Create the folder you would like to synchronise to:
 
     ```
     $ mkdir <pc_folder_name>
     ```
-2. 将文件同步到带有 rsync 的文件夹：
+2. Synchronise files to the folder with `rsync`:
 
     ```
     $ rsync -avz -e ssh <pi_username>@<pi_ip_address>:<pi_folder_name>/ <pc_folder_name>/
     ```
 
-此命令将所有文件从您的树莓派上的选定文件夹复制到个人计算机上的选定文件夹。如果多次运行该命令， rsync 会跟踪您已经下载的文件并跳过它们。如果您在树莓派上删除或修改已同步的文件， rsync 会相应地更新个人计算机上的文件。
+This command copies all files from the selected folder on your Raspberry Pi to the selected folder on your personal computer. If you run the command multiple times, `rsync` keeps track of the files you have already downloaded and skips them. If you delete or modify an already synchronised file on the Raspberry Pi, `rsync` updates the files on your personal computer accordingly.
 
-## 网络文件系统（NFS）
+## Network File System (NFS)
 
-网络文件系统（NFS）允许您在一个网络计算机上共享一个目录，该目录与同一网络上的其他计算机或设备共享。目录所在的计算机称为服务器，连接到该服务器的计算机或设备称为客户端。客户端通常 mount 共享目录，使其成为其自己目录结构的一部分。共享目录是共享资源或网络共享的一个示例。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/nfs.adoc)
 
-NFS 是在 Linux/Unix 环境中创建简单 NAS（网络附加存储）的流行方式。
+Network File System (NFS) allows you to share a directory located on one networked computer with other computers or devices on the same network. The computer where the directory is located is called the **server**, and computers or devices connecting to that server are called clients. Clients usually `mount` the shared directory to make it a part of their own directory structure. The shared directory is an example of a shared resource or network share.
 
-NFS 可能更适合于更为永久的网络挂载目录，例如 /home 目录或经常访问的共享资源。如果您想要一个让访客用户可以轻松连接的网络共享，Samba 更适合这项任务。在各种操作系统中，用于临时挂载和分离 Samba 共享的工具更容易获得。
+NFS is a popular way to create a simple NAS (Network-attached storage) in a Linux/Unix environment.
 
-在部署 NFS 之前，您应该熟悉：
+An NFS is perhaps best suited to more permanent network-mounted directories, such as `/home` directories or regularly-accessed shared resources. If you want a network share that guest users can easily connect to, Samba is better suited to the task. Tools to temporarily mount and detach from Samba shares are more readily available across operating systems.
 
-* Linux 文件和目录权限
-* 挂载和卸载文件系统
+Before deploying an NFS, you should be familiar with:
 
-### 设置基本的 NFS 服务器
+* Linux file and directory permissions
+* mounting and unmounting filesystems
 
-使用以下命令安装所需的软件包：
+### Set up a basic NFS server
+
+Install the packages required using the command below:
 
 ```
 $ sudo apt install nfs-kernel-server
 ```
 
-为了更容易维护，我们将所有 NFS 导出隔离在单个目录中，在该目录中，将使用 --bind 选项挂载真实目录。
+For easier maintenance, we will isolate all NFS exports in single directory, into which the real directories will be mounted with the `--bind` option.
 
-假设我们想要导出用户的家目录，这些目录位于 /home/users 。首先，我们创建导出文件系统：
+Suppose we want to export our users' home directories, which are in `/home/users`. First we create the export filesystem:
 
 ```
 $ sudo mkdir -p /export/users
 ```
 
->**技巧**
->
->如果您计划配置 LDAP/NIS 身份验证，请跳过下面的 chmod 步骤。 
+| TIP | If you plan to configure LDAP/NIS authentication, skip the `chmod` step below. |
+| ----- | ------------------------------------------------------------------------- |
 
-授予 /export 和 /export/users 读取、写入和执行权限（ 777 ），这样您就可以在没有 LDAP/NIS 身份验证的情况下从客户端访问 NFS 共享：
+Grant `/export` and `/export/users` read, write, and execute permissions (`777`) so you can access the NFS share from the client without LDAP/NIS authentication:
 
 ```
 $ chmod -R 777 777 /export
 ```
 
-接下来，使用以下命令挂载真实 users 目录：
+Next, mount the real `users` directory with:
 
 ```
 $ sudo mount --bind /home/users /export/users
 ```
 
-为了避免在每次重启后重新输入，我们将以下行添加到 /etc/fstab 中：
+To save us from retyping this after every reboot, we add the following line to `/etc/fstab`:
 
 ```
 /home/users    /export/users   none    bind  0  0
 ```
 
-有三个与 NFS 服务器相关的配置文件：
+There are three configuration files that relate to an NFS server:
 
 1. `/etc/default/nfs-kernel-server`
 2. `/etc/default/nfs-common`
 3. `/etc/exports`
 
-目前， /etc/default/nfs-kernel-server 中唯一重要的选项是 NEED_SVCGSSD 。默认设置为 "no" ，这很好，因为这次我们不会激活 NFSv4 安全性。
+The only important option in `/etc/default/nfs-kernel-server` for now is `NEED_SVCGSSD`. It is set to `"no"` by default, which is fine, because we are not activating NFSv4 security this time.
 
-为了使 ID 名称自动映射，文件 /etc/idmapd.conf 必须在客户端和服务器上都存在，并且具有相同的内容和正确的域名。此外，该文件应在 Mapping 部分中包含以下行：
+In order for the ID names to be automatically mapped, the file `/etc/idmapd.conf` must exist on both the client and the server with the same contents and with the correct domain names. Furthermore, this file should have the following lines in the `Mapping` section:
 
 ```
 [Mapping]
@@ -642,14 +658,14 @@ Nobody-User = nobody
 Nobody-Group = nogroup
 ```
 
-但是，请注意，客户端可能对 Nobody-User 和 Nobody-Group 有不同的要求。例如，在 RedHat 变体上，它们都是 nfsnobody 。如果不确定，请通过以下命令检查 nobody 和 nogroup 是否存在：
+However, note that the client may have different requirements for the Nobody-User and Nobody-Group. For example, on RedHat variants, it is `nfsnobody` for both. If you’re not sure, check via the following commands to see if `nobody` and `nogroup` are there:
 
 ```
 $ cat /etc/passwd
 $ cat /etc/group
 ```
 
-这样，服务器和客户端不需要用户共享相同的 UID/GUID。对于使用基于 LDAP 的身份验证的用户，在您的客户端中添加以下行：
+This way, server and client do not need the users to share same UID/GUID. For those who use LDAP-based authentication, add the following lines to the `idmapd.conf` of your clients:
 
 ```
 [Translation]
@@ -657,329 +673,331 @@ $ cat /etc/group
 Method = nsswitch
 ```
 
-这将导致 idmapd 知道要查看 nsswitch.conf 以确定它应该查找凭据信息的位置。如果您已经使用 LDAP 身份验证， nsswitch 不需要进一步解释。
+This will cause `idmapd` to know to look at `nsswitch.conf` to determine where it should look for credential information. If you have LDAP authentication already working, `nsswitch` shouldn’t require further explanation.
 
-要将我们的目录导出到本地网络 192.168.1.0/24 ，请在 /etc/exports 中添加以下两行：
+To export our directories to a local network `192.168.1.0/24`, add the following two lines to `/etc/exports`:
 
 ```
 /export       192.168.1.0/24(rw,fsid=0,insecure,no_subtree_check,async)
 /export/users 192.168.1.0/24(rw,nohide,insecure,no_subtree_check,async)
 ```
 
-#### 端口映射锁定（可选）
+#### Portmap lockdown (optional)
 
-您的 NFS 上的文件对网络上的任何人都是开放的。作为安全措施，您可以限制对指定客户端的访问。
+The files on your NFS are open to anyone on the network. As a security measure, you can restrict access to specified clients.
 
-将以下行添加到 /etc/hosts.deny ：
+Add the following line to `/etc/hosts.deny`:
 
 ```
 rpcbind mountd nfsd statd lockd rquotad : ALL
 ```
 
-通过首先阻止所有客户端，只有在下面添加的 /etc/hosts.allow 中的客户端才能访问服务器。
+By blocking all clients first, only clients in `/etc/hosts.allow` (added below) will be allowed to access the server.
 
-现在将以下行添加到 /etc/hosts.allow 中：
+Now add the following line to `/etc/hosts.allow`:
 
 ```
 rpcbind mountd nfsd statd lockd rquotad : <list of IPv4s>
 ```
 
-其中 `<list of IPv4s>` 是服务器和所有客户端的 IP 地址列表。（由于 rpcbind 中的限制不喜欢主机名，这些必须是 IP 地址。）请注意，如果您设置了 NIS，您可以将这些添加到同一行中。
+where `<list of IPv4s>` is a list of the IP addresses of the server and all clients. (These have to be IP addresses because of a limitation in `rpcbind`, which doesn’t like hostnames.) Note that if you have NIS set up, you can just add these to the same line.
 
-请确保授权 IP 地址列表包括 localhost 地址（ 127.0.0.1 ），因为 Ubuntu 的最新版本中的启动脚本使用 rpcinfo 命令来发现 NFSv3 支持，如果 localhost 无法连接，这将被禁用。
+Please ensure that the list of authorised IP addresses includes the `localhost` address (`127.0.0.1`), as the startup scripts in recent versions of Ubuntu use the `rpcinfo` command to discover NFSv3 support, and this will be disabled if `localhost` is unable to connect.
 
-最后，要使更改生效，请重新启动服务：
+Finally, to make your changes take effect, restart the service:
 
 ```
 $ sudo systemctl restart nfs-kernel-server
 ```
 
-### 配置 NFS 客户端
+### Configure an NFS client
 
-现在您的服务器正在运行，您需要设置任何客户端以便能够访问它。首先，安装所需的软件包：
+Now that your server is running, you need to set up any clients to be able to access it. To start, install the required packages:
 
 ```
 $ sudo apt install nfs-common
 ```
 
-在客户端上，我们可以使用一个命令挂载完整的导出树：
+On the client, we can mount the complete export tree with one command:
 
 ```
 $ mount -t nfs -o proto=tcp,port=2049 <nfs-server-IP>:/ /mnt
 ```
 
-您还可以指定 NFS 服务器主机名，而不是其 IP 地址，但在这种情况下，您需要确保主机名可以在客户端上解析为 IP。确保这将始终解析的一种稳健方法是使用 /etc/hosts 文件。
+You can also specify the NFS server hostname instead of its IP address, but in this case you need to ensure that the hostname can be resolved to an IP on the client side. A robust way of ensuring that this will always resolve is to use the `/etc/hosts` file.
 
-请注意，在 NFSv4 中， `<nfs-server-IP>:/export` 不是必需的，就像在 NFSv3 中一样。根导出 `:/` 默认导出为 fsid=0 。
+Note that `<nfs-server-IP>:/export` is not necessary in NFSv4, as it was in NFSv3. The root export `:/` defaults to export with `fsid=0`.
 
-我们还可以挂载导出的子树：
+We can also mount an exported subtree with:
 
 ```
 $ mount -t nfs -o proto=tcp,port=2049 <nfs-server-IP>:/users /home/users
 ```
 
-为了确保在每次重启时都挂载这个，请将以下行添加到 /etc/fstab ：
+To ensure this is mounted on every reboot, add the following line to `/etc/fstab`:
 
 ```
 <nfs-server-IP>:/   /mnt   nfs    auto  0  0
 ```
 
-如果在挂载后， /proc/mounts appears 中的条目为 `<nfs-server-IP>://` （带有两个斜杠），那么您可能需要在 /etc/fstab 中指定两个斜杠，否则 umount 可能会抱怨找不到该挂载点。
+If, after mounting, the entry in `/proc/mounts appears` as `<nfs-server-IP>://` (with two slashes), then you might need to specify two slashes in `/etc/fstab`, or else `umount` might complain that it cannot find the mount.
 
-#### 端口映射锁定（可选）
+#### Portmap lockdown (optional)
 
-将以下行添加到 /etc/hosts.deny ：
+Add the following line to `/etc/hosts.deny`:
 
 ```
 rpcbind : ALL
 ```
 
-通过首先阻止所有客户端，只有在下面添加的 /etc/hosts.allow 中的客户端才能访问服务器。
+By blocking all clients first, only clients in `/etc/hosts.allow` (added below) will be allowed to access the server.
 
-现在将以下行添加到 /etc/hosts.allow 中：
+Now add the following line to `/etc/hosts.allow`:
 
 ```
 rpcbind : <NFS server IP address>
 ```
 
-其中 `<NFS server IP address>` 是服务器的 IP 地址。
+where `<NFS server IP address>` is the IP address of the server.
 
-### 配置复杂的 NFS 服务器
+### Configure a complex NFS server
 
-NFS 用户权限基于用户 ID（UID）。客户端上任何用户的 UID 必须与服务器上的 UID 匹配，以便用户能够访问。通常的做法有：
+NFS user permissions are based on user ID (UID). UIDs of any users on the client must match those on the server in order for the users to have access. The typical ways of doing this are:
 
-* 手动同步密码文件
-* 使用 LDAP
-* 使用 DNS
-* 使用 NIS
+* Manual password file synchronisation
+* Use of LDAP
+* Use of DNS
+* Use of NIS
 
-请注意，在具有 root 访问权限的系统上，您必须小心：该用户可以更改系统上的 UID 以允许自己访问任何人的文件。本页面假定管理团队是唯一具有 root 访问权限的群组，并且他们都是受信任的。其他任何情况都代表更高级的配置，这里不会涉及。
+Note that you have to be careful on systems where the main user has root access: that user can change UIDs on the system to allow themselves access to anyone’s files. This page assumes that the administrative team is the only group with root access and that they are all trusted. Anything else represents a more advanced configuration, and will not be addressed here.
 
-#### 群组权限
+#### Group permissions
 
-用户的文件访问权限取决于他们在客户端组中的成员资格，而不是在服务器上。但是，有一个重要的限制：从客户端传递给服务器的最多有 16 个组，如果用户在客户端是超过 16 个组的成员，则某些文件或目录可能会意外地无法访问。
+A user’s file access is determined by their membership of groups on the client, not on the server. However, there is an important limitation: a maximum of 16 groups are passed from the client to the server, and if a user is member of more than 16 groups on the client, some files or directories might be unexpectedly inaccessible.
 
-#### DNS（可选，仅在使用 DNS 时）
+#### DNS (optional, only if using DNS)
 
-将任何客户端名称和 IP 地址添加到 /etc/hosts 中。（服务器的 IP 地址应该已经存在。）这样即使 DNS 出现问题，NFS 仍然可以正常工作。或者您可以选择依赖 DNS - 这取决于您。
+Add any client name and IP addresses to `/etc/hosts`. (The IP address of the server should already be there.) This ensures that NFS will still work even if DNS goes down. Alternatively you can rely on DNS if you want - it’s up to you.
 
-#### NIS（可选，仅在使用 NIS 时）
+#### NIS (optional, only if using NIS)
 
-这适用于使用 NIS 的客户端。否则，您将无法使用 netgroups，并且应在 /etc/exports 中指定单独的 IP 或主机名。阅读 man netgroup 中的 BUGS 部分以获取更多信息。
+This applies to clients using NIS. Otherwise you can’t use netgroups, and should specify individual IPs or hostnames in `/etc/exports`. Read the BUGS section in `man netgroup` for more information.
 
-首先，编辑 /etc/netgroup 并添加一行来对您的客户端进行分类（此步骤不是必需的，但为方便起见）：
+First, edit `/etc/netgroup` and add a line to classify your clients (this step is not necessary, but is for convenience):
 
 ```
 myclients (client1,,) (client2,,) ...
 ```
 
-其中 myclients 是 netgroup 名称。
+where `myclients` is the netgroup name.
 
-运行此命令以重建 NIS 数据库：
+Next run this command to rebuild the NIS database:
 
 ```
 $ sudo make -C /var/yp
 ```
 
-文件名 yp 指的是 Yellow Pages，即 NIS 的前身。
+The filename `yp` refers to Yellow Pages, the former name of NIS.
 
-#### Portmap 锁定（可选）
+#### Portmap lockdown (optional)
 
-将以下行添加到 /etc/hosts.deny ：
+Add the following line to `/etc/hosts.deny`:
 
 ```
 rpcbind mountd nfsd statd lockd rquotad : ALL
 ```
 
-首先阻止所有客户端，只有在 /etc/hosts.allow （下面添加）中的客户端才能访问服务器。
+By blocking all clients first, only clients in `/etc/hosts.allow` (added below) will be allowed to access the server.
 
-考虑添加以下行到 /etc/hosts.allow ：
+Consider adding the following line to `/etc/hosts.allow`:
 
 ```
 rpcbind mountd nfsd statd lockd rquotad : <list of IPs>
 ```
 
-其中 `<list of IPs>` 是服务器和所有客户端的 IP 地址列表。由于 rpcbind 的限制，这些必须是 IP 地址。请注意，如果您设置了 NIS，可以将这些添加到同一行。
+where `<list of IPs>` is a list of the IP addresses of the server and all clients. These have to be IP addresses because of a limitation in `rpcbind`. Note that if you have NIS set up, you can just add these to the same line.
 
-#### 软件包安装和配置
+#### Package installation and configuration
 
-安装必要的软件包：
+Install the necessary packages:
 
 ```
 $ sudo apt install rpcbind nfs-kernel-server
 ```
 
-编辑 /etc/exports 并添加共享：
+Edit `/etc/exports` and add the shares:
 
 ```
 /home @myclients(rw,sync,no_subtree_check)
 /usr/local @myclients(rw,sync,no_subtree_check)
 ```
 
-上面的示例共享 /home 和 /usr/local 给 myclients netgroup 中的所有客户端。
+The example above shares `/home` and `/usr/local` to all clients in the `myclients` netgroup.
 
 ```
 /home 192.168.0.10(rw,sync,no_subtree_check) 192.168.0.11(rw,sync,no_subtree_check)
 /usr/local 192.168.0.10(rw,sync,no_subtree_check) 192.168.0.11(rw,sync,no_subtree_check)
 ```
 
-上面的示例将 /home 和 /usr/local 共享给具有静态 IP 地址的两个客户端。如果您希望改为允许私有网络中指定 IP 地址范围内的所有客户端访问，请考虑以下内容：
+The example above shares `/home` and `/usr/local` to two clients with static IP addresses. If you want instead to allow access to all clients in the private network falling within a designated IP address range, consider the following:
 
 ```
 /home 192.168.0.0/255.255.255.0(rw,sync,no_subtree_check)
 /usr/local 192.168.0.0/255.255.255.0(rw,sync,no_subtree_check)
 ```
 
-在这里， rw 使共享变为读/写模式，而 sync 要求服务器只在任何更改已刷新到磁盘后才回复请求。这是最安全的选项； async 更快，但危险。强烈建议您阅读 man exports ，如果您正在考虑其他选项。
+Here, `rw` makes the share read/write, and `sync` requires the server to only reply to requests once any changes have been flushed to disk. This is the safest option; `async` is faster, but dangerous. It is strongly recommended that you read `man exports` if you are considering other options.
 
-设置完 /etc/exports 后，导出共享：
+After setting up `/etc/exports`, export the shares:
 
 ```
 $ sudo exportfs -ra
 ```
 
-每当修改 /etc/exports 时，您都需要运行此命令。
+You’ll want to run this command whenever `/etc/exports` is modified.
 
-#### 重新启动服务
+#### Restart services
 
-重新启动 rpcbind 和 NFS 以使更改生效：
+Restart `rpcbind` and NFS for the changes to take effect:
 
 ```
 $ sudo systemctl restart rpcbind
 $ sudo systemctl restart nfs-kernel-server
 ```
 
-#### 要考虑的安全事项
+#### Security items to consider
 
-除了上面讨论的 UID 问题之外，还应注意到攻击者可能会冒充允许映射共享的机器，从而允许他们创建任意 UID 以访问您的文件。解决此问题的一个潜在方法是 IPSec。您可以设置所有域成员仅通过 IPSec 相互通信，这将有效地验证您的客户端是否为其所说的那个。
+Aside from the UID issues discussed above, it should be noted that an attacker could potentially masquerade as a machine that is allowed to map the share, which allows them to create arbitrary UIDs to access your files. One potential solution to this is IPSec. You can set up all your domain members to talk to each other only over IPSec, which will effectively authenticate that your client is who it says it is.
 
-IPSec 通过使用服务器的公钥加密到服务器的流量，服务器用客户端的公钥发送回所有回复。流量使用各自的私钥解密。如果客户端没有应该拥有的密钥，它就无法发送或接收数据。
+IPSec works by encrypting traffic to the server with the server’s public key, and the server sends back all replies encrypted with the client’s public key. The traffic is decrypted with the respective private keys. If the client doesn’t have the keys that it is supposed to have, it can’t send or receive data.
 
-IPSec 的替代方案是物理上分离的网络。这需要一个单独的网络交换机和单独的以太网卡，并且需要对该网络进行物理安全保护。
+An alternative to IPSec is physically separate networks. This requires a separate network switch and separate Ethernet cards, and physical security of that network.
 
-### 故障排除
+### Troubleshooting
 
-在加密的主目录中挂载 NFS 共享只有在成功登录并解密主目录后才能正常工作。这意味着在启动时使用/etc/fstab 挂载 NFS 共享是行不通的，因为在挂载时主目录尚未解密。有一种简单的方法可以解决这个问题，即使用符号链接：
+Mounting an NFS share inside an encrypted home directory will only work after you are successfully logged in and your home is decrypted. This means that using /etc/fstab to mount NFS shares on boot will not work, because your home has not been decrypted at the time of mounting. There is a simple way around this using symbolic links:
 
-1. 创建一个替代目录来挂载 NFS 共享：
+1. Create an alternative directory to mount the NFS shares in:
 
 ```
 $ sudo mkdir /nfs
 $ sudo mkdir /nfs/music
 ```
 
-1. 编辑 /etc/fstab 以将 NFS 共享挂载到该目录中：
+1. Edit `/etc/fstab` to mount the NFS share into that directory instead:
 
 ```
 nfsServer:music    /nfs/music    nfs    auto    0 0
 ```
 
-1. 在您的主目录内创建一个符号链接，指向实际的挂载位置。例如，在这种情况下，首先删除已经存在的 Music 目录：
+1. Create a symbolic link inside your home, pointing to the actual mount location. For example, and in this case deleting the `Music` directory already existing there first:
 
 ```
 $ rmdir /home/user/Music
 $ ln -s /nfs/music/ /home/user/Music
 ```
 
-## Samba（SMB/CIFS）
+## Samba (SMB/CIFS)
 
-Samba 是 Server Message Block（SMB）网络协议的免费软件重新实现。使用 Samba，您可以在 Windows、macOS 和 Linux 机器之间共享文件夹。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/samba.adoc)
 
-### 在您的树莓派上安装 Samba
+Samba is a free software reimplementation of the [Server Message Block](https://en.wikipedia.org/wiki/Server_Message_Block) (SMB) networking protocol. With Samba, you can share folders between Windows, macOS, and Linux machines.
 
-默认情况下，Raspberry Pi OS 不包含 Samba。要在您的树莓派上安装 Samba，请运行以下命令，该命令安装您运行 Samba 服务器或客户端所需的所有依赖项：
+### Install Samba on your Raspberry Pi
+
+By default, Raspberry Pi OS does not include Samba. To install Samba on your Raspberry Pi, run the following command, which installs all the dependencies you need to run a Samba server or client:
 
 ```
 $ sudo apt update
 $ sudo apt install samba samba-common-bin smbclient cifs-utils
 ```
 
-### 从 Windows 共享文件夹
+### Mount a folder shared from Windows
 
-首先，您需要在 Windows 设备上共享一个文件夹。
+First, you need to share a folder on your Windows device.
 
-#### 打开共享功能
+#### Turn on sharing
 
-1. 单击系统托盘，从菜单中选择“网络和共享中心”。
-2. 选择“更改高级共享设置”。
-3. 选择“打开网络发现”。
-4. 选择打开文件和打印机共享。
-5. 单击保存按钮以保存更改。
+1. Right click the system tray and select **Networking and Sharing Centre** from the menu.
+2. Select **Change advanced sharing settings**.
+3. Select **Turn on network discovery**.
+4. Select **Turn on file and printer sharing**.
+5. Click the **Save** button to save your changes.
 
-#### 共享文件夹
+#### Share the folder
 
-跟随这些步骤在 Windows 上共享文件夹：
+Follow these steps to share a folder from Windows:
 
-1. 右键单击要共享的文件夹，然后选择属性。
-2. 选择共享选项卡。
-3. 单击“高级共享”按钮。
-4. 选择“共享此文件夹”；默认情况下，Windows 使用文件夹名称作为共享名称。
-5. 单击“权限”按钮。
-6. 配置“每个人”和“完全控制”权限。
-7. 单击“确定”按钮以离开权限页面。
-8. 再次单击“确定”按钮以离开高级共享页面。
-9. 选择“安全”选项卡。
-10. 配置“每个人”和“完全控制”权限。
-11. 单击“确定”按钮。
+1. Right click the folder you want to share and select **Properties**.
+2. Select the **Sharing** tab.
+3. Click the **Advanced Sharing** button.
+4. Select **Share this folder**; by default, Windows uses the folder name as the share name.
+5. Click the **Permissions** button.
+6. Configure the **Everyone** and **Full Control** permissions.
+7. Click the **OK** button to leave the **Permissions** page.
+8. Click the **OK** button again to leave the **Advanced Sharing** page.
+9. Select the **Security** tab.
+10. Configure the **Everyone** and **Full Control** permissions.
+11. Click the **OK** button.
 
-现在应该共享文件夹了。您可以通过在权限和安全性页面上更改权限来修改共享文件夹权限。
+The folder should now be shared. You can modify shared folder permissions by changing permissions on both the **Permissions** and **Security** pages.
 
-#### Windows 10 共享向导
+#### Windows 10 Sharing Wizard
 
-在 Windows 10 上有一个共享向导，可以帮助完成其中的一些步骤。
+On Windows 10 there is a Sharing Wizard that helps with some of these steps.
 
-1. 从“开始”菜单中运行计算机管理应用程序。
-2. 选择“共享文件夹” > “共享”。
-3. 单击鼠标右键，选择“新建共享”以开始共享向导。
-4. 单击“下一步”按钮。
-5. 选择要共享的文件夹，然后单击“下一步”按钮。
-6. 单击“下一步”以使用共享默认设置，或选择“自定义”并设置所需权限。
-7. 点击“确定”按钮。
-8. 点击“完成”按钮以共享文件夹。
+1. Run the **Computer Management** application from the Start Bar.
+2. Select **Shared Folders** > **Shares**.
+3. Right click and select **New Share** to begin the Sharing Wizard.
+4. Click the **Next** button.
+5. Select the folder you wish to share, then click the **Next** button.
+6. Click **Next** to use the sharing defaults or select **Custom** and set the required permissions.
+7. Click the **OK** button.
+8. Click the **Finish** button to share the folder.
 
-#### 在树莓派上挂载文件夹。
+#### Mount the folder on the Raspberry Pi
 
-在 Linux 中，挂载是将文件夹附加到位置的过程，因此我们首先需要该位置。
+**Mounting** in Linux is the process of attaching a folder to a location, so firstly we need that location.
 
 ```
 $ mkdir windowshare
 ```
 
-现在，我们需要将远程文件夹挂载到该位置。远程文件夹是 Windows PC 的主机名或 IP 地址，以及在共享时使用的共享名称。我们还需要提供将用于访问远程计算机的 Windows 用户名。不要忘记用你的 Raspberry Pi OS 用户名替换 `<username>` 占位符。
+Now, we need to mount the remote folder to that location. The remote folder is the host name or IP address of the Windows PC, and the share name used when sharing it. We also need to provide the Windows username that will be used to access the remote machine. Don’t forget to replace the `<username>` placeholder with your Raspberry Pi OS username.
 
 ```
 $ sudo mount.cifs //<hostname or IP address>/<shared windows folder> /home/<username>/windowshare -o user=<name>
 ```
 
-您现在应该能够在树莓派上查看 Windows 共享的内容。
+You should now be able to view the content of the Windows share on your Raspberry Pi.
 
 ```
 $ ls windowshare/
 ```
 
-#### "主机已关闭" 错误
+#### "Host is down" error
 
-当 SMB 协议版本不匹配且 Linux Samba 客户端返回误导性错误消息时会发生此错误。默认情况下，Raspberry Pi OS 使用 2.1 及以上版本，与 Windows 7 及更高版本兼容。包括一些 NAS 在内的旧版设备可能需要 1.0 版本。要解决此错误，请在您的挂载命令中添加一个版本条目（例如 ,vers=1.0 ）：
+This error occurs when SMB protocol version do not match and the Linux Samba client returns a misleading error message. By default Raspberry Pi OS uses versions 2.1 and above, compatible with Windows 7 and later. Older devices, including some NAS, may require version 1.0. To fix this error, append a version entry (e.g. `,vers=1.0`) to your mount command:
 
 ```
 $ sudo mount.cifs //IP/share /mnt/point -o user=<uname>,vers=1.0
 ```
 
-您可能需要尝试不同的版本以与服务器版本匹配。可能的值包括：
+You may need to try different versions to match up with the server version. Possible values are:
 
-| 版本 | 说明                                                                |
-| ------ | --------------------------------------------------------------------- |
-| 1.0  | 旧版的 CIFS/SMBv1 协议                                              |
-| 2.0  | SMBv2.002 协议。Windows Vista Service Pack 1 和 Windows Server 2008 |
-| 2.1  | SMBv2.1 协议。Microsoft Windows 7 和 Windows Server 2008R2          |
-| 3.0  | SMBv3.0 协议。Microsoft Windows 8 和 Windows Server 2012            |
-| 3.02 | SMBv3.0.2 协议。Microsoft Windows 8.1 和 Windows Server 2012R2      |
-| 3.11 | SMBv3.1.1 协议。Microsoft Windows 10 和 Windows Server 2016         |
-| 3    | SMBv3.0 协议版本及以上                                              |
+| Version | Description                                                                   |
+| --------- | ------------------------------------------------------------------------------- |
+| 1.0     | Classic CIFS/SMBv1 protocol                                                   |
+| 2.0     | The SMBv2.002 protocol. Windows Vista Service Pack 1, and Windows Server 2008 |
+| 2.1     | The SMBv2.1 protocol. Microsoft Windows 7 and Windows Server 2008R2           |
+| 3.0     | The SMBv3.0 protocol. Microsoft Windows 8 and Windows Server 2012             |
+| 3.02    | The SMBv3.0.2 protocol. Microsoft Windows 8.1 and Windows Server 2012R2       |
+| 3.11    | The SMBv3.1.1 protocol. Microsoft Windows 10 and Windows Server 2016          |
+| 3       | The SMBv3.0 protocol version and above                                        |
 
-### 从您的树莓派共享文件夹
+### Sharing a Folder from your Raspberry Pi
 
-首先，创建一个要共享的文件夹。此示例在当前用户的 home 文件夹中创建一个名为 shared 的文件夹：
+Firstly, create a folder to share. This example creates a folder called `shared` in the `home` folder of the current user:
 
 ```
 $ cd ~
@@ -987,19 +1005,19 @@ $ mkdir shared
 $ chmod 0740 shared
 ```
 
-现在我们需要告诉 Samba 关于您的默认用户账户在访问该文件夹时。在提示时，请输入您的密码，并用您的主用户账户的用户名替换 `<username>` 占位符：
+Now we need to tell Samba about your default user account when accessing that folder. When prompted, enter your password, replacing the `<username>` placeholder with the username of your primary user account:
 
 ```
 $ sudo smbpasswd -a <username>
 ```
 
-现在我们需要告诉 Samba 共享这个文件夹，使用 Samba 配置文件。
+Now we need to tell Samba to share this folder, using the Samba configuration file.
 
 ```
 sudo nano /etc/samba/smb.conf
 ```
 
-在文件末尾，添加以下内容以共享文件夹，为远程用户提供读写权限。用你的树莓派上主用户账户的用户名替换 `<username>` 占位符：
+At the end of the file, add the following to share the folder, giving the remote user read/write permissions. Replace the `<username>` placeholder with the username of the primary user account on your Raspberry Pi:
 
 ```
 [share]
@@ -1009,56 +1027,58 @@ sudo nano /etc/samba/smb.conf
     writable = yes
 ```
 
-在同一文件中，找到 workgroup 这一行，如有必要，将其更改为本地 Windows 网络工作组的名称。
+In the same file, find the `workgroup` line, and if necessary, change it to the name of the workgroup of your local Windows network.
 
 ```
 workgroup = <your workgroup name here>
 ```
 
-共享文件夹现在应该会出现在网络上的 Windows 或 macOS 设备上。输入您的树莓派用户名和密码以挂载文件夹。
+The shared folder should now appear to Windows or macOS devices on the network. Enter your Raspberry Pi username and password to mount the folder.
 
-## 设置 Apache Web 服务器
+## Set up an Apache web server
 
-Apache 是一款流行的 Web 服务器应用程序，您可以在树莓派上安装它以允许其提供网页。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/apache.adoc)
 
-单独使用，Apache 可以通过 HTTP 提供 HTML 文件，并且通过附加模块可以使用脚本语言（如 PHP）提供动态网页。
+Apache is a popular web server application you can install on the Raspberry Pi to allow it to serve web pages.
 
-### 安装 Apache
+On its own, Apache can serve HTML files over HTTP, and with additional modules can serve dynamic web pages using scripting languages such as PHP.
 
-首先，通过在终端中输入以下命令来更新可用软件包：
+### Install Apache
+
+First, update the available packages by typing the following command into the Terminal:
 
 ```
 sudo apt update
 ```
 
-然后，使用此命令安装 apache2 软件包：
+Then, install the `apache2` package with this command:
 
 ```
 sudo apt install apache2 -y
 ```
 
-### 测试 Web 服务器
+### Test the web server
 
-默认情况下，Apache 在 Web 文件夹中放置一个测试 HTML 文件。当您在树莓派本身上浏览到 `http://localhost/` ，或者在网络中的另一台计算机上浏览到 `http://192.168.1.10` （无论树莓派的 IP 地址是什么）时，将提供此默认网页。要查找树莓派的 IP 地址，请在命令行中键入 hostname -I （或阅读有关查找 IP 地址的更多信息）。
+By default, Apache puts a test HTML file in the web folder. This default web page is served when you browse to `http://localhost/` on the Raspberry Pi itself, or `http://192.168.1.10` (whatever the Raspberry Pi’s IP address is) from another computer on the network. To find the Raspberry Pi’s IP address, type `hostname -I` at the command line (or read more about finding your [IP address](https://www.raspberrypi.com/documentation/computers/remote-access.html#ip-address)).
 
-在树莓派上或网络中的另一台计算机上浏览到默认网页，您应该看到以下内容：
+Browse to the default web page either on the Raspberry Pi or from another computer on the network and you should see the following:
 
-![Apache success message](../.gitbook/assets/apache-it-works.png)
+![Apache success message](https://www.raspberrypi.com/documentation/computers/images/apache-it-works.png?hash=dcdc4b903c8f1535b316e41f1e83c071)
 
-这意味着 Apache 正在运行！
+This means you have Apache working!
 
-#### 更改默认网页
+#### Change the default web page
 
-此默认网页只是文件系统上的一个 HTML 文件。它位于 /var/www/html/index.html 。
+This default web page is just an HTML file on the filesystem. It is located at `/var/www/html/index.html`.
 
-在终端窗口中导航到此目录，并查看其中的内容：
+Navigate to this directory in a terminal window and have a look at what’s inside:
 
 ```
 cd /var/www/html
 ls -al
 ```
 
-这将向您展示：
+This will show you:
 
 ```
 total 12
@@ -1067,132 +1087,132 @@ drwxr-xr-x 12 root root 4096 Jan  8 01:28 ..
 -rw-r--r--  1 root root  177 Jan  8 01:29 index.html
 ```
 
-这表明默认情况下， /var/www/html/ 中有一个名为 index.html 的文件，由 root 用户拥有（就像包含文件的文件夹一样）。要编辑该文件，您需要将其所有权更改为您自己的用户名。使用以下命令更改文件的所有者，将 `<username>` 占位符替换为您的主用户账户的用户名：
+This shows that by default there is one file in `/var/www/html/` called `index.html` and it is owned by the `root` user (as is the enclosing folder). In order to edit the file, you need to change its ownership to your own username. Change the owner of the file using the following command, replacing the `<username>` placeholder with the username of your primary user account:
 
 ```
 $ sudo chown <username>: index.html
 ```
 
-您现在可以尝试编辑此文件，然后刷新浏览器以查看网页更改。如果您了解 HTML，可以将自己的 HTML 文件和其他资产放入此目录，并将它们作为网站在本地网络上提供。
+You can now try editing this file and then refreshing the browser to see the web page change. If you know HTML you can put your own HTML files and other assets in this directory and serve them as a website on your local network.
 
-### 为 Apache 安装 PHP
+### Install PHP for Apache
 
-要允许您的 Apache 服务器处理 PHP 文件，您需要安装最新版本的 PHP 和 Apache 的 PHP 模块。键入以下命令以安装这些：
+To allow your Apache server to process PHP files, you’ll need to install the latest version of PHP and the PHP module for Apache. Type the following command to install these:
 
 ```
 sudo apt install php libapache2-mod-php -y
 ```
 
-现在删除 index.html 文件：
+Now remove the `index.html` file:
 
 ```
 sudo rm index.html
 ```
 
-并创建文件 index.php ：
+and create the file `index.php`:
 
 ```
 sudo nano index.php
 ```
 
-将一些 PHP 内容放入其中：
+Put some PHP content in it:
 
 ```
 <?php echo "hello world"; ?>
 ```
 
-现在保存并刷新您的浏览器。您应该看到“hello world”。这不是动态的，但仍由 PHP 提供。尝试一些动态内容：
+Now save and refresh your browser. You should see "hello world". This is not dynamic but still served by PHP. Try something dynamic:
 
 ```
 <?php echo date('Y-m-d H:i:s'); ?>
 ```
 
-或显示您的 PHP 信息：
+or show your PHP info:
 
 ```
 <?php phpinfo(); ?>
 ```
 
-## 在树莓派上通过网络启动
+## Network boot your Raspberry Pi
 
-您可以设置一个 DHCP/TFTP 服务器，这将允许您从网络引导树莓派 3 或 4。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/network-boot-raspberry-pi.adoc)
 
-说明假定您有一个现有的家庭网络，并且您想要使用树莓派作为服务器。您还需要另一个树莓派 3 或 4 作为客户端进行引导。只需要一个 SD 卡，因为在初始客户端配置后，客户端将从服务器引导。
+You can set up a DHCP/TFTP server which will allow you to boot a Raspberry Pi 3 or 4 from the network.
 
->**注意**
->
->由于网络设备和路由器的种类繁多，我们无法保证网络引导能在任何设备上正常工作。我们收到报告称，如果无法使网络引导正常工作，可以尝试在网络上禁用 STP 帧来帮助解决问题。 
+The instructions assume that you have an existing home network, and that you want to use a Raspberry Pi for the **server**. You will also need an additional Raspberry Pi 3 or 4 as a **client** to be booted. Only one SD Card is needed because the client will be booted from the server after the initial client configuration.
 
-### 配置网络启动客户端
+| NOTE | Due to the huge range of networking devices and routers available, we can’t guarantee that network booting will work with any device. We have had reports that, if you cannot get network booting to work, disabling STP frames on your network may help. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
-#### 树莓派 3 Model B
+### Configure a network boot client
 
->**注意**
->
->本部分仅适用于树莓派 3 Model B，因为树莓派 3 Model B+ 在出厂时已启用网络启动。 
+#### Raspberry Pi 3 Model B
 
-在树莓派 3 Model B 进行网络启动之前，需要从带有配置选项的 SD 卡启动，以启用 USB 启动模式。 这将在树莓派 SoC 的 OTP（一次可编程）存储器中设置一个位，从而启用网络引导。 完成此操作后，树莓派 3B 将尝试从 USB 和网络启动，如果无法从 SD 卡启动。
+| NOTE | This section only applies to the Raspberry Pi 3 Model B, as network boot is enabled on the Raspberry Pi 3 Model B+ at the factory. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 
-以通常方式在 SD 卡上安装 Raspberry Pi OS Lite 或带桌面的 Raspberry Pi OS。 接下来，使用以下命令启用 USB 启动模式：
+Before the Raspberry Pi 3 Model B will network boot it needs to be booted from an SD Card with a config option to enable USB boot mode. This will set a bit in the OTP (One Time Programmable) memory in the Raspberry Pi SoC that enables network booting. Once this is done, the Raspberry Pi 3B will attempt to boot from USB, and from the network, if it cannot boot from the SD card.
+
+Install Raspberry Pi OS Lite, or Raspberry Pi OS with desktop, on the SD card in the usual fashion. Next, enable USB boot mode with the following command:
 
 ```
 $ echo program_usb_boot_mode=1 | sudo tee -a /boot/firmware/config.txt
 ```
 
-将 program_usb_boot_mode=1 添加到 /boot/firmware/config.txt 的末尾。使用 sudo reboot 重新启动树莓派。在客户端树莓派重新启动后，请检查 OTP 是否已编程为：
+This adds `program_usb_boot_mode=1` to the end of [`/boot/firmware/config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html#what-is-config-txt). Reboot the Raspberry Pi with `sudo reboot`. Once the client Raspberry Pi has rebooted, check that the OTP has been programmed with:
 
 ```
 $ vcgencmd otp_dump | grep 17:
 17:3020000a
 ```
 
-确保输出 0x3020000a 正确。
+Ensure the output `0x3020000a` is correct.
 
-客户端配置几乎完成。作为最后一步，禁用 USB 启动。运行以下命令：
+The client configuration is almost done. As a final step, disable USB booting. Run the following command:
 
 ```
 $ sudo nano /boot/firmware/config.txt
 ```
 
-删除包含文本 program_usb_boot_mode=1 的行。最后，使用 sudo poweroff 关闭客户端树莓派。
+Remove the line that contains the text `program_usb_boot_mode=1`. Finally, shut the client Raspberry Pi down with `sudo poweroff`.
 
-#### 树莓派 4 Model B
+#### Raspberry Pi 4 Model B
 
-可以使用 raspi-config 工具在树莓派 4 上启用网络启动。首先，按照以下方式运行 raspi-config ：
+Network boot can be enabled on the Raspberry Pi 4 using the `raspi-config` tool. First, run `raspi-config` as follows:
 
 ```
 $ sudo raspi-config
 ```
 
-在 raspi-config 中，选择 Advanced Options ，然后选择 Boot Order ，最后选择 Network Boot 。然后必须重新启动设备，以便将引导顺序更改编程到引导加载程序 EEPROM 中。在树莓派重新启动后，请检查启动顺序是否现在为 0xf21 ：
+Within `raspi-config`, choose `Advanced Options`, then `Boot Order`, then `Network Boot`. You must then reboot the device for the change to the boot order to be programmed into the bootloader EEPROM. Once the Raspberry Pi has rebooted, check that the boot order is now `0xf21`:
 
 ```
 $ vcgencmd bootloader_config
 ```
 
-要了解如何配置树莓派 4 启动加载程序的更多详细信息，请参阅树莓派引导加载程序配置。
+For further details of configuring the Raspberry Pi 4 bootloader, see [Raspberry Pi Bootloader Configuration](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-bootloader-configuration).
 
-### 以太网 MAC 地址
+### Ethernet MAC address
 
-在配置网络引导之前，请记下序列号和 MAC 地址，以便 TFTP/DHCP 服务器可以识别开发板。
+Before configuring network boot, make a note of the serial number and mac address so that the board can be identified by the TFTP/DHCP server.
 
-在树莓派 4 上，MAC 地址是在制造时编程的，MAC 地址和序列号之间没有关联。MAC 地址和序列号都显示在启动加载程序的 HDMI 诊断屏幕上。
+On Raspberry Pi 4 the MAC address is programmed at manufacture and there is no link between the MAC address and serial number. Both the MAC address and serial numbers are displayed on the bootloader [HDMI diagnostics](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#boot-diagnostics-on-the-raspberry-pi-4) screen.
 
-要查找以太网 MAC 地址：
+To find the Ethernet MAC address:
 
 ```
 $ ethtool -P eth0
 ```
 
-查找序列号：
+To find the serial number:
 
 ```
 $ grep Serial /proc/cpuinfo | cut -d ' ' -f 2 | cut -c 9-16
 ```
 
-### 配置网络启动服务器
+### Configure a network boot server
 
-将 SD 卡插入服务器的树莓派，然后启动服务器。客户端的树莓派需要一个用于启动的根文件系统：我们将使用服务器的根文件系统的副本，并将其放置在 /nfs/client1 ：
+Plug the SD card into the server Raspberry Pi, and then boot the server. The client Raspberry Pi will need a root file system to boot from: we will use a copy of the server’s root filesystem and place it in `/nfs/client1`:
 
 ```
 $ sudo mkdir -p /nfs/client1
@@ -1200,7 +1220,7 @@ $ sudo apt install rsync
 $ sudo rsync -xa --progress --exclude /nfs / /nfs/client1
 ```
 
-在客户端文件系统中通过 chroot 重新生成 SSH 主机密钥：
+Regenerate SSH host keys on the client filesystem by chrooting into it:
 
 ```
 $ cd /nfs/client1
@@ -1214,41 +1234,41 @@ $ exit
 $ sudo umount dev sys proc
 ```
 
-查找本地网络的设置。您需要找到路由器（或网关）的地址，可以通过以下方式完成：
+Find the settings of your local network. You need to find the address of your router (or gateway), which can be done with:
 
 ```
 $ ip route | awk '/default/ {print $3}'
 ```
 
- 然后运行：
+Then run:
 
 ```
 $ ip -4 addr show dev eth0 | grep inet
 ```
 
-您应该看到类似以下内容的输出：
+You should see output similar to the following:
 
 ```
 inet 10.42.0.211/24 brd 10.42.0.255 scope global eth0
 ```
 
-第一个地址是您的服务器树莓派在网络上的 IP 地址，斜杠后面的部分是网络大小。很可能您的是一个 /24 。还要注意网络的 brd （广播）地址。记下前一个命令的输出，其中将包含树莓派的 IP 地址和网络的广播地址。
+The first address is the IP address of your server Raspberry Pi on the network, and the part after the slash is the network size. It is highly likely that yours will be a `/24`. Also note the `brd` (broadcast) address of the network. Note down the output of the previous command, which will contain the IP address of the Raspberry Pi and the broadcast address of the network.
 
-最后，记下您的 DNS 服务器地址，这与您的网关地址相同。您可以使用以下命令找到这个地址：
+Finally, note down the address of your DNS server, which is the same address as your gateway. You can find this with:
 
 ```
 $ cat /etc/resolv.conf
 ```
 
-通过 systemd 网络配置在您的服务器树莓派上配置静态网络地址，该网络作为网络处理程序和 DHCP 服务器。
+Configure a static network address on your server Raspberry Pi via the `systemd` networking, which works as the network handler and DHCP server.
 
-为此，您需要创建一个 10-eth0.netdev 和一个 11-eth0.network ，如下所示：
+To do that, you’ll need to create a `10-eth0.netdev` and a `11-eth0.network` like so:
 
 ```
 $ sudo nano /etc/systemd/network/10-eth0.netdev
 ```
 
-添加以下行：
+Add the following lines:
 
 ```
 [Match]
@@ -1258,13 +1278,13 @@ Name=eth0
 DHCP=no
 ```
 
-然后创建一个网络文件：
+Then create a network file:
 
 ```
 $ sudo nano /etc/systemd/network/11-eth0.network
 ```
 
-添加以下内容：
+Add the following contents:
 
 ```
 [Match]
@@ -1278,13 +1298,13 @@ DNS=10.42.0.1
 Gateway=10.42.0.1
 ```
 
-此时，您将没有工作的 DNS，因此您需要将之前记录的服务器添加到 systemd/resolved.conf 。在此示例中，网关地址为 10.42.0.1。
+At this point, you will not have working DNS, so you will need to add the server you noted down before to `systemd/resolved.conf`. In this example, the gateway address is 10.42.0.1.
 
 ```
 $ sudo nano /etc/systemd/resolved.conf
 ```
 
-取消注释 DNS 那一行，并在那里添加 DNS IP 地址。另外，如果您有备用 DNS 服务器，请也添加在那里。
+Uncomment the DNS line and add the DNS IP address there. Additionally, if you have a fallback DNS server, add it there as well.
 
 ```
 [Resolve]
@@ -1292,14 +1312,14 @@ DNS=10.42.0.1
 #FallbackDNS=
 ```
 
-启用 systemd-networkd ，然后重新启动以使更改生效：
+Enable `systemd-networkd` and then reboot for the changes to take effect:
 
 ```
 $ sudo systemctl enable systemd-networkd
 $ sudo reboot
 ```
 
-现在启动 tcpdump ，这样您就可以从客户端树莓派搜索 DHCP 数据包。
+Now start `tcpdump` so you can search for DHCP packets from the client Raspberry Pi:
 
 ```
 $ sudo apt install tcpdump dnsmasq
@@ -1307,20 +1327,20 @@ $ sudo systemctl enable dnsmasq
 $ sudo tcpdump -i eth0 port bootpc
 ```
 
-将客户端树莓派连接到您的网络并打开电源。检查客户端的 LED 是否在大约 10 秒后亮起，然后您应该从客户端收到一个数据包 "DHCP/BOOTP，来自..."。
+Connect the client Raspberry Pi to your network and power it on. Check that the LEDs illuminate on the client after around 10 seconds, then you should get a packet from the client "DHCP/BOOTP, Request from …"
 
 ```
 IP 0.0.0.0.bootpc > 255.255.255.255.bootps: BOOTP/DHCP, Request from b8:27:eb...
 ```
 
-现在您需要修改 dnsmasq 配置以使 DHCP 能够回复设备。按下 CTRL + C 退出 tcpdump 程序，然后输入以下内容：
+Now you need to modify the `dnsmasq` configuration to enable DHCP to reply to the device. Press CTRL + C to exit the `tcpdump` program, then type the following:
 
 ```
 $ echo | sudo tee /etc/dnsmasq.conf
 $ sudo nano /etc/dnsmasq.conf
 ```
 
-然后用以下内容替换 dnsmasq.conf 的内容：
+Then replace the contents of `dnsmasq.conf` with:
 
 ```
 # Note: comment out port if you want DNS services for systems on the network.
@@ -1332,9 +1352,9 @@ tftp-root=/tftpboot
 pxe-service=0,"Raspberry Pi Boot"
 ```
 
-在 dhcp-range 行的第一个地址处，使用您之前记录的广播地址。
+Where the first address of the `dhcp-range` line is, use the broadcast address you noted down earlier.
 
-现在创建一个 /tftpboot 目录：
+Now create a `/tftpboot` directory:
 
 ```
 $ sudo mkdir /tftpboot
@@ -1343,37 +1363,37 @@ $ sudo systemctl enable dnsmasq.service
 $ sudo systemctl restart dnsmasq.service
 ```
 
-现在监视 dnsmasq 日志：
+Now monitor the `dnsmasq` log:
 
 ```
 $ journalctl -f
 ```
 
-你应该看到类似这样的内容：
+You should see something like this:
 
 ```
 raspberrypi dnsmasq-tftp[1903]: file /tftpboot/bootcode.bin not found
 ```
 
-接下来，您需要将 boot 文件夹的内容复制到 /tftpboot 目录中。
+Next, you will need to copy the contents of the boot folder into the `/tftpboot` directory.
 
-首先，按下 CTRL + C 退出监控状态。然后输入以下内容：
+First, press **CTRL + C** to exit the monitoring state. Then type the following:
 
 ```
 $ cp -r /boot/firmware/* /tftpboot
 ```
 
-由于 tftp 位置已更改，请重新启动 dnsmasq :
+Since the tftp location has changed, restart `dnsmasq`:
 
 ```
 $ sudo systemctl restart dnsmasq
 ```
 
-#### 设置 NFS root
+#### Set up NFS root
 
-现在，这应该允许您的树莓派客户端尝试启动，直到尝试加载根文件系统（它没有）。
+This should now allow your Raspberry Pi client to attempt to boot through until it tries to load a root file system (which it doesn’t have).
 
-在这一点上，导出之前创建的 /nfs/client1 文件系统和 TFTP 引导文件夹。
+At this point, export the `/nfs/client1` file system created earlier, and the TFTP boot folder.
 
 ```
 $ sudo apt install nfs-kernel-server
@@ -1381,7 +1401,7 @@ $ echo "/nfs/client1 *(rw,sync,no_subtree_check,no_root_squash)" | sudo tee -a /
 $ echo "/tftpboot *(rw,sync,no_subtree_check,no_root_squash)" | sudo tee -a /etc/exports
 ```
 
-重新启动 RPC-Bind 和 NFS 服务器，以便它们检测到新文件。
+Restart RPC-Bind and the NFS server in order to have them detect the new files.
 
 ```
 $ sudo systemctl enable rpcbind
@@ -1390,110 +1410,109 @@ $ sudo systemctl enable nfs-kernel-server
 $ sudo systemctl restart nfs-kernel-server
 ```
 
-编辑 /tftpboot/cmdline.txt ，并从 root= 开始，将其替换为：
+Edit `/tftpboot/cmdline.txt` and from `root=` onwards, and replace it with:
 
 ```
 root=/dev/nfs nfsroot=10.42.0.211:/nfs/client1,vers=3 rw ip=dhcp rootwait
 ```
 
-在这里用您记录下的 IP 地址替换 IP 地址。还要删除命令行中以 init= 开头的任何部分。
+You should substitute the IP address here with the IP address you have noted down. Also remove any part of the command line starting with `init=`.
 
-最后，编辑 /nfs/client1/etc/fstab ，删除 /dev/mmcblk0p1 和 p2 行（只留下 proc ）。然后，将引导分区添加回去：
+Finally, edit `/nfs/client1/etc/fstab` and remove the `/dev/mmcblk0p1` and `p2` lines (only `proc` should be left). Then, add the boot partition back in:
 
 ```
 $ echo "10.42.0.211:/tftpboot /boot/firmware/ nfs defaults,vers=3 0 0" | sudo tee -a /nfs/client1/etc/fstab
 ```
 
-如果第一次尝试无法启动，请继续尝试。树莓派启动可能需要一分钟左右，所以请耐心等待。
+If it doesn’t boot on the first attempt, keep trying. It can take a minute or so for the Raspberry Pi to boot, so be patient.
 
-## 使用 IPv6 进行网络启动
+## Network boot using IPv6
 
-通过网络启动树莓派有 4 个阶段：
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/remote-access/network-boot-ipv6.adoc)
 
-1. 引导加载程序使用 DHCP 协商获取 IP 地址和 TFTP 服务器的详细信息。
-2. 引导加载程序通过 TFTP 加载固件，并将引导过程交给固件，将网络详细信息传递给它。
-3. 固件通过 TFTP 加载内核和命令行。
-4. 内核引导系统的其余部分，通过 NFS 或其他机制加载根文件系统（rootfs）。
+There are 4 stages to booting a Raspberry Pi computer over the network:
 
-引导加载程序和固件（阶段 1 到 3）已经得到增强，以支持通过 IPv6 引导。
+1. The bootloader negotiates to get an IP address and the details of a TFTP server using DHCP.
+2. The bootloader loads the firmware via TFTP and hands over the boot process to the firmware, passing it the details of the network.
+3. The firmware loads the kernel and command line via TFTP.
+4. The kernel boots the rest of the system, loading the root filesystem (rootfs) via NFS or some other mechanism.
 
->**重要**
->
->IPv6 netboot 是一个实验性的 Alpha 功能，根据反馈意见，我们可能需要在将来更改其工作方式。这仅适用于树莓派 4 和计算模块 4。
+The bootloader and firmware (stages 1 to 3) have been enhanced to support booting over IPv6.
 
+| IMPORTANT | IPv6 netboot is an **experimental alpha feature** and depending on feedback, we may need to change how it works in future. This only works on Raspberry Pi 4 and Compute Module 4. |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
-### 工作原理
+### How it works
 
-要通过 IPv6 启动，您需要一个更新的固件版本（例如 start4.elf ）和引导加载程序。使用最新版本的 Raspberry Pi OS 和最新的稳定引导加载程序应该足够了。
+To boot via IPv6 you need an updated version of the firmware (e.g. `start4.elf`) and the bootloader. Using the latest release of Raspberry Pi OS and the latest stable bootloader should be sufficient.
 
->**注意**
->
->常用的 dnsmasq DHCP 服务器目前不支持 IPv6 网络启动所需的网络启动参数，因此在目前，您只能使用其他 DHCP 服务器，如 ISC DHCP。 
+| NOTE | The commonly used `dnsmasq` DHCP server doesn’t currently support the network boot parameters required for IPv6 network boot, so for the time being you will have to use a different DHCP server such as [ISC DHCP](https://www.isc.org/dhcp/). |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-要通过网络挂载 rootfs ，IPv4 网络引导教程建议使用 nfsroot 。这不支持 IPv6，因此需要另一种方法来通过网络挂载 rootfs 。
+To mount `rootfs` over the network the [IPv4 netboot tutorial](https://www.raspberrypi.com/documentation/computers/remote-access.html#network-boot-your-raspberry-pi) suggests using `nfsroot`. This doesn’t support IPv6, so another method is needed to mount `rootfs` over the network.
 
-如果您的 ISP 和路由器不支持 IPv6，您将受到限制。
+If your ISP and router don’t support IPv6 you will be limited in what you can do.
 
-#### 网络地址
+#### Network addresses
 
-引导加载程序要做的第一件事是发送路由器请求，以获取网络的详细信息。路由器会以广告数据包回应，标识其以太网地址，如果 TFTP 服务器位于不同的网络上，引导加载程序可能会需要这些信息。
+The first thing the bootloader does is send a router solicitation to get the details of the network. The router responds with an advertisement packet identifying its ethernet address, which the bootloader might need if the TFTP server is on a different network.
 
-路由器通告包含一个标志，告诉它是否使用有状态（托管）或无状态（非托管）配置来获取其 IP 地址。 无状态配置意味着设备配置自己的 IP 地址。 目前，引导加载程序生成一个从其以太网 MAC 地址和路由器提供的网络前缀派生的地址。
+The router advertisement includes a flag which tells it whether to use stateful (managed) or stateless (unmanaged) configuration for its IP address. Stateless configuration means that the device configures its own IP address. Currently the bootloader generates an address derived from its ethernet MAC address and a network prefix supplied by the router.
 
-如果路由器指示启用了有状态配置，则使用 DHCP 来获取设备的 IP 地址。 这涉及设备向 DHCP 服务器发送一个请求，服务器响应一个通告。 然后客户端请求地址，然后从服务器获得回复确认。
+If the router indicates that stateful configuration is enabled DHCP is used to obtain the IP address of the device. This involves the device sending a solicitation request to a DHCP server which responds with an advertisement. The client then requests the address before getting a reply acknowledgement from the server.
 
-DHCP 服务器和客户端使用可变长度的 DUID（设备唯一 ID）来标识自己。 在树莓派上，这是从 MAC 地址（DUID_LL）派生的。
+DHCP Servers and clients identify themselves with variable length DUID (Device Unique ID). On the Raspberry Pi this is derived from the MAC address (DUID_LL).
 
-#### TFTP 地址
+#### TFTP address
 
-无论使用无状态还是有状态配置，DHCP 服务器用于获取 TFTP 服务器地址。这是在 BOOTFILE-URL 参数中编码的。我们发送客户端架构类型值 0x29 以识别设备。
+Whether using stateless or stateful configuration, the DHCP server is used to obtain the TFTP server address. This is encoded in the `BOOTFILE-URL` parameter. We send the client architecture type value `0x29` to identify a device.
 
-请参阅 RFC 5970 和 IANA IPv6 动态主机配置协议文档。
+See [RFC 5970](https://datatracker.ietf.org/doc/html/rfc5970) and the [IANA Dynamic Host Configuration Protocol for IPv6](https://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xhtml) documentation.
 
-#### 引导过程
+#### Boot process
 
-设备现在应该有一个 IP 地址和 TFTP 详细信息。它从 TFTP 服务器下载固件二进制 start4.elf ，然后继续使用此固件运行。固件传递了 IP 地址和 TFTP 服务器详细信息，以便它可以下载内核并引导系统的其余部分。
+The device should now have an IP address and TFTP details. It downloads the firmware binary `start4.elf` from the TFTP server and continues running with this. The firmware is passed the IP address and TFTP server details so it can download the kernel and boot the rest of the system.
 
-#### 内核引导
+#### Kernel Boot
 
-使用 IPv4 网络启动时， nfsroot 用于在网络上挂载 rootfs 。这不支持 IPv6，因此需要另一种解决方案。可能涉及一个可以在切换到适当的 rootfs 内容之前挂载适当网络位置的小型 RAM 文件系统。
+With IPv4 netboot, `nfsroot` is used to mount `rootfs` over the network. This doesn’t support IPv6 so another solution is required. It might involve a small RAM file system that can mount the appropriate network location before switching to the proper `rootfs` contents.
 
->**注意**
->
->通过 IPv6 通过 NFS 启动 Linux 内核的机制仍需演示。 
-### 测试设置
+| NOTE | A mechanism to boot the Linux kernel with NFS via IPv6 is still to be demonstrated. |
+| ------ | ------------------------------------------------------------------------------------- |
 
-如果您想尝试这个，您将需要另一个树莓派作为 TFTP 和 DHCP 服务器。
+### Test setup
 
-理论上，TFTP 服务器可以位于任何可路由的网络上，但 DHCP 服务器必须位于将要提供服务的设备相同的网络上。
+If you want to try this out you will need another Raspberry Pi to act as the TFTP and DHCP server.
 
-#### TFTP 服务器
+The TFTP server can in theory be on any routable network but the DHCP server has to be on the same network as the devices it will serve.
 
-如果您有一个工作的 IPv4 网络启动设置，您可以重用 dnsmasq 中的 TFTP 服务器提供文件（它可以与 IPv4 和 IPv6 通信）。
+#### TFTP server
 
-或者您可以使用一个独立的 TFTP 服务器，比如 tftpd-hpa 。
+If you have a working IPv4 network boot setup you can reuse the TFTP server in dnsmasq to supply the files (it can talk to both IPv4 and IPv6).
+
+Alternatively you can use a standalone TFTP server like `tftpd-hpa`.
 
 ```
 $ sudo apt-get install tftpd-hpa
 $ sudo systemctl start tftpd-hpa
 ```
 
-#### DHCP 服务器
+#### DHCP server
 
-IPv6 中的 DHCP 发生了很大变化。我们至少需要 DHCP 告诉我们 TFTP 服务器的地址，在这种情况下是同一台机器。
+DHCP in IPv6 has changed a lot. We need DHCP to at least tell us the address of the TFTP server, which in this case is the same machine.
 
 ```
 $ sudo apt-get install isc-dhcp-server
 ```
 
-修改 /etc/default/isc-dhcp-server 中的配置
+Modify the configuration in `/etc/default/isc-dhcp-server`
 
 ```
 DHCPDv6_CONF=/etc/dhcp/dhcpd6.conf
 INTERFACESv6="eth0"
 ```
 
-在 /etc/dhcp/dhcpd6.conf 中，您需要指定 TFTP 服务器地址并设置子网。这里 DHCP 服务器配置为提供一些虚构的唯一本地地址（ULA）。 host test-rpi4 行告诉 DHCP 为测试设备提供固定地址。
+In `/etc/dhcp/dhcpd6.conf` you need to specify the TFTP server address and setup a subnet. Here the DHCP server is configured to supply some made up unique local addresses (ULA). The `host test-rpi4` line tells DHCP to give a test device a fixed address.
 
 ```
 not authoritative;
@@ -1511,22 +1530,22 @@ subnet6 fd49:869:6f93::/64 {
 }
 ```
 
-您的服务器必须在 /etc/dhcpcd.conf 中分配 IPv6 地址
+Your server has to be assigned the IPv6 address in `/etc/dhcpcd.conf`
 
 ```
 interface eth0
 static ip6_address=fd49:869:6f93::1/64
 ```
 
-现在启动 DHCP 服务器。
+Now start the DHCP server.
 
 ```
 $ sudo systemctl restart isc-dhcp-server.service
 ```
 
-#### 引导加载程序
+#### Bootloader
 
-修改配置以通过 IPv6 尝试网络启动，而非 IPv4。
+Modify the configuration to tell it to attempt network boot via IPv6 rather than IPv4.
 
 ```
 BOOT_ORDER=0xf21 # 2=Network boot
@@ -1534,18 +1553,18 @@ USE_IPV6=1 # Enable IPv6 network boot
 BOOT_UART=1 # Debug
 ```
 
-要恢复到 IPv4 网络启动，只需从 boot.conf 中删除 USE_IPV6 行。
+To revert to IPv4 network boot just remove the `USE_IPV6` line from `boot.conf`.
 
-#### 路由器
+#### Router
 
-要使用 IPv6，您真的需要支持 IPv6 的路由器和 ISP。互联网上有一些网站可以为您检查这一点，或者运行以下命令。
+To use IPv6 you really need a router and ISP that supports IPv6. There are sites on the internet that can check this for you or alternatively run the following command.
 
 ```
 sudo apt-get install ndisc6
 rdisc6 -1 eth0
 ```
 
-这会向您的路由器发送路由器请求，请求您的网络详细信息，如网络前缀、路由器以太网地址以及是否使用 DHCP 进行寻址。如果没有响应这个命令，很可能是您的网络和 ISP 只支持 IPv4。如果支持 IPv6，很可能会配置为使用无状态配置，其中客户端生成自己的地址。
+This sends a router solicitation to your router asking for your network details such as the network prefix, router ethernet address and whether to use DHCP for addressing. If there’s no response to this command it’s likely your network and ISP only supports IPv4. If IPv6 is supported it’s most likely that it will be configured to use stateless configuration where clients generate their own addresses.
 
 ```
 Soliciting ff02::2 (ff02::2) on eth0...
@@ -1560,7 +1579,7 @@ Reachable time            :  unspecified (0x00000000)
 Retransmit time           :  unspecified (0x00000000)
 ```
 
-您可能能够为有状态配置配置您的路由器，这意味着它将使用 DHCP 获取 IP 地址。
+You might be able to configure your router for stateful configuration, which means it will use DHCP to obtain an IP address.
 
 ```
 Hop limit                 :           64 (      0x40)
@@ -1574,13 +1593,13 @@ Reachable time            :  unspecified (0x00000000)
 Retransmit time           :  unspecified (0x00000000)
 ```
 
-### 调试
+### Debugging
 
-#### 日志和跟踪
+#### Logs and traces
 
-如果启用了引导 UART，则应该从串行端口看到类似以下内容。 以 RX6 开头的行表示正在使用 IPv6。
+If the boot UART is enabled, you should see something like this from the serial port. The lines starting RX6 indicate that IPv6 is in use.
 
-这里 `dc:a6:32:6f:73:f4` 是 TFTP 服务器的 MAC 地址，它具有一个 IPv6 地址 `fd49:869:6f93::1` 。设备本身具有一个 MAC 地址 `e4:5f:01:20:24:0b` 和一个 IPv6 地址 `fd49:869:6f93::1000`
+Here `dc:a6:32:6f:73:f4` is the MAC address of the TFTP server and it has an IPv6 address of `fd49:869:6f93::1`. The device itself has a MAC address `e4:5f:01:20:24:0b` and an IPv6 address of `fd49:869:6f93::1000`
 
 ```
 Boot mode: NETWORK (02) order f
@@ -1601,19 +1620,19 @@ RX6: 18 IP: 5 MAC: 5 ICMP: 2/2 UDP: 3/3 ICMP_CSUM_ERR: 0 UDP_CSUM_ERR: 0
 TFTP_GET: dc:a6:32:6f:73:f4 fd49:869:6f93::1 ab5a4158/config.txt
 ```
 
-最后，引导加载程序将控制权交给应该加载内核的固件。
+Finally the bootloader hands over to firmware which should load the kernel.
 
-#### 有状态配置
+#### Stateful configuration
 
-您可以使用 tcpdump 检查网络活动。
+You can examine network activity with tcpdump.
 
 ```
 $ sudo tcpdump -i eth0 -e ip6 -XX -l -v -vv
 ```
 
-下面是一个 TCP 转储的摘录，其中路由器配置为使用有状态（DHCP）网络配置。
+Below is an extract of a TCP dump where the router is configured to use stateful (DHCP) network configuration.
 
-设备发送路由器请求。
+Device sends a router solicitation.
 
 ```
 12:23:35.387046 e4:5f:01:20:24:0b (oui Unknown) > 33:33:00:00:00:02 (oui Unknown), ethertype IPv6 (0x86dd), length 70: (hlim 255, next-header ICMPv6 (58) payload length: 16) fe80::e65f:1ff:fe20:240b > ip6-allrouters: [icmp6 sum ok] ICMP6, router solicitation, length 16
@@ -1621,7 +1640,7 @@ $ sudo tcpdump -i eth0 -e ip6 -XX -l -v -vv
             0x0000:  e45f 0120 240b
 ```
 
-路由器发送响应，告知设备使用有状态配置。
+Router sends a response telling the device to use stateful configuration.
 
 ```
 12:23:35.498902 60:8d:26:a7:c1:88 (oui Unknown) > 33:33:00:00:00:01 (oui Unknown), ethertype IPv6 (0x86dd), length 110: (hlim 255, next-header ICMPv6 (58) payload length: 56) bthub.home > ip6-allnodes: [icmp6 sum ok] ICMP6, router advertisement, length 56
@@ -1635,31 +1654,31 @@ $ sudo tcpdump -i eth0 -e ip6 -XX -l -v -vv
             0x0000:  608d 26a7 c188
 ```
 
-设备发送 DHCP 请求。
+Device sends a DHCP solicitation.
 
 ```
 12:23:35.502517 e4:5f:01:20:24:0b (oui Unknown) > 33:33:00:01:00:02 (oui Unknown), ethertype IPv6 (0x86dd), length 114: (hlim 255, next-header UDP (17) payload length: 60) fe80::e65f:1ff:fe20:240b.dhcpv6-client > ff02::1:2.dhcpv6-server: [udp sum ok] dhcp6 solicit (xid=8cdd56 (client-ID hwaddr type 1 e45f0120240b) (IA_NA IAID:0 T1:0 T2:0) (option-request opt_59) (opt_61) (elapsed-time 0))
 ```
 
-DHCP 服务器回复广告。
+The DHCP server replies with an advertisement.
 
 ```
 12:23:35.510478 dc:a6:32:6f:73:f4 (oui Unknown) > e4:5f:01:20:24:0b (oui Unknown), ethertype IPv6 (0x86dd), length 172: (flowlabel 0xad54d, hlim 64, next-header UDP (17) payload length: 118) fe80::537a:52c:c647:b184.dhcpv6-server > fe80::e65f:1ff:fe20:240b.dhcpv6-client: [bad udp cksum 0xd886 -> 0x6d26!] dhcp6 advertise (xid=8cdd56 (IA_NA IAID:0 T1:3600 T2:7200 (IA_ADDR fd49:869:6f93::1000 pltime:604800 vltime:2592000)) (client-ID hwaddr type 1 e45f0120240b) (server-ID hwaddr/time type 1 time 671211709 dca6326f73f4) (opt_59))
 ```
 
-设备向 DHCP 服务器发送地址和 TFTP 详细信息的请求。
+The device sends a request for an address and TFTP details to the DHCP server.
 
 ```
 12:23:35.510763 e4:5f:01:20:24:0b (oui Unknown) > 33:33:00:01:00:02 (oui Unknown), ethertype IPv6 (0x86dd), length 132: (hlim 255, next-header UDP (17) payload length: 78) fe80::e65f:1ff:fe20:240b.dhcpv6-client > ff02::1:2.dhcpv6-server: [udp sum ok] dhcp6 request (xid=8cdd56 (client-ID hwaddr type 1 e45f0120240b) (server-ID hwaddr/time type 1 time 671211709 dca6326f73f4) (IA_NA IAID:0 T1:0 T2:0) (option-request opt_59) (opt_61) (elapsed-time 1))
 ```
 
-DHCP 服务器回复， opt_59 用于传递 TFTP 服务器的地址。
+The DHCP server replies, `opt_59` is used to pass the address of the TFTP server.
 
 ```
 12:23:35.512122 dc:a6:32:6f:73:f4 (oui Unknown) > e4:5f:01:20:24:0b (oui Unknown), ethertype IPv6 (0x86dd), length 172: (flowlabel 0xad54d, hlim 64, next-header UDP (17) payload length: 118) fe80::537a:52c:c647:b184.dhcpv6-server > fe80::e65f:1ff:fe20:240b.dhcpv6-client: [bad udp cksum 0xd886 -> 0x6826!] dhcp6 reply (xid=8cdd56 (IA_NA IAID:0 T1:3600 T2:7200 (IA_ADDR fd49:869:6f93::1000 pltime:604800 vltime:2592000)) (client-ID hwaddr type 1 e45f0120240b) (server-ID hwaddr/time type 1 time 671211709 dca6326f73f4) (opt_59))
 ```
 
-设备向 FTP 服务器发送邻居请求，因为它需要其 MAC 地址。
+The device sends a neighbour solicitation to the FTP server because it needs its MAC address.
 
 ```
 12:23:36.510768 e4:5f:01:20:24:0b (oui Unknown) > 33:33:ff:00:00:01 (oui Unknown), ethertype IPv6 (0x86dd), length 86: (hlim 255, next-header ICMPv6 (58) payload length: 32) fe80::e65f:1ff:fe20:240b > ff02::1:ff00:1: [icmp6 sum ok] ICMP6, neighbor solicitation, length 32, who has fd49:869:6f93::1
@@ -1667,7 +1686,7 @@ DHCP 服务器回复， opt_59 用于传递 TFTP 服务器的地址。
             0x0000:  e45f 0120 240b
 ```
 
-FTP 服务器将以其 MAC 地址回复。
+The FTP server replies with its MAC address.
 
 ```
 12:23:36.510854 dc:a6:32:6f:73:f4 (oui Unknown) > e4:5f:01:20:24:0b (oui Unknown), ethertype IPv6 (0x86dd), length 86: (hlim 255, next-header ICMPv6 (58) payload length: 32) fd49:869:6f93::1 > fe80::e65f:1ff:fe20:240b: [icmp6 sum ok] ICMP6, neighbor advertisement, length 32, tgt is fd49:869:6f93::1, Flags [solicited, override]
@@ -1675,17 +1694,17 @@ FTP 服务器将以其 MAC 地址回复。
             0x0000:  dca6 326f 73f4
 ```
 
-TFTP 请求由应该现在通过网络引导的设备发出。
+TFTP requests are made by the device which should now boot over the network.
 
 ```
 12:23:36.530820 e4:5f:01:20:24:0b (oui Unknown) > dc:a6:32:6f:73:f4 (oui Unknown), ethertype IPv6 (0x86dd), length 111: (hlim 255, next-header UDP (17) payload length: 57) fd49:869:6f93::1000.61785 > fd49:869:6f93::1.tftp: [udp sum ok]  49 RRQ "ab5a4158/start4.elf" octet tsize 0 blksize 1024
 ```
 
-#### 无状态配置
+#### Stateless configuration
 
-下面是一个用于无状态（非 DHCP）网络配置的 tcp 转储的摘录。
+Below is an extract of a tcp dump for a stateless (non-DHCP) network configuration.
 
-设备发送路由器请求。
+The device sends a router solicitation.
 
 ```
 12:55:27.541909 e4:5f:01:20:24:0b (oui Unknown) > 33:33:00:00:00:02 (oui Unknown), ethertype IPv6 (0x86dd), length 70: (hlim 255, next-header ICMPv6 (58) payload length: 16) fe80::e65f:1ff:fe20:240b > ip6-allrouters: [icmp6 sum ok] ICMP6, router solicitation, length 16
@@ -1693,7 +1712,7 @@ TFTP 请求由应该现在通过网络引导的设备发出。
             0x0000:  e45f 0120 240b
 ```
 
-路由器回复网络详细信息。
+The router replies with the network details.
 
 ```
 12:55:27.834684 60:8d:26:a7:c1:88 (oui Unknown) > 33:33:00:00:00:01 (oui Unknown), ethertype IPv6 (0x86dd), length 174: (hlim 255, next-header ICMPv6 (58) payload length: 120) bthub.home > ip6-allnodes: [icmp6 sum ok] ICMP6, router advertisement, length 120
@@ -1713,19 +1732,19 @@ TFTP 请求由应该现在通过网络引导的设备发出。
             0x0000:  608d 26a7 c188
 ```
 
-设备向 DHCP 组播地址发送信息请求，请求 TFTP 详细信息。
+The device sends an information request to the DHCP multicast address asking for the TFTP details.
 
 ```
 12:55:27.838300 e4:5f:01:20:24:0b (oui Unknown) > 33:33:00:01:00:02 (oui Unknown), ethertype IPv6 (0x86dd), length 98: (hlim 255, next-header UDP (17) payload length: 44) fe80::e65f:1ff:fe20:240b.dhcpv6-client > ff02::1:2.dhcpv6-server: [udp sum ok] dhcp6 inf-req (xid=e5e0a4 (client-ID hwaddr type 1 e45f0120240b) (option-request opt_59) (opt_61) (elapsed-time 0))
 ```
 
-DHCP 服务器回复 TFTP 服务器详细信息（ opt_59 ）。
+The DHCP server replies with the TFTP server details (`opt_59`).
 
 ```
 12:55:27.838898 dc:a6:32:6f:73:f4 (oui Unknown) > e4:5f:01:20:24:0b (oui Unknown), ethertype IPv6 (0x86dd), length 150: (flowlabel 0xd1248, hlim 64, next-header UDP (17) payload length: 96) fe80::537a:52c:c647:b184.dhcpv6-server > fe80::e65f:1ff:fe20:240b.dhcpv6-client: [bad udp cksum 0xd870 -> 0x78bb!] dhcp6 reply (xid=e5e0a4 (client-ID hwaddr type 1 e45f0120240b) (server-ID hwaddr/time type 1 time 671211709 dca6326f73f4) (opt_59))
 ```
 
-设备请求 TFTP 服务器 MAC 地址，因为它可以知道它在同一网络上。
+The device asks for the TFTP server MAC address since it can tell it’s on the same network.
 
 ```
 12:55:28.834796 e4:5f:01:20:24:0b (oui Unknown) > 33:33:ff:1d:fe:2a (oui Unknown), ethertype IPv6 (0x86dd), length 86: (hlim 255, next-header ICMPv6 (58) payload length: 32) fe80::e65f:1ff:fe20:240b > ff02::1:ff1d:fe2a: [icmp6 sum ok] ICMP6, neighbor solicitation, length 32, who has 2a00:23c5:ee00:5001:57f1:7523:2f1d:fe2a
@@ -1733,7 +1752,7 @@ DHCP 服务器回复 TFTP 服务器详细信息（ opt_59 ）。
             0x0000:  e45f 0120 240b
 ```
 
-FTP 服务器将以其 MAC 地址回复。
+The FTP server replies with its MAC address.
 
 ```
 12:55:28.834875 dc:a6:32:6f:73:f4 (oui Unknown) > e4:5f:01:20:24:0b (oui Unknown), ethertype IPv6 (0x86dd), length 86: (hlim 255, next-header ICMPv6 (58) payload length: 32) 2a00:23c5:ee00:5001:57f1:7523:2f1d:fe2a > fe80::e65f:1ff:fe20:240b: [icmp6 sum ok] ICMP6, neighbor advertisement, length 32, tgt is 2a00:23c5:ee00:5001:57f1:7523:2f1d:fe2a, Flags [solicited, override]
@@ -1741,7 +1760,7 @@ FTP 服务器将以其 MAC 地址回复。
             0x0000:  dca6 326f 73f4
 ```
 
-设备开始发出 TFTP 请求。
+The device starts making TFTP requests.
 
 ```
 12:55:28.861097 e4:5f:01:20:24:0b (oui Unknown) > dc:a6:32:6f:73:f4 (oui Unknown), ethertype IPv6 (0x86dd), length 111: (hlim 255, next-header UDP (17) payload length: 57) 2a00:23c5:ee00:5001:e65f:1ff:fe20:240b.46930 > 2a00:23c5:ee00:5001:57f1:7523:2f1d:fe2a.tftp: [udp sum ok]  49 RRQ "ab5a4158/start4.elf" octet tsize 0 blksize 1024
