@@ -1,112 +1,116 @@
-# 树莓派调试器（Raspberry Pi Debug Probe）
+# Raspberry Pi Debug Probe
 
-## 关于调试器
+## About the Debug Probe
 
-![debug probe](https://www.raspberrypi.com/documentation/microcontrollers/images/debug-probe.jpg)
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/microcontrollers/debug-probe/introduction.adoc)
 
-树莓派调试器是一种提供了 UART 串口和标准 Arm 串行线调试（SWD）接口的 USB 设备。该调试器设计用于简单、无需焊接的即插即用调试。它具有以下功能：
+![debug probe](https://www.raspberrypi.com/documentation/microcontrollers/images/debug-probe.jpg?hash=5a67801105b1ed0d696230a41a13832a)
 
-* USB 到 ARM 串行线调试（SWD）接口
-* USB 到 UART 桥接器
-* 兼容 CMSIS-DAP 标准
-* 与支持 CMSIS-DAP 的 OpenOCD 和其他工具配合使用
-* 开源，易升级的固件
+The Raspberry Pi Debug Probe is a USB device that provides both a UART serial port and a standard Arm Serial Wire Debug (SWD) interface. The probe is designed for easy, solderless, plug-and-play debugging. It has the following features:
 
->**注意**
->
->有关树莓派三针调试连接器的更多信息，请参阅规格书。 
+* USB to ARM [Serial Wire Debug](https://developer.arm.com/documentation/ihi0031/a/The-Serial-Wire-Debug-Port--SW-DP-/Introduction-to-the-ARM-Serial-Wire-Debug--SWD--protocol) (SWD) port
+* USB to UART bridge
+* Compatible with the [CMSIS-DAP](https://developer.arm.com/documentation/101451/0100/About-CMSIS-DAP) standard
+* Works with [OpenOCD](https://openocd.org/) and other tools supporting CMSIS-DAP
+* Open source, easily upgradeable firmware
 
-这使得在 Windows、macOS 和 Linux 等没有 GPIO 引脚头来直连 Pico 串口或 SWD 接口的设备也可轻松使用树莓派 Pico。
+| NOTE | For more information on the Raspberry Pi three-pin debug connector see the [specification](https://rptl.io/debug-spec). |
+| ------ | ------------------------------------------------------------------------------ |
 
-### 调试器
+This makes it easy to use a Raspberry Pi Pico on platforms such as Windows, macOS, and Linux that lack a GPIO header to connect directly to the Pico’s serial UART or SWD port.
 
-调试器在 3.3V 名义 I/O 电压下运行。
+### The Debug Probe
+
+The probe operates at 3.3V nominal I/O voltage.
 
 ![the probe](https://www.raspberrypi.com/documentation/microcontrollers/images/the-probe.png)
 
-调试器附带一根 USB 线和三根调试线：
+Included with the Debug Probe is a USB power cable and three debug cables:
 
-* 三针 JST-SH 连接器到 3 针 JST-SH 连接器电缆
-* 三针 JST-SH 连接器到 0.1 英寸排针（母）
-* 三针 JST-SH 连接器到 0.1 英寸排针（公）
+* three-pin JST-SH connector to 3-pin JST-SH connector cable
+* three-pin JST-SH connector to 0.1-inch header (female)
+* three-pin JST-SH connector to 0.1-inch header (male)
 
-两根 0.1 英寸排针电缆 — 用于面包板（公头）或直接连接到带排针的板上（母头） — 颜色如下：
+The two 0.1-inch header cables — intended for breadboard (male) or direct connection to a board with header pins (female) — are coloured as below:
 
-橙色 TX/SC（调试器输出）
+OrangeTX/SC (Output from Probe)
 
- 黑色 GND
+BlackGND
 
-YellowRX/SD（输入到调试器或 I/O）
+YellowRX/SD (Input to Probe or I/O)
 
-带有三针 JST-SH 连接器的电缆旨在与较新的树莓派主板用于 SWD 调试端口和 UART 连接器的标准三针连接器一起使用。
+While the cable with three-pin JST-SH connectors is intended to be used with the [standard three-pin connector](https://rptl.io/debug-spec) which newer Raspberry Pi boards use for the SWD debug port and UART connectors.
 
-调试器有五个 LED 灯：一个是红色 LED 电源指示灯，另外四个是状态指示灯。
+The Debug Probe has five LEDs, a red LED to indicate power, and four more activity indicator LEDs
 
-![debug leds](https://www.raspberrypi.com/documentation/microcontrollers/images/debug-leds.png)
+![debug leds](https://www.raspberrypi.com/documentation/microcontrollers/images/debug-leds.png?hash=4d2f83f6e80803242416c5b43fe32ae8)
 
->**注意**
->
->当目标连接时，OpenOCD 会同时打开 DAP 的两个 LED，并在调用 DAP_DISCONNECT 时将它们关闭。
+| NOTE | OpenOCD switches both DAP LEDs on when the target is connected, and turns them off when it calls `DAP_DISCONNECT`. |
+| ------ | ---------------------------------------------------------------------------------------------------- |
 
-## 入门指南
+## Getting started
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/microcontrollers/debug-probe/getting-started.adoc)
 
 ![labelled wiring](https://www.raspberrypi.com/documentation/microcontrollers/images/labelled-wiring.jpg)
 
-根据您的设置，有不同的方法可以将调试器连接到树莓派 Pico。在下面的示例中，我们将调试器连接到具有更新的三针 JST-SH 连接器用于 SWD 的树莓派 Pico H。
+Depending on your setup, there are several ways to wire the Debug Probe to a [Raspberry Pi Pico](https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html). Below, we connect the Debug Probe to a Raspberry Pi Pico H which has the newer three-pin JST-SH connector for SWD.
 
- 连接以下内容：
+Connect the following:
 
-* 将调试器“D”接口连接到 Pico H SWD JST-SH 连接器
-* 将调试器“U”接口，带有三针 JST-SH 连接器连接到 0.1 英寸排针（公头）:
-  * 调试器 RX 连接到 Pico H TX 引脚
-  * 调试器 TX 连接到 Pico H RX 引脚
-  * 调试器 GND 连接到 Pico H GND 引脚
+* The Debug Probe "D" port to Pico H SWD JST-SH connector
+* The Debug Probe "U" port, with the three-pin JST-SH connector to 0.1-inch header (male):
 
->**注意**
->
->如果您有非 H Pico 或 Pico W（没有 JST-SH 连接器），您仍然可以将其连接到调试器。在板上的 SWCLK ， GND 和 SWDIO 引脚上焊接一个公连接器。使用随调试器附带的备用 3 引脚 JST-SH 连接器到 0.1 英寸排针（母）电缆，连接到调试器的“D”端口。分别将 Pico 或 Pico W 上的 SWCLK ， GND 和 SWDIO 连接到调试器上的 SC ， GND 和 SD 引脚。
+  * Debug Probe `RX` connected to Pico H `TX` pin
+  * Debug Probe `TX` connected to Pico H `RX` pin
+  * Debug Probe `GND` connected to Pico H `GND` pin
+
+| NOTE | If you have a non-H Pico or Pico W (without a JST-SH connector) you can still connect it to a Debug Probe. Solder a male connector to the `SWCLK`, `GND`, and `SWDIO` header pins on the board. Using the alternate 3-pin JST-SH connector to 0.1-inch header (female) cable included with the Debug Probe, connect to the Debug Probe "D" port. Connect `SWCLK`, `GND`, and `SWDIO` on the Pico or Pico W to the `SC`, `GND`, and `SD` pins on the Debug Probe, respectively. |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ![wiring](https://www.raspberrypi.com/documentation/microcontrollers/images/wiring.png)
 
-## 安装工具
+## Install tools
 
-要使用调试器，需安装以下工具。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/microcontrollers/debug-probe/installing-tools.adoc)
 
-### 安装 OpenOCD
+To use the Debug Probe, install the following tools.
 
-您需要安装 OpenOCD。
+### Install OpenOCD
 
-要安装 OpenOCD，请在终端中运行以下命令：
+You need to install OpenOCD.
+
+To install OpenOCD, run the following command in a terminal:
 
 ```
 $ sudo apt install openocd
 ```
 
-在终端中使用 openocd 命令来运行 OpenOCD。
+To run OpenOCD, use the `openocd` command in your terminal.
 
-#### 在 macOS 上安装 OpenOCD
+#### Install OpenOCD on macOS
 
-首先，安装包管理器 Homebrew：
+First, install the [Homebrew](https://brew.sh/) package manager:
 
 ```
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-在 macOS 上安装 OpenOCD，请运行以下命令：
+To install OpenOCD on macOS, run the following commands:
 
 ```
 $ brew install openocd
 ```
 
-要运行 OpenOCD，请在终端中使用 openocd 命令。
+To run OpenOCD, use the `openocd` command in your terminal.
 
-### 安装 GDB
+### Install GDB
 
-我们还需要安装 GNU 调试器 (GDB)。
+We also need to install the GNU debugger (GDB).
 
 #### Linux
 
- 安装 gdb-multiarch ：
+Install `gdb-multiarch`:
 
 ```
 $ sudo apt install gdb-multiarch
@@ -114,49 +118,48 @@ $ sudo apt install gdb-multiarch
 
 #### macOS
 
-运行以下命令安装 gdb ：
+Run the following command to install `gdb`:
 
 ```
 $ brew install gdb
 ```
 
-您可以安全地忽略安装过程中关于“特殊权限”请求的消息。
+You can safely ignore the request for "special privileges" messages on installation.
 
->**重要**
->
->GDB 不支持 gdb Arm-based Macs。因此，要么从源代码编译 `gdb`，要么使用 `lldb` 来代替 `gdb`。开发者没有为在 Arm-based Macs 上运行 GDB 提供官方支持。可以在 Sourceware.org 的 GDB 邮件列表中找到有关 GDB 的支持。 lldb 可作为 Xcode 命令行工具的一部分进行安装。
+| IMPORTANT | GDB does not support `gdb` Arm-based Macs. Instead, either [install ](https://gist.github.com/m0sys/711d0ec5e52102c6ba44451caf38bd38)​[`gdb`](https://gist.github.com/m0sys/711d0ec5e52102c6ba44451caf38bd38)​[ from source](https://gist.github.com/m0sys/711d0ec5e52102c6ba44451caf38bd38) or use `lldb` instead of `gdb`. There is [no official support](https://inbox.sourceware.org/gdb/3185c3b8-8a91-4beb-a5d5-9db6afb93713@Spark/) from the developers for running GDB on Arm-based Macs. Support for GDB can be found on the [GDB mailing list](https://inbox.sourceware.org/gdb/) on Sourceware.org. `lldb` is installed as part of the Xcode Command Line Tools. |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 #### MS Windows
 
-GDB 包含在我们的 Pico Windows 安装程序中。它也包含在 Arm GNU Toolchain Downloads 中。
+GDB is available as part of our [Pico setup for Windows installer](https://github.com/raspberrypi/pico-setup-windows/releases/latest). It is also included in the [Arm GNU Toolchain Downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
 
-或者，您可以在我们的《树莓派 Pico 入门指南》第 9 章和附录 A 中找到有关手动安装的信息。
+Alternatively information about manual installation can be found in Chapter 9 and Appendix A of our [Getting Started with Raspberry Pi Pico](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf) book.
 
->**注意**
->
-> 不建议在 Windows 上手动安装 GDB。 
+| NOTE | Manual installation of GDB on Windows is not recommended. |
+| ------ | ----------------------------------------------------------- |
 
-## 串行线调试（SWD）
+## Serial Wire Debug (SWD)
 
-Serial Wire Debug (SWD)是一种两引脚接口（SWDIO 和 SWCLK），可替代 JTAG 四或五引脚调试接口标准。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/microcontrollers/debug-probe/swd-connection.adoc)
 
-### 将新程序上传到您的 Pico
+Serial Wire Debug (SWD) is a two-pin interface ([SWDIO and SWCLK](https://developer.arm.com/documentation/101761/1-0/Debug-and-trace-interface/Serial-Wire-Debug-signals)) alternative to the JTAG four- or five-pin debugging interface standard.
 
-Pico 调试器可使您通过 SWD 接口和 OpenOCD 来加载二进制文件：从而无需在每次将新二进制文件推送到 Pico 后拔下，然后按住 BOOTSEL 按钮这些操作。使用调试器上传新的二进制文件是完全自动化的。
+### Uploading new programs to your Pico
 
-假如您构建了一个二进制文件：
+The Pico Debug Probe will let you load binaries via the SWD port and OpenOCD: you will not need to unplug, and then push-and-hold, the BOOTSEL button every time you push a new binary to your Pico. Using the Debug Probe uploading new binaries is an entirely hands off affair.
+
+Once you have built a binary:
 
 ```
 $ sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program blink.elf verify reset exit"
 ```
 
->**注意**
->
->当您使用调试器上传二进制文件时，使用的是文件的 ELF 版本，而不是您在拖放时使用的 UF2 文件。
+| NOTE | When you use the Debug Probe to upload a binary the ELF version of the file is used, not the UF2 file that you would use when you drag-and-drop. |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-### 使用 SWD 进行调试
+### Debugging with SWD
 
-它还将让您在服务器模式下使用 openocd ，并连接 GDB，这将为您提供断点和“正确”的调试。
+It’ll also let you use `openocd` in server mode, and connect GDB, which gives you break points and "proper" debugging.
 
 ```
 $ cd ~/pico/pico-examples/
@@ -169,17 +172,15 @@ $ cd blink
 $ make -j4
 ```
 
-在调试构建中，当您在调试器下运行时，您将获得更多信息，因为编译器会使用信息构建您的程序，以告诉 GDB 您的程序正在做什么。
+<br /><br />In a debug build you will get more information when you run it under the debugger, as the compiler builds your program with the information to tell GDB what your program is doing.<br /><br />See Chapter 6 of [Getting started with Raspberry Pi Pico](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf) for more information.
 
- 有关更多信息，请参阅《树莓派 Pico 入门指南》第 6 章。
-
-要启动 OpenOCD 服务器，请运行以下命令：
+To start an OpenOCD server, run the following command:
 
 ```
 $ sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"
 ```
 
-然后打开第二个终端窗口，切换到包含您构建的二进制文件的目录，并启动调试器以将其附加到 OpenOCD 服务器：
+Then open a second terminal window, switch to the directory containing your built binary, and start a debugger to attach it to the OpenOCD server:
 
 ```
 $ gdb blink.elf
@@ -188,46 +189,47 @@ $ gdb blink.elf
 > continue
 ```
 
-GDB 不适用于所有平台。根据您的操作系统和设备，请使用以下替代方案取代 gdb ：
+GDB doesn’t work on all platforms. Use one of the following alternatives instead of `gdb`, depending on your operating system and device:
 
-* 在非树莓派设备上使用 `gdb-multiarch`。
-* 在基于 Arm 的 macOS 设备上使用 `lldb`。
+* On Linux devices that are *not* Raspberry Pis, use `gdb-multiarch`.
+* On Arm-based macOS devices, use `lldb`.
 
-## 串行连接
+## Serial connections
 
-确保调试器连接到了您树莓派 Pico 的 UART 引脚。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/microcontrollers/debug-probe/uart-connection.adoc)
+
+Ensure that the Debug Probe is connected to the UART pins of your Raspberry Pi Pico.
 
 ![wiring](https://www.raspberrypi.com/documentation/microcontrollers/images/wiring.png)
 
-树莓派 Pico UART0 的默认引脚如下：
+The default pins for Raspberry Pi Pico UART0 are as follows:
 
-| 默认 UART0 | 物理引脚 | GPIO 引脚 |
-| ------------ | ---------- | ----------- |
-| GND        | 3        | 不适用    |
-| UART0_TX   | 1        | GP0       |
-| UART0_RX   | 2        | GP1       |
+| Default UART0 | Physical Pin | GPIO Pin |
+| --------------- | -------------- | ---------- |
+| GND           | 3            | N/A      |
+| UART0\_TX  | 1            | GP0      |
+| UART0\_RX  | 2            | GP1      |
 
-在连接后，树莓派 Pico 的 UART 上的流量将通过调试器中继到您的计算机，并显示为 CDC UART。在树莓派上，显示为 /dev/ttyACM0 ；在其他平台上，此串口将以不同方式显示（例如，在 macOS 上，显示为 /dev/cu.usbmodemXXXX ）。
+Once connected, traffic over the Raspberry Pi Pico’s UART will be relayed to your computer by the Debug Probe and exposed as a CDC UART. On a Raspberry Pi this will show up as `/dev/ttyACM0`; on other platforms this serial port will show up differently (e.g. on macOS it will appear as `/dev/cu.usbmodemXXXX`).
 
-如果您尚未安装 minicom，请执行以下操作：
+If you have not already done so you should install minicom:
 
 ```
 $ sudo apt install minicom
 ```
 
-并打开串口：
+and open the serial port:
 
 ```
 $ minicom -b 115200 -o -D /dev/ttyACM0
 ```
 
->**技巧**
->
->要退出 minicom ，请按 CTRL-A，然后按 X 键。 
+| TIP | To exit `minicom`, use CTRL-A followed by X. |
+| ----- | ------------------------------------- |
 
-要测试串行通信，您可以构建并上传“Hello World”示例应用程序。
+To test serial communication you can build and upload the "Hello World" example application.
 
-进入 pico-examples 树中的 hello_world 目录，并运行 make 。之后，您可以使用 openocd 将其上传到您的树莓派 Pico。要了解构建 hello_serial 示例程序的完整步骤，请参阅《开始使用树莓派 Pico》第 4 章。
+Change directory into the `hello_world` directory inside the `pico-examples` tree, and run `make`. Afterwards, you can upload it to your Raspberry Pi Pico using `openocd`. For a full walkthrough of building the `hello_serial` example program, see Chapter 4 of [Getting started with Raspberry Pi Pico](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf).
 
 ```
 $ cd pico-examples
@@ -241,37 +243,41 @@ $ sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed
 $ minicom -b 115200 -o -D /dev/ttyACM0
 ```
 
-打开 minicom 后，应该在控制台上看到打印出了"Hello, world!"。
+On opening `minicom` you should see "Hello, world!" printed to the console.
 
-对于支持的终端程序，USB 串行 UART 的描述会在 USB 设备描述中进行广告。
+For terminal programs that support it, a description of the USB serial UART is advertised in the USB device description.
 
-![description](https://www.raspberrypi.com/documentation/microcontrollers/images/description.jpg)
+![description](https://www.raspberrypi.com/documentation/microcontrollers/images/description.jpg?hash=c86c87f5ca55b3f8baf45709ba83f2d0)
 
-此描述中的唯一序列号意味着在 Windows 上，您的 COM 端口编号是"粘性"的每个设备，并且将允许您编写 udev 规则以将命名设备节点与特定的调试器绑定起来。
+The unique serial number in this description means that on Windows your COM port numbering is "sticky" per device, and will allow you to write `udev` rules to associate a named device node with a particular Debug Probe.
 
-## 更新调试器固件
+## Updating the firmware on the Debug Probe
 
-调试器固件以 UF2 文件的形式由树莓派分发。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/microcontrollers/debug-probe/updating-firmware.adoc)
 
-调试器固件的最新版本是版本 2。如果您正在运行旧版，或者如果您意外地覆盖了调试器的固件，您可以在 debugprobe GitHub 存储库中找到最新版本的固件。
+Firmware for the Debug Probe is available as a UF2 file distributed by Raspberry Pi.
 
-从最新版本下载 debugprobe.uf2 。
+The latest version of the Debug Probe firmware is version 2. If you’re running an older version, or if you have accidentally overwritten the firmware on your Debug Probe, you can find the latest release of the firmware in [the debugprobe GitHub repository](https://github.com/raspberrypi/debugprobe/releases/latest).
 
-捏住调试器外壳顶部以拆除。
+Download `debugprobe.uf2` from the latest release.
 
-在将调试器插入计算机时按住 BOOTSEL 按钮，以挂载名为“RPI-RP2”的卷。
+Pinch to remove the top of the Debug Probe enclosure.
 
-将 debugprobe.uf2 复制到 "RPI-RP2" 卷。文件复制到设备后，将自动卸载设备。
+Push and hold the BOOTSEL button as you plug the Debug Probe into your computer to mount a volume called "RPI-RP2".
 
-您的调试器将重启，现在运行更新版本的调试器固件。现在已准备好进行调试了。
+Copy `debugprobe.uf2` onto the "RPI-RP2" volume. The volume will dismount automatically after the file finishes copying onto the device.
 
-## 框图
+Your Debug Probe will reboot and now runs an updated version of the Debug Probe firmware. It is now ready for debugging.
 
-调试器的原理图和机械图纸可用：
+## Schematics
 
-* 原理图（PDF）
-* 机械图（PDF）
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/microcontrollers/debug-probe/schematics.adoc)
 
-原理图上显示的测试点（TP）位于下图所示位置。
+Schematics and mechanical drawing of the Debug Probe are available:
 
-![debug probe tps](https://www.raspberrypi.com/documentation/microcontrollers/images/debug-probe-tps.jpg)
+* [Schematics](https://datasheets.raspberrypi.com/debug/raspberry-pi-debug-probe-schematics.pdf) (PDF)
+* [Mechanical Diagram](https://datasheets.raspberrypi.com/debug/raspberry-pi-debug-probe-mechanical-drawing.pdf) (PDF)
+
+The test point (TP) shown on the schematics are located as shown in the diagram below.
+
+![debug probe tps](https://www.raspberrypi.com/documentation/microcontrollers/images/debug-probe-tps.jpg?hash=a093fce11fd83c5292aec0cd49817c60)
