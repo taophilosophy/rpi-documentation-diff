@@ -1,223 +1,229 @@
-# 计算模块（硬件）
+# Compute Module hardware
 
+## Compute Modules
 
-## 计算模块
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/compute-module/introduction.adoc)
 
-树莓派计算模块是旗舰树莓派的系统级模块变体。计算模块在工业和商业应用中特别受欢迎，如数字标牌、瘦客户机和自动化流程。上述程序有设计用于旗舰树莓派的，但许多用户希望拥有更紧凑的设计或内置 eMMC 存储。
+Raspberry Pi Compute Modules are **system-on-module** variants of the flagship Raspberry Pi models. Compute Modules are especially popular for industrial and commercial applications, including digital signage, thin clients, and process automation. Some of these applications use the flagship Raspberry Pi design, but many users want a more compact design or on-board eMMC storage.
 
-计算模块有多种变体，内存和嵌入式多媒体卡（eMMC）闪存容量各不相同。eMMC 类似于 SD 卡，但焊接在主板上。与 SD 卡不同，eMMC 专门设计用作磁盘，并包含额外功能以提高可靠性。Lite 型号没有内置存储，并且有时用简写后缀 L 来表示，例如“CM3L”。
+Compute Modules come in multiple variants, varying both in memory and embedded Multi-Media Card (eMMC) flash storage capacity. The eMMC is similar to an SD card, but soldered onto the board. Unlike SD cards, eMMC is specifically designed to be used as a disk and includes extra features to improve reliability. **Lite** models have no on-board storage, and are sometimes referred to with the shorthand suffix **L**, e.g. "CM3L".
 
-计算模块使用以下树莓派 SoC:
+Compute Modules use the following Raspberry Pi SoCs:
 
-* CM1 采用 BCM2835
-* CM3, CM3+ 采用 BCM2837
-* 适用于 CM4，CM4S 的 BCM2711
+* BCM2835 for CM1
+* BCM2837 for CM3, CM3+
+* BCM2711 for CM4, CM4S
 
-### 计算模块 4
+### Compute Module 4
 
-计算模块的最新版本是计算模块 4（CM4）。我们建议未来所有的开发都使用 CM4。
+The latest version of the Compute Module is the Compute Module 4 (CM4). We recommend CM4 for all future development.
 
-![Compute Module 4](https://www.raspberrypi.com/documentation/computers/images/cm4.jpg)
+![Compute Module 4](https://www.raspberrypi.com/documentation/computers/images/cm4.jpg?hash=989dcf3efb7c9d59f463fe404a5e3820)
 
- 计算模块 4
+Compute Module 4
 
-计算模块 4（CM4）包含了树莓派 4 的内部（BCM2711 处理器和 1GB、2GB、4GB 或 8GB 的 RAM），以及可选的 0GB（Lite）、8GB、16GB 或 32GB 的 eMMC 闪存。
+The Compute Module 4 (CM4) contains the internals of a Raspberry Pi 4 (the BCM2711 processor and 1GB, 2GB, 4GB, or 8GB of RAM) as well as an optional 0GB (Lite), 8GB, 16GB or 32GB of eMMC flash storage.
 
-与 CM1、CM3 和 CM3+ 不同，CM4 不使用 DDR2 SODIMM 外形规格。相反，CM4 使用了两个 100 针高密度连接器，占用更小的物理空间。这种改变帮助增加了以下接口：
+Unlike CM1, CM3, and CM3+, CM4 does not use the DDR2 SO-DIMM form factor. Instead, CM4 uses two 100-pin high density connectors in a smaller physical footprint. This change helped add the following interfaces:
 
-* 额外的第二个 HDMI
+* an additional second HDMI port
 * PCIe
-* 以太网
+* Ethernet
 
-旧版的形态无法支持这些接口。
+The previous form factor could not have supported these interfaces.
 
-### 计算模块 4S
+### Compute Module 4S
 
-![Compute Module 4S](https://www.raspberrypi.com/documentation/computers/images/cm4s.jpg)
+![Compute Module 4S](https://www.raspberrypi.com/documentation/computers/images/cm4s.jpg?hash=4ec9821548515598adfe5a3cdc14789d)
 
- 计算模块 4S
+Compute Module 4S
 
-计算模块 4S（CM4S）包含了树莓派 4 的内部部件（BCM2711 处理器和 1GB、2GB、4GB 或 8GB 的 RAM），以及可选的 0GB（Lite）、8GB、16GB 或 32GB 的 eMMC 闪存存储。与 CM4 不同，CM4S 采用与 CM1、CM3 和 CM3+ 相同的 DDR2 SODIMM 外形规格。
+The Compute Module 4S (CM4S) contains the internals of a Raspberry Pi 4 (the BCM2711 processor and 1GB, 2GB, 4GB, or 8GB of RAM) as well as an optional 0GB (Lite), 8GB, 16GB or 32GB of eMMC flash storage. Unlike CM4, CM4S comes in same the DDR2 SO-DIMM form factor as CM1, CM3, and CM3+.
 
-### 计算模块 3+
+### Compute Module 3+
 
-![Compute Module 3+](https://www.raspberrypi.com/documentation/computers/images/cm3-plus.jpg)
+![Compute Module 3+](https://www.raspberrypi.com/documentation/computers/images/cm3-plus.jpg?hash=352ed6d3402586078299193abe8ba754)
 
- 计算模块 3+
+Compute Module 3+
 
-计算模块 3+（CM3+）包含了树莓派 3 Model B+（BCM2837 处理器和 1GB 内存）的内部，以及可选的 0GB（Lite）、8GB、16GB 或 32GB eMMC 闪存存储。
+The Compute Module 3+ (CM3+) contains the internals of a Raspberry Pi 3 Model B+ (the BCM2837 processor and 1GB of RAM) as well as an optional 0GB (Lite), 8GB, 16GB or 32GB of eMMC flash storage.
 
-### 计算模块 3
+### Compute Module 3
 
-![Compute Module 3](https://www.raspberrypi.com/documentation/computers/images/cm3.jpg)
+![Compute Module 3](https://www.raspberrypi.com/documentation/computers/images/cm3.jpg?hash=3a5ff7c853190d7a07c51bf67c1082b8)
 
- 计算模块 3
+Compute Module 3
 
-计算模块 3（CM3）包含了树莓派 3 的内部部件（BCM2837 处理器和 1GB 的 RAM），以及可选的 4GB eMMC 闪存。
+The Compute Module 3 (CM3) contains the internals of a Raspberry Pi 3 (the BCM2837 processor and 1GB of RAM) as well as an optional 4GB of eMMC flash storage.
 
-### 计算模块 1
+### Compute Module 1
 
-![Compute Module 1](https://www.raspberrypi.com/documentation/computers/images/cm1.jpg)
+![Compute Module 1](https://www.raspberrypi.com/documentation/computers/images/cm1.jpg?hash=725d6ee61d958098dc68dc7739deab88)
 
- 计算模块 1
+Compute Module 1
 
-计算模块 1（CM1）包含了树莓派的内部部件（BCM2835 处理器和 512MB 内存），以及可选的 4GB eMMC 闪存存储。
+The Compute Module 1 (CM1) contains the internals of a Raspberry Pi (the BCM2835 processor and 512MB of RAM) as well as an optional 4GB of eMMC flash storage.
 
-## IO 板
+## IO Boards
 
-树莓派 IO 板提供了一种将单个计算模块连接到各种 I/O（输入/输出）接口的方法。由于计算模块本质上较小，因此它们缺少端口和连接器。IO 板提供了一种将计算模块连接到各种外围设备的方法。
+Raspberry Pi IO Boards provide a way to connect a single Compute Module to a variety of I/O (input/output) interfaces. Compute Modules are, by nature, small. As a result, they lack ports and connectors. IO Boards provide a way to connect Compute Modules to a variety of peripherals.
 
-IO 板是旨在开发的分支板；在生产中，您应该使用一个更小的、可能是定制的板，该板仅提供您的用例所需的端口和外围设备。
+IO Boards are breakout boards intended for development; in production, you should use a smaller, potentially custom board that provides only the ports and peripherals required for your use-case.
 
-### 计算模块 4 IO 板
+### Compute Module 4 IO Board
 
-![Compute Module 4 IO Board](https://www.raspberrypi.com/documentation/computers/images/cm4io.jpg)
+![Compute Module 4 IO Board](https://www.raspberrypi.com/documentation/computers/images/cm4io.jpg?hash=a69dcc715bfcacfd6dccc10c8d4922c2)
 
-计算模块 4 IO 板
+Compute Module 4 IO Board
 
-计算模块 4 IO 板提供以下接口：
+Compute Module 4 IO Board provides the following interfaces:
 
-* 带有 40 针 GPIO 连接器和 PoE 标头的 HAT 印记
-* 两个 HDMI 接口
-* 两个 USB 2.0 接口
-* 带 PoE 支持的千兆以太网 RJ45
-* MicroSD 卡槽（仅适用于没有 eMMC 的 Lite 变体）
-* PCIe Gen 2 接口
-* 通过桶形插孔输入 12V（如果未使用 PCIe，支持最高达 26V）
-* 2 x MIPI DSI 显示 FPC 连接器（22 引脚 0.5 毫米间距电缆）
-* 2 x MIPI CSI-2 摄像头 FPC 连接器（22 引脚 0.5 毫米间距电缆）
-* 带电池插座的实时时钟
+* HAT footprint with 40-pin GPIO connector and PoE header
+* Two HDMI ports
+* Two USB 2.0 ports
+* Gigabit Ethernet RJ45 with PoE support
+* MicroSD card slot (only for use with Lite variants with no eMMC)
+* PCIe Gen 2 socket
+* 12V input via barrel jack (supports up to 26V if PCIe unused)
+* 2 x MIPI DSI display FPC connectors (22-pin 0.5 mm pitch cable)
+* 2 x MIPI CSI-2 camera FPC connectors (22-pin 0.5 mm pitch cable)
+* Real-time clock with battery socket
 
-### 计算模块 IO 板
+### Compute Module IO Board
 
-![计算模块 IO 板](https://www.raspberrypi.com/documentation/computers/images/cmio.jpg)
+![Compute Module IO Board](https://www.raspberrypi.com/documentation/computers/images/cmio.jpg?hash=a6e2d5cd1e8845e0925ed00c15aef6a9)
 
-计算模块 IO 板
+Compute Module IO Board
 
-计算模块 IO 板提供以下接口：
+Compute Module IO Board provides the following interfaces:
 
-* 120 个 GPIO 引脚
-* 一个 HDMI 接口
-* 一个 USB-A 接口
-* 2 x MIPI DSI 显示器 FPC 连接器（22 针 0.5 毫米间距电缆）
-* 2 x MIPI CSI-2 相机 FPC 连接器（22 针 0.5 毫米间距电缆）
+* 120 GPIO pins
+* an HDMI port
+* a USB-A port
+* 2 x MIPI DSI display FPC connectors (22-pin 0.5 mm pitch cable)
+* 2 x MIPI CSI-2 camera FPC connectors (22-pin 0.5 mm pitch cable)
 
-计算模块 IO 板有两个变体：版本 1 和版本 3。版本 1 仅兼容 CM1。版本 3 兼容 CM1、CM3、CM3+和 CM4S。计算模块 IO 板版本 3 有时被简写为 CMIO3。
+The Compute Module IO Board comes in two variants: Version 1 and Version 3. Version 1 is only compatible with CM1. Version 3 is compatible with CM1, CM3, CM3+, and CM4S. Compute Module IO Board Version 3 is sometimes written as the shorthand CMIO3.
 
-### IO 板兼容性
+Compute Module IO Board Version 3 added a microSD card slot that did not exist in Compute Module IO Board Version 1.
 
-不是所有计算模块 IO 板都适用于所有计算模块型号。以下表格显示了每个 IO 板适用于哪些计算模块：
+### IO Board compatibility
 
-| IO 板                               | 兼容的计算模块                                |
-| ------------------------------------- | ----------------------------------------------- |
-| 计算模块 IO 板版本 1 (CMIO)/(CMIO1) | * CM1                                         |
-| 计算模块 IO 板版本 3 (CMIO)/(CMIO3) | 计算模块 1 计算模块 3 计算模块 3+ 计算模块 4S |
-| 计算模块 4 IO 板 (CM4IO)            | 计算模块 4                                    |
+Not all Compute Module IO Boards work with all Compute Module models. The following table shows which Compute Modules work with each IO Board:
 
-## 将图像刷写到计算模块
+| IO Board                                         | Compatible Compute Modules |
+| -------------------------------------------------- | ---------------------------- |
+| Compute Module IO Board Version 1 (CMIO)/(CMIO1) | * CM1                      |
+| Compute Module IO Board Version 3 (CMIO)/(CMIO3) | * CM1* CM3* CM3+* CM4S     |
+| Compute Module 4 IO Board (CM4IO)                | * CM4                      |
 
-计算模块配备了连接到主要 SD 卡接口的内置 eMMC 设备。本指南解释了如何将操作系统映像刷写到单个计算模块的 eMMC 存储器。
+## Flash an image to a Compute Module
 
-当向多个计算模块刷写镜像时，请考虑使用计算模块配置工具：
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/compute-module/cm-emmc-flashing.adoc)
 
-##### [使用计算模块配置器进行大规模配置](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003468-WP/Using-the-Compute-Module-Provisioner.pdf)
+The Compute Module has an on-board eMMC device connected to the primary SD card interface. This guide explains how to flash (write) an operating system image to the eMMC storage of a single Compute Module.
 
-使用计算模块配置器进行大规模配置
+| NOTE | **Lite** variants of Compute Modules do not have on-board eMMC. Instead, you can follow the procedure to flash a storage device for other Raspberry Pi devices at [Install an operating system](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system). |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-计算模块配置器是一个 Web 应用程序，可帮助开发人员同时为多个计算模块设备编程。
+When flashing an image to multiple Compute Modules, consider using the Compute Module Provisioner instead:
 
-它提供了内核映像数据库和在闪存过程中运行脚本的能力，以及自动标签打印和固件更新。
+##### [Mass Provision with the Compute Module Provisioner](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003468-WP/Using-the-Compute-Module-Provisioner.pdf)
 
-### 先决条件
+Mass Provision with the Compute Module Provisioner
 
-要刷写计算模块 eMMC，您需要以下内容：
+The Compute Module Provisioner is a web application that helps developers program many Compute Module devices simultaneously.
 
-* 本指南中称为主机设备的另一台计算机。您可以使用 Linux（Raspberry Pi OS 或 Ubuntu）、Windows 或 macOS。
-* 与您的计算模块型号对应的计算模块 IO 板。
-* 一根 Micro USB 线。
+It provides a database of kernel images and the ability to run scripts during the flashing process, in addition to automated label printing and firmware updating.
 
-### 设置 IO 板
+### Prerequisites
 
-要开始，物理设置您的 IO 板。这包括将计算模块和主机设备连接到 IO 板。
+To flash the Compute Module eMMC, you need the following:
 
-#### 使用计算模块 4 IO 板
+* Another computer, referred to in this guide as the **host device**. You can use Linux (Raspberry Pi OS or Ubuntu), Windows, or macOS.
+* The Compute Module IO Board [that corresponds to your Compute Module model](https://www.raspberrypi.com/documentation/computers/compute-module.html#io-board-compatibility).
+* A micro USB cable.
 
-设置计算模块 4 IO 板：
+### Set up the IO Board
 
-1. 将计算模块连接到 IO 板。连接后，计算模块应该平放。
-2. 将 nRPI_BOOT 安装到 IO 板跳线帽 J2（ disable eMMC Boot ）。
-3. 将一根电缆从 IO 板上的 micro USB 从机端口 J11 连接到主机设备。
+To begin, physically set up your IO Board. This includes connecting the Compute Module and host device to the IO Board.
 
-#### 使用计算模块 IO 板
+#### with Compute Module 4 IO Board
 
-要设置计算模块 IO 板：
+To set up the Compute Module 4 IO Board:
 
-1. 将计算模块连接到 IO 板。连接后，计算模块应平行于板放置，使接合夹牢固地卡入位。
-2. 将 J4（ USB SLAVE BOOT ENABLE ）设置为 1-2 =（ USB BOOT ENABLED ）
-3. 将一根电缆从 IO 板上的 micro USB 从机端口 J15 连接到主机设备。
+1. Connect the Compute Module to the IO board. When connected, the Compute Module should lie flat.
+2. Fit `nRPI_BOOT` to J2 (`disable eMMC Boot`) on the IO board jumper.
+3. Connect a cable from micro USB slave port J11 on the IO board to the host device.
 
-### 设置主机设备
+#### with Compute Module IO Board
 
-接下来，在主机设备上设置软件。
+To set up the Compute Module IO Board:
 
-#### 在 Linux
+1. Connect the Compute Module to the IO board. When connected, the Compute Module should lie parallel to the board, with the engagement clips firmly clicked into place.
+2. Set J4 (`USB SLAVE BOOT ENABLE`) to 1-2 = (`USB BOOT ENABLED`)
+3. Connect a cable from micro USB slave port J15 on the IO board to the host device.
 
-在 Linux 主机设备上设置软件：
+### Set up the host device
 
-1. 运行以下命令安装 rpiboot ：
+Next, let’s set up software on the host device.
+
+#### on Linux
+
+To set up software on a Linux host device:
+
+1. Run the following command to install `rpiboot`:
 
     ```
     $ sudo apt install rpiboot
     ```
-2. 将 IO 板连接到电源。
-3. 然后运行 rpiboot :
+2. Connect the IO Board to power.
+3. Then, run `rpiboot`:
 
     ```
     $ sudo rpiboot
     ```
-4. 几秒钟后，计算模块应该会显示成一个大容量存储设备。检查 /dev/ 目录，可能是 /dev/sda 或 /dev/sdb ，查找该设备。或者，运行 lsblk 并搜索一个存储容量与您的计算模块容量相匹配的设备。
+4. After a few seconds, the Compute Module should appear as a mass storage device. Check the `/dev/` directory, likely `/dev/sda` or `/dev/sdb`, for the device. Alternatively, run `lsblk` and search for a device with a storage capacity that matches the capacity of your Compute Module.
 
->**技巧**
->
->或者，您可以从源代码编译 rpiboot 。 
+| TIP | Alternatively, you can [build ](https://github.com/raspberrypi/usbboot)​[`rpiboot`](https://github.com/raspberrypi/usbboot)​[ from source](https://github.com/raspberrypi/usbboot). |
+| ----- | -------------------------- |
 
-#### 在 macOS 上
+#### on macOS
 
-在 macOS 主机设备上设置软件：
+To set up software on a macOS host device:
 
-1. 首先，从源代码编译 rpiboot 。
-2. 将 IO 板连接到电源。
-3. 然后，使用以下命令运行 rpiboot 可执行文件：
+1. First, [build ](https://github.com/raspberrypi/usbboot?tab=readme-ov-file#macos)​[`rpiboot`](https://github.com/raspberrypi/usbboot?tab=readme-ov-file#macos)​[ from source](https://github.com/raspberrypi/usbboot?tab=readme-ov-file#macos).
+2. Connect the IO Board to power.
+3. Then, run the `rpiboot` executable with the following command:
 
     ```
     $ sudo ./rpiboot
     ```
-4. 当命令运行完成时，您应该会看到一条消息，指出“您插入的磁盘无法被此计算机读取。” 点击“忽略”。您的计算模块现在应该显示成了一个大容量存储设备。
+4. When the command finishes running, you should see a message stating "The disk you inserted was not readable by this computer." Click **Ignore**. Your Compute Module should now appear as a mass storage device.
 
-#### 在 Windows 上
+#### on Windows
 
-在 Windows 主机设备上设置软件：
+To set up software on a Windows host device:
 
-1. 下载 Windows 安装程序
-2. 双击安装程序运行。这将安装驱动程序和引导工具。
-3. 将 IO 板连接到电源。Windows 应该会发现硬件并配置所需的驱动程序。
-4. 双击 RPiBoot.exe 运行。几秒钟后，计算模块 eMMC 应该会显示为 USB 大容量存储设备。
+1. Download the [Windows installer](https://github.com/raspberrypi/usbboot/raw/master/win32/rpiboot_setup.exe)
+2. Double-click on the installer to run it. This installs the drivers and boot tool.
+3. Connect the IO Board to power. Windows should discover the hardware and configure the required drivers.
+4. Double-click on `RPiBoot.exe` to run it. After a few seconds, the Compute Module eMMC should appear as a USB mass storage device.
 
->**技巧**
->
->或者，您可以从源代码编译 rpiboot 。 
+| TIP | Alternatively, you can [build ](https://github.com/raspberrypi/usbboot)​[`rpiboot`](https://github.com/raspberrypi/usbboot)​[ from source](https://github.com/raspberrypi/usbboot). |
+| ----- | -------------------------- |
 
-### 刷写 eMMC
+### Flash the eMMC
 
-您可以使用 Raspberry Pi Imager 刷写操作系统镜像到计算模块。
+You can use [Raspberry Pi Imager](https://www.raspberrypi.com/documentation/computers/getting-started.html#raspberry-pi-imager) to flash an operating system image to a Compute Module.
 
-或者，使用 dd 来将原始操作系统映像（例如 Raspberry Pi OS）写入您的计算模块。运行以下命令，将 /dev/sdX 替换为您的计算模块的质量存储设备表示形式的路径，将 raw_os_image.img 替换为您的原始操作系统映像的路径：
+Alternatively, use `dd` to write a raw OS image (such as [Raspberry Pi OS](https://www.raspberrypi.com/documentation/computers/os.html#introduction)) to your Compute Module. Run the following command, replacing `/dev/sdX` with the path to the mass storage device representation of your Compute Module and `raw_os_image.img` with the path to your raw OS image:
 
 ```
 $ sudo dd if=raw_os_image.img of=/dev/sdX bs=4MiB
 ```
 
-映像写入后，断开并重新连接计算模块。现在应该看到两个分区（用于 Raspberry Pi OS）：
+Once the image has been written, disconnect and reconnect the Compute Module. You should now see two partitions (for Raspberry Pi OS):
 
 ```
 /dev/sdX    <- Device
@@ -225,25 +231,25 @@ $ sudo dd if=raw_os_image.img of=/dev/sdX bs=4MiB
 /dev/sdX2   <- Second partition (Linux filesystem)
 ```
 
-您可以正常挂载 /dev/sdX1 和 /dev/sdX2 分区。
+You can mount the `/dev/sdX1` and `/dev/sdX2` partitions normally.
 
-### 从 eMMC 启动
+### Boot from eMMC
 
-#### 使用 计算模块 4 IO 板
+#### with Compute Module 4 IO Board
 
-从 IO 板跳线上的 J2 ( disable eMMC Boot ) 断开 nRPI_BOOT 。
+Disconnect `nRPI_BOOT` from J2 (`disable eMMC Boot`) on the IO board jumper.
 
-#### 使用计算模块 IO 板
+#### with Compute Module IO Board
 
-将 J4（ USB SLAVE BOOT ENABLE ）设置为 2-3（ USB BOOT DISABLED ）。
+Set J4 (`USB SLAVE BOOT ENABLE`) to 2-3 (`USB BOOT DISABLED`).
 
-#### 启动
+#### Boot
 
-断开 USB 从属端口。重新启动 IO 板，从您刚刚写入 eMMC 的新镜像引导计算模块。
+Disconnect the USB slave port. Power-cycle the IO board to boot the Compute Module from the new image you just wrote to eMMC.
 
-### 已知问题
+### Known issues
 
-* 小部分 CM3 存在启动问题。我们已经发现到这些问题与创建 FAT32 分区的方法有关；我们认为问题是由于 CPU 和 eMMC 之间的时序差异导致的。如果您在启动 CM3 时遇到问题，请使用以下命令手动创建分区：
+* A small percentage of CM3 experienced booting problems. We have traced these back to the method used to create the FAT32 partition; we believe the problem is due to a difference in timing between the CPU and eMMC. If you have trouble booting your CM3, create the partitions manually with the following commands:
 
   ```
   $ sudo parted /dev/<device>
@@ -252,316 +258,337 @@ $ sudo dd if=raw_os_image.img of=/dev/sdX bs=4MiB
   $ sudo mkfs.vfat -F32 /dev/<device>
   $ sudo cp -r <files>/* <mountpoint>
   ```
-* CM1 引导加载程序会向主机返回一个略有不正确的 USB 数据包。大多数 USB 主机会忽略它，但由于该问题，某些 USB 接口无法工作。CM3 修复了该错误。
+* The CM1 bootloader returns a slightly incorrect USB packet to the host. Most USB hosts ignore it, but some USB ports don’t work due to this bug. CM3 fixed this bug.
 
-### 计算模块 4 引导加载程序
+## Compute Module EEPROM bootloader
 
-CM4 上的默认引导加载程序配置旨在支持在计算模块 4 IO 板上启动和开发，并且在制造时刷写的软件版本可能比最新版本要旧。对于最终产品，请考虑：
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/compute-module/cm-bootloader.adoc)
 
-* 选择并验证特定的引导加载程序版本。 usbboot 存储库中的版本始终是最新的稳定版本。
-* 配置引导设备（例如网络引导）。请参阅引导加载程序配置指南中的 BOOT_ORDER 部分。
-* 启用引导加载程序 EEPROM 上的硬件写保护，以确保引导加载程序无法在无法访问的产品（如远程或嵌入式设备）上被修改。
+Since Compute Module 4, Compute Modules use an EEPROM bootloader. This bootloader lives in a small segment of on-board storage instead of the boot partition. As a result, it requires different procedures to update. Before using a Compute Module with an EEPROM bootloader in production, always follow these best practices:
 
->**注意**
->
->计算模块 4 ROM 不从 SD/EMMC 运行 recovery.bin ， rpi-eeprom-update 服务默认情况下未启用。这是必要的，因为 EMMC 不可拆卸，无效的 recovery.bin 文件将妨碍系统启动。这可以被覆盖并与 self-update 模式一起使用，其中引导加载程序可以从 USB MSD 或网络引导进行更新。但是，在更新 EEPROM 时发生断电时， self-update 模式不是原子更新，所以不安全。
+* Select a specific bootloader release. Verify that every Compute Module you use has that release. The version in the `usbboot` repo is always a recent stable release.
+* Configure the boot device by [setting the ](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-bootloader-configuration)​[`BOOT\_ORDER`](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-bootloader-configuration)​[ ](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-bootloader-configuration).
+* Enable hardware write-protection on the bootloader EEPROM to ensure that the bootloader can’t be modified on inaccessible products (such as remote or embedded devices).
 
+### Flash Compute Module bootloader EEPROM
 
-#### 除 SD 卡之外的闪存设备
+To flash the bootloader EEPROM:
 
-基于 Linux 的大容量存储设备支持 NVMe、EMMC 和 USB 块设备的闪存。这通常比使用 rpiboot 固件驱动程序更快，还为设备提供 UART 控制台，以便更容易进行调试。
+1. Set up the hardware as you would when [flashing the eMMC](https://www.raspberrypi.com/documentation/computers/compute-module.html#flash-compute-module-emmc), but ensure `EEPROM_nWP` is *not* pulled low.
+2. Run the following command to write `recovery/pieeprom.bin` to the bootloader EEPROM:
 
-另请参阅：CM4 rpiboot 扩展。
+    ```
+    $ ./rpiboot -d recovery
+    ```
+3. Once complete, `EEPROM_nWP` may be pulled low again.
 
-#### 修改引导加载程序配置
+### Flash storage devices other than SD cards
 
-要修改 CM4 引导加载程序配置：
+The Linux-based [`mass-storage-gadget`](https://github.com/raspberrypi/usbboot/blob/master/mass-storage-gadget/README.md) supports flashing of NVMe, eMMC and USB block devices. `mass-storage-gadget` writes devices faster than the firmware-based `rpiboot` mechanism, and also provides a UART console to the device for debugging.
 
-* 导航到 usbboot/recovery 目录
-* 如果需要特定的引导加载程序版本，请替换 pieeprom.original.bin
-* 编辑默认的 boot.conf 引导加载程序配置文件；通常至少需要更新 BOOT_ORDER：
-  * 用于网络引导，请使用 BOOT_ORDER=0xf2
-  * 用于 SD/EMMC 引导，请使用 BOOT_ORDER=0xf1
-  * 用于 USB 引导失败后切换到 EMMC，请使用 BOOT_ORDER=0xf15
-* 运行 ./update-pieeprom.sh 以更新 EEPROM 图像 pieeprom.bin 图像文件
-* 如果需要 EEPROM 写保护，请编辑 config.txt 并添加 eeprom_write_protect=1 。硬件写保护必须通过软件启用，然后通过将 EEPROM_nWP 引脚拉低进行锁定
-* 运行 ../rpiboot -d . 以使用更新的 EEPROM 映像 pieeprom.bin 更新引导加载程序
+`usbboot` also includes a number of [extensions](https://github.com/raspberrypi/usbboot/blob/master/Readme.md#compute-module-4-extensions) that enable you to interact with the EEPROM bootloader on a Compute Module.
 
-pieeprom.bin 文件现在已准备好刷写到计算模块 4。
+### Update the Compute Module bootloader
 
-#### 刷写引导加载程序 EEPROM - 计算模块 4
+On Compute Modules with an EEPROM bootloader, ROM never runs `recovery.bin` from SD/eMMC. These Compute Modules disable the `rpi-eeprom-update` service by default, because eMMC is not removable and an invalid `recovery.bin` file could prevent the system from booting.
 
-要刷写引导加载程序 EEPROM，请遵循与刷写 EMMC 相同的硬件设置，但还要确保 EEPROM_nWP 未被拉低。完成后， EEPROM_nWP 可以再次被拉低。运行以下命令将 recovery/pieeprom.bin 写入引导加载程序 EEPROM：
+You can override this behaviour with `self-update` mode. In `self-update` mode, you can update the bootloader from USB MSD or network boot.
 
-```
-$ ./rpiboot -d recovery
-```
+| WARNING | `self-update` mode does not update the bootloader atomically. If a power failure occurs during an EEPROM update, you could corrupt the EEPROM. |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 
-## 连接外围设备
+### Modify the bootloader configuration
 
-本指南帮助开发人员将外围设备连接到计算模块引脚。此外，本指南解释了如何更改软件以启用这些外围设备。
+To modify the Compute Module EEPROM bootloader configuration:
 
-SoC 的大多数引脚（GPIO、两个 CSI 摄像头接口、两个 DSI 显示接口、HDMI 等）可用于连接。通常可以将未使用的引脚保持未连接状态。
+1. Navigate to the `usbboot/recovery` directory.
+2. If you require a specific bootloader release, replace `pieeprom.original.bin` with the equivalent from your bootloader release.
+3. Edit the default `boot.conf` bootloader configuration file to define a [`BOOT\_ORDER`](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#BOOT_ORDER):
 
-具有 DDR2 SODIMM 外形规格的计算模块可以使用任何 DDR2 SODIMM 插槽。但是，引脚分配与 SODIMM 内存模块不同。
+    * For network boot, use `BOOT_ORDER=0xf2`.
+    * For SD/eMMC boot, use `BOOT_ORDER=0xf1`.
+    * For USB boot failing over to eMMC, use `BOOT_ORDER=0xf15`.
+    * For NVMe boot, use `BOOT_ORDER=0xf6`.
+4. Run `./update-pieeprom.sh` to generate a new EEPROM image `pieeprom.bin` image file.
+5. If you require EEPROM write-protection, add `eeprom_write_protect=1` to `/boot/firmware/config.txt`.
 
-要使用计算模块，用户设计的主板必须满足：
+    * Once enabled in software, you can lock hardware write-protection by pulling the `EEPROM_nWP` pin low.
+6. Run the following command to write the updated `pieeprom.bin` image to EEPROM:
 
-* 为计算模块供电（3.3V，最低 1.8V）
-* 将引脚连接到用户应用程序所需的外围设备
+    ```
+    $ ../rpiboot -d .
+    ```
 
-树莓派的 IO 板提供以下功能：
+## Wire peripherals
 
-* 为模块供电
-* 将 GPIO 引线连接到引脚排
-* 将摄像头和显示接口引线连接到 FFC 连接器
-* 将 HDMI 引线连接到 HDMI 接口
-* 将 USB 线连接到 USB 接口
-* 将活动监视器连接到“ACT” LED
-* 通过 USB 进行 eMMC 编程
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/compute-module/cm-peri-sw-guide.adoc)
 
-本指南首先解释了引导过程以及设备树如何描述连接的硬件。
+This guide helps developers wire up peripherals to the Compute Module pins. Additionally, this guide explains how to make changes to the software to enable these peripherals.
 
-然后，我们将解释如何将 I2C 和 SPI 外围设备连接到 IO 板。最后，我们将创建使用这两个外围设备所需的设备树文件，以便在 Raspberry Pi OS 上使用。
+Most of the pins of the SoC (GPIO, two CSI camera interfaces, two DSI display interfaces, HDMI, etc.) are available for wiring. You can can usually leave unused pins disconnected.
+
+Compute Modules with the DDR2 SODIMM form factor can use any DDR2 SODIMM socket. However, the pinout is not the same as SODIMM memory modules.
+
+To use a Compute Module, a user must design a motherboard that:
+
+* provides power to the Compute Module (3.3V and 1.8V at minimum)
+* connects the pins to the required peripherals for the user’s application
+
+Raspberry Pi’s IO Boards provide the following functionality:
+
+* powers the module
+* wires the GPIO to pin headers
+* wires the camera and display interfaces to FFC connectors
+* wires HDMI to an HDMI port
+* wires USB to USB ports
+* wires activity monitoring to an 'ACT' LED
+* eMMC programming over USB
+
+This guide first explains the boot process and how Device Tree describes attached hardware.
+
+Then, we’ll explain how to attach an I2C and an SPI peripheral to an IO Board. Finally, we’ll create the Device Tree files necessary to use both peripherals with Raspberry Pi OS.
 
 ### BCM283x GPIOs
 
-BCM283x 具有三个通用输入/输出(GPIO)引脚组：BANK0 上有 28 个引脚，BANK1 上有 18 个引脚，BANK2 上有 8 个引脚，总共 54 个引脚。这些引脚可以用作真正的 GPIO 引脚：软件可以将它们设置为输入或输出，读取和/或设置状态，并将它们用作中断。它们还可以运行诸如 I2C、SPI、I2S、UART、SD 卡等其他功能。
+BCM283x has three banks of general-purpose input/output (GPIO) pins: 28 pins on Bank 0, 18 pins on Bank 1, and 8 pins on Bank 2, for a total of 54 pins. These pins can be used as true GPIO pins: software can set them as inputs or outputs, read and/or set state, and use them as interrupts. They also can run alternate functions such as I2C, SPI, I2S, UART, SD card, and others.
 
-任何计算模块上都可以使用 BANK0 或 BANK1。不要使用 BANK2：它控制 eMMC、HDMI 热插拔检测和 ACT LED/USB 引导控制。
+You can use Bank 0 or Bank 1 on any Compute Module. Don’t use Bank 2: it controls eMMC, HDMI hot plug detect, and ACT LED/USB boot control.
 
-使用 pinctrl 来检查 GPIO 引脚的电压和功能，以查看您的设备树是否按预期工作。
+Use `pinctrl` to check the voltage and function of the GPIO pins to see if your Device Tree is working as expected.
 
-### BCM283x 引导过程
+### BCM283x boot process
 
-BCM283x 设备配有 VideoCore GPU 和 Arm CPU 核心。GPU 包括 DSP 处理器和用于图像处理、视频编解码、3D 图形和图像合成的硬件加速器。
+BCM283x devices have a VideoCore GPU and Arm CPU cores. The GPU consists of a DSP processor and hardware accelerators for imaging, video encode and decode, 3D graphics, and image compositing.
 
-在 BCM283x 设备中，GPU 中的 DSP 核心首先启动。它在启动主 Arm 处理器之前处理设置。
+In BCM283x devices, the DSP core in the GPU boots first. It handles setup before booting up the main Arm processors.
 
-树莓派 BCM283x 设备具有三阶段引导过程：
+Raspberry Pi BCM283x devices have a three-stage boot process:
 
-* GPU DSP 退出复位并从小型内部引导 ROM 执行代码。此代码通过外部接口加载第二阶段引导加载程序。此代码首先在称为 bootcode.bin 的引导分区上查找第二阶段引导加载程序。如果未找到引导设备或未找到 bootcode.bin ，引导 ROM 将在 USB 引导模式下等待主机提供第二阶段引导加载程序（ usbbootcode.bin ）。
-* 第二阶段引导加载程序负责设置 LPDDR2 SDRAM 接口和其他关键系统功能。设置完成后，第二阶段引导加载程序加载并执行主 GPU 固件（ start.elf ）。
-* start.elf 处理额外的系统设置并启动 Arm 处理器子系统。它包含 GPU 固件。GPU 固件首先读取 dt-blob.bin 以确定初始 GPIO 引脚状态和 GPU 特定接口和时钟，然后解析 config.txt 。然后加载特定于模型的 Arm 设备树文件和在 config.txt 中指定的任何设备树叠加，然后启动 Arm 子系统并将设备树数据传递给正在引导的 Linux 内核。
+* The GPU DSP comes out of reset and executes code from the small internal boot ROM. This code loads a second-stage bootloader via an external interface. This code first looks for a second-stage boot loader on the boot device called `bootcode.bin` on the boot partition. If no boot device is found or `bootcode.bin` is not found, the boot ROM waits in USB boot mode for a host to provide a second-stage boot loader (`usbbootcode.bin`).
+* The second-stage boot loader is responsible for setting up the LPDDR2 SDRAM interface and other critical system functions. Once set up, the second-stage boot loader loads and executes the main GPU firmware (`start.elf`).
+* `start.elf` handles additional system setup and boots up the Arm processor subsystem. It contains the GPU firmware. The GPU firmware first reads `dt-blob.bin` to determine initial GPIO pin states and GPU-specific interfaces and clocks, then parses `config.txt`. It then loads a model-specific Arm device tree file and any Device Tree overlays specified in `config.txt` before starting the Arm subsystem and passing the Device Tree data to the booting Linux kernel.
 
-### 设备树
+### Device Tree
 
-树莓派的 Linux 设备树编码了连接到系统的硬件信息以及用于与该硬件通信的驱动程序。
+[Linux Device Tree for Raspberry Pi](https://www.raspberrypi.com/documentation/computers/configuration.html#device-trees-overlays-and-parameters) encodes information about hardware attached to a system as well as the drivers used to communicate with that hardware.
 
-引导分区包含几个二进制设备树（ .dtb ）文件。设备树编译器使用可读的设备树描述（ .dts ）创建这些二进制文件。
+The boot partition contains several binary Device Tree (`.dtb`) files. The Device Tree compiler creates these binary files using human-readable Device Tree descriptions (`.dts`).
 
-引导分区包含两种不同类型的设备树文件。一种仅供 GPU 使用；其余是针对每个基于 BCM283x 的树莓派产品的标准 Arm 设备树文件：
+The boot partition contains two different types of Device Tree files. One is used by the GPU only; the rest are standard Arm Device Tree files for each of the BCM283x-based Raspberry Pi products:
 
-* dt-blob.bin （供 GPU 使用）
-* bcm2708-rpi-b.dtb （用于树莓派 1 Model A 和 B）
-* bcm2708-rpi-b-plus.dtb （用于树莓派i 1 Model B+ 和 A+）
-* bcm2709-rpi-2-b.dtb （用于树莓派 2 Model B）
-* bcm2710-rpi-3-b.dtb （用于树莓派 3 Model B）
-* bcm2708-rpi-cm.dtb （用于树莓派 计算模块 1）
-* bcm2710-rpi-cm3.dtb （用于树莓派计算模块 3）
+* `dt-blob.bin` (used by the GPU)
+* `bcm2708-rpi-b.dtb` (Used for Raspberry Pi 1 Models A and B)
+* `bcm2708-rpi-b-plus.dtb` (Used for Raspberry Pi 1 Models B+ and A+)
+* `bcm2709-rpi-2-b.dtb` (Used for Raspberry Pi 2 Model B)
+* `bcm2710-rpi-3-b.dtb` (Used for Raspberry Pi 3 Model B)
+* `bcm2708-rpi-cm.dtb` (Used for Raspberry Pi Compute Module 1)
+* `bcm2710-rpi-cm3.dtb` (Used for Raspberry Pi Compute Module 3)
 
-在启动过程中，用户可以通过 device_tree 参数在 config.txt 中指定要使用的特定 Arm 设备树。例如， config.txt 中的 device_tree=mydt.dtb 行指定了一个名为 mydt.dtb 的文件中的 Arm 设备树。
+During boot, the user can specify a specific Arm Device Tree to use via the `device_tree` parameter in `config.txt`. For example, the line `device_tree=mydt.dtb` in `config.txt` specifies an Arm Device Tree in a file named `mydt.dtb`.
 
-您可以为计算模块产品创建完整的设备树，但我们建议改用叠加层。叠加层向基本设备树添加非特定于板的硬件描述。这包括使用的 GPIO 引脚及其功能，以及连接的设备，以便正确加载驱动程序。引导加载程序在将设备树传递给 Linux 内核之前将叠加层与基本设备树合并。基本设备树偶尔会更改，通常不会破坏叠加层。
+You can create a full Device Tree for a Compute Module product, but we recommend using **overlays** instead. Overlays add descriptions of non-board-specific hardware to the base Device Tree. This includes GPIO pins used and their function, as well as the devices attached, so that the correct drivers can be loaded. The bootloader merges overlays with the base Device Tree before passing the Device Tree to the Linux kernel. Occasionally the base Device Tree changes, usually in a way that will not break overlays.
 
-使用 dtoverlay 参数在 config.txt 中加载设备树叠加层。Raspberry Pi OS 假定所有叠加层位于 /overlays 目录中，并使用后缀 -overlay.dtb 。例如， dtoverlay=myoverlay 行加载叠加层 /overlays/myoverlay-overlay.dtb 。
+Use the `dtoverlay` parameter in `config.txt` to load Device Tree overlays. Raspberry Pi OS assumes that all overlays are located in the `/overlays` directory and use the suffix `-overlay.dtb`. For example, the line `dtoverlay=myoverlay` loads the overlay `/overlays/myoverlay-overlay.dtb`.
 
-要将外围设备连接到计算模块，请在覆盖中描述连接到 BANK0 和 BANK1 GPIO 的所有硬件。这样您就可以使用标准的 Raspberry Pi OS 镜像，因为覆盖已合并到标准基础设备树中。或者，您可以为您的应用程序定义自定义设备树，但您将无法使用标准的 Raspberry Pi OS 镜像。相反，您必须创建一个包含您自定义设备树的修改后的 Raspberry Pi OS 镜像，以便分发您希望分发的每个操作系统更新。如果基础覆盖发生更改，则可能需要更新您的定制设备树。
+To wire peripherals to a Compute Module, describe all hardware attached to the Bank 0 and Bank 1 GPIOs in an overlay. This allows you to use standard Raspberry Pi OS images, since the overlay is merged into the standard base Device Tree. Alternatively, you can define a custom Device Tree for your application, but you won’t be able to use standard Raspberry Pi OS images. Instead, you must create a modified Raspberry Pi OS image that includes your custom device tree for every OS update you wish to distribute. If the base overlay changes, you might need to update your customised Device Tree.
 
 ### `dt-blob.bin`
 
-当 start.elf 运行时，它首先读取 dt-blob.bin 。这是一种特殊形式的设备树 blob，告诉 GPU 如何设置 GPIO 引脚状态。
+When `start.elf` runs, it first reads `dt-blob.bin`. This is a special form of Device Tree blob which tells the GPU how to set up the GPIO pin states.
 
-dt-blob.bin 包含由 GPU 而不是 SoC 控制的 GPIO 和外围设备的信息。例如，GPU 管理摄像头模块。GPU 需要独占访问 I2C 接口和一些引脚，以便与摄像头模块通信。
+`dt-blob.bin` contains information about GPIOs and peripherals controlled by the GPU, instead of the SoC. For example, the GPU manages Camera Modules. The GPU needs exclusive access to an I2C interface and a couple of pins to talk to a Camera Module.
 
-在大多数树莓派型号上，I2C0 专为 GPU 独占使用。 dt-blob.bin 定义了用于 I2C0 的 GPIO 引脚。
+On most Raspberry Pi models, I2C0 is reserved for exclusive GPU use. `dt-blob.bin` defines the GPIO pins used for I2C0.
 
-默认情况下， dt-blob.bin 不存在。相反， start.elf 包含了文件的内置版本。许多计算模块项目提供了一个自定义 dt-blob.bin ，该文件覆盖了默认的内置文件。
+By default, `dt-blob.bin` does not exist. Instead, `start.elf` includes a built-in version of the file. Many Compute Module projects provide a custom `dt-blob.bin` which overrides the default built-in file.
 
-  dt-blob.bin 指定：
+`dt-blob.bin` specifies:
 
-* 用于 HDMI 热插拔检测的引脚
-* 用作 GPCLK 输出的 GPIO 引脚
-* GPU 在引导过程中可以使用的 ACT LED
+* the pin used for HDMI hot plug detect
+* GPIO pins used as a GPCLK output
+* an ACT LED that the GPU can use while booting
 
-minimal-cm-dt-blob.dts 是一个示例 .dts 设备树文件。它设置了 HDMI 热插拔检测，ACT LED，并将所有其他 GPIO 设置为带有默认拉电的输入。
+[`minimal-cm-dt-blob.dts`](https://datasheets.raspberrypi.com/cm/minimal-cm-dt-blob.dts) is an example `.dts` device tree file. It sets up HDMI hot plug detection, an ACT LED, and sets all other GPIOs as inputs with default pulls.
 
-要将 minimal-cm-dt-blob.dts 编译为 dt-blob.bin ，请使用设备树编译器 dtc 。要在树莓派上安装 dtc ，请运行以下命令：
+To compile `minimal-cm-dt-blob.dts` to `dt-blob.bin`, use the [Device Tree compiler](https://www.raspberrypi.com/documentation/computers/configuration.html#device-trees-overlays-and-parameters) `dtc`. To install `dtc` on a Raspberry Pi, run the following command:
 
 ```
 $ sudo apt install device-tree-compiler
 ```
 
-然后，运行以下命令将 minimal-cm-dt-blob.dts 编译为 dt-blob.bin ：
+Then, run the follow command to compile `minimal-cm-dt-blob.dts` into `dt-blob.bin`:
 
 ```
 $ dtc -I dts -O dtb -o dt-blob.bin minimal-cm-dt-blob.dts
 ```
 
-获取更多信息，请参阅我们的创建指南 dt-blob.bin 。
+For more information, see our [guide to creating ](https://www.raspberrypi.com/documentation/computers/configuration.html#change-the-default-pin-configuration)​[`dt-blob.bin`](https://www.raspberrypi.com/documentation/computers/configuration.html#change-the-default-pin-configuration).
 
-### Arm Linux 设备树
+### Arm Linux Device Tree
 
-在 start.elf 读取 dt-blob.bin 并设置初始引脚状态和时钟之后，它会读取 config.txt ，其中包含许多其他系统设置选项。
+After `start.elf` reads `dt-blob.bin` and sets up the initial pin states and clocks, it reads [`config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html), which contains many other options for system setup.
 
-阅读完 config.txt 后， start.elf 会读取一个特定于模型的设备树文件。例如，计算模块 3 使用 bcm2710-rpi-cm.dtb 。该文件是一个标准的 Arm Linux 设备树文件，详细说明连接到处理器的硬件。它枚举了：
+After reading `config.txt`, `start.elf` reads a model-specific Device Tree file. For instance, Compute Module 3 uses `bcm2710-rpi-cm.dtb`. This file is a standard Arm Linux Device Tree file that details hardware attached to the processor. It enumerates:
 
-* 外围设备的种类和位置
-* 使用了哪些 GPIO
-* 这些 GPIO 有什么功能
-* 连接了哪些物理设备
+* what and where peripheral devices exist
+* which GPIOs are used
+* what functions those GPIOs have
+* what physical devices are connected
 
-如果与 dt-blob.bin 不同，此文件将通过覆盖引脚状态来设置 GPIO，并尝试为特定设备加载驱动程序。
+This file sets up the GPIOs by overwriting the pin state in `dt-blob.bin` if it is different. It will also try to load drivers for the specific devices.
 
-特定型号的设备树文件包含了对外围设备的禁用条目。除了 eMMC/SD 卡外设备的 GPIO 引脚定义外，它不包含任何 GPIO 引脚定义，并且始终使用相同的引脚。
+The model-specific Device Tree file contains disabled entries for peripherals. It contains no GPIO pin definitions other than the eMMC/SD Card peripheral which has GPIO defs and always uses the same pins.
 
-### 设备树源码和编译
+### Device Tree source and compilation
 
-Raspberry Pi OS 镜像提供了预编译的 dtb 文件，但源 dts 文件位于树莓派 Linux 内核分支中。在文件名中查找 rpi 。
+The Raspberry Pi OS image provides compiled `dtb` files, but the source `dts` files live in the [Raspberry Pi Linux kernel branch](https://github.com/raspberrypi/linux/tree/rpi-6.6.y/arch/arm/boot/dts/broadcom). Look for `rpi` in the file names.
 
-默认叠加 dts 文件位于 arch/arm/boot/dts/overlays 。这些叠加文件是创建自己的叠加的好起点。要将这些 dts 文件编译为 dtb 文件，请使用设备树编译器 dtc 。
+Default overlay `dts` files live at [`arch/arm/boot/dts/overlays`](https://github.com/raspberrypi/linux/tree/rpi-6.6.y/arch/arm/boot/dts/overlays). These overlay files are a good starting point for creating your own overlays. To compile these `dts` files to `dtb` files, use the [Device Tree compiler](https://www.raspberrypi.com/documentation/computers/configuration.html#device-trees-overlays-and-parameters) `dtc`.
 
-在编译自己的内核时，构建主机需要 scripts/dtc 中的设备树编译器。要自动构建叠加，请将它们添加到 dtbs 中的 make 目标中 arch/arm/boot/dts/overlays/Makefile 。
+When building your own kernel, the build host requires the Device Tree compiler in `scripts/dtc`. To build your overlays automatically, add them to the `dtbs` make target in `arch/arm/boot/dts/overlays/Makefile`.
 
-### 设备树调试
+### Device Tree debugging
 
-当启动 Linux 内核时，GPU 使用基础 dts 和任何叠加层创建完整的设备树。这个完整的树可以通过 Linux proc 接口在 /proc/device-tree 中访问。节点变成目录，属性变成文件。
+When booting the Linux kernel, the GPU provides a fully assembled Device Tree created using the base `dts` and any overlays. This full tree is available via the Linux `proc` interface in `/proc/device-tree`. Nodes become directories and properties become files.
 
-您可以使用 dtc 将其写成可供人类阅读的 dts 文件以进行调试。要查看完整的组装设备树，请运行以下命令：
+You can use `dtc` to write this out as a human readable `dts` file for debugging. To see the fully assembled device tree, run the following command:
 
 ```
 $ dtc -I fs -O dts -o proc-dt.dts /proc/device-tree
 ```
 
-pinctrl 提供 GPIO 引脚的状态。如果出现问题，请尝试转储 GPU 日志消息：
+`pinctrl` provides the status of the GPIO pins. If something seems to be going awry, try dumping the GPU log messages:
 
 ```
 $ sudo vclog --msg
 ```
 
->**技巧**
->
->要在输出中包含更多诊断信息，请将 dtdebug=1 添加到 config.txt 。 
+| TIP | To include even more diagnostics in the output, add `dtdebug=1` to `config.txt`. |
+| ----- | ----------------------------------------------------------- |
 
-使用设备树树莓派论坛提出设备树相关问题或报告问题。
+Use the [Device Tree Raspberry Pi forum](https://forums.raspberrypi.com/viewforum.php?f=107) to ask Device Tree-related questions or report an issue.
 
-### 例子
+### Examples
 
-以下示例使用带有通过跳线连接的外围设备的 IO 板。我们假设使用旧版的 Raspberry Pi OS Lite 运行 CM1+CMIO 或 CM3+CMIO3。这里的示例需要互联网连接，因此我们建议将 USB 集线器、键盘和无线局域网或以太网转接器插入 IO 板的 USB 端口。
+The following examples use an IO Board with peripherals attached via jumper wires. We assume a CM1+CMIO or CM3+CMIO3, running a clean install of Raspberry Pi OS Lite. The examples here require internet connectivity, so we recommend a USB hub, keyboard, and wireless LAN or Ethernet dongle plugged into the IO Board USB port.
 
-#### 将 I2C RTC 连接到 BANK1 引脚
+#### Attach an I2C RTC to Bank 1 pins
 
-在这个示例中，我们将 NXP PCF8523 实时时钟（RTC）连接到 IO 板的 BANK1 GPIO 引脚：3V3、GND、GPIO44 上的 I2C1_SDA 和 GPIO45 上的 I2C1_SCL。
+In this example, we wire an NXP PCF8523 real time clock (RTC) to the IO Board Bank 1 GPIO pins: 3V3, GND, I2C1_SDA on GPIO44 and I2C1_SCL on GPIO45.
 
-下载 minimal-cm-dt-blob.dts 并将其复制到 /boot/firmware/ 的引导分区中。
+Download [`minimal-cm-dt-blob.dts`](https://datasheets.raspberrypi.com/cm/minimal-cm-dt-blob.dts) and copy it to the boot partition in `/boot/firmware/`.
 
-编辑 minimal-cm-dt-blob.dts 并将 GPIO44 和 45 的引脚状态更改为带上拉的 I2C1：
+Edit `minimal-cm-dt-blob.dts` and change the pin states of GPIO44 and 45 to be I2C1 with pull-ups:
 
 ```
 $ sudo nano /boot/firmware/minimal-cm-dt-blob.dts
 ```
 
-替换以下行：
+Replace the following lines:
 
 ```
 pin@p44 { function = "input"; termination = "pull_down"; }; // DEFAULT STATE WAS INPUT NO PULL
 pin@p45 { function = "input"; termination = "pull_down"; }; // DEFAULT STATE WAS INPUT NO PULL
 ```
 
-使用以下上拉定义：
+With the following pull-up definitions:
 
 ```
 pin@p44 { function = "i2c1"; termination = "pull_up"; }; // SDA1
 pin@p45 { function = "i2c1"; termination = "pull_up"; }; // SCL1
 ```
 
-我们可以在不进行任何更改的情况下使用此 dt-blob.dts ，因为 Linux 设备树在特定驱动程序加载时重新配置这些引脚。但是，如果配置 dt-blob.dts ，GPIO 在 GPU 引导阶段尽快达到最终状态。在某些情况下，必须在 GPU 引导时配置引脚，以便在加载 Linux 驱动程序时处于特定状态。例如，重置线可能需要保持在正确的方向上。
+We could use this `dt-blob.dts` with no changes, because the Linux Device Tree re-configures these pins during Linux kernel boot when the specific drivers load. However, if you configure `dt-blob.dts`, the GPIOs reach their final state as soon as possible during the GPU boot stage. In some cases, pins must be configured at GPU boot time so they are in a specific state when Linux drivers are loaded. For example, a reset line may need to be held in the correct orientation.
 
-运行以下命令编译 dt-blob.bin ：
+Run the following command to compile `dt-blob.bin`:
 
 ```
 $ sudo dtc -I dts -O dtb -o /boot/firmware/dt-blob.bin /boot/firmware/minimal-cm-dt-blob.dts
 ```
 
-下载 example1-overlay.dts ，将其复制到 /boot/firmware/ 中的引导分区，然后使用以下命令编译：
+Download [`example1-overlay.dts`](https://datasheets.raspberrypi.com/cm/example1-overlay.dts), copy it to the boot partition in `/boot/firmware/`, then compile it with the following command:
 
 ```
 $ sudo dtc -@ -I dts -O dtb -o /boot/firmware/overlays/example1.dtbo /boot/firmware/example1-overlay.dts
 ```
 
--@ 标志编译具有外部引用的 dts 文件。通常是必要的。
+The `-@` flag compiles `dts` files with external references. It is usually necessary.
 
-将以下行添加到 /boot/firmware/config.txt 中：
+Add the following line to [`/boot/firmware/config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html#what-is-config-txt):
 
 ```
 dtoverlay=example1
 ```
 
-最后，使用 sudo reboot 重新启动。
+Finally, reboot with `sudo reboot`.
 
-重新启动后，您应该在 /dev 中看到一个 rtc0 条目。运行以下命令查看硬件时钟时间：
+Once rebooted, you should see an `rtc0` entry in `/dev`. Run the following command to view the hardware clock time:
 
 ```
 $ sudo hwclock
 ```
 
-#### 在 BANK0 上连接一个 ENC28J60 SPI 以太网控制器
+#### Attach an ENC28J60 SPI Ethernet controller on Bank 0
 
-在这个示例中，我们使用已在 /boot/firmware/overlays 中定义的叠加层，将 ENC28J60 SPI 以太网控制器添加到 BANK0。 以太网控制器使用 SPI 引脚 CE0、MISO、MOSI 和 SCLK（分别为 GPIO8-11），GPIO25 用于下降沿中断，另外还有 GND 和 3.3V。
+In this example, we use an overlay already defined in `/boot/firmware/overlays` to add an ENC28J60 SPI Ethernet controller to Bank 0. The Ethernet controller uses SPI pins CE0, MISO, MOSI and SCLK (GPIO8-11 respectively), GPIO25 for a falling edge interrupt, in addition to GND and 3.3V.
 
-在这个示例中，我们不会更改 dt-blob.bin 。而是，将以下行添加到 /boot/firmware/config.txt 中：
+In this example, we won’t change `dt-blob.bin`. Instead, add the following line to `/boot/firmware/config.txt`:
 
 ```
 dtoverlay=enc28j60
 ```
 
- 使用 sudo reboot 重新启动。
+Reboot with `sudo reboot`.
 
-您现在应该在 /dev 中看到一个 rtc0 条目。运行以下命令查看硬件时钟时间：
+You should now see an `rtc0` entry in `/dev`. Run the following command to view the hardware clock time:
 
 ```
 $ sudo hwclock
 ```
 
-您还应该具有以太网连接性。运行以下命令测试您的连接性：
+You should also have Ethernet connectivity. Run the following command to test your connectivity:
 
 ```
 $ ping 8.8.8.8
 ```
 
-运行以下命令显示 GPIO 功能；GPIO8-11 现在应提供 ALT0（SPI）功能：
+Run the following command to show GPIO functions; GPIO8-11 should now provide ALT0 (SPI) functions:
 
 ```
 $ pinctrl
 ```
 
-## 连接摄像头模块
+## Attach a Camera Module
 
-计算模块具有两个 CSI-2 摄像头接口：CAM1 和 CAM0。本节将解释如何使用计算模块 I/O 板将一个或两个树莓派摄像头连接到计算模块的 CAM1 和 CAM0 接口。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/compute-module/cmio-camera.adoc)
 
-### 更新您的系统
+The Compute Module has two CSI-2 camera interfaces: CAM1 and CAM0. This section explains how to connect one or two Raspberry Pi Cameras to a Compute Module using the CAM1 and CAM0 interfaces with a Compute Module I/O Board.
 
-在配置摄像头之前，请确保您树莓派的固件是最新的。
+### Update your system
+
+Before configuring a camera, [ensure that your Raspberry Pi firmware is up-to-date](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#update-the-bootloader-configuration).:
 
 ```
 $ sudo apt update
 $ sudo apt full-upgrade
 ```
 
-### 连接一个摄像头
+### Connect one camera
 
-要将单个摄像头连接到计算模块，请完成以下步骤：
+To connect a single camera to a Compute Module, complete the following steps:
 
-1. 断开计算模块的电源。
-2. 使用 RPI-CAMERA 板或树莓派 Zero 摄像头电缆将摄像头模块连接到 CAM1 接口。![Connecting the adapter board](https://www.raspberrypi.com/documentation/computers/images/CMIO-Cam-Adapter.jpg)
-3. （仅限 CM1、CM3、CM3+ 和 CM4S）：使用跳线电缆连接以下 GPIO 引脚：
+1. Disconnect the Compute Module from power.
+2. Connect the Camera Module to the CAM1 port using a RPI-CAMERA board or a Raspberry Pi Zero camera cable.
+    ![Connecting the adapter board](https://www.raspberrypi.com/documentation/computers/images/CMIO-Cam-Adapter.jpg?hash=e283b8867e93491c0a21b11de82c84e4)
+3. *(CM1, CM3, CM3+, and CM4S only)* : Connect the following GPIO pins with jumper cables:
 
-    * 0 到 CD1_SDA
-    * 1 到 CD1_SCL
-    * 2 到 CAM1_I01
-    * 3 到 CAM1_I00 ![GPIO connection for a single camera](https://www.raspberrypi.com/documentation/computers/images/CMIO-Cam-GPIO.jpg)
-4. 重新连接计算模块到电源。
-5. 在 /boot/firmware/config.txt 中删除（或使用前缀 # 注释掉）以下行，如果存在的话：
+    * `0` to `CD1_SDA`
+    * `1` to `CD1_SCL`
+    * `2` to `CAM1_I01`
+    * `3` to `CAM1_I00`
+      ![GPIO connection for a single camera](https://www.raspberrypi.com/documentation/computers/images/CMIO-Cam-GPIO.jpg?hash=6918226529340146f2468d25027df9f0)
+4. Reconnect the Compute Module to power.
+5. Remove (or comment out with the prefix `#`) the following lines, if they exist, in `/boot/firmware/config.txt`:
 
     ```
     camera_auto_detect=1
@@ -570,95 +597,98 @@ $ sudo apt full-upgrade
     ```
     dtparam=i2c_arm=on
     ```
-6. (仅适用于 CM1、CM3、CM3+ 和 CM4S)：向 /boot/firmware/config.txt 添加以下指令，以适应 I/O 板上 GPIO 引脚分配的交换：
+6.  *(CM1, CM3, CM3+, and CM4S only)* : Add the following directive to `/boot/firmware/config.txt` to accommodate the swapped GPIO pin assignment on the I/O board:
 
     ```
     dtoverlay=cm-swap-i2c0
     ```
-7. (仅适用于 CM1、CM3、CM3+ 和 CM4S)：向 /boot/firmware/config.txt 添加以下指令，将 GPIO 3 分配为 CAM1 稳压器：
+7.  *(CM1, CM3, CM3+, and CM4S only)* : Add the following directive to `/boot/firmware/config.txt` to assign GPIO 3 as the CAM1 regulator:
 
     ```
     dtparam=cam1_reg
     ```
-8. | 向 /boot/firmware/config.txt 添加适当的指令，手动配置相机型号的驱动程序： |  |
-    | 相机型号 | 指令 |
-    | --------------------------------------------------------------------------- | -- |
-    | v1 相机                                                                   | `dtoverlay=ov5647,cam1` |
-    | v2 相机                                                                   | `dtoverlay=imx219,cam1` |
-    | v3 相机                                                                   | `dtoverlay=imx708,cam1` |
-    | HQ 相机                                                                   | `dtoverlay=imx477,cam1` |
-    | GS 相机                                                                   | `dtoverlay=imx296,cam1` |
-9. 使用 sudo reboot 重新启动您的计算模块。
-10. 运行以下命令以检查检测到的相机列表：
+8. | Add the appropriate directive to `/boot/firmware/config.txt` to manually configure the driver for your camera model: |  |
+    | camera model | directive |
+    | ------------------------------------------------------------------------------------------- | -- |
+    | v1 camera                                                                                 | `dtoverlay=ov5647,cam1` |
+    | v2 camera                                                                                 | `dtoverlay=imx219,cam1` |
+    | v3 camera                                                                                 | `dtoverlay=imx708,cam1` |
+    | HQ camera                                                                                 | `dtoverlay=imx477,cam1` |
+    | GS camera                                                                                 | `dtoverlay=imx296,cam1` |
+9. Reboot your Compute Module with `sudo reboot`.
+10. Run the following command to check the list of detected cameras:
 
      ```
      $ rpicam-hello --list
      ```
 
-     您应该在上表中由驱动程序指令引用的摄像头型号中看到输出。
+     You should see your camera model, referred to by the driver directive in the table above, in the output.
 
-### 连接两台摄像头
+### Connect two cameras
 
-要将两台摄像头连接到计算模块，请完成以下步骤：
+To connect two cameras to a Compute Module, complete the following steps:
 
-1. 按照上述单摄像头说明操作。
-2. 断开计算模块的电源。
-3. 使用 RPI-CAMERA 板或树莓派 Zero 摄像头电缆将摄像头模块连接到 CAM0 接口。![Connect the adapter board](https://www.raspberrypi.com/documentation/computers/images/CMIO-Cam-Adapter.jpg)
-4. (仅适用于 CM1、CM3、CM3+和 CM4S)：使用跳线连接以下 GPIO 引脚：
+1. Follow the single camera instructions above.
+2. Disconnect the Compute Module from power.
+3. Connect the Camera Module to the CAM0 port using a RPI-CAMERA board or a Raspberry Pi Zero camera cable.
+    ![Connect the adapter board](https://www.raspberrypi.com/documentation/computers/images/CMIO-Cam-Adapter.jpg?hash=e283b8867e93491c0a21b11de82c84e4)
+4. *(CM1, CM3, CM3+, and CM4S only)* : Connect the following GPIO pins with jumper cables:
 
-    * 28 到 CD0_SDA
-    * 29 到 CD0_SCL
-    * 30 到 CAM0_I01
-    * 31 到 CAM0_I00 ![GPIO connection with additional camera](https://www.raspberrypi.com/documentation/computers/images/CMIO-Cam-GPIO2.jpg)
-5. (仅限 CM4)：使用两根垂直方向的跳线连接 J6 GPIO 引脚。![Connect the J6 GPIO pins in vertical orientation](https://www.raspberrypi.com/documentation/computers/images/j6_vertical.jpg)
-6. 重新连接计算模块到电源。
-7. （仅适用于 CM1、CM3、CM3+和 CM4S）：向 /boot/firmware/config.txt 添加以下指令，将 GPIO 31 分配为 CAM0 调节器：
+    * `28` to `CD0_SDA`
+    * `29` to `CD0_SCL`
+    * `30` to `CAM0_I01`
+    * `31` to `CAM0_I00`
+      ![GPIO connection with additional camera](https://www.raspberrypi.com/documentation/computers/images/CMIO-Cam-GPIO2.jpg)
+5.  *(CM4 only)* : Connect the J6 GPIO pins with two vertical-orientation jumpers.
+    ![Connect the J6 GPIO pins in vertical orientation](https://www.raspberrypi.com/documentation/computers/images/j6_vertical.jpg)
+6. Reconnect the Compute Module to power.
+7.  *(CM1, CM3, CM3+, and CM4S only)* : Add the following directive to `/boot/firmware/config.txt` to assign GPIO 31 as the CAM0 regulator:
 
     ```
     dtparam=cam0_reg
     ```
-8. | 向 /boot/firmware/config.txt 添加适当的指令，手动配置相机型号的驱动程序： |  |
-    | 相机型号 | 指令 |
-    | --------------------------------------------------------------------------- | -- |
-    | v1 相机                                                                   | `dtoverlay=ov5647,cam0` |
-    | v2 相机                                                                   | `dtoverlay=imx219,cam0` |
-    | v3 相机                                                                   | `dtoverlay=imx708,cam0` |
-    | HQ 相机                                                                   | `dtoverlay=imx477,cam0` |
-    | GS 相机                                                                   | `dtoverlay=imx296,cam0` |
-9. 使用 sudo reboot 重新启动您的计算模块。
-10. 运行以下命令以检查检测到的相机列表：
+8. | Add the appropriate directive to `/boot/firmware/config.txt` to manually configure the driver for your camera model: |  |
+    | camera model | directive |
+    | ------------------------------------------------------------------------------------------- | -- |
+    | v1 camera                                                                                 | `dtoverlay=ov5647,cam0` |
+    | v2 camera                                                                                 | `dtoverlay=imx219,cam0` |
+    | v3 camera                                                                                 | `dtoverlay=imx708,cam0` |
+    | HQ camera                                                                                 | `dtoverlay=imx477,cam0` |
+    | GS camera                                                                                 | `dtoverlay=imx296,cam0` |
+9. Reboot your Compute Module with `sudo reboot`.
+10. Run the following command to check the list of detected cameras:
 
      ```
      $ rpicam-hello --list
      ```
 
-     您应该在上表中的驱动指令中看到两个摄像头型号的输出。
+     You should see both camera models, referred to by the driver directives in the table above, in the output.
 
-### 软件
+### Software
 
-Raspberry Pi OS 包含 libcamera 库，可帮助您使用树莓派拍摄图像。
+Raspberry Pi OS includes the `libcamera` library to help you take images with your Raspberry Pi.
 
-#### 拍照
+#### Take a picture
 
-使用以下命令立即拍照，并将其保存为 PNG 编码的文件，文件名使用 MMDDhhmmss 日期格式：
+Use the following command to immediately take a picture and save it to a file in PNG encoding using the `MMDDhhmmss` date format as a filename:
 
 ```
 $ rpicam-still --datetime -e png
 ```
 
-使用 -t 选项添加毫秒级延迟。使用 --width 和 --height 选项指定图像的宽度和高度。
+Use the `-t` option to add a delay in milliseconds. Use the `--width` and `--height` options to specify a width and height for the image.
 
-#### 拍摄视频
+#### Take a video
 
-使用以下命令立即开始录制十秒钟的视频，并将其保存到一个名为 video.h264 的带有 h264 编解码器的文件中：
+Use the following command to immediately start recording a ten-second long video and save it to a file with the h264 codec named `video.h264`:
 
 ```
 $ rpicam-vid -t 10000 -o video.h264
 ```
 
-#### 指定要使用的摄像头
+#### Specify which camera to use
 
-默认情况下， libcamera 总是使用 --list-cameras 列表中索引为 0 的相机。要指定相机选项，请从以下命令获取每个相机的索引值：
+By default, `libcamera` always uses the camera with index `0` in the `--list-cameras` list. To specify a camera option, get an index value for each camera from the following command:
 
 ```
 $ rpicam-hello --list-cameras
@@ -676,197 +706,202 @@ Available cameras
                              4608x2592 [14.35 fps - (0, 0)/4608x2592 crop]
 ```
 
-在上述输出中：
+In the above output:
 
-* imx477 指的是索引为 0 的 HQ 相机
-* imx708 指的是具有索引 1 的 v3 摄像头
+* `imx477` refers to a HQ camera with an index of `0`
+* `imx708` refers to a v3 camera with an index of `1`
 
-要使用 HQ 摄像头，请将其索引 ( 0 ) 传递给 --camera libcamera 选项：
+To use the HQ camera, pass its index (`0`) to the `--camera` `libcamera` option:
 
 ```
 $ rpicam-hello --camera 0
 ```
 
-要使用 v3 摄像头，请将其索引 ( 1 ) 传递给 --camera libcamera 选项：
+To use the v3 camera, pass its index (`1`) to the `--camera` `libcamera` option:
 
 ```
 $ rpicam-hello --camera 1
 ```
 
-### GPIO 引脚的 I2C 映射
+### I2C mapping of GPIO pins
 
-默认情况下，提供的摄像头驱动程序假定 CAM1 使用 i2c-10 ，CAM0 使用 i2c-0 。计算模块 I/O 板将以下 GPIO 引脚映射到 i2c-10 和 i2c-0 ：
+By default, the supplied camera drivers assume that CAM1 uses `i2c-10` and CAM0 uses `i2c-0`. Compute module I/O boards map the following GPIO pins to `i2c-10` and `i2c-0`:
 
-| I/O 板型号                                              | i2c-10 引脚 | i2c-0 引脚 |
-| --------------------------------------------------------- | ------------- | ------------ |
-| CM4 I/O 板                                              | GPIOs 44,45 | GPIOs 0,1  |
-| 计算模块 1, 计算模块 3, 计算模块 3+, 计算模块 4S I/O 板 | GPIO 0,1    | GPIO 28,29 |
+| I/O Board Model                | `i2c-10` pins       | `i2c-0` pins       |
+| -------------------------------- | ------------- | ------------- |
+| CM4 I/O Board                  | GPIOs 44,45 | GPIOs 0,1   |
+| CM1, CM3, CM3+, CM4S I/O Board | GPIOs 0,1   | GPIOs 28,29 |
 
-要连接相机到计算模块 1、计算模块 3、计算模块 3+和计算模块 4S I/O 板，添加以下指令到 /boot/firmware/config.txt 以适应交换的引脚分配:
+To connect a camera to the CM1, CM3, CM3+ and CM4S I/O Board, add the following directive to `/boot/firmware/config.txt` to accommodate the swapped pin assignment:
 
 ```
 dtoverlay=cm-swap-i2c0
 ```
 
-替代板可能使用其他引脚分配。检查您的板的文档，并根据您的布局使用以下替代覆盖:
+Alternative boards may use other pin assignments. Check the documentation for your board and use the following alternate overrides depending on your layout:
 
-| 交换                               | 覆盖 |
-| ------------------------------------ | ------ |
-| 使用 GPIO 0、1 进行 i2c0           | `i2c0-gpio0`     |
-| 使用 GPIO 28、29 进行 i2c0（默认） | `i2c0-gpio28`     |
-| 使用 GPIO 44 和 45 进行 i2c0       | `i2c0-gpio44`     |
-| 使用 GPIO 0&1 进行 i2c10 (默认)    | `i2c10-gpio0`     |
-| 使用 GPIO 28&29 进行 i2c10         | `i2c10-gpio28`     |
-| 使用 GPIO 44&45 进行 i2c10         | `i2c10-gpio44`     |
+| Swap                               | Override |
+| ------------------------------------ | ---------- |
+| Use GPIOs 0,1 for i2c0             | `i2c0-gpio0`         |
+| Use GPIOs 28,29 for i2c0 (default) | `i2c0-gpio28`         |
+| Use GPIOs 44&45 for i2c0           | `i2c0-gpio44`         |
+| Use GPIOs 0&1 for i2c10 (default)  | `i2c10-gpio0`         |
+| Use GPIOs 28&29 for i2c10          | `i2c10-gpio28`         |
+| Use GPIOs 44&45 for i2c10          | `i2c10-gpio44`         |
 
-#### 用于关机的 GPIO 引脚
+#### GPIO pins for shutdown
 
-对于相机关机，设备树使用 cam1_reg 和 cam0_reg 叠加层分配的引脚。
+For camera shutdown, Device Tree uses the pins assigned by the `cam1_reg` and `cam0_reg` overlays.
 
-CM4 IO 板为两个别名提供单个 GPIO 引脚，因此两个相机共享同一个调节器。
+The CM4 IO board provides a single GPIO pin for both aliases, so both cameras share the same regulator.
 
-CM1、CM3、CM3+和 CM4S I/O 板不提供 cam1_reg 和 cam0_reg 的 GPIO 引脚，因此这些板上的稳压器被禁用。但是，您可以通过在 /boot/firmware/config.txt 中使用以下指令来启用它们：
+The CM1, CM3, CM3+, and CM4S I/O boards provides no GPIO pin for `cam1_reg` and `cam0_reg`, so the regulators are disabled on those boards. However, you can enable them with the following directives in `/boot/firmware/config.txt`:
 
 * `dtparam=cam1_reg`
 * `dtparam=cam0_reg`
 
-要将 cam1_reg 和 cam0_reg 分配到自定义板上的特定引脚，请使用以下指令在 /boot/firmware/config.txt 中：
+To assign `cam1_reg` and `cam0_reg` to a specific pin on a custom board, use the following directives in `/boot/firmware/config.txt`:
 
 * `dtparam=cam1_reg_gpio=<pin number>`
 * `dtparam=cam0_reg_gpio=<pin number>`
 
-例如，要将引脚 42 用作 CAM1 的稳压器，请将指令 dtparam=cam1_reg_gpio=42 添加到 /boot/firmware/config.txt 中。
+For example, to use pin 42 as the regulator for CAM1, add the directive `dtparam=cam1_reg_gpio=42` to `/boot/firmware/config.txt`.
 
-这些指令仅适用于直接连接到 SoC 的 GPIO 引脚，而不适用于扩展器 GPIO 引脚。
+These directives only work for GPIO pins connected directly to the SoC, not for expander GPIO pins.
 
-## 连接官方的 7 英寸显示屏
+## Attach the official 7-inch display
 
-在开始之前，请将系统软件和固件更新到最新版本。 计算模块大多使用相同的流程，但有时物理差异会迫使针对特定型号进行更改。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/compute-module/cmio-display.adoc)
 
-### 连接显示器到 DISP1
+Update your system software and firmware to the latest version before starting. Compute Modules mostly use the same process, but sometimes physical differences force changes for a particular model.
 
->**注意**
->
->树莓派 Zero 相机线不能作为 RPI-DISPLAY 适配器的替代品。这两根线的布线不同。 
+### Connect a display to DISP1
 
-要连接显示器到 DISP1：
+| NOTE | The Raspberry Pi Zero camera cable cannot be used as an alternative to the RPI-DISPLAY adapter. The two cables have distinct wiring. |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 
-1. 断开计算模块的电源。
-2. 通过 22W 至 15W 显示适配器，将显示器连接到计算模块 IO 板上的 DISP1 接口。
-3. （仅限 CM1、CM3、CM3+和 CM4S）：使用跳线电缆连接以下 GPIO 引脚：
-    * 0 到 CD1_SDA
-    * 1 到 CD1_SCL
-4. 重新连接计算模块到电源。
-5. 将以下行添加到 /boot/firmware/config.txt ：
+To connect a display to DISP1:
 
-    ```
-    dtoverlay=vc4-kms-dsi-7inch
-    ```
-6. 使用 sudo reboot 重新启动您的计算模块。您的设备应该检测到并开始向显示器显示输出。
+1. Disconnect the Compute Module from power.
+2. Connect the display to the DISP1 port on the Compute Module IO board through the 22W to 15W display adapter.
+3. *(CM1, CM3, CM3+, and CM4S only)* : Connect the following GPIO pins with jumper cables:
 
-### 将显示器连接到 DISP0
-
-连接显示器到 DISP0：
-
-1. 通过 22W 至 15W 电源适配器将显示器连接到计算模块 IO 板上的 DISP0 接口。
-2. （仅适用于 CM1、CM3、CM3+和 CM4S）：使用跳线电缆连接以下 GPIO 引脚：
-    * 28 到 CD0_SDA
-    * 29 到 CD0_SCL
-3. 重新连接计算模块到电源。
-4. 将以下行添加到 /boot/firmware/config.txt ：
+    * `0` to `CD1_SDA`
+    * `1` to `CD1_SCL`
+4. Reconnect the Compute Module to power.
+5. Add the following line to [`/boot/firmware/config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html#what-is-config-txt):
 
     ```
     dtoverlay=vc4-kms-dsi-7inch
     ```
-5. 使用 sudo reboot 重新启动您的计算模块。您的设备应该检测到并开始在显示器上显示输出。
+6. Reboot your Compute Module with `sudo reboot`. Your device should detect and begin displaying output to your display.
 
-### 禁用触摸屏
+### Connect a display to DISP0
 
-触摸屏不需要额外配置。将其连接到您的计算模块，如果成功检测到，触摸屏元素和显示器都应该正常工作。
+To connect a display to DISP0:
 
-要禁用触摸屏元素，但仍然使用显示器，请在 /boot/firmware/config.txt 中添加以下行：
+1. Connect the display to the DISP0 port on the Compute Module IO board through the 22W to 15W display adapter.
+2. *(CM1, CM3, CM3+, and CM4S only)* : Connect the following GPIO pins with jumper cables:
+
+    * `28` to `CD0_SDA`
+    * `29` to `CD0_SCL`
+3. Reconnect the Compute Module to power.
+4. Add the following line to `/boot/firmware/config.txt`:
+
+    ```
+    dtoverlay=vc4-kms-dsi-7inch
+    ```
+5. Reboot your Compute Module with `sudo reboot`. Your device should detect and begin displaying output to your display.
+
+### Disable touchscreen
+
+The touchscreen requires no additional configuration. Connect it to your Compute Module, and both the touchscreen element and display should work once successfully detected.
+
+To disable the touchscreen element, but still use the display, add the following line to `/boot/firmware/config.txt`:
 
 ```
 disable_touchscreen=1
 ```
 
-### 禁用显示器
+### Disable display
 
-在连接时完全忽略显示器，请将以下行添加到 /boot/firmware/config.txt ：
+To entirely ignore the display when connected, add the following line to `/boot/firmware/config.txt`:
 
 ```
 ignore_lcd=1
 ```
 
-## 规格
+## Specifications
 
-### 计算模块 4 数据表
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/compute-module/datasheet.adoc)
 
-了解有关计算模块 4（CM4）及其相应 IO 板的更多信息，请参阅以下文档：
+### Compute Module 4 datasheet
 
-* [ CM4 数据表](https://datasheets.raspberrypi.com/cm4/cm4-datasheet.pdf)
+To learn more about Compute Module 4 (CM4) and its corresponding IO Board, see the following documents:
 
-##### [配置计算模块 4](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003470-WP/Configuring-the-Compute-Module-4.pdf)
+* [CM4 datasheet](https://datasheets.raspberrypi.com/cm4/cm4-datasheet.pdf)
 
-配置计算模块 4
+##### [Configure the Compute Module 4](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003470-WP/Configuring-the-Compute-Module-4.pdf)
 
-计算模块 4 有多种不同的硬件配置。一些用例禁用不需要的某些功能。
+Configure the Compute Module 4
 
-本文档描述了如何禁用各种硬件和软件接口。
+The Compute Module 4 is available in a number of different hardware configurations. Some use cases disable certain features that aren’t required.
 
-### 计算模块 4 IO 板数据表
+This document describes how to disable various hardware and software interfaces.
 
-设计数据可以在计算模块 4 IO 板（CM4IO）的数据表中找到：
+### Compute Module 4 IO Board datasheet
 
-* [ CM4IO 数据表](https://datasheets.raspberrypi.com/cm4io/cm4io-datasheet.pdf)
+Design data for the Compute Module 4 IO Board (CM4IO) can be found in its datasheet:
 
-我们还为 CM4 IO 板提供 KiCad PCB 设计套件：
+* [CM4IO datasheet](https://datasheets.raspberrypi.com/cm4io/cm4io-datasheet.pdf)
 
-* [ CM4IO KiCad 文件](https://datasheets.raspberrypi.com/cm4io/CM4IO-KiCAD.zip)
+We also provide a KiCad PCB design set for the CM4 IO Board:
 
-### 计算模块 4S 数据表
+* [CM4IO KiCad files](https://datasheets.raspberrypi.com/cm4io/CM4IO-KiCAD.zip)
 
-计算模块 4S（CM4S）在 CM1、CM3 和 CM3+的 DDR2-SODIMM 尺寸中提供了 CM4 的内部组件。要了解有关 CM4S 的更多信息，请参阅以下文档：
+### Compute Module 4S datasheet
 
-* [ CM4S 数据表](https://datasheets.raspberrypi.com/cm4s/cm4s-datasheet.pdf)
+Compute Module 4S (CM4S) offers the internals of CM4 in the DDR2-SODIMM form factor of CM1, CM3, and CM3+. To learn more about CM4S, see the following documents:
 
-### 计算模块 3+ 数据表
+* [CM4S datasheet](https://datasheets.raspberrypi.com/cm4s/cm4s-datasheet.pdf)
 
-计算模块 3+ (CM3+)是一个支持的产品，其终止生命周期（EOL）日期不早于 2028 年 1 月。要了解有关 CM3+及其对应 IO 板的更多信息，请参阅以下文档：
+### Compute Module 3+ datasheet
 
-* [ CM3+ 数据表](https://datasheets.raspberrypi.com/cm/cm3-plus-datasheet.pdf)
+Compute Module 3+ (CM3+) is a supported product with an end-of-life (EOL) date no earlier than January 2028. To learn more about CM3+ and its corresponding IO Board, see the following documents:
 
-### 计算模块 1 和计算模块 3 数据表
+* [CM3+ datasheet](https://datasheets.raspberrypi.com/cm/cm3-plus-datasheet.pdf)
 
-树莓派计算模块 1 (CM1) 和 计算模块 3 (CM3) 是支持的产品，其终止生命周期 (EOL) 日期不早于 2026 年 1 月。要了解有关 CM1 和 CM3 的更多信息，请参阅以下文档：
+### Compute Module 1 and Compute Module 3 datasheet
 
-* [CM1 和 CM3 数据表](https://datasheets.raspberrypi.com/cm/cm1-and-cm3-datasheet.pdf)
-* [ CM1 的原理图](https://datasheets.raspberrypi.com/cm/cm1-schematics.pdf)
-* [ CM3 的原理图](https://datasheets.raspberrypi.com/cm/cm3-schematics.pdf)
+Raspberry Pi Compute Module 1 (CM1) and Compute Module 3 (CM3) are supported products with an end-of-life (EOL) date no earlier than January 2026. To learn more about CM1 and CM3, see the following documents:
 
-##### [从计算模块 1 或计算模块 3 过渡到计算模块 4](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003469-WP/Transitioning-from-CM3-to-CM4.pdf)
+* [CM1 and CM3 datasheet](https://datasheets.raspberrypi.com/cm/cm1-and-cm3-datasheet.pdf)
+* [Schematics for CM1](https://datasheets.raspberrypi.com/cm/cm1-schematics.pdf)
+* [Schematics for CM3](https://datasheets.raspberrypi.com/cm/cm3-schematics.pdf)
 
-从计算模块 1 或计算模块 3 过渡到计算模块 4
+##### [Transition from Compute Module 1 or Compute Module 3 to Compute Module 4](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003469-WP/Transitioning-from-CM3-to-CM4.pdf)
 
-这份白皮书帮助开发人员从计算模块 1 或计算模块 3 迁移到计算模块 4。
+Transition from Compute Module 1 or Compute Module 3 to Compute Module 4
 
-### 计算模块 IO 板原理图
+This white paper helps developers migrate from Compute Module 1 or Compute Module 3 to Compute Module 4.
 
-计算模块 IO 板（CMIO）为 CM1、CM3、CM3L 和 CM3+提供各种接口。计算模块 IO 板有两个变体：版本 1 和版本 3。版本 1 仅兼容 CM1。版本 3 兼容 CM1、CM3、CM3+和 CM4S。计算模块 IO 板版本 3 有时被简写为 CMIO3。要了解有关 CMIO1 和 CMIO3 的更多信息，请参阅以下文档：
+### Compute Module IO Board schematics
 
-* [ CMIO 的原理图](https://datasheets.raspberrypi.com/cmio/cmio-schematics.pdf)
-* [CMIO Version 1.2（CMIO/CMIO1）的设计文档](https://datasheets.raspberrypi.com/cmio/RPi-CMIO-R1P2.zip)
-* [CMIO Version 3.0（CMIO3）的设计文档](https://datasheets.raspberrypi.com/cmio/RPi-CMIO-R3P0.zip)
+The Compute Module IO Board (CMIO) provides a variety of interfaces for CM1, CM3, CM3L, and CM3+. The Compute Module IO Board comes in two variants: Version 1 and Version 3. Version 1 is only compatible with CM1. Version 3 is compatible with CM1, CM3, CM3+, and CM4S. Compute Module IO Board Version 3 is sometimes written as the shorthand CMIO3. To learn more about CMIO1 and CMIO3, see the following documents:
 
-### 计算模块摄像头/显示适配板原理图
+* [Schematics for CMIO](https://datasheets.raspberrypi.com/cmio/cmio-schematics.pdf)
+* [Design documents for CMIO Version 1.2 (CMIO/CMIO1)](https://datasheets.raspberrypi.com/cmio/RPi-CMIO-R1P2.zip)
+* [Design documents for CMIO Version 3.0 (CMIO3)](https://datasheets.raspberrypi.com/cmio/RPi-CMIO-R3P0.zip)
 
-计算模块摄像头/显示适配板（CMCDA）为计算模块提供摄像头和显示接口。要了解有关 CMCDA 的更多信息，请参阅以下文档：
+### Compute Module Camera/Display Adapter Board schematics
 
-* [CMCDA 的原理图](https://datasheets.raspberrypi.com/cmcda/cmcda-schematics.pdf)
-* [CMCDA Version 1.1 的设计文档](https://datasheets.raspberrypi.com/cmcda/RPi-CMCDA-1P1.zip)
+The Compute Module Camera/Display Adapter Board (CMCDA) provides camera and display interfaces for Compute Modules. To learn more about the CMCDA, see the following documents:
 
-### 欠压检测
+* [Schematics for the CMCDA](https://datasheets.raspberrypi.com/cmcda/cmcda-schematics.pdf)
+* [Design documents for CMCDA Version 1.1](https://datasheets.raspberrypi.com/cmcda/RPi-CMCDA-1P1.zip)
 
-以下原理图描述了用于老型号树莓派的欠压检测电路：
+### Under-voltage detection
 
-![Under-voltage detect](https://www.raspberrypi.com/documentation/computers/images/under_voltage_detect.png)
+The following schematic describes an under-voltage detection circuit, as used in older models of Raspberry Pi:
+
+![Under-voltage detect](https://www.raspberrypi.com/documentation/computers/images/under_voltage_detect.png?hash=3cbc75b81e54c6b8caabfa4b29edcc0d)
