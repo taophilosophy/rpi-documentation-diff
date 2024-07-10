@@ -1,386 +1,386 @@
-# 入门
+# Getting started
 
-## 开始使用你的树莓派
+## Getting started with your Raspberry Pi
 
-{% embed url="https://www.bilibili.com/video/BV1TS411N7Fs" %}
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/getting-started/setting-up.adoc)
 
- 
-要开始使用你的树莓派，你需要满足如下条件：
+To get started with your Raspberry Pi, you’ll need the following:
 
-* 电源供应
-* 启动介质（如存储空间足够大和速度足够快的 microSD 卡）
+* a [power supply](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-supply)
+* boot media (e.g. a [microSD card with ample storage and speed](https://www.raspberrypi.com/documentation/computers/getting-started.html#recommended-sd-cards))
 
-你可以将树莓派配置为带有桌面的交互式计算机，也可以将其配置为仅通过网络访问的无头系统（headless）。你无需任何额外的外部设备即可无头设置你的树莓派：你可以在安装操作系统时预先设置主机名、用户账号、网络连接和 SSH。但如果要直接使用你的树莓派，你还需要以下额外的配件：
+You can set up your Raspberry Pi as an interactive computer with a desktop, or as a *headless* computer accessible only over the network. To set your Raspberry Pi up headless, you don’t need any additional peripherals: you can preconfigure a hostname, user account, network connection, and SSH when you [install an operating system](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system). If you want to use your Raspberry Pi directly, you’ll need the following additional accessories:
 
-* 显示器
-* 用于将树莓派连接到显示器的连接线
-* 键盘
-* 鼠标
+* a display
+* a cable to connect your Raspberry Pi to your display
+* a keyboard
+* a mouse
 
-### 电源供应
+### Power supply
 
-下面的表格列出了为各种型号的树莓派提供电源所需的 USB-PD 电源适配器型号。你可使用其他能提供符合电源功率要求的高品质电源适配器来代替。
+The following table shows the USB-PD power mode required to power various Raspberry Pi models. You can use any high-quality power supply that provides the correct power mode.
 
-| 型号                    | 推荐的电源适配器（电压/电流）     | 树莓派电源适配器 |
-| :-------------------------: | :-----------------------------------: | :------------------: |
-| 树莓派 5                | 5V/5A，5V/3A（将限制外部设备至 600mA） | [27W USB-C 电源适配器](https://www.raspberrypi.com/products/27w-power-supply/)                 |
-| 树莓派 4 Model B        | 5V/3A                             | [15W USB-C 电源适配器](https://www.raspberrypi.com/products/type-c-power-supply/)                 |
-| 树莓派 3（所有型号）    | 5V/2.5A                           | [12.5W Mirco USB 电源适配器](https://www.raspberrypi.com/products/micro-usb-power-supply/)                 |
-| 树莓派 2（所有型号）    | 5V/2.5A                           | [12.5W Mirco USB 电源适配器](https://www.raspberrypi.com/products/micro-usb-power-supply/)                 |
-| 树莓派 1（所有型号）    | 5V/2.5A                           | [12.5W Mirco USB 电源适配器](https://www.raspberrypi.com/products/micro-usb-power-supply/)                 |
-| 树莓派 Zero（所有型号） | 5V/2.5A                           | [12.5W Mirco USB 电源适配器](https://www.raspberrypi.com/products/micro-usb-power-supply/)                 |
+| Model                          | Recommended power supply (voltage/current) | Raspberry Pi power supply |
+| -------------------------------- | -------------------------------------------- | --------------------------- |
+| Raspberry Pi 5                 | 5V/5A, 5V/3A limits peripherals to 600mA   | [27W USB-C power supply](https://www.raspberrypi.com/products/27w-power-supply/)                          |
+| Raspberry Pi 4 Model B         | 5V/3A                                      | [15W USB-C power supply](https://www.raspberrypi.com/products/type-c-power-supply/)                          |
+| Raspberry Pi 3 (all models)    | 5V/2.5A                                    | [12.5W Micro USB power supply](https://www.raspberrypi.com/products/micro-usb-power-supply/)                          |
+| Raspberry Pi 2 (all models)    | 5V/2.5A                                    | [12.5W Micro USB power supply](https://www.raspberrypi.com/products/micro-usb-power-supply/)                          |
+| Raspberry Pi 1 (all models)    | 5V/2.5A                                    | [12.5W Micro USB power supply](https://www.raspberrypi.com/products/micro-usb-power-supply/)                          |
+| Raspberry Pi Zero (all models) | 5V/2.5A                                    | [12.5W Micro USB power supply](https://www.raspberrypi.com/products/micro-usb-power-supply/)                          |
 
-![将电源插入树莓派](../.gitbook/assets/cable-power.png)
+![Plugging a power supply into a Raspberry Pi.](https://www.raspberrypi.com/documentation/computers/images/peripherals/cable-power.png?hash=b5cb190b02c5c2555af60a48dba0a1f9)
 
-请将电源适配器插入标有“POWER IN”、“PWR IN”或“PWR”的接口。某些型号的树莓派（如 Zero 系列）的 USB 输出接口的规格与电源接口相同。请确保在树莓派上使用的接口是正确的！
+Plug your power supply into the port marked "POWER IN", "PWR IN", or "PWR". Some Raspberry Pi models, such as the Zero series, have output USB ports with the same form factor as the power port. Be sure to use the correct port on your Raspberry Pi!
 
-### 启动介质
+### Boot Media
 
-树莓派没有内置存储，因此需要你来提供启动介质。你可以通过安装在受支持的介质上的操作系统来启动你的树莓派：一般用 microSD 卡，但也可以使用 USB 存储设备、网络存储设备及通过 PCIe 扩展板转接的存储设备。然而，只有最新型号的树莓派才能支持上以上所有类型的介质。
+Raspberry Pi models lack onboard storage, so you have to supply it. You can boot your Raspberry Pi from an operating system image installed on any supported media: microSD cards are used commonly, but USB storage, network storage, and storage connected via a PCIe HAT are also available. However, only recent Raspberry Pi models support all of these media types.
 
-自树莓派 1 Model A+ 以来的所有的消费者型号树莓派都配备了 microSD 卡槽。当卡槽中插入了 microSD 时，你的树莓派会自动从 microSD 启动。
+All Raspberry Pi consumer models since the Raspberry Pi 1 Model A+ feature a microSD slot. Your Raspberry Pi automatically boots from the microSD slot when the slot contains a card.
 
-![将 microSD 卡插入树莓派](../.gitbook/assets/sd-card.png)
+![Inserting a microSD card into a Raspberry Pi.](https://www.raspberrypi.com/documentation/computers/images/peripherals/sd-card.png?hash=d0b4ea20b41681cee6ce87eb5df2b279)
 
-#### 推荐的 SD 卡
+#### Recommended SD cards
 
-我们建议，用于安装 Raspberry Pi OS 的 SD 卡至少要拥有 32GB 存储空间（对于 Raspberry Pi OS Lite 建议至少为 16GB）。你可以使用任何容量不大于 2TB 的 SD 卡。由于 MBR 的限制，目前不支持超过 2TB 的容量。与所有其他启动介质一样，读写速度更快的 SD 卡能提供更好的性能。
+We recommend using an SD card with at least 32GB of storage for Raspberry Pi OS installations. For Raspberry Pi OS Lite, we recommend at least 16GB. You can use any SD card with a capacity of less than 2TB. Capacities above 2TB are currently not supported due to limitations in the [MBR](https://en.wikipedia.org/wiki/Master_boot_record). As with any other boot media, you’ll see improved performance on SD cards with faster read and write speeds.
 
-由于硬件限制，以下设备只能从 256GB（或更小）的启动分区上启动：
+Because of a hardware limitation, the following devices will only boot from a boot partition of 256GB or less:
 
-* 树莓派 Zero
-* 树莓派 1
-* 基于 BCM2836 SoC 的早期树莓派 Model 2 
+* Raspberry Pi Zero
+* Raspberry Pi 1
+* early Raspberry Pi 2 models with the BCM2836 SoC
 
-其他操作系统可能有不同的需求。请查阅你使用的操作系统文档以了解容量需求。
+Other operating systems have different requirements. Check the documentation for your operating system for capacity requirements.
 
-### 键盘
+### Keyboard
 
-你可以使用树莓派上的任意 USB 接口来连接[有线键盘](https://www.raspberrypi.com/products/raspberry-pi-keyboard-and-hub/)或 USB 蓝牙接收器。
+You can use any of the USB ports on your Raspberry Pi to connect a [wired keyboard](https://www.raspberrypi.com/products/raspberry-pi-keyboard-and-hub/) or USB Bluetooth receiver.
 
-![将键盘插入树莓派](../.gitbook/assets/cable-key.png)
+![Plugging a keyboard into a Raspberry Pi.](https://www.raspberrypi.com/documentation/computers/images/peripherals/cable-key.png)
 
-### 鼠标
+### Mouse
 
-你可以使用树莓派上的任意 USB 接口来连接[有线鼠标](https://www.raspberrypi.com/products/raspberry-pi-mouse/)或 USB 蓝牙接收器。
+You can use any of the USB ports on your Raspberry Pi to connect a [wired mouse](https://www.raspberrypi.com/products/raspberry-pi-mouse/) or USB Bluetooth receiver.
 
-![将鼠标插入树莓派](../.gitbook/assets/cable-mouse.png)
+![Plugging a mouse into a Raspberry Pi.](https://www.raspberrypi.com/documentation/computers/images/peripherals/cable-mouse.png)
 
-### 显示器
+### Display
 
-树莓派具有以下显示输出功能：
+Raspberry Pi models have the following display connectivity:
 
-| 型号                    | 显示输出                                             |
-| ------------------------- | ------------------------------------------------------ |
-| 树莓派 5                | micro HDMI ×2                                       |
-| 树莓派 4（所有型号）    | micro HDMI ×2，可通过 3.5 mm [TRRS 插孔](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards)实现音频和复合输出 |
-| 树莓派 3（所有型号）    | HDMI，可通过 3.5 mm [TRRS 插孔](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards)实现音频和复合输出          |
-| 树莓派 2 (所有型号)     | 可通过 3.5 mm [TRRS 插孔](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards)实现 HDMI、音频和复合输出     |
-| 树莓派 1 Model B+       | 可通过 3.5 mm [TRRS 插孔](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards)实现 HDMI、音频和复合输出     |
-| 树莓派 1 型 A+          | 可通过 3.5 mm [TRRS 插孔](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards)实现 HDMI、音频和复合输出     |
-| 树莓派 Zero（所有型号） | mini HDMI                                            |
+| Model                          | Display outputs                                         |
+| -------------------------------- | --------------------------------------------------------- |
+| Raspberry Pi 5                 | 2× micro HDMI                                          |
+| Raspberry Pi 4 (all models)    | 2× micro HDMI, audio and composite out via 3.5mm [TRRS](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards) jack |
+| Raspberry Pi 3 (all models)    | HDMI, audio and composite out via 3.5mm [TRRS](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards) jack           |
+| Raspberry Pi 2 (all models)    | HDMI, audio and composite out via 3.5mm [TRRS](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards) jack           |
+| Raspberry Pi 1 Model B+        | HDMI, audio and composite out via 3.5mm [TRRS](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards) jack           |
+| Raspberry Pi 1 Model A+        | HDMI, audio and composite out via 3.5mm [TRRS](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards) jack           |
+| Raspberry Pi Zero (all models) | mini HDMI                                               |
 
->**注意**
->
->所有型号的树莓派都不支持 USB-C 视频传输（DisplayPort alt mode）。 
+| NOTE | No Raspberry Pi models support video over USB-C (DisplayPort alt mode). |
+| ------ | ------------------------------------------------------------------------- |
 
-如果你的树莓派有多个 HDMI 接口，请将主显示器插入标有 `HDMI0` 的那个接口。
+If your Raspberry Pi has more than one HDMI port, plug your primary monitor into the port marked `HDMI0`.
 
-常见的显示器不支持 micro HDMI 和 mini HDMI。但是，你可以使用 [micro-HDMI-to-HDMI 转换线](https://www.raspberrypi.com/products/micro-hdmi-to-standard-hdmi-a-cable/) 和 [mini-HDMI-to-HDMI 转换线](https://www.raspberrypi.com/products/standard-hdmi-a-male-to-mini-hdmi-c-male-cable/)来将树莓派上的这些接口转接到 HDMI 显示器。如果显示器不支持 HDMI，请考虑用转换器将 HDMI 输出转换为该设备所支持的类型。
+Most displays don’t have micro or mini HDMI ports. However, you can use a [micro-HDMI-to-HDMI cable](https://www.raspberrypi.com/products/micro-hdmi-to-standard-hdmi-a-cable/) or [mini-HDMI-to-HDMI cable](https://www.raspberrypi.com/products/standard-hdmi-a-male-to-mini-hdmi-c-male-cable/) to connect those ports on your Raspberry Pi to any HDMI display. For displays that don’t support HDMI, consider an adapter that translates display output from HDMI to a port supported by your display.
 
-![Plugging a micro HDMI cable into a Raspberry Pi.](../.gitbook/assets/cable-hdmi.png)
+![Plugging a micro HDMI cable into a Raspberry Pi.](https://www.raspberrypi.com/documentation/computers/images/peripherals/cable-hdmi.png?hash=f483bed69e8caae75cc6f79552e41e64)
 
-### 音频
+### Audio
 
-所有型号的树莓派都支持通过 HDMI、micro HDMI 或 mini HDMI 进行音频输出，且都支持通过 USB 进行音频输出。所有配备了蓝牙的树莓派都支持蓝牙音频。所有基于树莓派 1、2、3 和 4 的型号都有一个 3.5 mm 的 [TRRS](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards) AUX 耳机插孔，但可能需要用放大器才能获得足够的输出音量。
+All Raspberry Pi models with HDMI, micro HDMI, or mini HDMI support audio output over HDMI. All Raspberry Pi models support audio over USB. All Raspberry Pi models equipped with Bluetooth support Bluetooth audio. All variants of the Raspberry Pi 1, 2, 3, and 4 include a 3.5mm auxiliary [TRRS](http://en.wikipedia.org/wiki/Phone_connector_(audio)#TRRS_standards) jack, which may require amplification for sufficient output volume.
 
-### 网络
+### Networking
 
-如下型号的树莓派配备了 Wi-Fi 和蓝牙连接功能：
+The following Raspberry Pi models come with Wi-Fi and Bluetooth connectivity:
 
-* 树莓派 5
-* 树莓派 4
-* 树莓派 3B+
-* 树莓派 3
-* 树莓派 Zero W
-* 树莓派 Zero 2 W
+* Raspberry Pi 5
+* Raspberry Pi 4
+* Raspberry Pi 3B+
+* Raspberry Pi 3
+* Raspberry Pi Zero W
+* Rsapberry Pi Zero 2 W
 
-后缀“Model B”代表带以太网接口的版本；“Model A”代表无以太网接口。如果你的树莓派没有以太网接口，你还可以使用 USB 转以太网转换器来连接有线互联网。
+The "Model B" suffix indicates variants with an Ethernet port; "Model A" indicates no Ethernet port. If your Raspberry Pi doesn’t have an Ethernet port, you can still connect to a wired internet connection using a USB-to-Ethernet adapter.
 
-![把以太网线接入树莓派](../.gitbook/assets/cable-net.png)
+![Plugging an Ethernet cable into a Raspberry Pi.](https://www.raspberrypi.com/documentation/computers/images/peripherals/cable-net.png?hash=f9cb414421165e03c1c1f6acd524630f)
 
-## 安装操作系统
+## Install an operating system
 
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/getting-started/install.adoc)
 
-要使用你的树莓派，你需要操作系统。在默认情况下，树莓派会在 SD 卡槽中的 SD 卡内查找是否有操作系统。
+To use your Raspberry Pi, you’ll need an operating system. By default, Raspberry Pis check for an operating system on any SD card inserted in the SD card slot.
 
-取决于你的树莓派型号，你还可以通过其他存储设备启动操作系统，包括 USB 设备、网络存储和通过扩展板连接的存储设备。
+Depending on your Raspberry Pi model, you can also boot an operating system from other storage devices, including USB drives, storage connected via a HAT, and network storage.
 
-要在用于树莓派的存储设备上安装操作系统，你需要：
+To install an operating system on a storage device for your Raspberry Pi, you’ll need:
 
-* 可以用来把镜像写入到该存储设备的计算机
-* 将你的存储设备连接到该计算机的手段
+* a computer you can use to image the storage device into a boot device
+* a way to plug your storage device into that computer
 
-大多数树莓派用户选择用 microSD 卡作为他们的启动设备。
+Most Raspberry Pi users choose microSD cards as their boot device.
 
-我们建议用 Raspberry Pi Imager 来安装操作系统。
+We recommend installing an operating system using [Raspberry Pi Imager](https://www.raspberrypi.com/documentation/computers/getting-started.html#raspberry-pi-imager).
 
-Raspberry Pi Imager 是一个帮助你在 macOS、Windows 和 Linux 上下载和写入镜像的工具。Raspberry Pi Imager 包含了许多流行的树莓派操作系统镜像。Raspberry Pi Imager 还支持加载直接从[树莓派](https://ubuntu.com/download/raspberry-pi)或第三方供应商（如 [Ubuntu](https://ubuntu.com/download/raspberry-pi)）下载的镜像。你可以使用 Raspberry Pi Imager 预配置树莓派的凭据和远程访问设置。
+Raspberry Pi Imager is a tool that helps you download and write images on macOS, Windows, and Linux. Imager includes many popular operating system images for Raspberry Pi. Imager also supports loading images downloaded directly from [Raspberry Pi](https://www.raspberrypi.com/software/operating-systems/) or third-party vendors such as [Ubuntu](https://ubuntu.com/download/raspberry-pi). You can use Imager to preconfigure credentials and remote access settings for your Raspberry Pi.
 
-Raspberry Pi Imager 也支持打包为 `.img` 格式的镜像，以及像 `.zip` 这样的压缩格式。
+Imager supports images packaged in the `.img` format as well as container formats like `.zip`.
 
-如果你没有能把镜像写入到存储设备的计算机，你可以通过互联网直接在你的树莓派上安装操作系统。
+If you have no other computer to write an image to a boot device, you may be able to install an operating system [directly on your Raspberry Pi from the internet](https://www.raspberrypi.com/documentation/computers/getting-started.html#install-over-the-network).
 
-### 使用 Raspberry Pi Imager 安装
+### Install using Imager
 
-你可以通过以下方式安装 Raspberry Pi Imager：
+You can install Imager in the following ways:
 
-* 从树莓派官网 [raspberrypi.com/software](https://www.raspberrypi.com/software/) 下载最新版本并运行安装程序。
-* 通过终端使用包管理器安装，如 `sudo apt install rpi-imager`。
+* Download the latest version from [raspberrypi.com/software](https://www.raspberrypi.com/software/) and run the installer.
+* Install it from a terminal using your package manager, e.g. `sudo apt install rpi-imager`.
 
-安装 Raspberry Pi Imager 后，通过单击 Raspberry Pi Imager 图标或执行 `rpi-imager` 启动应用程序。
+Once you’ve installed Imager, launch the application by clicking the Raspberry Pi Imager icon or running `rpi-imager`.
 
-![Raspberry Pi Imager 主窗口](https://www.raspberrypi.com/documentation/computers/images/imager/welcome.png)
+![Raspberry Pi Imager main window.](https://www.raspberrypi.com/documentation/computers/images/imager/welcome.png?hash=a351c2ba01f30809c2921de09be67683)
 
-单击“**选择设备（Choose device）**”，然后从列表中选择你的树莓派型号。
+Click **Choose device** and select your Raspberry Pi model from the list.
 
-![在 Raspberry Pi Imager 中选择树莓派型号](https://www.raspberrypi.com/documentation/computers/images/imager/choose-model.png)
+![Raspberry Pi model selections in Imager.](https://www.raspberrypi.com/documentation/computers/images/imager/choose-model.png?hash=0543c40612882f917cfc565caa6dc92f)
 
-接下来，单击“**选择操作系统（Choose OS）**”，然后选择要安装的操作系统。Raspberry Pi Imager 将始终在列表最上面显示适用于你的型号，推荐版本的 Raspberry Pi OS。
+Next, click **Choose OS** and select an operating system to install. Imager always shows the recommended version of Raspberry Pi OS for your model at the top of the list.
 
-![在 Raspberry Pi Imager 中选择操作系统](https://www.raspberrypi.com/documentation/computers/images/imager/choose-os.png)
+![Operating system selections in Imager.](https://www.raspberrypi.com/documentation/computers/images/imager/choose-os.png?hash=9d49bdaf867704b30f177d47e72dc9b8)
 
-将首选存储设备连接到计算机。例如，使用外部或内置 SD 卡读卡器插入 microSD 卡。然后，单击“**选择存储设备（Choose storage）**”，选择你的存储设备。
+Connect your preferred storage device to your computer. For example, plug a microSD card in using an external or built-in SD card reader. Then, click **Choose storage** and select your storage device.
 
->**警告**
->
->如果你的计算机连接了多个存储设备，*请务必选择正确的设备！* 通常可以通过大小来识别存储设备。如不确定，请断开其他设备，直到确定要刻录镜像的设备。 
+| WARNING | If you have more than one storage device connected to your computer, *be sure to choose the correct device!*  You can often identify storage devices by size. If you’re unsure, disconnect other devices until you’ve identified the device you want to image. |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-![在 Raspberry Pi Imager 中选择存储设备](https://www.raspberrypi.com/documentation/computers/images/imager/choose-storage.png)
+![Storage selection options in Imager.](https://www.raspberrypi.com/documentation/computers/images/imager/choose-storage.png?hash=05e6671a4cac0b1f3781448688f5d692)
 
- 接下来，点击“**下一步（Next）**。
+Next, click **Next**.
 
-![在 Raspberry Pi Imager 中打开 OS customisation menu.](https://www.raspberrypi.com/documentation/computers/images/imager/os-customisation-prompt.png)
+![Imager prompt to open OS customisation menu.](https://www.raspberrypi.com/documentation/computers/images/imager/os-customisation-prompt.png?hash=4df5658cd09684490db4c1f2352255a3)
 
-在弹出窗口中，Imager 将要求你应用操作系统设置。我们强烈建议通过操作系统定制设置配置你的树莓派。单击“编辑设置（Edit Settings）”按钮打开操作系统定制（ OS customisation）。
+In a popup, Imager will ask you to apply OS customisation. We strongly recommend configuring your Raspberry Pi via the OS customisation settings. Click the **Edit Settings** button to open [OS customisation](https://www.raspberrypi.com/documentation/computers/getting-started.html#advanced-options).
 
-如果你没有通过操作系统定制设置配置你的树莓派，Raspberry Pi OS 将在首次启动期间的配置向导中要求你提供相同的信息。你可以单击选项“否（No）”来跳过操作系统自定义。
+If you don’t configure your Raspberry Pi via OS customisation settings, Raspberry Pi OS will ask you for the same information at first boot during the [configuration wizard](https://www.raspberrypi.com/documentation/computers/getting-started.html#configuration-on-first-boot). You can click the **No** button to skip OS customisation.
 
-#### 操作系统定制
+#### OS customisation
 
-操作系统定制菜单允许你在首次启动之前设置你的树莓派。你可以预先配置：
+The OS customisation menu lets you set up your Raspberry Pi before first boot. You can preconfigure:
 
-* 用户名和密码
-* Wi-Fi 凭据
-* 设备主机名
-* 时区
-* 键盘布局
-* 远程连接
+* a username and password
+* Wi-Fi credentials
+* the device hostname
+* the time zone
+* your keyboard layout
+* remote connectivity
 
-当你首次打开系统自定义菜单时，你可能会看到一个提示，询问是否允许从主机计算机加载 Wi-Fi 凭据。如果你回答“是”，Imager 将从你当前连接的网络预填 Wi-Fi 凭据。如果你回答“否”，你可以手动输入 Wi-Fi 凭据。
+When you first open the OS customisation menu, you might see a prompt asking for permission to load Wi-Fi credentials from your host computer. If you respond "yes", Imager will prefill Wi-Fi credentials from the network you’re currently connected to. If you respond "no", you can enter Wi-Fi credentials manually.
 
-主机名选项定义了你的树莓派使用 mDNS 在网络上广播的主机名。当你将树莓派连接到网络时，网络上的其他设备可以使用 `<hostname>.local` 或 `<hostname>.lan` 与你的计算机通信。
+The **hostname** option defines the hostname your Raspberry Pi broadcasts to the network using [mDNS](https://en.wikipedia.org/wiki/Multicast_DNS). When you connect your Raspberry Pi to your network, other devices on the network can communicate with your computer using `<hostname>.local` or `<hostname>.lan`.
 
-用户名和密码选项定义了树莓派上管理员用户帐户的用户名和密码。
+The **username and password** option defines the username and password of the admin user account on your Raspberry Pi.
 
-无线局域网选项允许你输入无线网络的 SSID（名称）和密码。如果你的网络不公开广播 SSID，则应启用“隐藏 SSID”设置。默认情况下，Imager 使用你当前所在的国家作为“无线局域网国家”。此设置控制树莓派使用的 Wi-Fi 广播频率。如果你计划运行无头树莓派，请为无线局域网选项输入凭据。
+The **wireless LAN** option allows you to enter an SSID (name) and password for your wireless network. If your network does not broadcast an SSID publicly, you should enable the "Hidden SSID" setting. By default, Imager uses the country you’re currently in as the "Wireless LAN country". This setting controls the Wi-Fi broadcast frequencies used by your Raspberry Pi. Enter credentials for the wireless LAN option if you plan to run a headless Raspberry Pi.
 
-区域设置选项允许你为你的树莓派定义时区和默认键盘布局。
+The **locale settings** option allows you to define the time zone and default keyboard layout for your Pi.
 
-![General settings in the OS customisation menu.](https://www.raspberrypi.com/documentation/computers/images/imager/os-customisation-general.png)
+![General settings in the OS customisation menu.](https://www.raspberrypi.com/documentation/computers/images/imager/os-customisation-general.png?hash=6509321c9eebb02e53dd711c12395571)
 
-服务选项卡包括帮助你远程连接到树莓派的设置。
+The **Services** tab includes settings to help you connect to your Raspberry Pi remotely.
 
-如果你计划通过网络远程使用你的树莓派，请勾选“启用 SSH”旁边的复选框。如果你计划运行无显示器的树莓派，你应该启用此选项。
+If you plan to use your Raspberry Pi remotely over your network, check the box next to **Enable SSH**. You should enable this option if you plan to run a headless Raspberry Pi.
 
-* 选择密码验证选项，使用你在 OS 定制的常规选项卡中提供的用户名和密码通过网络 SSH 到你的树莓派。
-* 选择仅允许公钥验证，为你的树莓派预配置无密码公钥 SSH 验证，使用你当前使用的计算机上的私钥。如果你的 SSH 配置中已经有 RSA 密钥，Imager 将使用该公钥。如果没有，你可以单击“运行 SSH-keygen”生成公/私钥对。Imager 将使用新生成的公钥。
+* Choose the **password authentication** option to SSH into your Raspberry Pi over the network using the username and password you provided in the general tab of OS customisation.
+* Choose **Allow public-key authentication only** to preconfigure your Raspberry Pi for passwordless public-key SSH authentication using a private key from the computer you’re currently using. If already have an RSA key in your SSH configuration, Imager uses that public key. If you don’t, you can click **Run SSH-keygen** to generate a public/private key pair. Imager will use the newly-generated public key.
 
-![Services settings in the OS customisation menu.](https://www.raspberrypi.com/documentation/computers/images/imager/os-customisation-services.png)
+![Services settings in the OS customisation menu.](https://www.raspberrypi.com/documentation/computers/images/imager/os-customisation-services.png?hash=bbc8c0ff2f1eb7207d43180d7694c399)
 
-系统定制还包括“选项”菜单，允许你在写入过程中配置 Imager 的行为。这些选项允许你在 Imager 完成验证图像时播放声音，自动在验证后卸载存储介质，并禁用遥测。
+OS customisation also includes an **Options** menu that allows you to configure the behaviour of Imager during a write. These options allow you to play a noise when Imager finishes verifying an image, to automatically unmount storage media after verification, and to disable telemetry.
 
-![Options in the OS customisation menu.](https://www.raspberrypi.com/documentation/computers/images/imager/os-customisation-options.png)
+![Options in the OS customisation menu.](https://www.raspberrypi.com/documentation/computers/images/imager/os-customisation-options.png?hash=eda44365c03e4184f09832f46516a41b)
 
-#### 写入
+#### Write
 
-当你完成输入系统定制设置后，请单击“保存”以保存你的定制。
+When you’ve finished entering OS customisation settings, click **Save** to save your customisation.
 
-然后，在将镜像写入存储设备时，单击“是”应用系统自定义设置。
+Then, click **Yes** to apply OS customisation settings when you write the image to the storage device.
 
-最后，回答“你确定要继续吗？”弹出窗口中的“是”，开始向存储设备写入数据。
+Finally, respond **Yes** to the "Are you sure you want to continue?" popup to begin writing data to the storage device.
 
-![Confirming a reimage of a storage device in Imager.](https://www.raspberrypi.com/documentation/computers/images/imager/are-you-sure.png)
+![Confirming a reimage of a storage device in Imager.](https://www.raspberrypi.com/documentation/computers/images/imager/are-you-sure.png?hash=5dce4cfcd6622b97ce741b2c168f0a3d)
 
-如果看到要求管理员权限以读取和写入存储介质的提示，请授予 Imager 权限以继续。
+If you see an admin prompt asking for permissions to read and write to your storage medium, grant Imager the permissions to proceed.
 
-![Writing an image to a device in Imager.](https://www.raspberrypi.com/documentation/computers/images/imager/writing.png)
+![Writing an image to a device in Imager.](https://www.raspberrypi.com/documentation/computers/images/imager/writing.png?hash=15fc8293a1c6b12fad0436e4d4aaf506)
 
-去喝杯咖啡或散散步。这可能需要几分钟。
+Grab a cup of coffee or go for a walk. This could take a few minutes.
 
-![Verifying an image on a device in Imager.](https://www.raspberrypi.com/documentation/computers/images/imager/stop-ask-verify.png)
+![Verifying an image on a device in Imager.](https://www.raspberrypi.com/documentation/computers/images/imager/stop-ask-verify.png?hash=78a0e9f7a1df18d5df3ebe92b073ed97)
 
-如果你想要冒险一下，可以点击取消验证来跳过验证过程。
+If you want to live especially dangerously, you can click **cancel verify** to skip the verification process.
 
-当你看到“写入成功”弹出窗口时，表示镜像已完全写入和验证。现在你可以从存储设备启动树莓派了！
+When you see the "Write Successful" popup, your image has been completely written and verified. You’re now ready to boot a Raspberry Pi from the storage device!
 
-![The screen Imager shows when it finishes writing an image to a storage device.](https://www.raspberrypi.com/documentation/computers/images/imager/finished.png)
+![The screen Imager shows when it finishes writing an image to a storage device.](https://www.raspberrypi.com/documentation/computers/images/imager/finished.png?hash=ba5031e958427e07a6c3a727d3b30021)
 
-接下来，继续进行首次启动配置说明，让你的树莓派运行起来。
+Next, proceed to the [first boot configuration instructions](https://www.raspberrypi.com/documentation/computers/getting-started.html#configuration-on-first-boot) to get your Raspberry Pi up and running.
 
-### 通过网络安装
+### Install over the network
 
-网络安装使树莓派能够使用通过网络下载的树莓派 Imager 版本在存储设备上安装操作系统。通过网络安装，你可以在树莓派上安装操作系统，从而无需单独的 SD 卡读卡器及除树莓派之外的计算机。你可以在任何兼容的存储设备上运行网络安装，包括 SD 卡和 USB 存储设备。
+Network Install enables a Raspberry Pi to install an operating system on a storage device using a version of Raspberry Pi Imager downloaded over the network. With Network Install, you can get an operating system installed on your Raspberry Pi with no separate SD card reader and no computer other than your Raspberry Pi. You can run Network Install on any compatible storage device, including SD cards and USB storage.
 
-网络安装仅适用于树莓派 4、400 和 5。如果你的树莓派使用较旧的引导加载程序，你可能需要更新引导加载程序以使用网络安装。
+Network Install only runs on Raspberry Pi 4, 400, and 5. If your Raspberry Pi runs an older bootloader, you may need to [update the bootloader](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#bootloader_update_stable) to use Network Install.
 
-网络安装需要以下条件：
+Network Install requires the following:
 
-* 受支持的树莓派型号且安装了支持网络安装的固件
-* 显示器
-* 键盘
-* 有线网络连接
+* a compatible Raspberry Pi model running firmware that supports Network Install
+* a monitor
+* a keyboard
+* a wired internet connection
 
-要启动网络安装，请在以下配置的基础上，按住 *SHIFT* 键并打开你的树莓派电源：
+To launch Network Install, power on your Raspberry Pi *while pressing and holding the* ***SHIFT*** *key* in the following configuration:
 
-* 存储设备没有被写入镜像
-* 连接键盘
-* 连接兼容的存储设备，如 SD 卡或 USB 存储设备
+* no bootable storage device
+* attached keyboard
+* attached compatible storage device, such as an SD card or USB storage
 
-![The Network Install screen.](../.gitbook/assets/network-install-1.png)
+![The Network Install screen.](https://www.raspberrypi.com/documentation/computers/images/network-install-1.png?hash=860b27343ffe3b99bbdf90242787bf93)
 
-如果你尚未将树莓派连接到互联网，请使用网线进行连接。
+If you haven’t already connected your Raspberry Pi to the internet, connect it with an Ethernet cable.
 
-![Starting Network Install.](../.gitbook/assets/network-install-2.png)
+![Starting Network Install.](https://www.raspberrypi.com/documentation/computers/images/network-install-2.png?hash=7a66f6f7b4f2421c488c3f3a25742fad)
 
-连接到互联网后，你的树莓派将下载树莓派安装程序。如果下载失败，你可以重复该过程再试一次。
+Once you’re connected to the internet, your Raspberry Pi will download Raspberry Pi installer. If the download fails, you can repeat the process to try again.
 
-![Downloading Imager using Network Install.](../.gitbook/assets/network-install-3.png)
+![Downloading Imager using Network Install.](https://www.raspberrypi.com/documentation/computers/images/network-install-3.png?hash=3af0667640d3789e700378b9c33dfa8d)
 
-在完成下载树莓派安装程序后，你的树莓派将自动启动树莓派镜像工具。有关运行树莓派镜像工具的更多信息，请参阅安装操作系统。
+Once you finish downloading Raspberry Pi Installer, your Raspberry Pi will automatically start Raspberry Pi Imager. For more information about running Raspberry Pi Imager, see [install an operating system](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system).
 
-![Choose a storage device.](https://www.raspberrypi.com/documentation/computers/images/network-install-4.png)
+![Choose a storage device.](https://www.raspberrypi.com/documentation/computers/images/network-install-4.png?hash=c5270de569440bc4c0f0cc11c0fdb3e7)
 
-有关网络安装配置的更多信息，请参阅 HTTP 引导。
+For more information about Network Install configuration, see [HTTP boot](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#http-boot).
 
-## 设置你的树莓派
+## Set up your Raspberry Pi
 
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/getting-started/configuring.adoc)
 
-安装操作系统镜像后，将存储设备连接到你的树莓派。
+After installing an operating system image, connect your storage device to your Raspberry Pi.
 
-首先，拔掉树莓派的电源适配器，确保在连接外围设备时树莓派已关机。如果你在 microSD 卡上安装了操作系统，现在可以将其插入树莓派的卡槽。如果你在其他存储设备上安装了操作系统，现在可以将其连接到树莓派。
+First, unplug your Raspberry Pi’s power supply to ensure that the Raspberry Pi is powered down while you connect peripherals. If you installed the operating system on a microSD card, you can plug it into your Raspberry Pi’s card slot now. If you installed the operating system on any other storage device, you can connect it to your Raspberry Pi now.
 
-![Inserting a microSD card into a Raspberry Pi.](../.gitbook/assets/sd-card.png)
+![Inserting a microSD card into a Raspberry Pi.](https://www.raspberrypi.com/documentation/computers/images/peripherals/sd-card.png?hash=d0b4ea20b41681cee6ce87eb5df2b279)
 
-然后，插入所需的其他外围设备，如鼠标、键盘和显示器。
+Then, plug in any other peripherals, such as your mouse, keyboard, and monitor.
 
-![Attaching the power supply to a Raspberry Pi.](../.gitbook/assets/cable-all.png)
+![Attaching the power supply to a Raspberry Pi.](https://www.raspberrypi.com/documentation/computers/images/peripherals/cable-all.png?hash=99131f604cad98dc8eddc7daa0b7d20e)
 
-最后，将电源连接到你的树莓派。当你的树莓派开机时，你应该看到 LED 状态亮起。如果你的树莓派接入了显示器，你应该在几分钟内看到启动屏幕。
+Finally, connect the power supply to your Raspberry Pi. You should see the status LED light up when your Pi powers on. If your Pi is connected to a display, you should see the boot screen within minutes.
 
-## 首次启动配置
+## Configuration on first boot
 
-如果你在 Imager 中使用了系统自定义来预配置你的树莓派，恭喜！你的设备已经准备就绪。继续下一步，了解如何充分利用你的树莓派。
+If you used OS customisation in Imager to preconfigure your Raspberry Pi, **congratulations!**  Your device is ready to use. Proceed to [next steps](https://www.raspberrypi.com/documentation/computers/getting-started.html#next-steps) to learn how you can put your Raspberry Pi to good use.
 
-如果你的树莓派在 5 分钟内无法启动，请检查 LED 状态灯。如果 LED 在闪烁，请查看 LED 警告闪烁代码以获取更多信息。如果你的树莓派拒绝启动，请尝试以下缓解措施：
+If your Raspberry Pi does not boot within 5 minutes, check the status LED. If it’s flashing, see the [LED warning flash codes for more information](https://www.raspberrypi.com/documentation/computers/configuration.html#led-warning-flash-codes). If your Pi refuses to boot, try the following mitigation steps:
 
-* 如果你使用的是除 SD 卡以外的启动设备，请尝试从 SD 卡启动
-* 重新为你的 SD 卡写入镜像; 确保在 Imager 中完成了完整的校验步骤
-* 更新你的树莓派上的引导加载程序，然后重新为你的 SD 卡重新写入镜像
+* if you used a boot device other than an SD card, try booting from an SD card
+* [re-image your SD card](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system); be sure to complete the entire verify step in Imager
+* [update the bootloader](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#bootloader_update_stable) on your Raspberry Pi, then [re-image your SD card](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system)
 
-如果你选择在 Imager 中跳过系统定制，则你的树莓派将在首次启动时运行配置向导。你需要一个显示器和键盘来浏览向导（如果没有鼠标也可以进行）。
+If you chose to skip OS customisation in Imager, your Raspberry Pi will run a configuration wizard on first boot. You need a monitor and keyboard to navigate through the wizard; a mouse is optional.
 
-![Click Next to get started with configuration.](../.gitbook/assets/start.png)
+![Click Next to get started with configuration.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/start.png?hash=b09c881a5736586851e18c5f05848de9)
 
-### 蓝牙
+### Bluetooth
 
-如果你正在使用蓝牙键盘或鼠标，此步骤将引导你完成设备配对。你的树莓派将扫描可配对的设备，并连接到找到的第一个设备。
+If you’re using a Bluetooth keyboard or mouse, this step will walk you through device pairing. Your Raspberry Pi will scan for pairable devices and connect to the first device it finds for each item.
 
-此过程适用于内置或外部 USB 蓝牙适配器。如果你使用 USB 适配器，请在启动树莓派之前插入。
+This process works with built-in or external USB Bluetooth adapters. If you use a USB adapter, plug it in before booting your Raspberry Pi.
 
-### 语言环境
+### Locale
 
-此页面可帮助你配置国家、语言、时区和键盘布局。
+This page helps you configure your country, language, and time zone, and keyboard layout.
 
-![Adjust country, language, time zone, and keyboard layout.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/locale.png)
+![Adjust country, language, time zone, and keyboard layout.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/locale.png?hash=fbd68b45d7d7dbdb8d4b8a007b884dcd)
 
-### 用户
+### User
 
-此页面可帮助你配置默认用户帐户的用户名和密码。
+This page helps you configure the username and password for the default user account.
 
-在默认情况下，旧版的 Raspberry Pi OS 将用户名设置为"pi"。如果你使用用户名"pi"，请避免使用旧的默认密码"raspberry"，以保持你的树莓派安全。
+By default, older versions of Raspberry Pi OS set the username to "pi". If you use the username "pi", avoid the old default password of "raspberry" to keep your Raspberry Pi secure.
 
-![Create your username and password.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/user.png)
+![Create your username and password.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/user.png?hash=a599f2e570ef4504b7686165b75ff87d)
 
-### 无线网络
+### Wi-Fi
 
-这个页面可以帮助你连接到 Wi-Fi 网络。从列表中选择你喜欢的网络。
+This page helps you connect to a Wi-Fi network. Choose your preferred network from the list.
 
-![Selecting a wireless network.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/network.png)
+![Selecting a wireless network.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/network.png?hash=0689b7309b820bbe9d6481ede702ae90)
 
-如果你的网络需要密码，你可以在这里输入。
+If your network requires a password, you can enter it here.
 
-![Entering a password for a wireless network.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/network_password.png)
+![Entering a password for a wireless network.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/network_password.png?hash=0e8c3340265258d58892ada216415fbb)
 
-### 浏览器
+### Browser
 
-此页面允许你选择将 Firefox 或 Chromium 作为默认的互联网浏览器。你可以选择卸载你未设置为默认的浏览器。
+This page lets you select Firefox or Chromium as your default internet browser. You can optionally uninstall the browser you don’t set as default.
 
-![The Choose Browser page.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/browser.png)
+![The Choose Browser page.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/browser.png?hash=81ebfe9b12c6bf8977067fd8570b5c3d)
 
-### 软件更新
+### Software updates
 
-在你的树莓派连接到互联网后，此页面将帮助你将操作系统和软件更新到最新版本。在软件更新过程中，向导将删除非默认浏览器（如果你选择在浏览器选择步骤中卸载它）。更新可能需要几分钟时间。
+Once your Raspberry Pi has internet access, this page helps you update your operating system and software to the latest versions. During the software update process, the wizard will remove the non-default browser if you opted to uninstall it in the browser selection step. Downloading updates may take several minutes.
 
-![You can download the latest software updates during the wizard before you boot for the first time.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/update.png)
+![You can download the latest software updates during the wizard before you boot for the first time.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/update.png?hash=246c11bd48b5c6f0e3332b39fc58e6a5)
 
-![You can download the latest software updates during the wizard before you boot for the first time.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/download.png)
+![You can download the latest software updates during the wizard before you boot for the first time.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/download.png?hash=1b90dc708944ceeeabe6ac5fb3c65df4)
 
-当你看到弹出窗口指示系统已经更新，请点击“确定”继续下一步。
+When you see a popup indicating that your system is up to date, click **OK** to proceed to the next step.
 
-### 完成
+### Finish
 
-在配置向导结束时，点击“重新启动”来重启你的树莓派。你的树莓派将应用你的配置并启动到桌面。
+At the end of the configuration wizard, click **Restart** to reboot your Raspberry Pi. Your Raspberry Pi will apply your configuration and boot to the desktop.
 
-![The Setup Complete dialogue prompts to restart your Raspberry Pi.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/restart.png)
+![The Setup Complete dialogue prompts to restart your Raspberry Pi.](https://www.raspberrypi.com/documentation/computers/images/initial-setup/restart.png?hash=a4722ccce3851961d3c05d4ac8245452)
 
-## 下一步
- 
+## Next steps
 
-树莓派已设置并准备就绪，接下来做什么？
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/getting-started/wrapping-up.adoc)
 
-### 推荐软件
+Now that your Raspberry Pi is set up and ready to go, what’s next?
 
-树莓派操作系统预装许多基本应用程序，因此你可以立即开始使用它们。如果你想利用我们认为有用的其他应用程序，请单击屏幕左上角的树莓图标。选择首选项 > 推荐软件，你将找到软件包管理器。你可以在此免费安装各种推荐软件。
+### Recommended software
 
-![Opening the package manager GUI in Raspberry Pi OS](https://www.raspberrypi.com/documentation/computers/images/recommended-software.png)
+Raspberry Pi OS comes with many essential applications pre-installed so you can start using them straight away. If you’d like to take advantage of other applications we find useful, click the raspberry icon in the top left corner of the screen. Select **Preferences &gt;**  **Recommended Software** from the drop-down menu, and you’ll find the package manager. You can install a wide variety of recommended software here for free.
 
-例如，如果你计划将树莓派用作家用电脑，你可能会发现 LibreOffice 用于编写和编辑文档和电子表格非常有用。你还可以通过诸如屏幕放大器和 Orca 屏幕阅读器之类的应用程序使树莓派更易于访问，这些应用程序位于通用访问下。
+![Opening the package manager GUI in Raspberry Pi OS](https://www.raspberrypi.com/documentation/computers/images/recommended-software.png?hash=941c1b34b17afdc98bba97c62dc2da0a)
 
-### 教程
+For example, if you plan to use your Raspberry Pi as a home computer, you might find LibreOffice useful for writing and editing documents and spreadsheets. You can also make your Raspberry Pi more accessible with apps like a screen magnifier and Orca screen reader, found under Universal Access.
 
-我们的教程展示了你可以如何使用你的新计算机的各种方式。你可以通过跟随激发你兴趣的教程来学习编码、控制外部设备，并构建令人兴奋的新项目。
+### Tutorials
 
-### 支持
+Our tutorials demonstrate various ways you can use your new computer. You can learn to code, control external devices, and build exciting new projects by following [tutorials](https://www.raspberrypi.com/tutorials/) that pique your interest.
 
-对于官方树莓派产品的支持，或者与其他树莓派用户联系，请访问树莓派论坛。
+### Support
 
-### 进一步阅读
+For support with official Raspberry Pi products, or to connect with other Raspberry Pi users, visit the [Raspberry Pi forums](https://forums.raspberrypi.com/).
 
-![](https://www.raspberrypi.com/documentation/computers/images/fifth-editon-cover.png)
+### Further reading
 
-你可以在 Gareth Halfacree 的最新版《官方树莓派初学者指南》中找到有关如何开始使用树莓派的更多信息。
+![](https://www.raspberrypi.com/documentation/computers/images/fifth-editon-cover.png)[https://store.rpipress.cc/products/the-official-raspberry-pi-beginners-guide-5th-edition](https://store.rpipress.cc/products/the-official-raspberry-pi-beginners-guide-5th-edition)
 
- 学习如何：
+You can find more information on how get started with your Raspberry Pi in the latest edition of [Official Raspberry Pi Beginners Guide](https://store.rpipress.cc/collections/latest-releases/products/the-official-raspberry-pi-beginners-guide-5th-edition) by Gareth Halfacree.
 
-* 配置你的树莓派，为其安装操作系统，并开始使用这台功能齐全的计算机。
-* 使用 Scratch 3、Python 和 MicroPython 编程语言，通过逐步指南开始编码项目。
-* 尝试连接电子元件，并乐在其中创造令人惊叹的项目。
+Learn how to:
 
-第五版的新内容：
+* Set up your Raspberry Pi, install its operating system, and start using this fully functional computer.
+* Start coding projects, with step-by-step guides using the Scratch 3, Python, and MicroPython programming languages.
+* Experiment with connecting electronic components, and have fun creating amazing projects.
 
-* 针对最新的树莓派计算机进行更新：树莓派 5 和树莓派 Zero 2 W。
-* 覆盖最新的 Raspberry Pi OS。
-* 包含关于树莓派 Pico 的新章节！
+New in the 5th edition:
 
-你可以在树莓派出版社的网站上购买这本书。
+* Updated for the latest Raspberry Pi computers: Raspberry Pi 5 and Raspberry Pi Zero 2 W.
+* Covers the latest Raspberry Pi OS.
+* Includes a new chapter on the Raspberry Pi Pico!
+
+You can [buy this book](https://store.rpipress.cc/products/the-official-raspberry-pi-beginners-guide-5th-edition) on the Raspberry Pi Press site.
