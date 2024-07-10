@@ -1,94 +1,99 @@
-# 传感器扩展板（Sense HAT）
+# Sense HAT
 
-## 传感器扩展板（Sense HAT）简介
+## Introducing the Sense HAT
 
-树莓派传感器扩展板（Sense HAT）可为您的树莓派提供一系列传感功能。板载传感器可让您监测压力、湿度、温度、颜色、方向和运动。明亮的 8×8 RGB LED 矩阵可使传感器数据可视化，五个按钮的摇杆能让用户与您的项目进行交互。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/sense-hat/intro.adoc)
 
-![Sense HAT](https://www.raspberrypi.com/documentation/accessories/images/Sense-HAT.jpg)
+The [Raspberry Pi Sense HAT](https://www.raspberrypi.com/products/sense-hat/) is an add-on board that gives your Raspberry Pi an array of sensing capabilities. The on-board sensors allow you to monitor pressure, humidity, temperature, colour, orientation, and movement. The bright 8×8 RGB LED matrix allows you to visualise data from the sensors, and the five-button joystick lets users interact with your projects.
 
-传感器扩展板最初是为国际空间站开发的：作为由树莓派基金会与欧洲航天局（ESA）合作，开展的 Astro Pi 教育计划的一部分。它非常适合许多需要位置、运动、方向或环境感知的项目。传感器扩展板从连接的树莓派上取电。
+![Sense HAT](https://www.raspberrypi.com/documentation/accessories/images/Sense-HAT.jpg?hash=e095672e700544fc89a62dad3d9fc164)
 
-由官方支持的 Python 库提供了对所有板载传感器、LED 矩阵和操纵杆的控制。传感器扩展板兼容带有 40 针 GPIO 引脚排针型号的树莓派计算机。
+The Sense HAT was originally developed for use on the International Space Station, as part of the educational [Astro Pi](https://astro-pi.org/) programme run by the [Raspberry Pi Foundation](https://raspberrypi.org/) in partnership with the [European Space Agency](https://www.esa.int/). It is well suited to many projects that require position, motion, orientation, or environmental sensing. The Sense HAT is powered by the Raspberry Pi computer to which it is connected.
 
-## 安装
+An officially supported [Python library](https://www.raspberrypi.com/documentation/accessories/sense-hat.html#use-the-sense-hat-with-python) provides access to all of the on-board sensors, the LED matrix, and the joystick. The Sense HAT is compatible with any Raspberry Pi computer with a 40-pin GPIO header.
 
-为了正确工作，传感器扩展板需要最新的内核，启用 I2C，并准备一些库来继续。
+## Installation
 
-确保您的 APT 软件源是最新的：
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/sense-hat/software.adoc)
 
-```
- sudo apt update
-```
+In order to work correctly, the Sense HAT requires an up-to-date kernel, I2C to be enabled, and a few libraries to get started.
 
-接下来，安装传感器扩展板软件包，这将确保内核是最新的，启用 I2C，并安装必要的库和程序：
+Ensure your APT package list is up-to-date:
 
 ```
- sudo apt install sense-hat
+$ sudo apt update
 ```
 
-最后，如果 I2C 被禁用或在安装之前内核是旧的，则可能需要重启：
+Next, install the sense-hat package, which will ensure the kernel is up to date, enable I2C, and install the necessary libraries and programs:
 
 ```
- sudo reboot
+$ sudo apt install sense-hat
 ```
 
-## 入门指南
+Finally, a reboot may be required if I2C was disabled or the kernel was not up-to-date prior to the install:
 
-安装后，可在 `/usr/src/sense-hat/examples` 下找到示例代码。
+```
+$ sudo reboot
+```
 
-### 进一步阅读
+## Getting started
 
-![](https://www.raspberrypi.com/documentation/accessories/images/experiment-with-the-sense-hat.png)
+After installation, example code can be found under `/usr/src/sense-hat/examples`.
 
-您可以在由树莓派出版的《Experiment with the Sense HAT》一书中找到有关如何使用传感器扩展板的更多信息。由 Raspberry Pi 基金会的教育团队编写，这本书是由 Raspberry Pi Press 出版的 MagPi Essentials 系列的一部分。该书涵盖了 Astro Pi 项目的背景，并指导您如何使用 Python 库利用所有传感器扩展板的功能。
+### Further reading
 
-您可以以 PDF 格式免费下载这本书，它已根据知识共享署名-非商业性使用-相同方式共享 3.0 未本地化（CC BY NC-SA）许可发布。
+![](https://www.raspberrypi.com/documentation/accessories/images/experiment-with-the-sense-hat.png)[https://github.com/raspberrypipress/released-pdfs/raw/main/experiment-with-the-sense-hat.pdf](https://github.com/raspberrypipress/released-pdfs/raw/main/experiment-with-the-sense-hat.pdf)
 
-### 使用 Python 与传感器扩展板
+You can find more information on how to use the Sense HAT in the Raspberry Pi Press book [Experiment with the Sense HAT](https://github.com/raspberrypipress/released-pdfs/raw/main/experiment-with-the-sense-hat.pdf). Written by The Raspberry Pi Foundation’s Education Team, it is part of the MagPi Essentials series published by Raspberry Pi Press. The book covers the background of the Astro Pi project, and walks you through how to make use of all the Sense HAT features using the [Python library](https://www.raspberrypi.com/documentation/accessories/sense-hat.html#use-the-sense-hat-with-python).
 
-sense-hat 是传感器扩展板的官方支持库；它提供对所有板载传感器和 LED 矩阵的访问。
+You can [download this book](https://github.com/raspberrypipress/released-pdfs/raw/main/experiment-with-the-sense-hat.pdf) as a PDF file for free, it has been released under a Creative Commons [Attribution-NonCommercial-ShareAlike](https://creativecommons.org/licenses/by-nc-sa/3.0/) 3.0 Unported (CC BY NC-SA) licence.
 
-可在 sense-hat.readthedocs.io 找到该库的完整文档。
+### Use the Sense HAT with Python
 
-### 使用 C++ 与传感器扩展板
+`sense-hat` is the officially supported library for the Sense HAT; it provides access to all of the on-board sensors and the LED matrix.
 
-RTIMULib 是一个 C++ 和 Python 库，可使嵌入式 Linux 系统与 9 自由度和 10 自由度 IMU 的使用变得更加容易。 /etc/RTIMULib.ini 中提供了一个预校准的设置文件，也被 sense-hat 复制并使用。包含的示例在当前工作目录中查找 RTIMULib.ini ，因此您可能希望将文件复制到那里以获得更准确的数据。
+Complete documentation for the library can be found at [sense-hat.readthedocs.io](https://sense-hat.readthedocs.io/en/latest/).
 
-RTIMULibDrive11 示例已经被预编译，以确保一切按预期工作。可以通过运行 RTIMULibDrive11 启动，并通过按 Ctrl C 停止。
+### Use the Sense HAT with C++
 
->**注意**
->
->可以通过在适当的目录中运行 make 来编译 C/C++ 示例。 
+[RTIMULib](https://github.com/RPi-Distro/RTIMULib) is a C++ and Python library that makes it easy to use 9-dof and 10-dof IMUs with embedded Linux systems. A pre-calibrated settings file is provided in `/etc/RTIMULib.ini`, which is also copied and used by `sense-hat`. The included examples look for `RTIMULib.ini` in the current working directory, so you may wish to copy the file there to get more accurate data.
 
-## 传感器扩展板硬件
+The RTIMULibDrive11 example comes pre-compiled to help ensure everything works as intended. It can be launched by running `RTIMULibDrive11` and closed by pressing `Ctrl C`.
 
-传感器扩展板配备有 8×8 RGB LED 点阵和五向按钮摇杆，并包含以下传感器：
+| NOTE | The C/C++ examples can be compiled by running `make` in the appropriate directory. |
+| ------ | ------------------------------------------------------------------------------ |
 
-* 陀螺仪
-* 加速度计
-* 磁力计
-* 温度
-* 气压
-* 湿度
-* 颜色和亮度
+## Sense HAT hardware
 
-Sense HAT 和 Sense HAT V2 的原理图和机械图可供下载。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/sense-hat/hardware.adoc)
 
-* Sense HAT V1 原理图。
-* Sense HAT V2 原理图。
-* 传感器扩展板机械图纸。
+The Sense HAT has an 8×8 RGB LED matrix and a five-button joystick, and includes the following sensors:
 
-### LED 点阵
+* Gyroscope
+* Accelerometer
+* Magnetometer
+* Temperature
+* Barometric pressure
+* Humidity
+* Colour and brightness
 
-LED 点阵是一个带有 id“RPi-Sense FB”的 RGB565 帧缓冲区。适当的设备节点可以被写入为标准文件或进行 mmap 映射。包含的“snake”示例展示了如何访问帧缓冲区。
+Schematics and mechanical drawings for the Sense HAT and the Sense HAT V2 are available for download.
 
-### 操纵杆
+* [Sense HAT V1 schematics](https://datasheets.raspberrypi.com/sense-hat/sense-hat-schematics.pdf).
+* [Sense HAT V2 schematics](https://datasheets.raspberrypi.com/sense-hat/sense-hat-v2-schematics.pdf).
+* [Sense HAT mechanical drawings](https://datasheets.raspberrypi.com/sense-hat/sense-hat-mechanical-drawing.pdf).
 
-操纵杆显示为名为“Raspberry Pi Sense HAT Joystick”的输入事件设备，映射到箭头键和`回车键`。它应该受到任何能够处理输入的库的支持，或直接通过 evdev 接口。适用的库包括 SDL、pygame 和 python-evdev。包含的“snake”示例显示了如何直接访问操纵杆。
+### LED matrix
 
-## 硬件校准
+The LED matrix is an RGB565 [framebuffer](https://www.kernel.org/doc/Documentation/fb/framebuffer.txt) with the id "RPi-Sense FB". The appropriate device node can be written to as a standard file or mmap-ed. The included 'snake' example shows how to access the framebuffer.
 
-安装必要的软件并按照以下步骤运行校准程序：
+### Joystick
+
+The joystick comes up as an input event device named "Raspberry Pi Sense HAT Joystick", mapped to the arrow keys and `Enter`. It should be supported by any library which is capable of handling inputs, or directly through the [evdev interface](https://www.kernel.org/doc/Documentation/input/input.txt). Suitable libraries include SDL, [pygame](http://www.pygame.org/docs/) and [python-evdev](https://python-evdev.readthedocs.org/en/latest/). The included 'snake' example shows how to access the joystick directly.
+
+## Calibrate
+
+Install the necessary software and run the calibration program as follows:
 
 ```
 $ sudo apt update
@@ -99,7 +104,7 @@ $ cd RTEllipsoidFit
 $ RTIMULibCal
 ```
 
-然后您将看到此菜单：
+The calibration program displays the following menu:
 
 ```
 Options are:
@@ -112,7 +117,7 @@ Options are:
 Enter option:
 ```
 
-按小写的 `m` 。然后将显示以下消息。按任意键开始。
+Press lowercase `m`. The following message will then show. Press any key to start.
 
 ```
     Magnetometer min/max calibration
@@ -125,46 +130,46 @@ Enter option:
     Press any key to start...
 ```
 
-启动后，您将看到屏幕上滚动的类似内容：
+After it starts, you should see output similar to the following scrolling up the screen:
 
 ```
  Min x:  51.60  min y:  69.39  min z:  65.91
  Max x:  53.15  max y:  70.97  max z:  67.97
 ```
 
-关注屏幕底部的两行，因为这些是程序中最近发布的测量结果。
+Focus on the two lines at the very bottom of the screen, as these are the most recently posted measurements from the program.
 
-现在，拿起树莓派和传感器扩展板，以尽可能多的方式移动它。最好拔掉所有非必要的电缆，以避免混乱。
+Now, pick up the Raspberry Pi and Sense HAT and move it around in every possible way you can think of. It helps if you unplug all non-essential cables to avoid clutter.
 
-尝试在俯仰、横滚和偏航轴上各获得一个完整的圆圈。在执行此操作时，请注意不要意外弹出 SD 卡。花几分钟移动传感器扩展板，当您发现数字不再变化时停止。
+Try and get a complete circle in each of the pitch, roll and yaw axes. Take care not to accidentally eject the SD card while doing this. Spend a few minutes moving the Sense HAT, and stop when you find that the numbers are not changing any more.
 
-现在按小写 s 然后小写 x 退出程序。如果现在运行 ls 命令，您会看到已创建一个新的 RTIMULib.ini 文件。
+Now press lowercase `s` then lowercase `x` to exit the program. If you run the `ls` command now, you’ll see a new `RTIMULib.ini` file has been created.
 
-除了这些步骤，您还可以通过执行上述步骤，但按 m 键而不是 e 键来执行椭球拟合。
+In addition to those steps, you can also do the ellipsoid fit by performing the steps above, but pressing `e` instead of `m`.
 
-当您完成后，将生成的 RTIMULib.ini 复制到 /etc/ 并删除 `~/.config/sense_hat/` 中的本地副本：
+When you’re done, copy the resulting `RTIMULib.ini` to `/etc/` and remove the local copy in `~/.config/sense_hat/`:
 
 ```
 $ rm ~/.config/sense_hat/RTIMULib.ini
 $ sudo cp RTIMULib.ini /etc
 ```
 
-## 读取和写入 EEPROM 数据
+## Read and write EEPROM data
 
-通过向 /boot/firmware/config.txt 文件添加以下行来启用 I2C0 和 I2C1：
-
-```
- dtparam=i2c_vc=on
- dtparam=i2c_arm=on
-```
-
-输入以下命令以重新启动：
+Enable I2C0 and I2C1 by adding the following line to the [`/boot/firmware/config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html#what-is-config-txt) file:
 
 ```
- sudo systemctl reboot
+dtparam=i2c_vc=on
+dtparam=i2c_arm=on
 ```
 
-下载并构建闪存工具：
+Enter the following command to reboot:
+
+```
+$ sudo systemctl reboot
+```
+
+Download and build the flash tool:
 
 ```
 $ git clone https://github.com/raspberrypi/hats.git
@@ -172,46 +177,43 @@ $ cd hats/eepromutils
 $ make
 ```
 
->**注意**
->
->这些步骤可能不适用于树莓派 2 Model B Rev 1.0 和树莓派 3 Model B。固件将控制 I2C0，致使 ID 引脚被配置为输入。
+| NOTE | These steps may not work on Raspberry Pi 2 Model B Rev 1.0 and Raspberry Pi 3 Model B boards. The firmware will take control of I2C0, causing the ID pins to be configured as inputs. |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
+### Read
 
-### 阅读
-
-可以使用以下命令读取 EEPROM 数据：
+EEPROM data can be read with the following command:
 
 ```
 $ sudo ./eepflash.sh -f=sense_read.eep -t=24c32 -r
 ```
 
-### 写入
+### Write
 
-下载 EEPROM 设置并构建 .eep 二进制文件：
+Download EEPROM settings and build the `.eep` binary:
 
 ```
 $ wget https://github.com/raspberrypi/rpi-sense/raw/master/eeprom/eeprom_settings.txt -O sense_eeprom.txt
- ./eepmake sense_eeprom.txt sense.eep /boot/firmware/overlays/rpi-sense-overlay.dtb
+$ ./eepmake sense_eeprom.txt sense.eep /boot/firmware/overlays/rpi-sense-overlay.dtb
 ```
 
-禁用写保护：
+Disable write protection:
 
 ```
 $ i2cset -y -f 1 0x46 0xf3 1
 ```
 
-写入 EEPROM 数据：
+Write the EEPROM data:
 
 ```
 $ sudo ./eepflash.sh -f=sense.eep -t=24c32 -w
 ```
 
-重新启用写保护:
+Re-enable write protection:
 
 ```
- i2cset -y -f 1 0x46 0xf3 0
+$ i2cset -y -f 1 0x46 0xf3 0
 ```
 
->**警告**
->
->此操作不会损坏您的树莓派或传感器扩展板，但如果发生错误，扩展板可能不能被自动检测到。上述步骤仅供调试目的。
+| WARNING | This operation will not damage your Raspberry Pi or Sense HAT, but if an error occurs, the HAT may no longer be automatically detected. The steps above are provided for debugging purposes only. |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
