@@ -1,111 +1,119 @@
 # M.2 HAT+
 
-## 关于
+## About
 
-![m2 hat plus](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus.jpg)
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/m2-hat-plus/about.adoc)
 
-树莓派 M.2 HAT+
+![m2 hat plus](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus.jpg?hash=199f21455058b7785213b21ca479fae1)
 
-树莓派 M.2 HAT+ M Key 可让您将 M.2 外围设备（如 NVMe 存储设备和其他 PCIe 配件）转接到树莓派 5 的 PCIe 接口。
+The Raspberry Pi M.2 HAT+
 
-M.2 HAT+ 扩展板可把树莓派 5 上的 PCIe 接口同单个 M.2 M key 接口的设备进行转接。您可以连接使用 2230 或 2242 尺寸的设备。M.2 HAT+ 可提供高达 3A 的功率。
+The Raspberry Pi M.2 HAT+ M Key enables you to connect M.2 peripherals such as NVMe drives and other PCIe accessories to Raspberry Pi 5’s PCIe interface.
 
-M.2 HAT+ 使用树莓派的 HAT+ 规范，Raspberry Pi OS 可自动检测 HAT+ 及其连接的设备。
+The M.2 HAT+ adapter board converts between the PCIe connector on Raspberry Pi 5 and a single M.2 M key edge connector. You can connect any device that uses the 2230 or 2242 form factors. The M.2 HAT+ can supply up to 3A of power.
 
-附带的螺纹间隔柱提供了充足的空间，以便在 M.2 HAT+ 下安装树莓派主动散热器。
+The M.2 HAT+ uses Raspberry Pi’s [HAT+ specification](https://datasheets.raspberrypi.com/hat/hat-plus-specification.pdf), which allows Raspberry Pi OS to automatically detect the HAT+ and any connected devices.
 
-M.2 HAT+ 仅兼容树莓派 5 的树莓派外壳（需要您移除盖子和附带的风扇）。
+The included threaded spacers provide ample room to fit the Raspberry Pi Active Cooler beneath an M.2 HAT+.
 
-## 特点
+The M.2 HAT+ is *only* compatible with the [Raspberry Pi Case for Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5-case/) *if you remove the lid and the included fan*.
 
-* 单通道 PCIe 2.0 接口（500 MB/s 峰值传输速率）
-* 支持使用 M.2 M Key 接口的设备
-* 支持 2230 或 2242 尺寸的设备
-* 为连接的 M.2 设备提供高达 3A 的电流
-* 电源和状态指示灯
-* 符合树莓派 HAT+ 规范
-* 包含:
-  * 连接线缆
-  * 16 毫米 GPIO 堆叠排针
-  * 4 个螺纹间隔柱
-  * 8 颗螺丝
-  * 1 个带有花纹的双凸缘 SSD 配件螺丝（用于固定和支撑 M.2 外围设备）
+## Features
 
-## 安装
+* Single-lane PCIe 2.0 interface (500 MB/s peak transfer rate)
+* Supports devices that use the M.2 M key edge connector
+* Supports devices with the 2230 or 2242 form factor
+* Supplies up to 3A to connected M.2 devices
+* Power and activity LEDs
+* Conforms to the [Raspberry Pi HAT+ specification](https://datasheets.raspberrypi.com/hat/hat-plus-specification.pdf)
+* Includes:
 
-要使用树莓派 M.2 HAT+，您需要：
+  * ribbon cable
+  * 16mm GPIO stacking header
+  * 4 threaded spacers
+  * 8 screws
+  * 1 knurled double-flanged drive attachment screw to secure and support the M.2 peripheral
 
-* 树莓派 5
+## Installation
 
-每个 M.2 HAT+ 都配备了排线、GPIO 堆叠头和安装硬件。请按照以下说明来完成 M.2 HAT+ 的安装：
+To use the Raspberry Pi M.2 HAT+, you will need:
 
-1. 首先，请确保您的树莓派运行的是最新软件。运行以下命令进行更新：
+* a Raspberry Pi 5
+
+Each M.2 HAT+ comes with a ribbon cable, GPIO stacking header, and mounting hardware. Complete the following instructions to install your M.2 HAT+:
+
+1. First, ensure that your Raspberry Pi runs the latest software. Run the following command to update:
 
     ```
     $ sudo apt update && sudo apt upgrade
     ```
-2. 接下来，请确保您的树莓派固件也是最新的。运行以下命令查看您正在运行的固件版本：
+2. Next, [ensure that your Raspberry Pi firmware is up-to-date](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#update-the-bootloader-configuration). Run the following command to see what firmware you’re running:
 
     ```
     $ sudo rpi-eeprom-update
     ```
 
-    如果您看到的日期是 2023 年 12 月 6 日或更晚，请继续下一步。如果您看到的日期早于 2023 年 12 月 6 日，请运行以下命令打开树莓派配置 CLI：
+    If you see December 6, 2023 or a later date, proceed to the next step. If you see a date earlier than December 6, 2023, run the following command to open the Raspberry Pi Configuration CLI:
 
     ```
     $ sudo raspi-config
     ```
 
-    在 Advanced Options 下 > Bootloader Version ，选择 Latest 。然后，使用 Finish 键或 Escape 键退出 raspi-config 。
+    Under `Advanced Options` > `Bootloader Version`, choose `Latest`. Then, exit `raspi-config` with `Finish` or the **Escape** key.
 
-    运行以下命令以将固件更新到最新版本：
+    Run the following command to update your firmware to the latest version:
 
     ```
     $ sudo rpi-eeprom-update -a
     ```
 
-    然后，使用 sudo reboot 重启。
-3. 在开始安装之前，请断开树莓派的电源。
-4. M.2 HAT+ 兼容树莓派 5 主动散热器。如果您有主动散热器，请在安装 M.2 HAT+ 之前先安装散热器。
-5. 使用提供的四颗螺丝安装间隔柱。将 GPIO 堆叠排针牢固地压在树莓派的 GPIO 引脚上；只要所有引脚都能正确插入即可，方向并不重要。将 Ribbon 线缆从 M.2 HAT+上拔下，并将另一端插入树莓派的 PCIe 接口。从两侧抬起 Ribbon 线缆固定器，然后将带有铜接点朝向内部、朝向 USB 的线缆插入。确保 Ribbon 线缆完全且均匀地插入 PCIe 接口，然后从两侧向下按紧线缆固定器，将 Ribbon 线缆牢固地固定在位。
-6. 把 M.2 HAT+ 放在螺柱上面，并使用剩下的四颗螺丝将其固定在位。
-7. 把排线插入 M.2 HAT+ 上的插槽。从两侧抬起排线固定器，然后插入铜接点朝上的电缆。将排线完全均匀地插入端口，从两侧向下推动电缆固定器，将排线牢固地固定在位。
-8. 通过逆时针旋转螺丝来取下驱动附件螺丝。将您的 M.2 SSD 插入 M.2 key 接口，将 SSD 以轻微向上的角度滑入插槽。不要强行将 SSD 插入插槽：而应轻轻地滑入。
-9. 将 SSD 附件螺丝上的凹口推入 M.2 SSD 尾部的插槽中。将 SSD 平放在 M.2 HAT+ 上，并顺时针旋转螺丝，直到 SSD 固定。不要太过紧拧螺丝。
-10. 恭喜，您已成功的安装了 M.2 HAT+。现在把您的树莓派接入电源；Raspberry Pi OS 能自动检测到 M.2 HAT+。如果您使用 Raspberry Pi Desktop，您应该在桌面上看到代表硬盘的图标。如果您不使用桌面版，您可以在 /dev/nvme0n1 找到硬盘。要使硬盘自动可用于文件访问，请考虑配置自动挂载。![m2 hat plus installation 07](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus-installation-07.png)
+    Then, reboot with `sudo reboot`.
+3. Disconnect the Raspberry Pi from power before beginning installation.
+4. The M.2 HAT+ is compatible with the Raspberry Pi 5 Active Cooler. If you have an Active Cooler, install it before installing the M.2 HAT+.
+    ![m2 hat plus installation 01](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus-installation-01.png?hash=8ec5865c09d8cf67c0fbb593304755f4)
+5. Install the spacers using four of the provided screws. Firmly press the GPIO stacking header on top of the Raspberry Pi GPIO pins; orientation does not matter as long as all pins fit into place. Disconnect the ribbon cable from the M.2 HAT+, and insert the other end into the PCIe port of your Raspberry Pi. Lift the ribbon cable holder from both sides, then insert the cable with the copper contact points facing inward, towards the USB ports. With the ribbon cable fully and evenly inserted into the PCIe port, push the cable holder down from both sides to secure the ribbon cable firmly in place.
+    ![m2 hat plus installation 02](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus-installation-02.png?hash=c59aa98734a3334cde67ebc8387f27ee)
+6. Set the M.2 HAT+ on top of the spacers, and use the four remaining screws to secure it in place.
+    ![m2 hat plus installation 03](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus-installation-03.png?hash=86ee6cde9d89679b56452add4d0a53ef)
+7. Insert the ribbon cable into the slot on the M.2 HAT+. Lift the ribbon cable holder from both sides, then insert the cable with the copper contact points facing up. With the ribbon cable fully and evenly inserted into the port, push the cable holder down from both sides to secure the ribbon cable firmly in place.
+    ![m2 hat plus installation 04](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus-installation-04.png?hash=0c2e813a36e988f85e317067de8c151b)
+8. Remove the drive attachment screw by turning the screw counter-clockwise. Insert your M.2 SSD into the M.2 key edge connector, sliding the drive into the slot at a slight upward angle. Do not force the drive into the slot: it should slide in gently.
+    ![m2 hat plus installation 05](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus-installation-05.png?hash=761bdd2e056ec948078c68c78eb127d2)
+9. Push the notch on the drive attachment screw into the slot at the end of your M.2 drive. Push the drive flat against the M.2 HAT+, and insert the SSD attachment screw by turning the screw clockwise until the SSD feels secure. Do not over-tighten the screw.
+    ![m2 hat plus installation 06](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus-installation-06.png?hash=c69a935c08589cff0531c1fa82644310)
+10. Congratulations, you have successfully installed the M.2 HAT+. Connect your Raspberry Pi to power; Raspberry Pi OS will automatically detect the M.2 HAT+. If you use Raspberry Pi Desktop, you should see an icon representing the drive on your desktop. If you don’t use a desktop, you can find the drive at `/dev/nvme0n1`. To make your drive automatically available for file access, consider [configuring automatic mounting](https://www.raspberrypi.com/documentation/computers/configuration.html#automatically-mount-a-storage-device).
+     ![m2 hat plus installation 07](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus-installation-07.png?hash=59ace8c3c7a33e8435e6e5b2484e8c6d)
 
->**警告**
->
->在连接或断开 M.2 插槽上的设备之前，务必将树莓派断开电源。 
+| WARNING | Always disconnect your Raspberry Pi from power before connecting or disconnecting a device from the M.2 slot. |
+| --------- | --------------------------------------------------------------------------------------------------------------- |
 
-## 从 NVMe 启动
+## Boot from NVMe
 
-要从连接到 M.2 HAT+ 的 NVMe 存储设备启动，请完成以下步骤：
+To boot from an NVMe drive attached to the M.2 HAT+, complete the following steps:
 
-1. 使用 Raspberry Pi Imager 格式化您的 NVMe 存储设备。如果您已经有带有 Raspberry Pi OS 镜像的 SD 卡，可以在您的树莓派上执行此操作。
-2. 使用 SD 卡或 USB 存储设备将树莓派启动到 Raspberry Pi OS，以持久性更改板载 EEPROM 配置中的引导顺序。
-3. 在树莓派终端上运行 sudo raspi-config 以打开树莓派配置 CLI。
-4. 在 Advanced Options > Boot Order 下，选择 NVMe/USB boot 。然后，使用 Finish 或 Esc 键退出 raspi-config 。
-5. 使用 sudo reboot 重启您的树莓派。
+1. [Format your NVMe drive using Raspberry Pi Imager](https://www.raspberrypi.com/documentation/computers/getting-started.html#raspberry-pi-imager). You can do this from your Raspberry Pi if you already have an SD card with a Raspberry Pi OS image.
+2. Boot your Raspberry Pi into Raspberry Pi OS using an SD card or USB drive to alter the boot order in the persistent on-board EEPROM configuration.
+3. In a terminal on your Raspberry Pi, run `sudo raspi-config` to open the Raspberry Pi Configuration CLI.
+4. Under `Advanced Options` > `Boot Order`, choose `NVMe/USB boot`. Then, exit `raspi-config` with `Finish` or the **Escape** key.
+5. Reboot your Raspberry Pi with `sudo reboot`.
 
-要获取更多信息，请参阅 NVMe 启动。
+For more information, see [NVMe boot](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#nvme-ssd-boot).
 
-## 启用 PCIe Gen 3
+## Enable PCIe Gen 3
 
->**警告**
->
->树莓派 5 未经 Gen 3.0 速度认证。PCIe Gen 3.0 连接可能不稳定。 
+| WARNING | The Raspberry Pi 5 is not certified for Gen 3.0 speeds. PCIe Gen 3.0 connections may be unstable. |
+| --------- | --------------------------------------------------------------------------------------------------- |
 
-要启用 PCIe Gen 3 速度，请按照在启用 PCIe Gen 3.0 中的说明操作。
+To enable PCIe Gen 3 speeds, follow the instructions at [enable PCIe Gen 3.0](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pcie-gen-3-0).
 
-## 框图
+## Schematics
 
-![m2 hat plus schematics](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus-schematics.png)
+![m2 hat plus schematics](https://www.raspberrypi.com/documentation/accessories/images/m2-hat-plus-schematics.png?hash=05467097b198e1555cf20f072e529059)
 
-树莓派 M.2 HAT+ 的原理图
+Schematics for the Raspberry Pi M.2 HAT+
 
-PDF 格式的原理图。
+Schematics are also available as a [PDF](https://datasheets.raspberrypi.com/m2-hat-plus/raspberry-pi-m2-hat-plus-schematics.pdf).
 
-## 产品简介
+## Product brief
 
-有关 M.2 HAT+ 的更多信息，包括机械规格和操作环境限制，请参阅产品简介。
+For more information about the M.2 HAT+, including mechanical specifications and operating environment limitations, see the [product brief](https://datasheets.raspberrypi.com/m2-hat-plus/raspberry-pi-m2-hat-plus-product-brief.pdf).
