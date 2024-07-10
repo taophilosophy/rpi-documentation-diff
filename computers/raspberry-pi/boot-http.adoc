@@ -7,14 +7,16 @@ In addition to network install, you can explicitly boot your device with files d
 You could, for example, add this to your `BOOT_ORDER` as a fall-back boot method, or put it behind a GPIO conditional to initiate HTTP boot from your own server when a GPIO pin is pulled low.
 
 For example, if you added the following to your EEPROM config and GPIO 8 (which has a default state of 1 or HIGH) were to be pulled low, the files `\http://downloads.raspberrypi.org:80/net_install/boot.img` and `\http://downloads.raspberrypi.org:80/net_install/boot.sig` would be downloaded. If network install on boot were enabled, it would use the same URL. If GPIO 8 were not pulled low the behaviour would be unchanged.
-```
+
+[source,ini]
+----
 [gpio8=0]
 BOOT_ORDER=0xf7
 HTTP_HOST=downloads.raspberrypi.org
 NET_INSTALL_ENABLED=0
-```
+----
 
-`boot.img` and the `boot.sig` signature file is a ram disk containing a boot file system. For more details, see xref:raspberry-pi.adoc#boot_ramdisk[boot_ramdisk].
+`boot.img` and the `boot.sig` signature file is a ram disk containing a boot file system. For more details, see xref:config_txt.adoc#boot_ramdisk[boot_ramdisk].
 
 HTTP in the `BOOT_ORDER` will be ignored if secure boot is enabled and xref:raspberry-pi.adoc#HTTP_HOST[HTTP_HOST] is not set.
 
@@ -32,17 +34,28 @@ WARNING: Using your own network install image will require you to sign the image
 
 https://github.com/raspberrypi/usbboot/blob/master/Readme.md[`USBBOOT`] has all the tools needed to program public keys. 
 
-----
-# Add your PUBLIC key to the eeprom. boot.conf contains your modifications
-rpi-eeprom-config -c boot.conf -p mypubkey.pem -o pieeprom.upd pieeprom.original.bin
+Use the following command to add your public key to the EEPROM. `boot.conf` contains your modifications:
 
-# Generate signature for your eeprom
-rpi-eeprom-digest -i pieeprom.upd -o pieeprom.sig
-
-# Sign the network install image with your PRIVATE key
-# Put boot.img and boot.sig on your web server
-rpi-eeprom-digest -i boot.img -o boot.sig -k myprivkey.pem
+[source,console]
 ----
+$ rpi-eeprom-config -c boot.conf -p mypubkey.pem -o pieeprom.upd pieeprom.original.bin
+----
+
+Use the following command to generate a signature for your EEPROM:
+
+[source,console]
+----
+$ rpi-eeprom-digest -i pieeprom.upd -o pieeprom.sig
+----
+
+Then, use the following command to sign the network install image with your private key:
+
+[source,console]
+----
+$ rpi-eeprom-digest -i boot.img -o boot.sig -k myprivkey.pem
+----
+
+Finally, put `boot.img` and `boot.sig` on your web server to use your own signed network install image.
 
 === Certificates
 
@@ -83,6 +96,7 @@ Configure the following settings in the `[gpio8=0]` section, replacing:
 * `<path_to_files>` with the xref:raspberry-pi.adoc#HTTP_PATH[path to your OS image] hosted on your website, e.g. `path/to/files`
 * `<hash>` with the hash value you generated above, e.g. `701bd97f67b0f5483a9734e6e5cf72f9a123407b346088638f597878563193fc`
 
+[source,ini]
 ----
 [all]
 BOOT_UART=1

@@ -49,7 +49,7 @@ We recommend using the Raspberry Pi's GPIO to provide power to the Touch Display
 
 ==== Power from a Raspberry Pi
 
-To power the Touch Display using a Raspberry Pi, you need to connect two jumper wires between the 5V and `GND` pins on xref:../computers/raspberry-pi.adoc#gpio-and-the-40-pin-header[Raspberry Pi's GPIO] and the 5V and `GND` pins on the display, as shown in the following illustration.
+To power the Touch Display using a Raspberry Pi, you need to connect two jumper wires between the 5V and `GND` pins on xref:../computers/raspberry-pi.adoc#gpio[Raspberry Pi's GPIO] and the 5V and `GND` pins on the display, as shown in the following illustration.
 
 .The location of the display's 5V and `GND` pins
 image::images/display_plugs.png[Illustration of display pins, width="40%"]
@@ -98,7 +98,7 @@ image::images/display-rotation.png[Screenshot of orientation options in screen c
 
 To set the screen orientation on a device that lacks a desktop environment, edit the `/boot/firmware/cmdline.txt` configuration file to pass an orientation to the system. Add the following line to `cmdline.txt`:
 
-[source]
+[source,ini]
 ----
 video=DSI-1:800x480@60,rotate=<rotation-value>
 ----
@@ -120,17 +120,38 @@ WARNING: Rotating touch input via device tree can cause conflicts with your inpu
 
 Rotation of touch input is independent of the orientation of the display itself. To change this you need to manually add a `dtoverlay` instruction in xref:../computers/config_txt.adoc[`/boot/firmware/config.txt`]. Add the following line in `config.txt`:
 
-[source]
+[source,ini]
 ----
 dtoverlay=vc4-kms-dsi-7inch,invx,invy
 ----
 
 Then, disable automatic display detection by removing the following line from `config.txt`, if it exists:
 
-[source]
+[source,ini]
 ----
 display_auto_detect=1
 ----
+
+[NOTE]
+====
+In Raspberry Pi OS _Bookworm_, a bug in https://github.com/WayfireWM/wayfire[Wayfire] currently prevents cursor movement rotation when using WayVNC. There is no workaround for this bug in Wayfire. Instead, you can use https://github.com/labwc/labwc[`labwc`] (currently in beta).
+
+First install `labwc`:
+
+[source,console]
+----
+$ sudo apt install labwc
+----
+
+Then, use the Raspberry Pi Configuration CLI to switch to the `labwc` window compositor. Run the following command to open `raspi-config`:
+
+[source,console]
+----
+$ sudo raspi-config
+----
+
+Go to **Advanced Options**. Select **Wayland**, then select **labwc**. Exit `raspi-config` and reboot with `sudo reboot`. Switching to `labwc` may reset some configuration, including keyboard layout and rotation settings.
+====
 
 ==== Touch Display device tree option reference
 
@@ -160,7 +181,7 @@ The `vc4-kms-dsi-7inch` overlay supports the following options:
 
 To specify these options, add them, separated by commas, to your `dtoverlay` line in `/boot/firmware/config.txt`. Boolean values default to true when present, but you can set them to false with the suffix "=0". Integer values require a value, e.g. `sizey=240`. For instance, to set the X resolution to 400 pixels and invert both X and Y coordinates, use the following line:
 
-[source]
+[source,ini]
 ----
 dtoverlay=vc4-kms-dsi-7inch,sizex=400,invx,invy
 ----
