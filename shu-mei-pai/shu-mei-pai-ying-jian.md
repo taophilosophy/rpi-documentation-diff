@@ -1,444 +1,370 @@
-# 树莓派硬件
+# Raspberry Pi hardware
 
+## Introduction
 
-## GPIO 和 40 针排针
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/introduction.adoc)
 
-树莓派的一个强大功能是主板的顶部沿着一排 GPIO（通用输入/输出）引脚。当前所有树莓派主板上都有一个 40 针的 GPIO 引脚排针（尽管在树莓派 Zero、树莓派 Zero W 和树莓派 Zero 2 W 上是未焊接的）。所有主板上的 GPIO 引脚的引脚间距都是 0.1 英寸（2.54 毫米）。
+Raspberry Pi makes computers in several different **series**:
 
-![GPIO pins](https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png)
+* The **flagship** series, often referred to by the shorthand "Raspberry Pi", offers high-performance hardware, a full Linux operating system, and a variety of common ports in a form factor roughly the size of a credit card.
+* The **Zero** series offers a full Linux operating system and essential ports at an affordable price point in a minimal form factor with low power consumption.
+* The **Compute Module** series, often referred to by the shorthand "CM", offers high-performance hardware and a full Linux operating system in a minimal form factor suitable for industrial and embedded applications. Compute Module models feature hardware equivalent to the corresponding flagship models, but with fewer ports and no on-board GPIO pins. Instead, users should connect Compute Modules to a separate baseboard that provides the ports and pins required for a given application.
 
-所有 GPIO 引脚都可以在软件中指定为输入或输出引脚，并用于各种用途。
+Additionally, Raspberry Pi makes the **Pico** series of tiny, versatile [microcontroller](https://en.wikipedia.org/wiki/Microcontroller) boards. Pico models do not run Linux or allow for removable storage, but instead allow programming by flashing a binary onto on-board flash storage.
 
-![GPIO layout](../.gitbook/assets/GPIO.png)
+### Flagship series
 
->**注意**
->
->GPIO 引脚编号方案不按数字顺序排列。 GPIO 引脚 0 和 1 位于板上（物理引脚 27 和 28），但保留供高级使用。
+**Model B** indicates the presence of an Ethernet port. **Model A** indicates a lower-cost model in a smaller form factor with no Ethernet port, reduced RAM, and fewer USB ports to limit board height.
 
-### 电压
+| Model                                                                                                                                                                   | SoC                             | Memory                   | GPIO               | Connectivity                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Raspberry Pi Model B](https://www.raspberrypi.com/documentation/computers/images/model-b.jpg?hash=caa7985f73e4fb3af8fb7b0a614d88b3)<br />Raspberry Pi Model B              | [BCM2835](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2835)                                | 256MB<br /><br />512MB           | 26-pin GPIO header | * HDMI* 2 × USB 2.0* CSI camera port* DSI display port* 3.5mm audio jack* RCA composite video* Ethernet (100Mb/s)* SD card slot* micro USB power                                                                                                                                                                                                     |
+| ![Raspberry Pi Model A](https://www.raspberrypi.com/documentation/computers/images/model-a.jpg?hash=9b8ad338273f437641f74eb13a32adc1)<br />Raspberry Pi Model A              | [BCM2835](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2835)                                | 256MB                    | 26-pin GPIO header | * HDMI* USB 2.0* CSI camera port* DSI display port* 3.5mm audio jack* RCA composite video* SD card slot* micro USB power                                                                                                                                                                                                                              |
+| ![Raspberry Pi Model B+](https://www.raspberrypi.com/documentation/computers/images/model-b-plus.jpg?hash=83f51a836116f3df1378346158d6e148)<br />Raspberry Pi Model B+       | [BCM2835](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2835)                                | 512MB                    | 40-pin GPIO header | * HDMI* 4 × USB 2.0* CSI camera port* DSI display port* 3.5mm AV jack* Ethernet (100Mb/s)* microSD card slot* micro USB power                                                                                                                                                                                                                        |
+| ![Raspberry Pi Model A+](https://www.raspberrypi.com/documentation/computers/images/model-a-plus.jpg?hash=e0df62b537945082df16ff45f453d2ad)<br />Raspberry Pi Model A+       | [BCM2835](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2835)                                | 256MB<br /><br />512MB           | 40-pin GPIO header | * HDMI* USB 2.0* CSI camera port* DSI display port* 3.5mm AV jack* microSD card slot* micro USB power                                                                                                                                                                                                                                                 |
+| ![Raspberry Pi 2 Model B](https://www.raspberrypi.com/documentation/computers/images/2-model-b.jpg?hash=f7ccdaf24be1e125198d6ef11a7d3258)<br />Raspberry Pi 2 Model B        | [BCM2836](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2836) (in version 1.2, switched to [BCM2837](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2837)) | 1 GB                     | 40-pin GPIO header | * HDMI* 4 × USB 2.0* CSI camera port* DSI display port* 3.5mm AV jack* Ethernet (100Mb/s)* microSD card slot* micro USB power                                                                                                                                                                                                                        |
+| ![Raspberry Pi 3 Model B](https://www.raspberrypi.com/documentation/computers/images/3-model-b.jpg?hash=26b673f0b2c427e9e29fada4336a3569)<br />Raspberry Pi 3 Model B        | [BCM2837](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2837)                                | 1 GB                     | 40-pin GPIO header | * HDMI* 4 × USB 2.0* CSI camera port* DSI display port* 3.5mm AV jack* Ethernet (100Mb/s)* 2.4GHz single-band 802.11n Wi-Fi (35Mb/s)* Bluetooth 4.1, Bluetooth Low Energy (BLE)* microSD card slot* micro USB power                                                                                                                                  |
+| ![Raspberry Pi 3 Model B+](https://www.raspberrypi.com/documentation/computers/images/3-model-b-plus.jpg?hash=55357b0ece66311f90f82db2dc09f3d2)<br />Raspberry Pi 3 Model B+ | [BCM2837b0](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2837b0)                                | 1GB                      | 40-pin GPIO header | * HDMI* 4 × USB 2.0* CSI camera port* DSI display port* 3.5mm AV jack* PoE-capable Ethernet (300Mb/s)* 2.4/5GHz dual-band 802.11ac Wi-Fi (100Mb/s)* Bluetooth 4.2, Bluetooth Low Energy (BLE)* microSD card slot* micro USB power                                                                                                                    |
+| ![Raspberry Pi 3 Model A+](https://www.raspberrypi.com/documentation/computers/images/3-model-a-plus.jpg?hash=e8035ce9e2c7f5d1c8050e039aaacbaa)<br />Raspberry Pi 3 Model A+ | [BCM2837b0](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2837b0)                                | 512 MB                   | 40-pin GPIO header | * HDMI* USB 2.0* CSI camera port* DSI display port* 3.5mm AV jack* 2.4/5GHz dual-band 802.11ac Wi-Fi (100Mb/s)* Bluetooth 4.2, Bluetooth Low Energy (BLE)* microSD card slot* micro USB power                                                                                                                                                         |
+| ![Raspberry Pi 4 Model B](https://www.raspberrypi.com/documentation/computers/images/4-model-b.jpg?hash=f56bee1ea763677368e20dbc59574c85)<br />Raspberry Pi 4 Model B        | [BCM2711](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2711)                                | 1GB<br /><br />2GB<br /><br />4GB<br /><br />8GB | 40-pin GPIO header | * 2 × micro HDMI* 2 × USB 2.0* 2 × USB 3.0* CSI camera port* DSI display port* 3.5mm AV jack* PoE-capable Gigabit Ethernet (1Gb/s)* 2.4/5GHz dual-band 802.11ac Wi-Fi (120Mb/s)* Bluetooth 5, Bluetooth Low Energy (BLE)* microSD card slot* USB-C power (5V, 3A (15W))                                                                            |
+| ![Raspberry Pi 400](https://www.raspberrypi.com/documentation/computers/images/400.jpg?hash=59a07dc791fc54f56c2416f42ced88e3)<br />Raspberry Pi 400                          | [BCM2711](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2711)                                | 4GB                      | 40-pin GPIO header | * 2 × micro HDMI* USB 2.0* 2 × USB 3.0* Gigabit Ethernet (1Gb/s)* 2.4/5GHz dual-band 802.11ac Wi-Fi (120Mb/s)* Bluetooth 5, Bluetooth Low Energy (BLE)* microSD card slot* USB-C power (5V, 3A (15W))                                                                                                                                               |
+| ![Raspberry Pi 5](https://www.raspberrypi.com/documentation/computers/images/5.jpg?hash=b888dab3bb8bcb8dd4e0541c99238eec)<br />Raspberry Pi 5                                | [BCM2712](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2712)                                | 4GB<br /><br />8GB               | 40-pin GPIO header | * 2 × micro HDMI* 2 × USB 2.0* 2 × USB 3.0* 2 × CSI camera/DSI display ports* single-lane [PCIe FFC connector](https://datasheets.raspberrypi.com/pcie/pcie-connector-standard.pdf)* [UART connector](https://datasheets.raspberrypi.com/debug/debug-connector-specification.pdf)* RTC battery connector* [four-pin JST-SH PWM fan connector](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#fan-connector-pinout)* PoE+-capable Gigabit Ethernet (1Gb/s)* 2.4/5GHz dual-band 802.11ac Wi-Fi 5 (300Mb/s)* Bluetooth 5, Bluetooth Low Energy (BLE)* microSD card slot* USB-C power (5V, 5A (25W) or 5V, 3A (15W) with a 600mA peripheral limit) |
 
-板上有两个 5V 引脚和两个 3.3V 引脚，以及若干接地引脚（GND），这些引脚无法重新配置。其余引脚均为通用 3.3V 引脚，意味着输出设置为 3.3V，输入为 3.3V 容忍。
+For more information about the ports on the Raspberry Pi flagship series, see the [Schematics and mechanical drawings](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#schematics-and-mechanical-drawings).
 
-### 输出
+### Zero series
 
-指定为输出引脚的 GPIO 引脚可以设置为高电平（3.3V）或低电平（0V）。
+Models with the **H** suffix have header pins pre-soldered to the GPIO header. Models that lack the **H** suffix do not come with header pins attached to the GPIO header; the user must solder pins manually or attach a third-party pin kit.
 
-### 输入
+All Zero models have the following connectivity:
 
-将作为输入引脚指定的 GPIO 引脚可以读取为高电平（3.3V）或低电平（0V）。使用内部上拉或下拉电阻可以更容易地实现这一点。GPIO2 和 GPIO3 引脚具有固定的上拉电阻，但对于其他引脚，可以在软件中进行配置。
+* a microSD card slot
+* a CSI camera port (version 1.3 of the original Zero introduced this port)
+* a mini HDMI port
+* 2 × micro USB ports (one for input power, one for external devices)
 
-### 其他 GPIO 功能
+| Model                                                                                                                                                         | SoC | Memory | GPIO                             | Wireless Connectivity                                                                  |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- | -------- | ---------------------------------- | ---------------------------------------------------------------------------------------- |
+| ![Raspberry Pi Zero](https://www.raspberrypi.com/documentation/computers/images/zero.jpg?hash=2d93a49cf668312604cfc00fc0660214)<br />Raspberry Pi Zero             | [BCM2835](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2835)    | 512MB  | 40-pin GPIO header (unpopulated) | none                                                                                   |
+| ![Raspberry Pi Zero W](https://www.raspberrypi.com/documentation/computers/images/zero-w.jpg?hash=3752f16ba033177e867614e87292076d)<br />Raspberry Pi Zero W       | [BCM2835](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2835)    | 512MB  | 40-pin GPIO header (unpopulated) | * 2.4GHz single-band 802.11n Wi-Fi (35Mb/s)* Bluetooth 4.0, Bluetooth Low Energy (BLE) |
+| ![Raspberry Pi Zero WH](https://www.raspberrypi.com/documentation/computers/images/zero-wh.jpg?hash=f7d7c5c9b132395f45c308741fc85c7e)<br />Raspberry Pi Zero WH    | [BCM2835](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2835)    | 512MB  | 40-pin GPIO header               | * 2.4GHz single-band 802.11n Wi-Fi (35Mb/s)* Bluetooth 4.0, Bluetooth Low Energy (BLE) |
+| ![Raspberry Pi Zero 2 W](https://www.raspberrypi.com/documentation/computers/images/zero-2-w.jpg?hash=5c934105e0a9be90fa0d506cac91a46f)<br />Raspberry Pi Zero 2 W | [RP3A0](https://www.raspberrypi.com/documentation/computers/processors.html#rp3a0)    | 512MB  | 40-pin GPIO header (unpopulated) | * 2.4GHz single-band 802.11n Wi-Fi (35Mb/s)* Bluetooth 4.2, Bluetooth Low Energy (BLE) |
 
-除了简单的输入和输出设备外，GPIO 引脚还可以与各种替代功能一起使用。一些功能适用于所有引脚，另一些适用于特定引脚：
+### Compute Module series
 
-* 脉冲宽度调制（PWM）
+| Model                                                                                                                                                                                        | SoC | Memory                   | Storage                           | Form factor                          | Wireless Connectivity                                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- | -------------------------- | ----------------------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| ![Raspberry Pi Compute Module 1](https://www.raspberrypi.com/documentation/computers/images/compute-module-1.jpg?hash=725d6ee61d958098dc68dc7739deab88)<br />Raspberry Pi Compute Module 1        | [BCM2835](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2835)    | 512MB                    | 0GB (Lite)<br /><br />4GB                 | DDR2 SO-DIMM                         | none                                                                                                |
+| ![Raspberry Pi Compute Module 3](https://www.raspberrypi.com/documentation/computers/images/compute-module-3.jpg?hash=3a5ff7c853190d7a07c51bf67c1082b8)<br />Raspberry Pi Compute Module 3        | [BCM2837](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2837)    | 1GB                      | 0GB (Lite)<br /><br />4GB                 | DDR2 SO-DIMM                         | none                                                                                                |
+| ![Raspberry Pi Compute Module 3+](https://www.raspberrypi.com/documentation/computers/images/compute-module-3-plus.jpg?hash=352ed6d3402586078299193abe8ba754)<br />Raspberry Pi Compute Module 3+ | [BCM2837b0](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2837b0)    | 1GB                      | 0GB (Lite)<br /><br />8GB<br /><br />16GB<br /><br />32GB | DDR2 SO-DIMM                         | none                                                                                                |
+| ![Raspberry Pi Compute Module 4S](https://www.raspberrypi.com/documentation/computers/images/compute-module-4s.jpg?hash=4ec9821548515598adfe5a3cdc14789d)<br />Raspberry Pi Compute Module 4S     | [BCM2711](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2711)    | 1GB<br /><br />2GB<br /><br />4GB<br /><br />8GB | 0GB (Lite)<br /><br />8GB<br /><br />16GB<br /><br />32GB | DDR2 SO-DIMM                         | none                                                                                                |
+| ![Raspberry Pi Compute Module 4](https://www.raspberrypi.com/documentation/computers/images/compute-module-4.jpg?hash=989dcf3efb7c9d59f463fe404a5e3820)<br />Raspberry Pi Compute Module 4        | [BCM2711](https://www.raspberrypi.com/documentation/computers/processors.html#bcm2711)    | 1GB<br /><br />2GB<br /><br />4GB<br /><br />8GB | 0GB (Lite)<br /><br />8GB<br /><br />16GB<br /><br />32GB | dual 100-pin high density connectors | optional:<br />* 2.4/5GHz dual-band 802.11ac Wi-Fi 5 (300Mb/s)* Bluetooth 5, Bluetooth Low Energy (BLE) |
 
-  * 所有引脚上都可用的软件 PWM
-  * GPIO12、GPIO13、GPIO18、GPIO19 上可用的硬件 PWM
-* SPI
-  * SPI0：MOSI（GPIO10）；MISO（GPIO9）；SCLK（GPIO11）；CE0（GPIO8），CE1（GPIO7）
-  * SPI1：MOSI（GPIO20）；MISO（GPIO19）；SCLK（GPIO21）；CE0（GPIO18）；CE1（GPIO17）；CE2（GPIO16）
-* I2C
-  * 数据：（GPIO2）；时钟（GPIO3）
-  * EEPROM 数据：（GPIO0）；EEPROM 时钟（GPIO1）
-* 串行
-  * TX（GPIO14）; RX（GPIO15）
+| NOTE | Several Compute Modules use the physical DDR2 SO-DIMM form factor, but are not compatible with DDR2 SO-DIMM electrical specifications. |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
 
-### 查看树莓派的 GPIO 引脚布局
+For more information about Raspberry Pi Compute Modules, see [the Compute Module documentation](https://www.raspberrypi.com/documentation/computers/compute-module.html).
 
-通过打开终端窗口并运行命令 pinout ，可以在您的树莓派上访问 GPIO 参考。此工具由 GPIO Zero Python 库提供，在 Raspberry Pi OS 中默认安装。
+### Pico microcontrollers
 
->**警告**
->
->尽管连接简单的组件到 GPIO 引脚是安全的，但要小心如何连接它们。LED 应该有电阻器来限制通过它们的电流。不要为 3.3V 组件使用 5V。不要直接把电机连接到 GPIO 引脚，而应使用 H 桥电路或电机控制板。 
+Models with the **H** suffix have header pins pre-soldered to the GPIO header. Models that lack the **H** suffix do not come with header pins attached to the GPIO header; the user must solder pins manually or attach a third-party pin kit.
 
-### 权限
+| Model                                                                                                                                                      | SoC | Memory | Storage | GPIO                             | Wireless Connectivity                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- | -------- | --------- | ---------------------------------- | ---------------------------------------------------------------------------------------- |
+| ![Raspberry Pi Pico](https://www.raspberrypi.com/documentation/computers/images/pico.png?hash=950c52fb95a01a3eec3b225e71a14bc9)<br />Raspberry Pi Pico          | [RP2040](https://www.raspberrypi.com/documentation/microcontrollers/rp2040.html#welcome-to-rp2040)    | 264kB  | 2MB     | 40-pin GPIO header (unpopulated) | none                                                                                   |
+| ![Raspberry Pi Pico H](https://www.raspberrypi.com/documentation/computers/images/pico-h.png?hash=26d4f02827ffd2c911119d36da30bb27)<br />Raspberry Pi Pico H    | [RP2040](https://www.raspberrypi.com/documentation/microcontrollers/rp2040.html#welcome-to-rp2040)    | 264kB  | 2MB     | 40-pin GPIO header (unpopulated) | none                                                                                   |
+| ![Raspberry Pi Pico W](https://www.raspberrypi.com/documentation/computers/images/pico-w.png?hash=ab356bc12db87ee6d8d3d62388baf4bd)<br />Raspberry Pi Pico W    | [RP2040](https://www.raspberrypi.com/documentation/microcontrollers/rp2040.html#welcome-to-rp2040)    | 264kB  | 2MB     | 40-pin GPIO header (unpopulated) | * 2.4GHz single-band 802.11n Wi-Fi (10Mb/s)* Bluetooth 5.2, Bluetooth Low Energy (BLE) |
+| ![Raspberry Pi Pico WH](https://www.raspberrypi.com/documentation/computers/images/pico-wh.png?hash=a6be966c70758bbcd9f5115c4096cf2c)<br />Raspberry Pi Pico WH | [RP2040](https://www.raspberrypi.com/documentation/microcontrollers/rp2040.html#welcome-to-rp2040)    | 264kB  | 2MB     | 40-pin GPIO header               | * 2.4GHz single-band 802.11n Wi-Fi (10Mb/s)* Bluetooth 5.2, Bluetooth Low Energy (BLE) |
 
-为了使用 GPIO，您的用户必须是 gpio 组的成员。默认用户帐户默认是成员，但您必须使用以下命令手动添加其他用户：
+For more information about Raspberry Pi Pico models, see [the Pico documentation](https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html).
+
+## Schematics and mechanical drawings
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/raspberry-pi-schematics.adoc)
+
+Schematics for the various Raspberry Pi board versions:
+
+### Raspberry Pi 5
+
+* [Mechanical drawings, PDF](https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-mechanical-drawing.pdf)
+* [STEP file](https://datasheets.raspberrypi.com/rpi5/RaspberryPi5-step.zip) for Raspberry Pi 5
+
+### Raspberry Pi 4 Model B
+
+* [Schematics, revision 4.0](https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-reduced-schematics.pdf)
+* [Mechanical drawings, PDF](https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-mechanical-drawing.pdf)
+* [Mechanical drawings, DXF](https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-mechanical-drawing.dxf)
+
+### Raspberry Pi 3 Model B+
+
+* [Schematics, revision 1.0](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-plus-reduced-schematics.pdf)
+* [Mechanical drawings, PDF](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-plus-mechanical-drawing.pdf)
+* [Mechanical drawings, DXF](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-plus-mechanical-drawing.dxf)
+* [Case drawings, PDF](https://datasheets.raspberrypi.com/case/raspberry-pi-3-b-plus-case-mechanical-drawing.pdf)
+
+### Raspberry Pi 3 Model A+
+
+* [Schematics, revision 1.0](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-a-plus-reduced-schematics.pdf)
+* [Mechanical drawings, PDF](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-a-plus-mechanical-drawing.pdf)
+* [Case drawings, PDF](https://datasheets.raspberrypi.com/case/raspberry-pi-3-a-plus-case-mechanical-drawing.pdf)
+
+### Raspberry Pi 3 Model B
+
+* [Schematics, revision 1.2](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-reduced-schematics.pdf)
+* [Mechanical drawings, PDF](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-mechanical-drawing.pdf)
+* [Mechanical drawings, DXF](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-mechanical-drawing.dxf)
+
+### Raspberry Pi 2 Model B
+
+* [Schematics, revision 1.2](https://datasheets.raspberrypi.com/rpi2/raspberry-pi-2-b-reduced-schematics.pdf)
+
+### Raspberry Pi 1 Model B+
+
+* [Schematics, revision 1.2](https://datasheets.raspberrypi.com/rpi/raspberry-pi-b-plus-reduced-schematics.pdf)
+* [Mechanical drawings, PDF](https://datasheets.raspberrypi.com/rpi/raspberry-pi-b-plus-mecahnical-drawing.pdf)
+* [Mechanical drawings, DXF](https://datasheets.raspberrypi.com/rpi/raspberry-pi-b-plus-mecahnical-drawing.dxf)
+
+### Raspberry Pi 1 Model A+
+
+* [Schematics, revision 1.1](https://datasheets.raspberrypi.com/rpi/raspberry-pi-a-plus-reduced-schematics.pdf)
+
+| NOTE | Mechanical drawings for the Raspberry Pi 3 Model A+ are also applicable to the Raspberry Pi 1 Model A+. |
+| ------ | --------------------------------------------------------------------------------------------------------- |
+
+### Raspberry Pi Zero 2 W
+
+* [Schematics](https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-reduced-schematics.pdf)
+* [Mechanical drawings, PDF](https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-mechanical-drawing.pdf)
+* [Test pad positions](https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-test-pads.pdf)
+
+#### Test pad locations
+
+The Raspberry Pi Zero 2 W has a number of test pad locations used during production of the board.
+
+![zero2 pad diagram](https://www.raspberrypi.com/documentation/computers/images/zero2-pad-diagram.png?hash=2e74c93201a0f4ee0c22848ce2cfa382)
+
+| Label          | Function                          | X (mm from origin) | Y (mm from origin) |
+| ---------------- | ----------------------------------- | -------------------- | -------------------- |
+| STATUS\_LED | Power state of LED (LOW \= ON) | 5.15               | 8.8                |
+| CORE           | Processor power                   | 6.3                | 18.98              |
+| RUN            | Connect to GND to reset           | 8.37               | 22.69              |
+| 5V             | 5V input                          | 8.75               | 11.05              |
+| 5V             | 5V input                          | 11.21              | 6.3                |
+| GND            | Ground pin                        | 10.9               | 3.69               |
+| GND            | Ground pin                        | 17.29              | 2.41               |
+| USB\_DP     | USB port                          | 22.55              | 1.92               |
+| USB\_DM     | USB port                          | 24.68              | 1.92               |
+| OTG            | On-the-go ID pin                  | 39.9               | 7.42               |
+| 1V8            | 1.8V analog supply                | 42.03              | 8.42               |
+| TV             | Composite TV out                  | 45.58              | 3.17               |
+| GND            | Ground pin                        | 49.38              | 3.05               |
+| GND            | Ground pin                        | 55.99              | 22.87              |
+| 3V3            | 3.3V I/O supply                   | 48.55              | 22.44              |
+| SD\_CLK     | SD Card clock pin                 | 60.95              | 18.45              |
+| SD\_CMD     | SD Card command pin               | 58.2               | 16.42              |
+| SD\_DAT0    | SD data pin                       | 58.13              | 20.42              |
+| SD\_DAT1    | SD data pin                       | 60.65              | 21.1               |
+| SD\_DAT2    | SD data pin                       | 57.78              | 13.57              |
+| SD\_DAT3    | SD data pin                       | 60.8               | 15.22              |
+| BT\_ON      | Bluetooth power status            | 25.13              | 19.55              |
+| WL\_ON      | Wireless LAN power status         | 27.7               | 19.2               |
+
+### Raspberry Pi Zero W
+
+* [Schematics, revision 1.1](https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf)
+* [Mechanical drawings, PDF](https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf)
+
+### Raspberry Pi Zero
+
+* [Schematics, revision 1.3](https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-reduced-schematics.pdf)
+* [Mechanical drawings, PDF](https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-mechanical-drawing.pdf)
+* [Case drawings, PDF - blank lid](https://datasheets.raspberrypi.com/case/raspberry-pi-zero-case-mechanical-drawing.pdf)
+* [Case drawings, PDF - GPIO lid](https://datasheets.raspberrypi.com/case/raspberry-pi-zero-case-with-gpio-mechanical-drawing.pdf)
+* [Case Drawings, PDF - camera lid](https://datasheets.raspberrypi.com/case/raspberry-pi-zero-case-with-camera-mechanical-drawing.pdf)
+
+## Product compliance and safety
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/raspberry-pi-compliance.adoc)
+
+All Raspberry Pi products have undergone extensive compliance testing. For more information see the [Product Information Portal](https://pip.raspberrypi.com/).
+
+### Flammability rating
+
+The PCBs used in Raspberry Pi devices adhere to UL94-V0.
+
+| NOTE | This applies to the PCBs only. |
+| ------ | -------------------------------- |
+
+### Raspberry Pi Compliance Support
+
+The Compliance Support programme is designed to eliminate the burden of navigating compliance issues and make it easier for companies to bring new products to consumers. It provides access to the same test engineers who worked on our Raspberry Pis during their compliance testing, connecting the user to a dedicated team at [UL](https://www.ul-certification.com/) who assess and test the user’s product, facilitated by their in-depth knowledge of Raspberry Pi.
+
+Find out more about the [Raspberry Pi Compliance Support Programme](https://www.raspberrypi.com/for-industry/integrator-programme/).
+
+### Powered by Raspberry Pi
+
+The Powered by Raspberry Pi program provides a process for companies wanting to use a form of the Raspberry Pi logo, and covers products with Raspberry Pi computers or silicon inside, and services provided by a Raspberry Pi. If you wish to start the process to apply you can do so [online](https://www.raspberrypi.com/trademark-rules/powered-raspberry-pi/).
+
+### Approved Design Partners
+
+Our list of [Approved Design Partners](https://www.raspberrypi.com/for-industry/design-partners/) provides a set of consultancies which we work closely with and support so they can provide paid-for design services across hardware, software, and mechanical fields.
+
+## Frequency management and thermal control
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/frequency-management.adoc)
+
+All Raspberry Pi models perform a degree of thermal management to avoid overheating under heavy load. The SoCs have an internal temperature sensor, which software on the GPU polls to ensure that temperatures do not exceed a limit which we define as 85°C on all models. It is possible to set this to a lower value, but not to a higher one. As the device approaches the limit, various frequencies and sometimes voltages used on the chip (Arm, GPU) are reduced. This reduces the amount of heat generated, keeping the temperature under control.
+
+When the core temperature is between 80°C and 85°C, the Arm cores will be progressively throttled back. If the temperature reaches 85°C, both the Arm cores and the GPU will be throttled back.
+
+For Raspberry Pi 3 Model B+, the PCB technology has been changed to provide better heat dissipation and increased thermal mass. In addition, a soft temperature limit has been introduced, with the goal of maximising the time for which a device can "sprint" before reaching the hard limit at 85°C. When the soft limit is reached, the clock speed is reduced from 1.4GHz to 1.2GHz, and the operating voltage is reduced slightly. This reduces the rate of temperature increase: we trade a short period at 1.4GHz for a longer period at 1.2GHz. By default, the soft limit is 60°C, and this can be changed via the `temp_soft_limit` setting in [config.txt](https://www.raspberrypi.com/documentation/computers/config_txt.html#overclocking-options).
+
+The Raspberry Pi 4 Model B continues with the same PCB technology as the Raspberry Pi 3 Model B+, to help dissipate excess heat. There is currently no soft limit defined.
+
+### Use DVFS
+
+| NOTE | Discussion of DVFS applies to Raspberry Pi 4 Model B, Raspberry Pi 400, and Compute Module 4 only. |
+| ------ | ---------------------------------------------------------------------------------------------------- |
+
+Raspberry Pi 4 devices implement dynamic voltage and frequency scaling (DVFS). This technique allows Raspberry Pi 4 devices to run at lower temperatures whilst still providing the same performance.
+
+Various clocks (e.g. Arm, Core, V3D, ISP, H264, HEVC) inside the SoC are monitored by the firmware, and whenever they are not running at full speed, the voltage supplied to the particular part of the chip driven by the clock is reduced relative to the reduction from full speed. In effect, only enough voltage is supplied to keep the block running correctly at the specific speed at which it is running. This can result in significant reductions in power used by the SoC, and therefore in the overall heat being produced.
+
+Due to possible system stability problems involved with running an undervoltage, especially when using undervoltaged fixed clock peripherals (eg. PCIe), three DVFS modes are available and can be configured in [`/boot/firmware/config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html#what-is-config-txt) with the below properties. Most systems should use `dvfs=3`, headless systems may benefit from a small power reduction with `dvfs=1` at the risk of PCIe stability issues.
+
+| property\=value | Description                                                                                                                                             |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dvfs=1`                   | allow undervoltage                                                                                                                                      |
+| `dvfs=2`                   | fixed voltage for default operating frequencies                                                                                                         |
+| `dvfs=3`                   | scale voltage up on demand for over clocking (default). If `over_voltage` is specified in `config.txt` then dynamic voltage scaling is disabled causing the system to revert to `dvfs=2`. |
+
+| NOTE | This setting has been removed on Raspberry Pi 5 and is effectively always mode 3. |
+| ------ | ----------------------------------------------------------------------------------- |
+
+In addition, a more stepped CPU governor is also used to produce finer-grained control of ARM core frequencies, which means the DVFS is more effective. The steps are now 1500MHz, 1000MHz, 750MHz, and 600MHz. These steps can also help when the SoC is being throttled, and mean that throttling all the way back to 600MHz is much less likely, giving an overall increase in fully loaded performance.
+
+The default CPU governor is `ondemand`. The governor can be manually changed with the `cpufreq-set` command (from the `cpufrequtils` package) to reduce idle power consumption:
 
 ```
-$ sudo usermod -a -G gpio <username>
+$ sudo apt install cpufrequtils
+$ sudo cpufreq-set -g powersave
 ```
 
-### Python 中的 GPIO
+### Measure temperatures
 
-使用 GPIO Zero 库可以轻松使用 Python 控制 GPIO 设备。该库在 gpiozero.readthedocs.io 上有全面的文档。
-
-#### LED
-
-以下示例代码控制连接到 GPIO17 的 LED：
+Due to the architecture of the SoCs used on Raspberry Pi devices, and the use of the upstream temperature monitoring code in the Raspberry Pi OS distribution, Linux-based temperature measurements can be inaccurate. However, the `vcgencmd` command provides an accurate and instantaneous reading of the current SoC temperature, as it communicates with the GPU directly:
 
 ```
-from gpiozero import LED
-from time import sleep
-
-led = LED(17)
-
-while True:
-    led.on()
-    sleep(1)
-    led.off()
-    sleep(1)
+$ vcgencmd measure_temp
 ```
 
-在类似 Thonny 的 IDE 中运行此代码，LED 将会重复闪烁。
+### Add heat sinks
 
-LED 方法包括 on() 、 off() 、 toggle() 和 blink() 。
+Thanks to built-in throttling, heatsinks are not necessary to prevent overheating damage to the SoC. However, a heatsink or small fan can reduce thermal throttling and improve performance. Mount the Raspberry Pi vertically for the best airflow and thus slightly improved heat dissipation.
 
-#### 按钮
+### Fan cases
 
-以下示例代码读取连接到 GPIO2 的按钮的状态：
+Raspberry Pi 5 has two official fan options to assist with cooling:
 
-```
-from gpiozero import Button
-from time import sleep
+* [Active Cooler](https://www.raspberrypi.com/products/active-cooler/)
+* [Case for Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5-case/)
 
-button = Button(2)
+Both of these plug into the four-pin JST-SH PWM fan connector located in the upper right of the board between the 40-pin GPIO header and the USB 2 ports. The fan connector pulls from the same current limit as USB peripherals. We recommend the Active Cooler case for overclockers, since it provides better cooling performance.
 
-while True:
-    if button.is_pressed:
-        print("Pressed")
-    else:
-        print("Released")
-    sleep(1)
-```
+Both of the available official accessories are actively managed by Raspberry Pi firmware. As the temperature of the Raspberry Pi increases, the fan reacts in the following way:
 
-按钮功能包括属性 is_pressed 和 is_held ；回调 when_pressed ， when_released 和 when_held ；以及方法 wait_for_press() 和 wait_for_release 。
+* below 50°C, the fan does not spin at all (0% speed)
+* at 50°C, the fan turns on at a low speed (30% speed)
+* at 60°C, the fan speed increases to a medium speed (50% speed)
+* at 67.5°C, the fan speed increases to a high speed (70% speed)
+* at 75°C the fan increases to full speed (100% speed)
 
-#### 按钮和 LED
+Temperature decreases use the same mapping with a 5°C **hysteresis**; fan speed decreases when the temperature drops to 5°C below each of the above thresholds.
 
-以下示例代码读取连接到 GPIO2 的按钮的状态，并在按下按钮时点亮连接到 GPIO17 的 LED。
+At boot the fan is turned on, and the tachometer input is checked to see if the fan is spinning. If it is, then the `cooling_fan` device tree overlay is enabled. This overlay is in `bcm2712-rpi-5-b.dtb` by default, but with `status=disabled`.
 
-```
-from gpiozero import LED, Button
+#### Fan connector pinout
 
-led = LED(17)
-button = Button(2)
+The fan connector is a 1mm pitch JST-SH socket containing the following four pins:
 
-while True:
-    if button.is_pressed:
-        led.on()
-    else:
-        led.off()
-```
+| Pin | Function | Wire colour |
+| ----- | ---------- | ------------- |
+| 1   | +5V      | Red         |
+| 2   | PWM      | Blue        |
+| 3   | GND      | Black       |
+| 4   | Tach     | Yellow      |
 
- 或者：
+## Raspberry Pi boot EEPROM
 
-```
-from gpiozero import LED, Button
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/boot-eeprom.adoc)
 
-led = LED(17)
-button = Button(2)
+Raspberry Pi 5, Raspberry Pi 4, 400, Compute Module 4, and Compute Module 4S computers use an EEPROM to boot the system. All other models of Raspberry Pi computer use the `bootcode.bin` file located in the boot filesystem.
 
-while True:
-    button.wait_for_press()
-    led.on()
-    button.wait_for_release()
-    led.off()
-```
+| NOTE | You can find the scripts and pre-compiled binaries used to create `rpi-eeprom` in the [rpi-eeprom GitHub repository](https://github.com/raspberrypi/rpi-eeprom/). |
+| ------ | ----------------------------------------------------------------------------- |
 
- 或：
+### Boot diagnostics
 
-```
-from gpiozero import LED, Button
+If an error occurs during boot, then an [error code](https://www.raspberrypi.com/documentation/computers/configuration.html#led-warning-flash-codes) will be displayed via the green LED. Newer versions of the bootloader will display a [diagnostic message](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#boot-diagnostics-on-the-raspberry-pi-4) which will be shown on both HDMI displays.
 
-led = LED(17)
-button = Button(2)
+### Update the bootloader
 
-button.when_pressed = led.on
-button.when_released = led.off
-```
+There are multiple ways to update the bootloader of your Raspberry Pi.
 
-#### 深入探讨
+#### Raspberry Pi 5, Raspberry Pi 4 and Raspberry Pi 400
 
-![](https://www.raspberrypi.com/documentation/computers/images/simple-electronics-with-gpio-zero.jpg)[https://github.com/raspberrypipress/released-pdfs/raw/main/simple-electronics-with-gpio-zero.pdf](https://github.com/raspberrypipress/released-pdfs/raw/main/simple-electronics-with-gpio-zero.pdf)
+Raspberry Pi OS automatically updates the bootloader for important bug fixes. To manually update the bootloader or change the boot order, use [raspi-config](https://www.raspberrypi.com/documentation/computers/configuration.html#raspi-config).
 
-您可以在 Raspberry Pi Press 的《使用 GPIO Zero Python 库的简单电子学》一书中找到有关如何使用 GPIO Zero Python 库编程连接到您树莓派的更多信息。该书将带您开始使用 GPIO Zero 库，并通过构建一系列项目来指导您如何使用它。
+#### Use Raspberry Pi Imager to update the bootloader
 
-您可以免费下载这本书的 PDF 文件，它已根据知识共享署名-非商业性使用-相同方式共享 3.0 未本地化版本（CC BY NC-SA）许可发布。
+Raspberry Pi Imager provides a GUI for updating the bootloader and selecting the boot mode.
 
-## 框图和机械图纸
+1. Download [Raspberry Pi Imager](https://www.raspberrypi.com/software/)
+2. Select a spare SD card (bootloader images overwrite the entire card)
+3. Launch Raspberry Pi Imager
+4. Select `Choose OS`
+5. Select `Misc utility images`
+    ![Select Misc utility images](https://www.raspberrypi.com/documentation/computers/images/misc-utility-images.png?hash=662b949f2e370649419c8efc7fc522f4)
+6. Select `Bootloader` for your version of Raspberry Pi (Pi 400 is part of the 4 family)
+    ![Choose a family for your bootloader](https://www.raspberrypi.com/documentation/computers/images/bootloader-family-select.png?hash=26cda00ff3f46580eac44af916437614)
+7. Select a boot mode: `SD` (recommended), `USB` or `Network`
+    ![Choose the storage from which you’d like to boot](https://www.raspberrypi.com/documentation/computers/images/bootloader-storage-select.png?hash=08b572c18e189ab4dd7688838fc0a97b)
+8. Select `SD card` and then `Write`
+9. Click `Yes` to continue
+10. Boot the Raspberry Pi with the new image and wait for at least ten seconds
+11. When the green activity LED blinks with a steady pattern and the HDMI display shows a green screen, you have successfully written the bootloader
+12. Power off the Raspberry Pi and remove the SD card
 
-各种树莓派开发板版本的原理图：
+#### Use `raspi-config` to update the bootloader
 
-### 树莓派 5
+To change the boot-mode or bootloader version from within Raspberry Pi OS, run [raspi-config](https://www.raspberrypi.com/documentation/computers/configuration.html#raspi-config).
 
-* [机械图，PDF](https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-mechanical-drawing.pdf)
-* 树莓派 5 的 STEP 文件
+1. [Update](https://www.raspberrypi.com/documentation/computers/os.html#update-software) Raspberry Pi OS to get the latest version of the `rpi-eeprom` package.
+2. Run `sudo raspi-config`.
+3. Select `Advanced Options`.
+4. Select `Bootloader Version`.
+5. Select `Default` for factory default settings or `Latest` for the latest bootloader release.
+6. Reboot with `sudo reboot`.
 
-### 树莓派 4 Model B
+### Update the bootloader configuration
 
-* [4.0 版本的原理图](https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-reduced-schematics.pdf)
-* [机械图纸，PDF](https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-mechanical-drawing.pdf)
-* [机械图纸，DXF](https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-mechanical-drawing.dxf)
+The `default` version of the bootloader represents the latest factory default firmware image. It updates to provide critical bug fixes, hardware support and periodically after features have been tested in the `latest` release. The `latest` bootloader updates more often to include the latest fixes and improvements.
 
-### 树莓派 3 Model B+
+Advanced users can switch to the `latest` bootloader to get the latest functionality.
 
-* [原理图，版本 1.0](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-plus-reduced-schematics.pdf)
-* [机械图纸，PDF](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-plus-mechanical-drawing.pdf)
-* [机械图纸，DXF](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-plus-mechanical-drawing.dxf)
-* [ 案例图，PDF](https://datasheets.raspberrypi.com/case/raspberry-pi-3-b-plus-case-mechanical-drawing.pdf)
-
-### 树莓派 3 Model B
-
-* [电路图，修订版 1.2](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-reduced-schematics.pdf)
-* [机械图纸，PDF](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-mechanical-drawing.pdf)
-* [机械图纸，DXF](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-mechanical-drawing.dxf)
-
-### 树莓派 2 Model B
-
-* [电路图，版本 1.2](https://datasheets.raspberrypi.com/rpi2/raspberry-pi-2-b-reduced-schematics.pdf)
-
-### 树莓派 1 Model B+
-
-* [电路图，版本 1.2](https://datasheets.raspberrypi.com/rpi/raspberry-pi-b-plus-reduced-schematics.pdf)
-* [机械图纸，PDF](https://datasheets.raspberrypi.com/rpi/raspberry-pi-b-plus-mecahnical-drawing.pdf)
-* [机械图纸，DXF](https://datasheets.raspberrypi.com/rpi/raspberry-pi-b-plus-mecahnical-drawing.dxf)
-
-### 树莓派 3 Model A+
-
-* [原理图，修订版 1.0](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-a-plus-reduced-schematics.pdf)
-* [机械图纸，PDF](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-a-plus-mechanical-drawing.pdf)
-* [ 机箱图纸，PDF](https://datasheets.raspberrypi.com/case/raspberry-pi-3-a-plus-case-mechanical-drawing.pdf)
-
->**注意**
->
->树莓派 3 Model A+ 的机械图也适用于树莓派 1 Model A+。 
-
-### 树莓派 1 Model A+
-
-* [电路图，版本 1.1](https://datasheets.raspberrypi.com/rpi/raspberry-pi-a-plus-reduced-schematics.pdf)
-
-### 树莓派 Zero
-
-* [电路图，版本 1.3](https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-reduced-schematics.pdf)
-* [机械图纸，PDF](https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-mechanical-drawing.pdf)
-* [盒子图纸，PDF - 空盖](https://datasheets.raspberrypi.com/case/raspberry-pi-zero-case-mechanical-drawing.pdf)
-* [盒子图纸，PDF - GPIO 盖](https://datasheets.raspberrypi.com/case/raspberry-pi-zero-case-with-gpio-mechanical-drawing.pdf)
-* [盒子图纸，PDF - 摄像头盖](https://datasheets.raspberrypi.com/case/raspberry-pi-zero-case-with-camera-mechanical-drawing.pdf)
-
-### 树莓派 Zero W
-
-* [电路图，版本 1.1](https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf)
-* [机械图纸，PDF](https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf)
-
-### 树莓派 Zero 2 W
-
-* [ 电路图](https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-reduced-schematics.pdf)
-* [机械图纸，PDF](https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-mechanical-drawing.pdf)
-* [ 测试垫位置](https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-test-pads.pdf)
-
-#### 测试垫位置
-
-树莓派 Zero 2 W 在生产过程中使用了许多测试垫位置。
-
-![zero2 pad diagram](https://www.raspberrypi.com/documentation/computers/images/zero2-pad-diagram.png)
-
-| 标签       | 功能                        | X（距原点的毫米） | 原点处的 Y（毫米） |
-| ------------ | ----------------------------- | ------------------- | -------------------- |
-| STATUS_LED | LED 的电源状态（低 = 开启） | 5.15              | 8.8                |
-| CORE       | 处理器电源                  | 6.3               | 18.98              |
-| RUN        | 连接到 GND 以复位           | 8.37              | 22.69              |
-| 5V         | 5V 输入                     | 8.75              | 11.05              |
-| 5V         | 5V 输入                     | 11.21             | 6.3                |
-| GND        | 地线引脚                    | 10.9              | 3.69               |
-| GND        | 地线引脚                    | 17.29             | 2.41               |
-| USB_DP     | USB 端口                    | 22.55             | 1.92               |
-| USB_DM     | USB 端口                    | 24.68             | 1.92               |
-| OTG        | 在路上 ID 引脚              | 39.9              | 7.42               |
-| 1V8        | 1.8V 模拟供电               | 42.03             | 8.42               |
-| TV         | 复合电视输出                | 45.58             | 3.17               |
-| GND        | 地针                        | 49.38             | 3.05               |
-| GND        | 地针                        | 55.99             | 22.87              |
-| 3V3        | 3.3V I/O 供应               | 48.55             | 22.44              |
-| SD_CLK     | SD 卡时钟引脚               | 60.95             | 18.45              |
-| SD_CMD     | SD 卡命令引脚               | 58.2              | 16.42              |
-| SD_DAT0    | SD 数据引脚                 | 58.13             | 20.42              |
-| SD_DAT1    | SD 数据引脚                 | 60.65             | 21.1               |
-| SD_DAT2    | SD 数据引脚                 | 57.78             | 13.57              |
-| SD_DAT3    | SD 数据引脚                 | 60.8              | 15.22              |
-| BT_ON      | 蓝牙电源状态                | 25.13             | 19.55              |
-| WL_ON      | 无线局域网电源状态          | 27.7              | 19.2               |
-
-## 产品合规性和安全性
-
-所有的树莓派产品均经过了广泛的合规性测试。有关更多信息，请参阅产品信息门户。
-
-### 燃烧性评级
-
-树莓派设备中使用的 PCB 符合 UL94-V0 标准。
-
-
->**注意**
->
->仅适用于 PCB。 
-
-### 树莓派合规支持
-
-旧版支持计划旨在消除导航合规问题的负担，使公司更容易将新产品带给消费者。它提供了访问与我们的树莓派在合规测试期间合作的相同测试工程师的机会，将用户连接到 UL 的专门团队，他们通过对树莓派的深入了解来评估和测试用户的产品。
-
-了解更多关于树莓派合规支持计划。
-
-### 由树莓派提供支持
-
-由树莓派提供支持的 Powered by Raspberry Pi 计划为希望使用 Raspberry Pi 标志形式的公司提供流程，涵盖搭载树莓派计算机或芯片的产品，以及由树莓派提供的服务。如果您希望开始申请流程，可以在线进行。
-
-### 已批准的设计合作伙伴
-
-我们的已批准设计合作伙伴名单提供了一组我们与之密切合作并支持的咨询公司，以便它们可以在硬件、软件和机械领域提供付费设计服务。
-
-## 频率管理和热控制
-
-所有型号的树莓派在高负荷情况下都会执行一定程度的热管理，以避免过热。SoC 具有内部温度传感器，GPU 上的软件会定期轮询以确保温度不超过我们设定的 85°C 的限制。可以将此值设置为较低的值，但不能设置提高此值。当设备接近极限时，芯片（Arm、GPU）上使用的各种频率和有时电压会降低。这样可以减少产生的热量，保持温度在可控范围内。
-
-当核心温度在 80°C 和 85°C 之间时，Arm 核心将逐渐降速。如果温度达到 85°C，Arm 核心和 GPU 都将降速。
-
-对于树莓派 3 Model B+，PCB 技术已经更改，以提供更好的散热和增加热量。此外，引入了软温度限制，旨在最大限度地延长设备在达到 85°C 的硬限制之前可以“冲刺”的时间。当达到软限制时，时钟速度从 1.4GHz 降低到 1.2GHz，并且操作电压略微降低。这减少了温度增加的速度：我们以 1.4GHz 的短暂时期换取了 1.2GHz 的较长时期。默认情况下，软限制为 60°C，可以通过 config.txt 中的 temp_soft_limit 设置进行更改。
-
-树莓派4 Model B 采用与树莓派 3 Model B+ 相同的 PCB 技术，以帮助散热。目前尚未定义软限制。
-
-### 使用 DVFS
-
->**注意**
->
->仅适用于树莓派 4 Model B、树莓派 400 和计算模块 4 的 DVFS 讨论。 
-
-树莓派 4 设备实现动态电压和频率调节（DVFS）。这种技术使树莓派 4 设备能够在提供相同性能的同时以更低的温度运行。
-
-SoC 内部的各种时钟（例如 Arm、Core、V3D、ISP、H264、HEVC）由固件监视，每当它们未以全速运行时，供应给由时钟驱动的芯片特定部分的电压会相对于全速降低。实际上，只提供足够的电压以使块在其运行的特定速度下正确运行。这可能导致 SoC 使用的功率大幅减少，从而减少总体产生的热量。
-
-由于在运行欠电压时可能涉及与使用欠电压固定时钟外设（例如 PCIe）相关的系统稳定性问题，因此有三种 DVFS 模式可供配置，在 /boot/firmware/config.txt 中具有以下属性。大多数系统应该使用 dvfs=3 ，无头系统可能会从 dvfs=1 的小功耗降低中受益，但存在 PCIe 稳定性问题的风险。
-
-| 属性=值 | 说明                                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------------------------- |
-| dvfs=1  | 允许降压                                                                                                                 |
-| dvfs=2  | 默认操作频率的固定电压                                                                                                   |
-| dvfs=3  | 根据需求增加电压以进行超频（默认）。如果 over_voltage 在 config.txt 中指定，则禁用动态电压调节，导致系统恢复到 dvfs=2 。 |
-
->**注意**
->
->该设置已在树莓派 5 上移除，实际上始终处于模式 3。 
-
-另外，还使用了更加分级的 CPU 调度程序来更精细地控制 ARM 核频率，这意味着 DVFS 更加有效。现在的步长为 1500MHz、1000MHz、750MHz 和 600MHz。这些步骤在 SoC 被限制时也会有帮助，意味着很少会出现一直降至 600MHz 的限制，从而在完全负载性能上有所提升。
-
-默认的 CPU 调度程序是 ondemand 。可以使用 cpufreq-set 命令（来自 cpufrequtils 软件包）手动更改调度程序以减少空闲功耗：
-
-```
- sudo apt install cpufrequtils
- sudo cpufreq-set -g powersave
-```
-
-### 测量温度
-
-由于树莓派设备上使用的 SoC 架构，以及树莓派 OS 发行版中使用的上游温度监控代码，基于 Linux 的温度测量可能不准确。然而， vcgencmd 命令提供了当前 SoC 温度的准确和即时读数，因为它直接与 GPU 通信：
-
-```
- vcgencmd measure_temp
-```
-
-### 添加散热片
-
-由于内置节流，不需要散热片来防止 SoC 过热损坏。但是，散热片或小风扇可以减少热节流并提高性能。将树莓派垂直安装以获得最佳气流，从而略微改善散热。
-
-### 风扇外壳
-
-树莓派 5 有两种官方风扇选项可用于辅助冷却：
-
-* [ 主动散热器](https://www.raspberrypi.com/products/active-cooler/)
-* [树莓派 5 机箱](https://www.raspberrypi.com/products/raspberry-pi-5-case/)
-
-这两者都插入到板子右上角的四针 JST-SH PWM 风扇连接器中，位于 40 针 GPIO 引脚排线和 USB 2 端口之间。风扇连接器从与 USB 外设相同的电流限制中提取电流。我们建议超频者使用主动散热器机箱，因为它提供更好的散热性能。
-
-可用的两个官方配件都由树莓派固件进行积极管理。随着树莓派的温度升高，风扇会做出以下反应：
-
-* 在 50°C 以下，风扇根本不转动（0%速度）
-* 在 50°C 时，风扇以低速运转（30%速度）
-* 在 60°C 时，风扇速度增加到中速（50% 速度）
-* 在 67.5°C 时，风扇速度增加到高速（70% 速度）
-* 在 75°C 时，风扇速度增加到全速（100% 速度）
-
-温度降低时，使用相同的映射，带有 5°C 的滞后；当温度降至以上阈值的每个下方 5°C 时，风扇速度降低。
-
-在启动时，风扇会打开，并检查转速输入，以查看风扇是否在旋转。如果是，则启用 cooling_fan 设备树叠加。此叠加默认情况下位于 bcm2712-rpi-5-b.dtb ，但带有 status=disabled 。
-
-#### 风扇连接器引脚分配
-
-风扇连接器是一个 1mm 间距的 JST-SH 插座，包含以下四个引脚：
-
-| 引脚 | 功能 | 电线颜色 |
-| ------ | ------ | ---------- |
-| 1    | +5V  | 红色     |
-| 2    | PWM  | 蓝色     |
-| 3    | GND  | 黑色     |
-| 4    | 转速 | 黄色     |
-
-## 树莓派引导 EEPROM
-
-树莓派 5，树莓派 4，400，计算模块 4 和计算模块 4S 计算机使用 EEPROM 引导系统。树莓派计算机的所有其他型号使用位于引导文件系统中的 bootcode.bin 文件。
-
->**注意**
->
->您可以在 rpi-eeprom GitHub 存储库中找到用于创建 rpi-eeprom 的脚本和预编译的二进制文件。
-
-### 启动诊断
-
-如果在启动过程中发生错误，则将通过绿色 LED 显示错误代码。较新版本的引导加载程序将显示诊断消息，该消息将显示在两个 HDMI 显示器上。
-
-### 更新引导程序
-
-有多种方法可以更新您的树莓派的引导程序。
-
-#### 树莓派 5，树莓派 4 和 树莓派 400
-
-Raspberry Pi OS 会自动更新引导加载程序以进行重要的错误修复。手动更新引导加载程序或更改引导模式的推荐方法是使用 Raspberry Pi Imager 和 raspi-config。
-
-#### 使用 Raspberry Pi Imager 更新引导加载程序
-
-Raspberry Pi Imager 提供了一个 GUI，用于更新引导加载程序和选择引导模式。
-
-* 下载 Raspberry Pi Imager
-* 选择一个备用的 SD 卡（引导加载程序映像会覆盖整个卡）
-* 启动 Raspberry Pi Imager
-* 选择 Choose OS
-* 选择 Misc utility images ![Select Misc utility images](https://www.raspberrypi.com/documentation/computers/images/misc-utility-images.png)
-* 为您的树莓派版本选择 Bootloader （Pi 400 是 4 系列的一部分）![Choose a family for your bootloader](https://www.raspberrypi.com/documentation/computers/images/bootloader-family-select.png)
-* 选择引导模式： SD （推荐）， USB 或 Network ![Choose the storage from which you’d like to boot](https://www.raspberrypi.com/documentation/computers/images/bootloader-storage-select.png)
-* 选择 SD card 然后 Write
-* 点击 Yes 继续
-* 使用新镜像启动树莓派并等待至少十秒
-* 当绿色活动 LED 以稳定的模式闪烁且 HDMI 显示器显示绿屏时，您已成功写入引导程序
-* 关闭树莓派并取出 SD 卡
-
-#### 使用 raspi-config 更新引导加载程序
-
-要在 Raspberry Pi OS 内部更改引导模式或引导加载程序版本，请运行 raspi-config。
-
-* 更新 Raspberry Pi OS 以获取 rpi-eeprom 软件包的最新版本
-* 运行 sudo raspi-config
-* 选择 Advanced Options
-* 选择 Bootloader Version
-* 选择 Default 以恢复出厂设置，或选择 Latest 以获取最新的引导加载程序版本。
-* 重新启动
-
-### 更新引导加载程序配置
-
-default 版本的引导加载程序代表最新的出厂默认固件映像。它会更新以提供关键的错误修复，硬件支持，并在 latest 版本中经过测试后定期提供功能。 latest 引导加载程序更新更频繁，以包括最新的修复和改进。
-
-高级用户可以切换到 latest 引导加载程序以获得最新功能。
-
-打开命令提示符并启动 raspi-config 。
+Run the following command to start `raspi-config`.
 
 ```
 $ sudo raspi-config
 ```
 
-转到 Advanced Options ，然后选择 Bootloader Version 。选择 Latest 并选择 Yes 以确认。选择 Finish 并确认要重新启动。重新启动后，再次打开命令提示符并更新您的系统：
+Navigate to `Advanced Options` and then `Bootloader Version`. Select `Latest` and choose `Yes` to confirm. Select `Finish` and confirm you want to reboot. After the reboot, open a command prompt again and update your system:
 
 ```
 $ sudo apt update
 ```
 
-如果运行 sudo rpi-eeprom-update ，您会看到一个更新的引导加载程序版本可用，它是 latest 版本。
+If you run `sudo rpi-eeprom-update`, you should see that a more recent version of the bootloader is available and it’s the `latest` release.
 
 ```
 *** UPDATE AVAILABLE ***
@@ -454,14 +380,14 @@ BOOTLOADER: update available
     LATEST: 000138c0
 ```
 
-现在您可以更新您的引导加载程序。
+Now you can update your bootloader.
 
 ```
 $ sudo rpi-eeprom-update -a
 $ sudo reboot
 ```
 
-重新启动，然后运行 sudo rpi-eeprom-update 。现在，您应该看到 CURRENT 日期已更新为引导加载程序的最新版本：
+Reboot, then run `sudo rpi-eeprom-update`. You should now see that the `CURRENT` date has updated to the latest version of the bootloader:
 
 ```
 BOOTLOADER: up to date
@@ -476,123 +402,123 @@ BOOTLOADER: up to date
     LATEST: 000138c0
 ```
 
-#### 读取当前引导加载程序配置
+#### Read the current bootloader configuration
 
-要查看当前运行引导加载程序使用的配置，请运行：
+To view the configuration used by the current running bootloader, run the following command:
 
-* `rpi-eeprom-config`
+```
+$ rpi-eeprom-config
+```
 
-#### 从引导加载程序映像中读取配置
+#### Read the configuration from an bootloader image
 
-从引导加载程序映像中读取配置：
+To read the configuration from a bootloader image:
 
 ```
 $ rpi-eeprom-config pieeprom.bin
 ```
 
-#### 编辑当前引导加载程序配置
+#### Editing the current bootloader configuration
 
-以下命令将当前引导加载程序配置加载到文本编辑器中。当编辑器关闭时， rpi-eeprom-config 将更新后的配置应用于最新可用的引导加载程序版本，并使用 rpi-eeprom-update 在系统重新启动时安排更新：
+The following command loads the current bootloader configuration into a text editor. When the editor is closed, `rpi-eeprom-config` applies the updated configuration to latest available bootloader release and uses `rpi-eeprom-update` to schedule an update when the system is rebooted:
 
 ```
 $ sudo -E rpi-eeprom-config --edit
 $ sudo reboot
 ```
 
-如果更新后的配置相同或为空，则不会进行任何更改。
+If the updated configuration is identical or empty, then no changes are made.
 
-编辑器由环境变量 EDITOR 决定。
+The editor is selected by the `EDITOR` environment variable.
 
-#### 应用已保存的配置
+#### Applying a saved configuration
 
-以下命令将 boot.conf 应用于最新可用的引导加载程序映像，并使用 rpi-eeprom-update 在系统重新启动时安排更新。
+The following command applies `boot.conf` to the latest available bootloader image and uses `rpi-eeprom-update` to schedule an update when the system is rebooted.
 
 ```
 $ sudo rpi-eeprom-config --apply boot.conf
 $ sudo reboot
 ```
 
-### 自动更新
+### Automatic updates
 
-rpi-eeprom-update systemd 服务在启动时运行，并在有新镜像可用时应用更新，自动迁移当前的引导加载程序配置。
+The `rpi-eeprom-update` `systemd` service runs at startup and applies an update if a new image is available, automatically migrating the current bootloader configuration.
 
-要禁用自动更新：
+To disable automatic updates:
 
 ```
 $ sudo systemctl mask rpi-eeprom-update
 ```
 
-要重新启用自动更新：
+To re-enable automatic updates:
 
 ```
 $ sudo systemctl unmask rpi-eeprom-update
 ```
 
->**注意**
->
->如果设置了 FREEZE_VERSION bootloader 配置，则更新服务将跳过任何自动更新。这样可以避免在安装了多个操作系统或交换 SD 卡时需要逐个禁用更新服务。 
+| NOTE | If the [FREEZEVERSION](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#FREEZE_VERSION) bootloader config is set then the update service will skip any automatic updates. This removes the need to individually disable the update service if there are multiple operating systems installed, or when swapping SD cards. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 #### `rpi-eeprom-update`
 
-Raspberry Pi OS 使用 rpi-eeprom-update 脚本来实现自动更新服务。该脚本也可以交互式运行，或者包装成自定义 bootloader 更新服务。
+Raspberry Pi OS uses the `rpi-eeprom-update` script to implement an [automatic update](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#automaticupdates) service. The script can also be run interactively or wrapped to create a custom bootloader update service.
 
-读取当前 bootloader 版本：
+Reading the current bootloader version:
 
 ```
 $ vcgencmd bootloader_version
 ```
 
-检查是否有可用更新：
+Check if an update is available:
 
 ```
 $ sudo rpi-eeprom-update
 ```
 
- 安装更新：
+Install the update:
 
 ```
 $ sudo rpi-eeprom-update -a
 $ sudo reboot
 ```
 
-取消待定更新：
+Cancel the pending update:
 
 ```
 $ sudo rpi-eeprom-update -r
 ```
 
-安装特定的引导加载程序映像：
+Installing a specific bootloader image:
 
 ```
 $ sudo rpi-eeprom-update -d -f pieeprom.bin
 ```
 
-参数 `-d` 指示 rpi-eeprom-update 使用指定的映像文件中的配置，而不是自动迁移当前配置。
+The `-d` flag instructs `rpi-eeprom-update` to use the configuration in the specified image file instead of automatically migrating the current configuration.
 
-显示内置文档：
+Display the built-in documentation:
 
 ```
 $ rpi-eeprom-update -h
 ```
 
-### 引导加载程序发布状态
+### Bootloader release status
 
-固件发布状态对应于引导加载程序固件映像的特定子目录（ /lib/firmware/raspberrypi/bootloader/... ），可以更改以选择不同的发布流。
+The firmware release status corresponds to a particular subdirectory of bootloader firmware images (`/lib/firmware/raspberrypi/bootloader/...`), and can be changed to select a different release stream.
 
-* default - 为新硬件支持、关键错误修复和通过 latest 发布测试的新功能的定期更新进行更新
-* 当新功能可用时更新
+* `default` - Updated for new hardware support, critical bug fixes and periodic update for new features that have been tested via the `latest` release
+* `latest` - Updated when new features are available
 
-由于发布状态字符串只是一个子目录名称，因此可以创建自己的发布流，例如固定的发布或自定义网络引导配置。
+Since the release status string is just a subdirectory name, it is possible to create your own release streams e.g. a pinned release or custom network boot configuration.
 
-#### 更改引导加载程序版本
+#### Changing the bootloader release
 
->**注意**
->
->您可以通过编辑 /etc/default/rpi-eeprom-update 文件并将 FIRMWARE_RELEASE_STATUS 条目更改为适当的流来更改更新期间要使用的发布流。 
+| NOTE | You can change which release stream is to be used during an update by editing the `/etc/default/rpi-eeprom-update` file and changing the `FIRMWARE_RELEASE_STATUS` entry to the appropriate stream. |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
 
-#### 在引导加载程序映像文件中更新引导加载程序配置
+#### Updating the bootloader configuration in an bootloader image file
 
-以下命令将 pieeprom.bin 中的引导加载程序配置替换为 boot.conf ，并将新映像写入 new.bin ：
+The following command replaces the bootloader configuration in `pieeprom.bin` with `boot.conf` and writes the new image to `new.bin`:
 
 ```
 $ rpi-eeprom-config --config boot.conf --out new.bin pieeprom.bin
@@ -600,1088 +526,328 @@ $ rpi-eeprom-config --config boot.conf --out new.bin pieeprom.bin
 
 #### `recovery.bin`
 
-在上电后，BCM2711 和 BCM2712 上的 ROM 会在 SD 卡的引导分区的根目录中查找名为 recovery.bin 的文件。如果找到有效的 recovery.bin ，则 ROM 会执行该文件，而不是 EEPROM 的内容。这种机制可确保引导加载程序闪存映像始终可以重置为具有出厂默认设置的有效映像。
+At power on, the ROM found on BCM2711 and BCM2712 looks for a file called `recovery.bin` in the root directory of the boot partition on the SD card. If a valid `recovery.bin` is found then the ROM executes this instead of the contents of the EEPROM. This mechanism ensures that the bootloader flash image can always be reset to a valid image with factory default settings.
 
-另请参阅树莓派引导流程
+For more information, see [EEPROM bootflow](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#eeprom-boot-flow).
 
-#### 引导加载程序更新文件
+#### Bootloader update files
 
-| 文件名 | 目的                                                                           |
-| -------- | -------------------------------------------------------------------------------- |
-| `recovery.bin`       | 引导加载程序恢复可执行文件                                                     |
-| `pieeprom.upd`       | 引导加载程序 EEPROM 映像                                                       |
-| `pieeprom.bin`       | 引导加载程序 EEPROM 映像 - 与 pieeprom.upd 相同，但更改了 recovery.bin 的行为  |
-| `pieeprom.sig`       | bootloader 镜像（pieeprom.upd/pieeprom.bin）的 sha256 校验和                   |
-| `vl805.bin`       | VLI805 USB 固件 EEPROM 镜像 - 仅适用于树莓派 4B 修订版 1.3 及更早版本。 |
-| `vl805.sig`       | vl805.bin 的 sha256 校验和                                                     |
+| Filename | Purpose                                                                               |
+| ---------- | --------------------------------------------------------------------------------------- |
+| `recovery.bin`         | Bootloader recovery executable                                                        |
+| `pieeprom.upd`         | Bootloader EEPROM image                                                               |
+| `pieeprom.bin`         | Bootloader EEPROM image - same as pieeprom.upd but changes recovery.bin behaviour     |
+| `pieeprom.sig`         | The sha256 checksum of bootloader image (pieeprom.upd/pieeprom.bin)                   |
+| `vl805.bin`         | The VLI805 USB firmware EEPROM image - Raspberry Pi 4B revision 1.3 and earlier only. |
+| `vl805.sig`         | The sha256 checksum of vl805.bin                                                      |
 
-* 如果引导加载程序更新映像名为 pieeprom.upd ，则更新完成后， recovery.bin 将重命名为 recovery.000 ，然后系统将重新启动。由于 recovery.bin 不再存在，ROM 将从 SPI 闪存加载新更新的引导加载程序，操作系统将正常启动。
-* 如果引导加载程序更新映像名为 pieeprom.bin ，则更新完成后 recovery.bin 将停止。成功后，HDMI 输出将变为绿色，绿色活动指示灯将快速闪烁。如果更新失败，HDMI 输出将变为红色，并通过活动指示灯显示错误代码。
-* .sig 文件包含相应映像文件的十六进制 sha256 校验和；将来可能会添加其他字段。
-* BCM2711 和 BCM2712 上找到的 ROM 不支持从 USB 大容量存储器或 TFTP 加载 recovery.bin 。相反，更新版本的引导加载程序支持自更新机制，其中引导加载程序能够重新刷新 SPI 闪存本身。请参阅引导加载程序配置页面上的 ENABLE_SELF_UPDATE 。
-* 临时 EEPROM 更新文件会在启动时由 rpi-eeprom-update 服务自动删除。
+* If the bootloader update image is called `pieeprom.upd` then `recovery.bin` is renamed to `recovery.000` once the update has completed, then the system is rebooted. Since `recovery.bin` is no longer present the ROM loads the newly updated bootloader from SPI flash and the OS is booted as normal.
+* If the bootloader update image is called `pieeprom.bin` then `recovery.bin` will stop after the update has completed. On success the HDMI output will be green and the green activity LED is flashed rapidly. If the update fails, the HDMI output will be red and an [error code](https://www.raspberrypi.com/documentation/computers/configuration.html#led-warning-flash-codes) will be displayed via the activity LED.
+* The `.sig` files contain the hexadecimal sha256 checksum of the corresponding image file; additional fields may be added in the future.
+* The ROM found on BCM2711 and BCM2712 does not support loading `recovery.bin` from USB mass storage or TFTP. Instead, newer versions of the bootloader support a self-update mechanism where the bootloader is able to reflash the SPI flash itself. See `ENABLE_SELF_UPDATE` on the [bootloader configuration](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-bootloader-configuration) page.
+* The temporary EEPROM update files are automatically deleted by the `rpi-eeprom-update` service at startup.
 
-有关 rpi-eeprom-update 配置文件的更多信息，请参阅 rpi-eeprom-update -h 。
+For more information about the `rpi-eeprom-update` configuration file see `rpi-eeprom-update -h`.
 
-#### EEPROM 写保护
+#### EEPROM write protect
 
-引导加载程序和 VLI EEPROM 都支持硬件写保护。有关在刷新 EEPROM 时如何启用此功能的更多信息，请参阅 eeprom_write_protect 选项。
+Both the bootloader and VLI EEPROMs support hardware write protection. See the [`eeprom\_write\_protect`](https://www.raspberrypi.com/documentation/computers/config_txt.html#eeprom_write_protect) option for more information about how to enable this when flashing the EEPROMs.
 
-## 树莓派 4 上的启动诊断
+## Boot diagnostics on the Raspberry Pi 4
 
-从 树莓派 4 bootloader 的 2020-04-16 版本开始，诊断信息可以在 HDMI 显示器上显示。要查看此诊断信息，请关闭树莓派 4，取出 SD 卡，然后重新上电。应该在连接的显示器上出现类似下面的诊断显示。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/boot-eeprom-diagnostics.adoc)
 
-![Boot diagnostics screen](https://www.raspberrypi.com/documentation/computers/images/bootloader-diagnostics.png)
+Starting with version 2020-04-16 of the Raspberry Pi 4 bootloader, diagnostic information can be displayed at boot time on an HDMI display. To see this diagnostic information, power down the Raspberry Pi 4, remove the SD card, then power back up. A diagnostic display similar to below should appear on the attached display.
 
-如果引导加载程序无法从插入的 SD 卡引导，或无法进行网络引导，则还会出现此诊断页面；例如，如果卡上没有可引导的映像，或者卡有缺陷，或者网络引导参数不正确。
+![Boot diagnostics screen](https://www.raspberrypi.com/documentation/computers/images/bootloader-diagnostics.png?hash=474195e522544fb421403622e269ab1b)
 
-一旦显示诊断页面，只能通过重新循环设备的电源（即拔掉电源然后重新插上）来重新启动。
+This diagnostics page will also appear if the bootloader is unable to boot from an inserted SD card, or is unable to network boot; for example, if there is no bootable image on the card, or if it is defective, or if the network boot parameters are incorrect.
 
-树莓派型号及其内存容量的顶部行描述。QR 码是指向下载页面的链接。
+Once the diagnostics page is displayed, a reboot is only possible by power cycling the device (i.e. unplug then re-plug the power supply).
 
-诊断信息如下：
+The top line describes the model of Raspberry Pi and its memory capacity. The QR code is a link to the [downloads page](https://www.raspberrypi.com/software/).
 
-| 行：         | 信息                                                                                                                        |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| 引导加载程序 | 引导加载程序 git 版本 - RO（如果 EEPROM 受写保护）- 软件构建日期                                                            |
-| 更新时间戳   | EEPROM 配置更新的时间戳。在自更新模式中检查此时间戳，以避免更新到旧配置。                                                   |
-| 安全启动     | 如果启用了安全启动，则会显示处理器版本（B0/C0）和已签名启动状态标志。否则，此行为空白。                                     |
-| 板           | 板修订版 - 序列号 - 以太网 MAC 地址                                                                                         |
-| 引导         | 模式（当前引导模式名称和编号）顺序（BOOT ORDER 配置）重试（当前引导模式中的重试次数）重新启动（引导模式列表中的循环次数）。 |
-| SD           | SD 卡检测状态（已检测/未检测）。                                                                                            |
-| 部分         | 主引导记录主分区类型：LBA。                                                                                                 |
-| 防火墙       | 如果存在，请提供 start.elf 和 fixup.dat 的文件名（例如 start4x.elf ， fixup4x.dat ）。                                      |
-| 网络         | 网络引导：链接状态（上/下），客户端 IP 地址（IP），子网（SN），默认网关（GW）                                               |
-| tftp         | 网络引导：TFTP 服务器 IP 地址                                                                                               |
-| 显示         | 指示是否检测到热插拔（ HPD=1 ），以及每个 HDMI 输出是否成功读取了 EDID。                                                    |
+The diagnostic information is as follows:
 
-可以使用 DISABLE_HDMI 选项禁用此显示器，请参阅引导加载程序配置。
+| Line | Information                                                                                                                                             |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bootloader`     | Bootloader git version - RO (if EEPROM is write protected) - software build date                                                                        |
+| `update-ts`     | The timestamp corresponding to when the EEPROM configuration was updated. This timestamp is checked in [self-update](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#ENABLE_SELF_UPDATE) mode to avoid updating to an old configuration. |
+| `secure-boot`     | If [secure-boot](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#secure-boot) is enabled, then the processor revision (B0/C0) and [signed-boot status flags](https://www.raspberrypi.com/documentation/computers/configuration.html#part4) are displayed. Otherwise, this line is blank.                                                  |
+| `board`     | [Board revision](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-revision-codes) - serial number - Ethernet MAC address                                                                                                                 |
+| `boot`     | **mode** (current boot mode name and number) **order** (the [BOOT ORDER](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#BOOT_ORDER) configuration) **retry** (retry count in the current boot mode) **restart** (number of cycles through the list of boot modes).  |
+| `SD`     | The SD card detect status (detected/not detected).                                                                                                      |
+| `part`     | Master Boot Record primary partitions type:LBA.                                                                                                         |
+| `fw`     | Filename for `start.elf` and `fixup.dat` if present (e.g. `start4x.elf`, `fixup4x.dat`).                                                                                                                |
+| `net`     | Network boot: link status (up/down), client IP address (ip), subnet (sn), default gateway (gw)                                                          |
+| `tftp`     | Network boot: TFTP server IP address                                                                                                                    |
+| `display`     | Indicates whether hotplug was detected (`HPD=1`) and if so whether the EDID was read successfully (`EDID=ok`) for each HDMI output.                                     |
 
->**注意**
->
->这仅用于诊断引导失败；这不是交互式引导加载程序。如果您需要交互式引导加载程序，请考虑使用 U-Boot 等工具。
+This display can be disabled using the `DISABLE_HDMI` option, see [Bootloader configuration](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-bootloader-configuration).
 
-## 树莓派启动模式
+| NOTE | This is purely for diagnosing boot failures; it is not an interactive bootloader. If you require an interactive bootloader, consider using a tool such as U-Boot. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-树莓派有许多不同的启动阶段。本文解释了启动模式的工作原理，以及哪些模式适用于 Linux 启动。
+## Raspberry Pi boot modes
 
-### 特殊 bootcode.bin -only 启动模式
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/bootmodes.adoc)
 
-基于 BCM2837 的树莓派（即树莓派 2B 版本 1.2、树莓派 3B 和 树莓派 3B+）可以执行 USB 主机和以太网引导（由于树莓派 3A+没有内置以太网接口，因此无法进行网络引导）。此外，所有旧版树莓派型号在树莓派4 之前可以使用仅 bootcode.bin 方法启用 USB 主机引导。
+The Raspberry Pi has a number of different stages of booting. This document explains how the boot modes work, and which ones are supported for Linux booting.
 
->**注意**
->
->树莓派 4 和 5 不使用 bootcode.bin 文件。他们的引导加载程序位于板载 EEPROM 芯片中。请参阅有关树莓派引导流程和 SPI 引导 EEPROM 的文档。
+### Special `bootcode.bin`-only boot mode
 
-将 SD 卡格式化为 FAT32 并复制最新的 bootcode.bin 到 SD 卡上。SD 卡必须放在树莓派中才能引导。在从 SD 卡加载了 bootcode.bin 后，树莓派将继续使用 USB 主机模式引导。
+USB host and Ethernet boot can be performed by BCM2837-based Raspberry Pis - that is, Raspberry Pi 2B version 1.2, Raspberry Pi 3B, and Raspberry Pi 3B+ (Raspberry Pi 3A+ cannot net boot since it does not have a built-in Ethernet interface). In addition, all Raspberry Pi models prior to Raspberry Pi 4 can use a `bootcode.bin`-only method to enable USB host boot.
 
-这对基于 BCM2835 和 BCM2836 芯片的树莓派 1、2 和 Zero 型号非常有用，在树莓派 3 无法启动的情况下（与烧录到 BCM2837A0 的引导代码相比，最新的 bootcode.bin 包含了额外的错误修复）。
+| NOTE | Since Raspberry Pi 4, flagship devices do not use the `bootcode.bin` file. Instead, these devices use a bootloader located in an on-board EEPROM chip. For more information, see the documentation on [EEPROM bootflow](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#eeprom-boot-flow) and [SPI boot EEPROM](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-boot-eeprom). |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
-如果您遇到大容量存储设备仍无法工作的问题，即使使用了这个 bootcode.bin，那么请在 SD 卡上添加一个名为"timeout"的新文件。这将使其等待大容量存储设备初始化的时间延长到六秒。
+Format an SD card as FAT32 and copy over the latest [`bootcode.bin`](https://github.com/raspberrypi/firmware/blob/master/boot/bootcode.bin). The SD card must be present in the Raspberry Pi for it to boot. Once `bootcode.bin` is loaded from the SD card, the Raspberry Pi continues booting using USB host mode.
 
-### bootcode.bin UART 启用
+This is useful for the Raspberry Pi 1, 2, and Zero models, which are based on the BCM2835 and BCM2836 chips, and in situations where a Raspberry Pi 3 fails to boot (the latest `bootcode.bin` includes additional bugfixes for the Raspberry Pi 3B, compared to the boot code burned into the BCM2837A0).
 
->**注意**
->
->适用于早于树莓派 4 Model B 的主板。 
+If you have a problem with a mass storage device still not working, even with this `bootcode.bin`, then add a new file called "timeout" to the SD card. This will extend to six seconds the time for which it waits for the mass storage device to initialise.
 
-有关在树莓派 4 bootloader 上启用 UART 的信息，请参阅 bootloader 配置文档。
+### `bootcode.bin` UART Enable
 
-可以启用早期阶段的 UART 来调试启动问题（与上述 bootcode.bin 仅引导模式一起使用很有用）。要做到这一点，请确保您有最新版本的固件（包括 bootcode.bin）。要检查当前固件是否支持 UART：
+| NOTE | For boards released prior to Raspberry Pi 4. |
+| ------ | ---------------------------------------------- |
 
-```
- strings bootcode.bin | grep BOOT_UART
-```
+For information on enabling UART with the EEPROM bootloader, see the [bootloader configuration](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-bootloader-configuration) documentation.
 
-从 bootcode.bin 启用 UART：
+It is possible to enable an early stage UART to debug booting issues (useful with the above `bootcode.bin` only boot mode). To do this, make sure you’ve got a recent version of the firmware (including `bootcode.bin`). To check if UART is supported in your current firmware:
 
 ```
-sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" bootcode.bin
+$ strings bootcode.bin | grep BOOT_UART
 ```
 
-接下来，将合适的 USB 串口线连接到您的主机计算机（树莓派将起作用，尽管您可能会发现，最简单的方法是使用 USB 串口线，因为它可以在无需任何烦人的 config.txt 设置的情况下立即使用）。在树莓派或计算模块上使用标准引脚 6、8 和 10（GND、GPIO14、GPIO15）。
-
-然后在 Linux 或 Mac 上使用 screen ，或在 Windows 上使用 putty 连接到串口。
-
-设置串口以接收 115200-8-N-1，并启动您的树莓派。您应该在设备上立即收到来自 bootcode.bin 的串行输出。
-
-## 启动顺序
-
->**重要**
->
->以下启动顺序仅适用于基于 BCM2837 和 BCM2837B0 的树莓派型号。在此之前的型号上，树莓派将尝试 SD 卡引导，然后是 USB 设备模式引导。有关树莓派 4 和树莓派 5 的引导顺序，请参阅树莓派i 4 和树莓派 5 引导流程部分。 
-
-树莓派 3 上的 USB 启动默认取决于使用的版本。有关在默认情况下未启用时启用 USB 启动模式的信息，请参阅此页面。
-
-当 BCM2837 启动时，它使用两个不同的源来确定要启用哪些启动模式。首先，检查一次可编程（OTP）存储器块，以查看启用了哪些启动模式。如果启用了 GPIO 启动模式设置，则会测试相关的 GPIO 线以选择应尝试哪些已在 OTP 中启用的启动模式。请注意，GPIO 启动模式只能用于选择已在 OTP 中启用的启动模式。有关配置 GPIO 启动模式的详细信息，请参阅 GPIO 启动模式。默认情况下，GPIO 启动模式已禁用。
-
-接下来，引导 ROM 会检查每个引导源是否存在名为 bootcode.bin 的文件；如果成功，它将将代码加载到本地 128K 缓存中并跳转到该代码。总体引导模式流程如下：
-
-* BCM2837 引导
-* 读取 OTP 以确定要启用的引导模式
-* 如果启用了 GPIO 引导模式，请使用 GPIO 引导模式来优化已启用的引导模式列表
-* 如果启用：检查 GPIO 48-53 上的主要 SD 卡上的 bootcode.bin
-  * 成功 - 启动
-  * 失败 - 超时（五秒）
-* 如果启用：检查次要 SD
-  * 成功 - 启动
-  * 失败 - 超时（五秒）
-* 如果启用：检查 NAND
-* 如果启用：检查 SPI
-* 如果启用：检查 USB
-  * 如果 OTG 引脚== 0
-    * 启用 USB，等待有效的 USB 2.0 设备（两秒）
-      * 发现设备：
-        * 如果设备类型 == hub
-          * 递归每个端口
-        * 如果设备类型 == (大容量存储或 LAN951x)
-          * 存储在设备列表中
-    * 通过每个 MSD 进行递归
-      * 如果找到 bootcode.bin，则启动
-    * 通过每个 LAN951x 进行递归
-      * DHCP / TFTP 引导
-  * 其他（设备模式引导）
-    * 启用设备模式并等待主机 PC 枚举
-    * 我们使用 VID: 0a5c PID: 0x2763（树莓派 1 或树莓派 2）或 0x2764（树莓派 3）回复 PC
-
->**注意**
->
->如果没有插入 SD 卡，则 SD 启动模式需要五秒钟才能失败。为了减少这一时间并更快地回退到 USB，您可以插入一个空 SD 卡，或者使用上面描述的 GPIO 启动模式 OTP 设置来仅启用 USB。GPIO 的默认拉电定义在 ARM 外设数据手册的第 102 页。如果在启动时的值不等于默认拉电，则启用该启动模式。USB 枚举是一种启用下游设备在集线器上的电源，然后等待设备拉动 D+ 和 D- 线以指示其是 USB 1 还是 USB 2 的方法。这可能需要时间：对于某些设备，硬盘驱动器可能需要长达三秒才能启动并开始枚举过程。因为这是检测硬件连接的唯一方法，我们必须等待最短时间（两秒）。如果设备在此最大超时后仍未响应，则可以使用 program_usb_boot_timeout=1 在 config.txt 中将超时增加到五秒。*MSD 启动优先于以太网启动。不再需要第一个分区是 FAT 分区，因为 MSD 启动将继续搜索第一个分区之外的 FAT 分区。引导 ROM 现在还支持 GUID 分区，并已经测试了使用 Mac、Windows 和 Linux 分区的硬盘。*使用供应商 ID 0x0424 和产品 ID 0xec00 检测 LAN951x，这与独立的 LAN9500 设备不同，后者的产品 ID 为 0x9500 或 0x9e00。要使用独立的 LAN9500，需要添加 I2C EEPROM 以更改这些 ID 以匹配 LAN951x。
-
-主要的 SD 卡引导模式，标准情况下设置为 GPIOs 49-53。可以从第二组引脚上的次要 SD 卡引导，即将次要 SD 卡添加到 GPIO 引脚上。但是，我们尚未启用此功能。
-
-NAND 引导和 SPI 引导模式确实可以工作，尽管它们尚未完全支持 GPU。
-
-USB 设备引导模式在制造时默认启用，但 USB 主机引导模式仅在 program_usb_boot_mode=1 时启用。只要启用，处理器将使用处理器上的 OTGID 引脚的值来决定两种模式之间的选择。在任何树莓派 Model B/B+上，OTGID 引脚被驱动为 0，因此如果启用，将只能通过主机模式引导（无法通过设备模式引导，因为 LAN951x 设备会阻碍）。
-
-如果将 OTGID 引脚悬空（例如插入 PC），USB 将作为树莓派 Zero 或计算模块上的 USB 设备启动，因此您可以将 bootcode.bin 推送到设备中。用于执行此操作的 usbboot 代码可在 GitHub 上找到。
-
-## 树莓派 4 和 树莓派 5 启动流程
-
-与以前的产品相比，主要区别在于第二阶段引导加载程序是从 SPI 闪存 EEPROM 而不是从以前产品上的 bootcode.bin 文件加载的。
-
-### 第一阶段引导加载程序
-
-ROM（第一阶段）的引导流程如下：
-
-* SoC 上电
-* 读取 OTP 以确定 nRPIBOOT GPIO 是否已配置
-* 如果 nRPIBOOT GPIO 为高电平或 OTP 未定义 nRPIBOOT GPIO
-  * 检查 OTP，看看是否可以从 SD/EMMC 加载 recovery.bin
-    * 如果启用 SD 恢复.bin，则检查主 SD / EMMC 是否为 recovery.bin
-      * 成功-运行 recovery.bin 并更新 SPI EEPROM
-      * 失败-继续
-  * 检查 SPI EEPROM 以获取第二阶段加载程序
-    * 成功 - 运行第二阶段引导加载程序
-    * 失败 - 继续
-* 当为真时
-  * 尝试从 USB 设备引导加载 recovery.bin
-    * 成功 - 运行 recovery.bin 并更新 SPI EEPROM 或切换到 USB 大容量存储设备模式
-    * 失败 - 重试 USB 设备引导
-
->**注意**
->
->recovery.bin 是一个用于刷新引导加载程序 SPI EEPROM 图像的最小第二阶段程序。
-
-### 第二阶段引导加载程序
-
-本节描述第二阶段引导加载程序的高级流程。
-
-有关每个引导模式的更多信息，请参阅引导加载程序配置页面，有关此阶段加载的 GPU 固件文件的描述，请参阅引导文件夹页面。
-
-* 初始化时钟和 SDRAM
-* 读取 EEPROM 配置文件
-* 检查 PM_RSTS 寄存器以确定是否请求了 HALT
-  * 检查 POWER_OFF_ON_HALT 和 WAKE_ON_GPIO EEPROM 配置设置
-  * 如果 POWER_OFF_ON_HALT 是 1 而且 WAKE_ON_GPIO 是 0 则
-    * 使用 PMIC 关闭系统电源
-  * 否则如果 WAKE_ON_GPIO 是 1
-    * 在 GPIO3 上启用下降沿中断，以便在 GPIO3 被拉低时唤醒
-  * 睡眠
-* 当为真时
-  * 从 EEPROM 配置文件的 BOOT_ORDER 参数中读取下一个引导模式。
-  * 如果引导模式 == RESTART
-    * 跳回 BOOT_ORDER 字段中的第一个引导模式。
-  * 如果引导模式 == STOP
-    * 显示 start.elf 未找到错误模式并永远等待。
-  * 如果引导模式 == SD CARD
-    * 尝试从 SD 卡加载固件
-      * 成功-运行固件
-      * 失败-继续
-  * 如果引导模式 == NETWORK 则
-    * 使用 DHCP 协议请求 IP 地址
-    * 从 DHCP 或静态定义的 TFTP 服务器加载固件
-    * 如果未找到固件或发生超时或网络错误，则继续
-  * 否则，如果引导模式 == USB-MSD 或引导模式 == BCM-USB-MSD ，那么
-    * 在 USB 发现未超时时
-      * 检查 USB 大容量存储设备
-      * 如果发现新的大容量存储设备
-        * 对于每个驱动器（LUN）
-          * 尝试加载固件
-            * 成功 - 运行固件
-            * 失败 - 转到下一个 LUN
-  * 如果引导模式 == NVME 则
-    * 扫描 PCIe 查找 NVMe 设备，如果找到
-      * 尝试从 NVMe 设备加载固件
-        * 成功 - 运行固件
-        * 失败 - 继续
-  * 否则如果引导模式 == RPIBOOT 则
-    * 尝试使用 USB 设备模式从 USB OTG 端口加载固件-请参阅 USB 启动。 RPIBOOT 模式没有超时。
-
-#### 树莓派 5 的不同点
-
-* 电源按钮用于从 PMIC STANDBY 或 HALT 而不是 GPIO 3 唤醒。
-* 固件加载 Linux 内核，而不是 start.elf 。实际上，引导加载程序嵌入了 start.elf 的版本。
-* 默认情况下，连接到 3A 电源时禁用 USB 启动。可在 `/boot/firmware/config.txt` 中设置 usb_max_current_enable=1 以启用 USB 启动。或者，您可以在 USB 启动失败时单击一次电源按钮，临时启用 usb_max_current_enable 并继续启动。但是，如果通过按电源按钮启用，此设置在重新启动后不会持续。
-
-### 引导加载程序更新
-
-如果找到 pieeprom.upd 文件，可以在启动固件之前更新引导加载程序。有关引导加载程序更新的更多信息，请参阅引导加载程序 EEPROM 页面。
-
-### 安全更新操作系统（ tryboot ）
-
-引导加载程序/固件提供一次性标志，如果设置，则清除但导致加载 tryboot.txt 而不是 config.txt 。此备用配置将指定待处理的操作系统更新固件、cmdline、内核和 os_prefix 参数。由于在启动固件之前清除了该标志，崩溃或重置将导致在下次重新启动时加载原始 config.txt 文件。
-
-要设置 tryboot 标志，请在 reboot 命令中的分区号后添加 tryboot 。通常，分区号默认为零，但如果添加了额外的参数，则必须指定。
+To enable UART from `bootcode.bin`:
 
 ```
-# Quotes are important. Reboot only accepts a single argument.
-sudo reboot '0 tryboot'
+$ sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" bootcode.bin
 ```
 
-所有型号的树莓派都支持 tryboot ，但在树莓派 4 Model B 修订版 1.0 和 1.1 上，EEPROM 不能被写保护。这是因为旧版树莓派 4B 设备必须重置电源供应（丢失 tryboot 状态），因此这些信息存储在 EEPROM 中。
+Next, connect a suitable USB serial cable to your host computer (a Raspberry Pi will work, although you may find that the easiest path is to use a USB serial cable, since it’ll work out the box without any pesky config.txt settings). Use the standard pins 6, 8 and 10 (GND, GPIO14, GPIO15) on a Raspberry Pi or Compute Module.
 
-如果 secure-boot 已启用，则 tryboot 模式将导致加载 tryboot.img 而不是 boot.img 。
+Then use `screen` on Linux or macOS or `putty` on Windows to connect to the serial.
 
-### tryboot_a_b 模式
+Set up your serial to receive at 115200-8-N-1, and then boot your Raspberry Pi. You should get an immediate serial output from the device as `bootcode.bin` runs.
 
-如果 autoboot.txt 中的 tryboot_a_b 属性设置为 1 ，那么加载的是 config.txt 而不是 tryboot.txt 。这是因为在更高级别（分区）已经进行了 tryboot 切换，因此在备用分区本身内部拥有 tryboot.txt 文件是不必要的。
+## USB boot modes
 
-注意：当从 boot.img ramdisk 中加载文件时， tryboot_a_b 属性会被隐式设置为 1 。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/boot-usb.adoc)
 
-## 树莓派引导加载程序配置
+There are two separate boot modes for USB:
 
-### 编辑配置
+* USB device boot
+* USB host boot
 
-在编辑引导加载程序配置之前，请更新您的系统以获取 rpi-eeprom 软件包的最新版本。
+The firmware chooses between the two modes at boot time based on the OTP bits. Two bits control USB boot. The first enables USB device boot and is enabled by default; the second enables USB host boot.
 
-查看当前 EEPROM 配置，请运行以下命令：
+If the USB host boot mode bit is set, the processor reads the OTGID pin to decide whether to boot as a host (driven to zero as on any Raspberry Pi Model B/B+) or as a device (left floating). The Raspberry Pi Zero has access to the OTGID pin through the USB connector; the Compute Module has access to the OTGID pin on the edge connector.
+
+Some other OTP bits allow certain GPIO pins to select the boot modes.
+
+### USB device boot mode
+
+| NOTE | USB device boot is available on the [Compute Module series](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#compute-module-series), [Zero series](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#zero-series), and [Model A variants of the flagship series](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#flagship-series). |
+| ------ | ----------------------------------------------- |
+
+When this boot mode is activated (usually after a failure to boot from the SD card), the Raspberry Pi puts its USB port into device mode and awaits a USB reset from the host. Example code showing how the host needs to talk to the Raspberry Pi can be found [on Github](https://github.com/raspberrypi/usbboot).
+
+The host first sends a structure to the device down control endpoint 0. This contains the size and signature for the boot (security is not enabled, so no signature is required). Secondly, code is transmitted down endpoint 1 (`bootcode.bin`). Finally, the device will reply with one of the following codes:
+
+* `0` - Success
+* `0x80` - Failure
+
+### USB host boot mode
+
+| NOTE | Host boot is available on the [Compute Module series since Compute Module 3](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#compute-module-series), [Zero series since Zero 2 W](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#zero-series), Raspberry Pi 2B (version 1.2), Raspberry Pi 3B, and [all flagship series devices since Raspberry Pi 3B+](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#flagship-series). Raspberry Pi 3A+ supports mass storage boot, but not network boot. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+
+USB host boot mode uses the following logic:
+
+1. Enable the USB port and wait for D+ line to be pulled high indicating a USB 2.0 device (we only support USB2.0)
+2. If the device is a hub:
+
+    1. Enable power to all downstream ports of the hub
+    2. For each port, loop for a maximum of two seconds (or five seconds if `program_usb_boot_timeout=1` has been set)
+
+        1. Release from reset and wait for D+ to be driven high to indicate that a device is connected
+        2. If a device is detected:
+
+            1. Send "Get Device Descriptor"
+
+                1. If `VID == SMSC` && `PID == 9500`
+
+                    1. Add device to Ethernet device list
+            2. If the class interface is mass storage class
+
+                1. Add device to mass storage device list
+3. Else
+
+    1. Enumerate single device
+4. Go through mass storage device list
+
+    1. Boot from [mass storage device](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#usb-mass-storage-boot)
+5. Go through Ethernet device list
+
+    1. Boot from [Ethernet](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#network-booting)
+
+On Raspberry Pi 3B, 3A+, and 3B+, host boot is disabled by default. To enable USB host boot, add a line containing `program_usb_boot_mode=1` to the end of [`/boot/firmware/config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html#what-is-config-txt).
+
+| WARNING | Any change you make to the OTP is permanent and cannot be undone.<br /><br />On Raspberry Pi 3A+, setting the OTP bit to enable USB host boot mode will permanently prevent that Raspberry Pi from booting in USB device mode. |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+
+## USB mass storage boot
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/boot-msd.adoc)
+
+| NOTE | Available on the [Compute Module series since Compute Module 3](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#compute-module-series), [Zero series since Zero 2 W](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#zero-series), and [all flagship series devices since Raspberry Pi 2B (version 1.2)](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#flagship-series). |
+| ------ | ---------------------------- |
+
+USB mass storage boot enables you to boot your Raspberry Pi from a USB mass storage device such as a flash drive or USB disk. When attaching USB devices, particularly hard disks and SSDs, be mindful of their power requirements. Attaching more than one disk typically requires additional external power from either a powered disk enclosure or a powered USB hub.
+
+| NOTE | Models prior to Raspberry Pi 4B have known issues which prevent booting with some USB devices. |
+| ------ | ------------------------------------------------------------------------------------------------ |
+
+### Devices with an EEPROM bootloader
+
+Raspberry Pi 4 and newer flagship series devices and Compute module devices since Compute Module 4 and 4S support USB boot by default, as long as you specify USB boot in the [`BOOT\_ORDER`](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#BOOT_ORDER) configuration.
+
+| NOTE | Early editions of Raspberry Pi 4 may require a [bootloader update](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspi-config) to boot from USB. |
+| ------ | ------------------------------------------------------------------- |
+
+| NOTE | Early editions of Compute Module 4 may require a [bootloader update](https://www.raspberrypi.com/documentation/computers/compute-module.html#update-the-compute-module-bootloader) to boot from USB. |
+| ------ | --------------------------------------------------------------------- |
+
+### Raspberry Pi 3B+
+
+The Raspberry Pi 3B+ supports USB mass storage boot out of the box.
+
+### Raspberry Pi 2B, 3A+, 3B, CM3, CM3+, Zero 2 W
+
+On Raspberry Pi 2B v1.2, 3A+, 3B, Zero 2 W, and Compute Module 3 and 3+, you must first enable [USB host boot mode](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#usb-host-boot-mode). This allows USB mass storage boot and [network boot](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#network-booting).
+
+| NOTE | Raspberry Pi 3A+ and Zero 2 W do not support network boot. |
+| ------ | ------------------------------------------------------------ |
+
+To enable USB host boot mode on these devices, set the USB host bit in OTP (one-time programmable) memory. To set the bit, boot from an SD card where [`/boot/firmware/config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html#what-is-config-txt) contains the line `program_usb_boot_mode=1`. Once you set the bit, you can boot from USB without the SD card.
+
+#### Enable USB host boot mode with OTP
+
+| WARNING | Any change you make to OTP (one-time programmable) memory is permanent and cannot be undone.<br /><br />On Raspberry Pi 3A+, setting the OTP bit to enable USB host boot mode will permanently prevent that Raspberry Pi from booting in USB device mode. |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+Use any SD card flashed with Raspberry Pi OS to program the OTP bit.
+
+To enable USB host boot mode, add the following line to `config.txt`:
 
 ```
-rpi-eeprom-config
+program_usb_boot_mode=1
 ```
 
-要编辑当前 EEPROM 配置并将更新应用到最新的 EEPROM 发布版，请运行以下命令：
+Then, use `sudo reboot` to reboot your Raspberry Pi. To check that the OTP has been programmed correctly, run the following command:
 
 ```
-sudo -E rpi-eeprom-config --edit
-```
-
-有关 EEPROM 更新过程的更多信息，请参阅启动 EEPROM。
-
-### 配置属性
-
-本节描述引导加载程序中所有可用配置项。语法与 config.txt 相同，但属性特定于引导加载程序。条件过滤器也受支持，除了 EDID。
-
-#### `BOOT_UART`
-
-如果 1 ，则在 GPIO 14 和 15 上启用 UART 调试输出。将接收调试终端配置为 115200bps，8 位，无奇偶校验位，1 个停止位。
-
- 默认: 0
-
-#### `UART_BAUD`
-
-仅适用于树莓派 5。
-
-更改引导加载程序 UART 的波特率。
-
-支持的值: 9600 , 19200 , 38400 , 57600 , 115200 , 230400 , 460800 , 921600
-
- 默认: 115200
-
-#### `WAKE_ON_GPIO`
-
-如果 1 则 sudo halt 将在低功耗模式下运行，直到 GPIO3 或 GLOBAL_EN 短接到地。
-
-由于专用电源按钮可始终用于唤醒 HALT 或 STANDBY ，因此树莓派 5 上此设置无关紧要。
-
- 默认值： 1
-
-#### `POWER_OFF_ON_HALT`
-
-如果 1 和 WAKE_ON_GPIO=0 ，则 sudo halt 将关闭所有 PMIC 输出。这是停机的最低功耗状态，但可能会导致一些 HAT 出现问题，因为 5V 仍然开启。必须将 GLOBAL_EN 短接到地以启动。
-
-树莓派 400 具有专用电源按钮，即使处理器关闭，也可以操作。此行为默认情况下已启用，但 WAKE_ON_GPIO=2 可以设置为使用外部 GPIO 电源按钮，而不是专用电源按钮。
-
-在树莓派 5 上，这将使 PMIC 处于 STANDBY 模式，其中所有输出都已关闭。无需设置 WAKE_ON_GPIO ，按下专用电源按钮将启动设备。
-
- 默认： 0
-
-#### `BOOT_ORDER`
-
-BOOT_ORDER 设置允许灵活配置不同引导模式的优先级。它表示为一个 32 位无符号整数，其中每个半字节表示一个引导模式。引导模式按照从最低有效半字节到最高有效半字节的顺序尝试。
-
-##### BOOT_ORDER 字段
-
-BOOT_ORDER 属性定义了不同引导模式的顺序。它从右向左读取，最多可以定义八位数字。
-
-| 值  | 模式        | 说明                                                                                                   |
-| ----- | ------------- | -------------------------------------------------------------------------------------------------------- |
-| 0x0 | SD 卡检测   | 尝试 SD 卡，然后等待卡检测指示卡片已更改。现在已弃用，因为 0xf（重新启动）可用。                       |
-| 1   | SD 卡       | SD 卡（或 Compute Module 4 上的 eMMC）。                                                               |
-| 2   | NETWORK     | 网络引导 - 请参阅网络引导服务器教程。                                                                  |
-| 3   | RPIBOOT     | RPIBOOT - 查看 usbboot。                                                                               |
-| 4   | USB-MSD     | USB 大容量存储启动 - 请参阅 USB 大容量存储启动。                                                       |
-| 5   | BCM-USB-MSD | 通过 USB Type C 插座从 USB 2.0 引导（CM4：CM4IO 板上的 USB Type A 插座）。在树莓派 5 上不可用。 |
-| 6   | NVME        | 仅限 CM4 和 Pi 5：从连接到 PCIe 接口的 NVMe SSD 启动。有关更多详细信息，请参阅 NVMe 启动。             |
-| 7   | HTTP        | 通过以太网进行 HTTP 引导。有关更多详细信息，请参阅 HTTP 引导。                                         |
-| 14  | STOP        | 停止并显示错误模式。需要重新上电才能退出此状态。                                                       |
-| 15  | RESTART     | 从 BOOT_ORDER 字段中的第一个启动模式重新启动，即循环。                                                 |
-
-RPIBOOT 旨在与 Compute Module 4 一起使用，以加载自定义调试映像（例如 Linux RAM-disk）而不是正常启动。这应该是最后的启动选项，因为它目前不支持超时或重试。
-
-##### BOOT_ORDER 示例
-
-| BOOT_ORDER | 说明                                                                  |
-| ------------ | -------------------------------------------------------------------------- |
-| 3905       | 首先尝试 SD 卡，然后是 USB-MSD，然后重复（如果 BOOT_ORDER 为空，则默认） |
-| 3860       | 首先尝试 USB，然后 SD，然后重复                                          |
-| 3873       | 首先尝试 SD，然后尝试网络，然后重复                                      |
-
-#### `MAX_RESTARTS`
-
-如果遇到 RESTART（ 0xf ）引导模式超过 MAX_RESTARTS 次数，则会触发看门狗复位。这不建议用于一般用途，但可能对需要完全重置以解决硬件或网络接口问题的测试或远程系统有用。
-
-默认： -1 （无限）
-
-#### `SD_BOOT_MAX_RETRIES`
-
-在移动到 BOOT_ORDER 定义的下一个引导模式之前，在失败后重试 SD 引导的次数。
-
--1 表示无限重试。
-
- 默认： 0
-
-#### `NET_BOOT_MAX_RETRIES`
-
-在移动到由 BOOT_ORDER 定义的下一个引导模式之前，在失败后网络引导将重试的次数。
-
--1 表示无限重试。
-
- 默认： 0
-
-#### `DHCP_TIMEOUT`
-
-整个 DHCP 序列超时时间（毫秒），在当前迭代失败之前。
-
- 最小值: 5000
-
- 默认值: 45000
-
-#### `DHCP_REQ_TIMEOUT`
-
-重试 DHCP DISCOVER 或 DHCP REQ 前的超时时间（毫秒）。
-
- 最小值： 500
-
- 默认值： 4000
-
-#### `TFTP_FILE_TIMEOUT`
-
-通过 TFTP 进行单个文件下载的超时时间（毫秒）。
-
- 最小值： 5000
-
- 默认值： 30000
-
-#### `TFTP_IP`
-
-可选的点分十进制 IP 地址（例如 192.168.1.99 ）用于覆盖 DHCP 请求中的服务器 IP。
-
-在家庭网络中，这可能很有用，因为 tftpd-hpa 可以代替 DHCP 服务器的 dnsmasq。
-
- 默认值： ""
-
-#### `TFTP_PREFIX`
-
-为了支持每个树莓派的唯一 TFTP 引导目录，引导加载程序使用设备特定目录作为文件名的前缀。如果在带前缀的目录中找不到 start4.elf 或 start.elf，则清除前缀。
-
-在旧版模型上，序列号被用作前缀，但是在树莓派 4 和 5 上，MAC 地址不再从序列号生成，这使得通过检查 DHCPDISCOVER 数据包自动创建 tftpboot 目录在服务器上变得困难。为了支持这一点，TFTP_PREFIX 可以定制为 MAC 地址、固定值或序列号（默认）。
-
-| 值 | 说明                                   |
-| ---- | ---------------------------------------- |
-| 0  | 使用序列号，例如 9ffefdef/             |
-| 1  | 使用由 TFTP_PREFIX_STR 指定的字符串    |
-| 2  | 使用 MAC 地址，例如 dc-a6-32-01-36-c2/ |
-
- 默认值：0
-
-#### `TFTP_PREFIX_STR`
-
-当 TFTP_PREFIX 设置为 1 时，指定用于自定义目录前缀字符串。例如：- TFTP_PREFIX_STR=tftp_test/
-
- 默认: ""
-
-最大长度: 32 个字符
-
-#### `PXE_OPTION43`
-
-使用不同的字符串覆盖 PXE Option43 匹配字符串。通常最好将自定义应用于 DHCP 服务器，而不是更改客户端行为，但在无法实现该目标的情况下提供此选项。
-
- 默认: Raspberry Pi Boot
-
-#### `DHCP_OPTION97`
-
-在旧版中，客户端 GUID（Option97）只是将序列号重复四次。默认情况下，新的 GUID 格式是四字符代码（FourCC）的串联（树莓派 4 为 RPi4 0x34695052，树莓派 5 为 RPi5 0x35695052），板子修订版（例如 0x00c03111 或 0x00d04170）（4 字节），MAC 地址的最低有效 4 字节和 4 字节序列号。这旨在是独一无二的，但也向 DHCP 服务器提供了结构化信息，允许识别树莓派 4 和 5 计算机，而无需依赖以太网 MAC OUID。
-
-指定 DHCP_OPTION97=0 以恢复旧行为，或指定自定义 4 字节前缀的非零十六进制值。
-
- 默认： 0x34695052
-
-#### `MAC_ADDRESS`
-
-使用给定值覆盖树莓派的以太网 MAC 地址。例如 dc:a6:32:01:36:c2
-
- 默认： ""
-
-#### `MAC_ADDRESS_OTP`
-
-使用存储在客户 OTP 寄存器中的值覆盖树莓派的以太网 MAC 地址。
-
-例如，要使用存储在 Customer OTP 的第 0 行和第 1 行中的 MAC 地址。
-
-```
-MAC_ADDRESS_OTP=0,1
-```
-
-第一个值（例如中的第 0 行）包含 OUI 和 MAC 地址的最高 8 位。第二个值（例如中的第 1 行）存储 MAC 地址的其余 16 位。这与制造时为树莓派编程的 MAC 地址使用的格式相同。
-
-任意两个客户行可以选择并以任何顺序组合。
-
-Customer OTP 行是 OTP 寄存器 36 到 43，在 vcgencmd otp_dump 输出中，因此如果前两行按照以下方式编程，则 MAC_ADDRESS_OTP=0,1 将给出一个 MAC 地址为 e4:5f:01:20:24:7e 。
-
-```
-36:247e0000
-37:e45f0120
-```
-
- 默认： ""
-
-#### 静态 IP 地址配置
-
-如果设置了 TFTP_IP 和以下选项，则将跳过 DHCP，并应用静态 IP 配置。如果 TFTP 服务器与客户端位于同一子网上，则可能省略网关。
-
-##### `CLIENT_IP`
-
-客户端的 IP 地址，例如 192.168.0.32
-
- 默认: ""
-
-##### `SUBNET`
-
-子网地址掩码 例如 255.255.255.0
-
- 默认: ""
-
-##### `GATEWAY`
-
-如果 TFTP 服务器位于不同子网上，则使用的网关地址，例如 192.168.0.1
-
- 默认： ""
-
-#### `DISABLE_HDMI`
-
-如果 DISABLE_HDMI=1 ，则禁用 HDMI 引导诊断显示。其他非零值保留供将来使用。
-
- 默认值: 0
-
-#### `HDMI_DELAY`
-
-在 N 秒内跳过 HDMI 诊断显示的渲染（默认为 5 秒），除非发生致命错误。默认行为旨在避免在正常的 SD/USB 启动过程中短暂出现引导加载程序诊断屏幕。
-
- 默认值: 5
-
-#### `ENABLE_SELF_UPDATE`
-
-使启动加载程序能够从 TFTP 或 USB 大容量存储设备（MSD）启动文件系统更新自身。
-
-如果启用了自更新，则引导加载程序将在启动文件系统中查找更新文件（.sig/.upd）。如果更新映像与当前映像不同，则应用更新并重置系统。否则，如果 EEPROM 映像是逐字节相同的，则引导将继续正常进行。
-
- 注意：
-
-* 2021 年之前的引导加载程序版本不支持 self-update 。
-* 在 2022 年之前，SD 卡引导中未启用自更新。在树莓派 4 上，ROM 可以从 SD 卡加载 recovery.bin。在 CM4 上，自更新和 recovery.bin 均无效，需要使用 USB 引导（请参阅 CM4 引导加载程序文档）。
-* 从 2022 年开始（beta 和稳定版），可以从 SD 卡启用自更新。
-* 用于网络引导，请确保可以通过 NFS 挂载 TFTP boot 目录，并且 rpi-eeprom-update 可以对其进行写入。
-
- 默认值： 1
-
-#### `FREEZE_VERSION`
-
-以前，此属性仅由 rpi-eeprom-update 脚本检查。但是，现在自更新已启用，引导加载程序也将检查此属性。如果设置为 1，则会覆盖 ENABLE_SELF_UPDATE 以停止自动更新。要禁用 FREEZE_VERSION ，您必须使用带有 recovery.bin 的 SD 卡引导。
-
-自定义 EEPROM 更新脚本还必须检查此标志。
-
- 默认： 0
-
-#### `HTTP_HOST`
-
-如果启动网络安装或 HTTP 引导，则从此服务器下载 boot.img 和 boot.sig 。
-
-无效的主机名将被忽略。它们应仅包含小写字母数字字符和 - 或 . 。如果设置了 HTTP_HOST ，则禁用 HTTPS，而改用普通 HTTP。您可以指定 IP 地址，以避免需要进行 DNS 查找。主机名中不要包含 HTTP 方案或任何斜杠。
-
- 默认： fw-download-alias1.raspberrypi.com
-
-#### `HTTP_PORT`
-
-您可以使用此属性更改用于网络安装和 HTTP 引导的端口。在使用默认主机 fw-download-alias1.raspberrypi.com 时启用 HTTPS。如果更改了 HTTP_HOST ，则禁用 HTTPS，而改用普通 HTTP。
-
-当 HTTPS 被禁用时，即使 HTTP_PORT 被更改为 443 ，仍将使用纯 HTTP。
-
-默认值：如果启用了 HTTPS，则为 443 ，否则为 80
-
-#### `HTTP_PATH`
-
-用于网络安装和 HTTP 引导的路径。
-
-区分大小写。使用正斜杠（Linux）作为路径分隔符。前导和尾随正斜杠不是必需的。
-
-如果 HTTP_HOST 未设置，则 HTTP_PATH 将被忽略，URL 将是 https://fw-download-alias1.raspberrypi.com:443/net_install/boot.img 。如果设置了 HTTP_HOST ，URL 将是 http://<HTTP_HOST>:<HTTP_PORT>/<HTTP_PATH>/boot.img
-
- 默认： net_install
-
-#### `IMAGER_REPO_URL`
-
-嵌入式 Raspberry Pi Imager 应用程序配置为在启动时下载的 json 文件。
-
-您可以更改嵌入式 Raspberry Pi Imager 应用程序使用的 json 文件的 URL，以便提供您自己的图像。您可以通过 --repo 参数传递 URL 来测试标准 Raspberry Pi Imager 应用程序。
-
- 默认值： http://downloads.raspberrypi.org/os_list_imagingutility_v3.json
-
-#### `NET_INSTALL_ENABLED`
-
-当网络安装启用时，如果检测到键盘，引导加载程序会在启动时显示网络安装屏幕。
-
-要启用网络安装，请添加 NET_INSTALL_ENABLED=1 ，要禁用网络安装，请添加 NET_INSTALL_ENABLED=0 。
-
-如果设置了 DISABLE_HDMI=1 ，则会忽略此设置并禁用网络安装。
-
-为了检测键盘，网络安装必须初始化 USB 控制器并枚举设备。这会增加约 1 秒的启动时间，因此在某些嵌入式应用中禁用网络安装可能是有利的。
-
-默认值：在树莓派 4 和树莓派 400 上为 1 ，在 Compute Module 4 上为 0 。
-
-#### `NET_INSTALL_KEYBOARD_WAIT`
-
-如果启用了网络安装，引导加载程序会尝试检测键盘和 SHIFT 键以启动网络安装。您可以使用此属性更改此等待时间的长度（以毫秒为单位）。
-
-设置此项为 0 会禁用键盘等待，尽管如果未找到引导文件且 USB 引导模式 4 处于 BOOT_ORDER 状态，仍然可以启动网络安装。
-
->**注意**
->
->测试表明键盘和 SHIFT 检测至少需要 750 毫秒。
-
- 默认值： 900
-
-#### NETCONSOLE - 高级日志记录
-
-NETCONSOLE 复制调试消息到网络接口。IP 地址和端口由 NETCONSOLE 字符串定义。
-
->**注意**
->
->NETCONSOLE 阻塞，直到以太网链路建立或超时发生。超时值为 DHCP_TIMEOUT ，尽管除非请求网络引导，否则不会尝试 DHCP。
-
-
-##### 格式
-
-请参阅 https://wiki.archlinux.org/index.php/Netconsole
-
-```
-src_port@src_ip/dev_name,dst_port@dst_ip/dst_mac
-E.g. 6665@169.254.1.1/,6666@/
-```
-
-为了简化解析，引导加载程序要求每个字段分隔符都必须存在。必须指定源 IP 地址，但以下字段可以留空并分配默认值。
-
-* 源端口 - 6665
-* 设备名称 - "" (设备名称始终被忽略)
-* 目标端口 - 6666
-* 目的地 IP - 255.255.255.255
-* 目的地 MAC - 00:00:00:00:00
-
-查看数据的一种方法是将测试树莓派 4 连接到另一台运行 WireShark 的树莓派，并选择“udp.srcport == 6665”作为过滤器，然后选择分析 → 跟踪 → UDP 流以 ASCII 日志形式查看。
-
-NETCONSOLE 不应默认启用，因为它可能会导致网络问题。可以通过 GPIO 过滤器按需启用：
-
-```
-# Enable debug if GPIO 7 is pulled low
-[gpio7=0]
-NETCONSOLE=6665@169.254.1.1/,6666@/
-```
-
-默认值： "" （未启用）
-
-最大长度：32 个字符
-
-#### `PARTITION`
-
-如果未明确由 reboot 命令（例如 sudo reboot N ）或 boot_partition=N 在 autoboot.txt 中设置，可以使用 PARTITION 选项指定引导分区号。如果用户按下按钮，可以使用此选项从救援分区引导。
-
-```
-# Boot from partition 2 if GPIO 7 is pulled low
-[gpio7=0]
-PARTITION=2
-```
-
- 默认值：0
-
-#### `PSU_MAX_CURRENT`
-
-仅适用于树莓派 5。
-
-如果设置，则此属性指示固件跳过 USB 供电协商，并假定连接到具有给定电流评级的电源。通常，这通常设置为 3000 或 5000 ，即低电流或高电流能力的电源。
-
- 默认： ""
-
-#### `USB_MSD_EXCLUDE_VID_PID`
-
-一个最多包含四个 VID/PID 对的列表，指定引导加载程序应忽略的设备。如果这与 HUB 匹配，则 HUB 将不被枚举，导致所有下游设备被排除在外。这旨在允许在引导枚举期间忽略有问题的（例如，枚举速度非常慢）设备。这是引导加载程序特有的，不会传递给操作系统。
-
-格式是以 VID 作为最高有效四位的十六进制值的逗号分隔列表。不允许空格。例如 034700a0,a4231234
-
- 默认： ""
-
-#### `USB_MSD_DISCOVER_TIMEOUT`
-
-如果在此超时内未找到任何 USB 大容量存储设备，则停止 USB-MSD，并选择下一个引导模式。
-
-最小值: 5000 (5 秒)
-
-默认值: 20000 (20 秒)
-
-#### `USB_MSD_LUN_TIMEOUT`
-
-在前进到下一个 LUN 之前等待的毫秒数，例如，多槽 SD 卡阅读器。这仍在调整中，但可能有助于加快引导速度，如果连接了旧/慢设备以及包含操作系统的快速 USB-MSD 设备。
-
- 最小值: 100
-
-默认值: 2000 (2 秒)
-
-#### `USB_MSD_PWR_OFF_TIME`
-
-仅适用于树莓派 4。
-
-当树莓派重新启动时，USB 电源会被硬件关闭。短暂的断电时间可能会导致一些 USB 设备出现问题，因此可以使用此参数来强制延长断电时间，就好像电缆被物理拔出一样。
-
-在 Pi4 v1.3 版本及更旧版本上，可配置/长时间断电需要启用 XHCI 控制器，因此实际上会出现短暂的断电，然后是较长的可配置断电。通过将此参数设置为零，可以跳过较长的可配置断电。
-
-在更新的版本中，硬件确保 USB 电源在重新启动后关闭，并且引导加载程序仅在此超时时间过去后才启用电源。这发生在内存初始化之后，确保 USB 电源至少关闭两秒钟。因此，此参数通常不会影响更新的硬件版本。
-
- 最小值: 0
-
- 最大值: 5000
-
-默认值: 1000 (1 秒)
-
-#### `USB_MSD_STARTUP_DELAY`
-
-如果定义了，在 USB 主机控制器初始化后，延迟给定超时时间进行 USB 枚举。如果 USB 硬盘需要很长时间初始化并触发 USB 超时，那么可以使用此延迟来为驱动程序提供额外的初始化时间。可能还需要增加整体 USB 超时时间 ( USB_MSD_DISCOVER_TIMEOUT )。
-
- 最小值: 0
-
-最大值: 30000 (30 秒)
-
- 默认: 0
-
-#### `VL805`
-
-仅适用于 Compute Module 4。
-
-如果 VL805 属性设置为 1 ，则引导加载程序将搜索 VL805 PCIe XHCI 控制器，并尝试使用嵌入在引导加载程序 EEPROM 中的 VL805 固件进行初始化。这使得工业设计可以使用 VL805 XHCI 控制器，而无需为 VL805 固件提供专用的 SPI EEPROM。
-
-* 在 Compute Module 4 上，引导加载程序永远不会写入专用的 VL805 SPI EEPROM。此选项只是配置控制器从 SDRAM 加载固件。
-* 如果 VL805 XHCI 控制器有专用的 EEPROM，请不要使用此选项。如果安装了 VL805 ROM，它将无法初始化，因为 VL805 ROM 将尝试使用专用的 SPI EEPROM。
-* 嵌入式的 VL805 固件假定与树莓派 4B 相同的 USB 配置（两个 USB 3.0 端口和四个 USB 2.0 端口）。不支持加载替代的 VL805 固件映像，应该使用专用的 VL805 SPI EEPROM 来代替这样的配置。
-
- 默认: 0
-
-#### `XHCI_DEBUG`
-
-此属性是一个位字段，用于控制大容量存储引导模式下 USB 调试消息的详细程度。启用所有这些消息会生成大量日志数据，这将减慢启动速度，甚至可能导致启动失败。对于详细日志，最好使用 NETCONSOLE 。
-
-| 值 | 记录                        |
-| ---- | ----------------------------- |
-| 1  | USB 描述符                  |
-| 2  | 大容量存储模式状态机        |
-| 4  | 大容量存储模式状态机 - 详细 |
-| 8  | 所有 USB 请求               |
-| 16 | 设备和集线器状态机          |
-| 32 | 所有 xHCI TRB（非常详细）   |
-| 64 | 所有 xHCI 事件（非常详细）  |
-
-将值相加以组合它们。例如：
-
-```
-# Enable mass storage and USB descriptor logging
-XHCI_DEBUG=0x3
-```
-
-默认： 0x0 （未启用 USB 调试消息）
-
-#### [config.txt] 部分
-
-阅读 config.txt 后，GPU 固件 start4.elf 会读取引导加载程序 EEPROM 配置，并检查是否存在名为 [config.txt] 的部分。如果 [config.txt] 部分存在，则将此部分开头到文件末尾的内容附加到内存中，以便与从引导分区读取的 config.txt 文件的内容合并。这可用于自动将设置应用于每个操作系统，例如 dtoverlays。
-
->**警告**
->
->如果指定了导致引导失败的无效配置，则必须重新刷新引导加载程序 EEPROM。 
-
-### config.txt 中的配置属性
-
-树莓派 5 需要存在一个 config.txt 文件来指示分区是可引导的。
-
-#### `boot_ramdisk`
-
-如果将此属性设置为 1 ，则引导加载程序将尝试加载一个名为 boot.img 的 ramdisk 文件，其中包含引导文件系统。随后的文件（例如 start4.elf ）将从 ramdisk 中读取，而不是从原始引导文件系统中读取。
-
-boot_ramdisk 的主要目的是支持 secure-boot ，然而，未签名的 boot.img 文件也对网络引导或 RPIBOOT 配置很有用。
-
-* RAM 磁盘文件的最大大小为 96MB。
-* boot.img 文件是原始磁盘 .img 文件。建议的格式是一个没有主引导记录的普通 FAT32 分区。
-* RAM 磁盘文件系统的内存在操作系统启动之前被释放。
-* 如果选择 TRYBOOT，则引导加载程序将搜索 tryboot.img 而不是 boot.img 。
-* 另请参阅 autoboot.txt。
-
-有关 secure-boot 和创建 boot.img 文件的更多信息，请参阅 USBBOOT。
-
- 默认: 0
-
-#### `boot_load_flags`
-
-自定义固件的实验性属性（裸机）。
-
-第 0 位（0x1）表示.elf 文件是自定义固件。这将禁用任何兼容性检查（例如 USB MSD 启动支持），并在启动可执行文件之前重置 PCIe。
-
-在树莓派 5 上不相关，因为没有 start.elf 文件。
-
- 默认： 0x0
-
-#### `pciex4_reset`
-
-仅适用于树莓派 5。
-
-默认情况下， RP1 使用的 PCIe x4 控制器在启动操作系统之前被重置。如果将此参数设置为 0 ，则禁用重置，允许操作系统或裸金属代码继承 PCIe 配置设置从引导加载程序。
-
- 默认值： 1
-
-#### `uart_2ndstage`
-
-如果 uart_2ndstage 是 1 ，则启用通过 UART 进行调试记录。此选项还会自动在 start.elf 中启用 UART 记录。这也在引导选项页面上有描述。
-
-BOOT_UART 属性还可以启用引导加载程序 UART 记录，但不会在 start.elf 中启用 UART 记录，除非还设置了 uart_2ndstage=1 。
-
- 默认值： 0
-
-#### `erase_eeprom`
-
-如果 erase_eeprom 设置为 1 ，那么 recovery.bin 将擦除整个 SPI EEPROM 而不是刷新引导加载程序映像。此属性在正常引导过程中不起作用。
-
- 默认: 0
-
-#### `eeprom_write_protect`
-
-配置 EEPROM write status register 。这可以设置为将整个 EEPROM 标记为写保护，或清除写保护。
-
-此选项必须与控制对 EEPROM Write Status Register 的更新的 EEPROM /WP 引脚一起使用。将 /WP 拉低（CM4 EEPROM_nWP 或树莓派 4 TP5 ）不会写保护 EEPROM，除非还配置了 Write Status Register 。
-
-查看 Winbond W25x40cl 或 Winbond W25Q16JV 数据表以获取更多详细信息。
-
-eeprom_write_protect 设置在 config.txt 中为 recovery.bin 。
-
-| 值 | 描述                              |
-| ---- | ----------------------------------- |
-| 1  | 配置写保护区域以覆盖整个 EEPROM。 |
-| 0  | 清除写保护区域。                  |
-| -1 | 什么也不做。                      |
-
->**注意**
->
->flashrom 不支持清除写保护区域，如果定义了写保护区域，则更新 EEPROM 将失败。
-
-在树莓派 5 上， /WP 默认被拉低，因此只要配置了 Write Status Register ，写保护就会被启用。要清除写保护，请通过连接 TP14 和 TP1 将 /WP 拉高。
-
- 默认： -1
-
-#### `os_check`
-
-在树莓派 5 上，固件会在尝试从当前分区引导之前自动检查兼容的设备树文件。否则，会加载旧版的不兼容内核，然后挂起。要禁用此检查（例如用于裸机开发），请在 config.txt 中设置 os_check=0
-
- 默认： 1
-
-#### `bootloader_update`
-
-此选项可设置为 0，以阻止自更新，而无需更新 EEPROM 配置。在通过网络引导更新多个树莓派时，有时会很有用，因为此选项可以针对每个树莓派进行控制（例如，通过 config.txt 中的序列号过滤器）。
-
- 默认： 1
-
-### config.txt 中的安全启动配置属性
-
-##### [如何使用树莓派安全启动](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003466-WP/Boot-Security-Howto.pdf)
-
-如何使用树莓派安全启动
-
-本白皮书描述了如何在基于树莓派 4 的设备上实现安全启动。有关我们实现安全启动方法的概述，请参阅树莓派 4 启动安全白皮书。安全启动系统旨在与 buildroot -based OS 映像一起使用；不建议或支持将其与 Raspberry Pi OS 一起使用。
-
-以下 config.txt 属性用于编程 secure-boot OTP 设置。这些更改是不可逆的，只能在刷新引导加载程序 EEPROM 图像时通过 RPIBOOT 编程。这确保 secure-boot 无法远程设置，也无法通过意外插入陈旧的 SD 卡图像来设置。
-
-要了解有关启用 secure-boot 的更多信息，请参阅 Secure Boot 自述文件和 USBBOOT 存储库中的 Secure Boot 教程。
-
-#### `program_pubkey`
-
-如果将此属性设置为 1 ，则 recovery.bin 将 EEPROM 图像中公钥的哈希写入 OTP。只要设置了，引导加载程序将拒绝使用不同 RSA 密钥签名的 EEPROM 图像或未签名图像。
-
- 默认: 0
-
-#### `revoke_devkey`
-
-如果将此属性设置为 1 ，则 recovery.bin 将向 OTP 写入一个值，防止 ROM 加载不支持 secure-boot 的旧版本第二阶段引导加载程序，这可以防止通过恢复到较旧版本的引导加载程序来关闭 secure-boot 。
-
- 默认: 0
-
-#### `program_rpiboot_gpio`
-
-由于树莓派 4B 或树莓派 400 上没有专用的 nRPIBOOT 跳线帽，因此必须使用替代的 GPIO 来选择 RPIBOOT 模式，通过将 GPIO 拉低来实现。只能选择一个 GPIO，并且可用选项为 2, 4, 5, 6, 7, 8 。此属性不取决于 secure-boot ，但请验证此 GPIO 配置不会与在引导过程中将 GPIO 拉低的任何 HAT 发生冲突。
-
-由于出于安全考虑，此属性只能通过 RPIBOOT 进行编程，因此必须首先使用 erase_eeprom 清除引导加载程序 EEPROM。这会导致 BCM2711 ROM 切换到 RPIBOOT 模式，然后允许设置此选项。
-
- 默认：``
-
-#### `program_jtag_lock`
-
-如果将此属性设置为 1 ，则 recovery.bin 将编程一个防止使用 VideoCore JTAG 的 OTP 值。此选项要求 program_pubkey 和 revoke_devkey 也设置。此选项可以防止故障分析，在设备完全测试后才应设置。
-
- 默认： 0
-
-## USB 启动模式
-
->**警告**
->
->默认情况下，树莓派从 SD 卡启动。这是新用户和经验不足用户的推荐方法。 
-
-USB 有两种独立的启动模式：USB 设备启动和 USB 主机启动。
-
-在启动时，固件通过读取 OTP 位来选择两种启动模式之间的选择。有两个位来控制 USB 启动。第一个启用 USB 设备启动，默认情况下启用；第二个启用 USB 主机启动。如果设置了 USB 主机启动模式位，则处理器会读取 OTGID 引脚以决定是作为主机（驱动为零，如任何树莓派 Model B/B+上）还是作为设备（悬空）。树莓派 Zero 通过 USB 连接器上的 OTGID 引脚访问此引脚，计算模块通过边缘连接器访问此引脚。
-
-还有 OTP 位，允许使用某些 GPIO 引脚来选择树莓派应尝试使用哪些引导模式。
-
->**注意**
->
->仅适用于某些型号的 USB 引导模式。 
-
-### USB 设备引导模式
-
->**注意**
->
->仅适用于树莓派计算模块、计算模块3、树莓派 Zero、Zero W、A、A+ 和 3A+ 上可用的设备引导。 
-
-当激活此引导模式（通常在从 SD 卡引导失败后），树莓派将其 USB 端口置于设备模式，并等待主机发送 USB 复位。示例代码显示主机需要如何与树莓派通信可在 Github 上找到。
-
-主机首先向设备发送一个结构，通过控制端点 0 传输。其中包含引导的大小和签名（未启用安全性，因此不需要签名）。其次，代码通过端点 1 传输（bootcode.bin）。最后，设备将以成功代码回复：
-
-* 0 - 成功
-* 0x80 - 失败
-
-### USB 主机启动模式
-
->**注意**
->
->仅适用于树莓派 3B、3B+、3A+ 和 2B v1.2 的主机引导。树莓派 3A+ 仅支持大容量存储引导，不支持网络引导。
-
-USB 主机引导模式遵循以下顺序：
-
-* 启用 USB 端口，并等待 D+ 线被拉高，表示连接了 USB 2.0 设备（我们仅支持 USB2.0）
-* 如果设备是集线器：
-  * 启用集线器的所有下游端口的电源
-  * 对于每个端口，循环最多两秒（如果已设置 program_usb_boot_timeout=1 ，则为五秒）
-    * 释放复位并等待 D+被拉高以指示设备已连接
-    * 如果检测到设备：
-      * 发送“获取设备描述符”
-        * 如果 VID == SMSC && PID == 9500
-          * 将设备添加到以太网设备列表
-      * 如果类接口 == 大容量存储类
-        * 将设备添加到大容量存储设备列表
-* 否则
-  * 枚举单个设备
-* 浏览大容量存储设备列表
-  * 从大容量存储设备启动
-* 浏览以太网设备列表
-  * 从以太网启动
-
-## USB 大容量存储启动
-
->**注意**
->
->仅适用于树莓派 2B v1.2、3A+、3B、3B+、4B、400 和 Zero 2 W，以及树莓派计算模块 3、3+ 和 4。 
-
-您可能希望从 USB 大容量存储设备（如闪存驱动器或 USB 硬盘）引导您的树莓派。连接 USB 设备时，特别是硬盘和固态硬盘时，请注意它们的功率要求。如果您计划连接多个固态硬盘或硬盘到树莓派，通常需要外部电源 - 要么是带电源的硬盘外壳，要么是带电源的 USB 集线器。
-
->**注意**
->
->旧版树莓派 4B 之前的型号存在已知问题，无法使用某些 USB 设备启动。
-
-### 树莓派 4B 和 树莓派 400
-
-树莓派 400 和更新的树莓派 4B 板上的引导加载程序默认支持 USB 引导，尽管 BOOT_ORDER 引导加载程序配置可能需要修改。在旧版的树莓派 4B 板上，或者选择备用引导模式时，必须更新引导加载程序。
-
- 查看：
-
-* 通过 Raspberry Pi Imager 更改引导模式的说明
-* 通过 raspi-config 更改启动模式的说明
-* 其他启动配置选项的引导加载程序配置页面
-
-### 计算模块 4
-
-请查看闪存计算模块 eMMC 以获取引导加载程序更新说明。
-
-### 树莓派 3B+
-
-树莓派 3B+支持开箱即用的 USB 大容量存储启动。
-
-### 树莓派 2B, 3A+, 3B, CM3, CM3+, Zero 2 W
-
-在 树莓派 2B v1.2、3A+、3B、Zero 2 W 和 Compute Module 3 和 3+ 上，您必须首先启用 USB 主机启动模式。这是为了允许 USB 大容量存储启动和网络启动。
-
->**注意**
->
->树莓派 3A+ 或 Zero 2 W 上不支持网络启动。
-
-要启用 USB 主机启动模式，树莓派需要从带有特殊选项的 SD 卡引导，以在一次性可编程（OTP）存储器中设置 USB 主机启动模式位。只要设置了此位，就不再需要 SD 卡。
-
->**警告**
->
->对 OTP 所做的任何更改都是永久的，无法撤消。 
-
-* 在树莓派 3A+上，将 OTP 位设置为启用 USB 主机启动模式将永久阻止该树莓派以 USB 设备模式启动。
-
-您可以使用运行 Raspberry Pi OS 的任何 SD 卡来编程 OTP 位。
-
-启用 USB 主机启动模式：
-
-```
-echo program_usb_boot_mode=1 | sudo tee -a /boot/firmware/config.txt
-```
-
-这将 program_usb_boot_mode=1 添加到 /boot/firmware/config.txt 的末尾。
-
-虽然选项被命名为 program_usb_boot_mode ，但它只启用了 USB 主机启动模式。 USB 设备启动模式仅适用于某些树莓派型号-请参阅 USB 设备启动模式。
-
-使用 sudo reboot 重新启动树莓派，并检查 OTP 是否已被编程：
-
-```
-vcgencmd otp_dump | grep 17:
+$ vcgencmd otp_dump | grep 17:
 17:3020000a
 ```
 
-检查输出 0x3020000a 是否显示。如果没有显示，则 OTP 位未成功编程。在这种情况下，请再次执行编程过程。如果位仍未设置，则可能表明树莓派硬件本身存在故障。
+If the output reads `0x3020000a`, the OTP has been successfully programmed. If you see different output, try the programming procedure again. Make sure there is no blank line at the end of `config.txt`.
 
-如果您愿意，可以从 config.txt 中删除 program_usb_boot_mode 行，这样，如果您将 SD 卡插入另一台树莓派，它将不会编程 USB 主机启动模式。确保 config.txt 末尾没有空行。
+You can now boot from a USB mass storage device in the same way as booting from an SD card. See the following section for further information.
 
-您现在可以像从 SD 卡引导一样从 USB 大容量存储设备引导。有关更多信息，请参阅以下部分。
+### Boot from USB mass storage
 
-### 从 USB 大容量存储设备引导
+The [procedure](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system) is the same as for SD cards - flash the USB storage device with the operating system image.
 
-过程与 SD 卡相同-只需使用操作系统映像对 USB 存储设备进行映像。
+After preparing the storage device, connect the drive and power up the Raspberry Pi, being aware of the extra USB power requirements of the external drive.
 
-准备存储设备后，连接驱动器并启动树莓派，注意外部驱动器的额外 USB 功率要求。
+After five to ten seconds, the Raspberry Pi should begin booting and show the rainbow splash screen on an attached display. Make sure that you do not have an SD card inserted in the Raspberry Pi, since if you do, it will boot from that first.
 
-五到十秒后，树莓派应开始引导并在连接的显示器上显示彩虹闪屏。确保在树莓派中没有插入 SD 卡，因为如果有，它将首先从 SD 卡引导。
+See the [boot modes documentation](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-boot-modes) for the boot sequence and alternative boot modes (network, USB device, GPIO or SD boot).
 
-查看引导模式文档，了解引导顺序和备用引导模式（网络、USB 设备、GPIO 或 SD 引导）。
+### Known issues
 
-### 已知问题
+* The default timeout for checking bootable USB devices is two seconds. Some flash drives and hard disks power up too slowly. It is possible to extend this timeout to five seconds (add a new file `timeout` to the SD card), but note that some devices take even longer to respond.
+* Some flash drives have a very specific protocol requirement that is not handled by the bootcode and may thus be incompatible.
 
->**注意**
->
->这些不适用于树莓派 4 Model B。
+### Special `bootcode.bin`-only boot mode
 
-* 检查可引导 USB 设备的默认超时时间为两秒。一些闪存驱动器和硬盘启动速度太慢。可以将此超时时间延长到五秒（在 SD 卡上添加一个新文件 timeout ），但请注意，有些设备响应时间甚至更长。
-* 一些闪存驱动器具有非常特定的协议要求，这些要求不受引导代码处理，因此可能不兼容。
+On Raspberry Pi 2B v1.2, 3A+, 3B and 3B+, if you are unable to use a particular USB device to boot your Raspberry Pi, you can instead use [`bootcode.bin`](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-boot-modes)​[-only](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-boot-modes) boot mode. The Raspberry Pi will still boot from the SD card, but only reads `bootcode.bin` from the SD card; the rest of your operating system lives on the USB device.
 
-### 特殊 bootcode.bin -only 引导模式
+### Hardware compatibility
 
->**重要**
->
->这不适用于树莓派 4 Model B。 
+Before booting from a USB mass storage device, verify that the device works correctly under Linux. Boot using an SD card and plug in the USB mass storage device. This should appear as a removable drive. This is especially important with USB SATA adapters, which may be supported by the bootloader in mass storage mode, but fail if Linux selects [USB Attached SCSI-UAS](https://en.wikipedia.org/wiki/USB_Attached_SCSI) mode.
 
-如果您无法使用特定的 USB 设备来引导您的树莓派，另一种选择（适用于树莓派 2B v1.2、3A+、3B 和 3B+）是使用特殊的 bootcode.bin-only 引导模式。树莓派仍将从 SD 卡引导，但只有 bootcode.bin 从中读取的文件。
+Hard disk drives (HDDs) typically require a powered USB hub. Even if everything appears to work, you may encounter intermittent failures without a powered USB hub.
 
-### 硬件兼容性
+### Multiple bootable drives
 
-在尝试从 USB 大容量存储设备启动之前，建议在 Linux 下验证设备是否正常工作。使用 SD 卡启动，然后插入 USB 大容量存储设备。这应该显示为可移动驱动器。这在使用 USB SATA 适配器时尤为重要，该适配器可能受到引导加载程序在大容量存储模式下的支持，但如果 Linux 选择 USB 附加 SCSI-UAS 模式，则可能失败。
+When searching for a bootable partition, the bootloader scans all USB mass storage devices in parallel and selects the first to respond. If the boot partition does not contain a suitable `start.elf` file, the bootloader attempts the next available device. There is no method for specifying the boot device according to the USB topology; this would slow down boot and adds unnecessary configuration complexity.
 
-旋转硬盘驱动器几乎总是需要有电源的 USB 集线器。即使一切看起来正常，没有有电源的 USB 集线器，您可能会遇到间歇性故障。
+| NOTE | Use `config.txt` file [conditional filters](https://www.raspberrypi.com/documentation/computers/config_txt.html#conditional-filters) to select alternate firmware in complex device configurations. |
+| ------ | --------------------------------------------------------------------------- |
 
-### 多个可引导驱动器
+## Network booting
 
-在搜索可引导分区时，引导加载程序并行扫描所有 USB 大容量存储设备，并将选择第一个响应的设备。如果引导分区不包含适当的 start.elf 文件，则会选择下一个可用设备。根据 USB 拓扑结构指定引导设备的方法不存在，因为这会减慢引导速度并增加不必要且难以支持的配置复杂性。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/boot-net.adoc)
 
->**注意**
->
->config.txt 文件条件过滤器可用于在复杂设备配置中选择备用固件。 
+This section describes how network booting works on Raspberry Pi 3B, 3B+ and 2B v1.2.
 
-## 网络引导
+On Pi 4 and Pi 5, network booting is implemented in the second stage bootloader in the EEPROM. For more information, see [Raspberry Pi 4 bootloader configuration](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-bootloader-configuration).
 
-本节描述了树莓派 3B、3B+ 和 2B v1.2 上的网络引导工作原理。
+We also have a [tutorial about setting up a network boot system](https://www.raspberrypi.com/documentation/computers/remote-access.html#network-boot-your-raspberry-pi).
 
-在 Pi 4 和 Pi 5 上，网络引导是在 EEPROM 中的第二阶段引导加载程序中实现的。有关更多信息，请参阅树莓派 4 引导加载程序配置。
+Network booting works only for the wired adapter built into the above models of Raspberry Pi. Booting over wireless LAN is not supported, nor is booting from any other wired network device.
 
-我们还有关于设置网络引导系统的教程。
+### Network boot flow
 
-仅适用于上述树莓派型号内置有线适配器的网络引导。不支持通过无线局域网引导，也不支持通过任何其他有线网络设备引导。
+To network boot, the boot ROM does the following:
 
-### 网络引导流程
-
-要进行网络引导，引导 ROM 执行以下操作：
-
-* 初始化板载以太网设备（Microchip LAN9500 或 LAN7500）
-* 发送 DHCP 请求（使用厂商类标识符 DHCP 选项 60 设置为 PXEClient:Arch:00000:UNDI:002001 ）
-* 接收 DHCP 回复
-* (可选)接收 DHCP 代理回复
-* ARP 到 tftpboot 服务器
-* ARP 回复包括 tftpboot 服务器以太网地址
+* Initialise on-board Ethernet device (Microchip LAN9500 or LAN7500)
+* Send DHCP request (with Vendor Class identifier DHCP option 60 set to `PXEClient:Arch:00000:UNDI:002001`)
+* Receive DHCP reply
+* (optional) Receive DHCP proxy reply
+* ARP to tftpboot server
+* ARP reply includes tftpboot server ethernet address
 * TFTP RRQ `bootcode.bin`
-  * 未找到文件：服务器用带有文本错误消息的 TFTP 错误响应回复
-  * 文件已存在：服务器将用带有头部中块编号的文件的第一个块（512 字节）的数据回复
-    * 树莓派用包含块编号的 TFTP ACK 数据包进行回复，并重复直到最后一个不是 512 字节的块
+
+  * File not found: Server replies with TFTP error response with textual error message
+  * File exists: Server will reply with the first block (512 bytes) of data for the file with a block number in the header
+
+    * Raspberry Pi replies with TFTP ACK packet containing the block number, and repeats until the last block which is not 512 bytes
 * TFTP RRQ `bootsig.bin`
-  * 通常会导致错误 file not found 。这是可以预料到的，TFTP 引导服务器应该能够处理它。
 
-从这一点开始， bootcode.bin 代码继续加载系统。它将尝试访问的第一个文件是 <serial_number>/start.elf 。如果这不会导致错误，那么要读取的任何其他文件都将以 serial_number 为前缀。这很有用，因为它使您能够为您的树莓派创建具有单独 start.elf / 内核的单独目录。
+  * This will normally result in an error `file not found`. This is to be expected, and TFTP boot servers should be able to handle it.
 
-要获取设备的序列号，您可以尝试使用 tcpdump / wireshark 查看访问的文件，或者运行标准的 Raspberry Pi OS SD 卡和 cat /proc/cpuinfo 。
+From this point the `bootcode.bin` code continues to load the system. The first file it will try to access is `<serial_number>/start.elf`. If this does not result in an error then any other files to be read will be prepended with the `serial_number`. This is useful because it enables you to create separate directories with separate `start.elf` / kernels for your Raspberry Pis.
 
-如果您将所有文件放入 TFTP 目录的根目录中，那么随后访问的所有文件都将从那里访问。
+To get the serial number for the device you can either try this boot mode and see what file is accessed using tcpdump / wireshark, or you can run a standard Raspberry Pi OS SD card and `cat /proc/cpuinfo`.
 
-### 调试网络引导模式
+If you put all your files into the root of your TFTP directory then all following files will be accessed from there.
 
-首先要检查的是 OTP 位是否正确编程。为此，您需要将 program_usb_boot_mode=1 添加到 config.txt ，然后重新启动（使用能够正确引导到 Raspberry Pi OS 的标准 SD 卡）。完成这些步骤后，您应该能够执行以下操作：
+### Debugging network boot mode
+
+The first thing to check is that the OTP bit is correctly programmed. To do this, you need to add `program_usb_boot_mode=1` to `config.txt` and reboot (with a standard SD card that boots correctly into Raspberry Pi OS). Once you’ve done this, you should be able to do:
 
 ```
 $ vcgencmd otp_dump | grep 17:
 ```
 
-如果第 17 行包含 3020000a ，则 OTP 已正确编程。现在，您应该能够移除 SD 卡，插入以太网，然后在树莓派上电约 5 秒后，以太网 LED 灯应该亮起。
+If row 17 contains `3020000a` then the OTP is correctly programmed. You should now be able to remove the SD card, plug in Ethernet, and then the Ethernet LEDs should light up around 5 seconds after the Raspberry Pi powers up.
 
-要在服务器上捕获以太网数据包，请在 tftpboot 服务器（或 DHCP 服务器，如果它们不同）上使用 tcpdump。否则，您将无法看到直接发送的数据包，因为网络交换机不是集线器！
+To capture the Ethernet packets on the server, use tcpdump on the tftpboot server (or DHCP server if they are different). You will need to capture the packets there otherwise you will not be able to see packets that get sent directly because network switches are not hubs!
 
 ```
 $ sudo tcpdump -i eth0 -w dump.pcap
 ```
 
-这将把 eth0 上的所有内容写入名为 dump.pcap 的文件中。然后，您可以对数据包进行后处理或将其上传到 cloudshark 进行通信。
+This will write everything from eth0 to a file named `dump.pcap`. You can then post-process or upload the packets to cloudshark for communication.
 
-#### DHCP 请求/响应
+#### DHCP request / reply
 
-作为最低要求，您应该看到类似以下内容的 DHCP 请求和回复：
+As a minimum you should see a DHCP request and reply which looks like the following:
 
 ```
 6:44:38.717115 IP (tos 0x0, ttl 128, id 0, offset 0, flags [none], proto UDP (17), length 348)
@@ -1719,11 +885,11 @@ $ sudo tcpdump -i eth0 -w dump.pcap
 	    END Option 255, length 0
 ```
 
-Vendor-Option Option 43 包含回复的重要部分。这部分必须包含字符串“Raspberry Pi Boot”。由于引导 ROM 中的一个错误，您可能需要在字符串末尾添加三个空格。
+`Vendor-Option Option 43` contains the important part of the reply. This must contain the string "Raspberry Pi Boot". Due to a bug in the boot ROM, you may need to add three spaces to the end of the string.
 
-#### TFTP 文件读取
+#### TFTP file read
 
-当正确指定供应商选项时，您将看到随后发送的 TFTP RRQ 数据包。 RRQ 可以通过数据的第一个块或错误消息（文件未找到）进行回复。在某些情况下，它们甚至会收到第一个数据包，然后传输会被树莓派中止（当检查文件是否存在时会发生这种情况）。下面的示例仅包括三个数据包：原始读取请求，第一个数据块（始终为 516 字节，包含标头和 512 字节数据，尽管最后一个块始终少于 512 字节，可能为零长度），以及第三个数据包（包含与数据块中的帧编号匹配的 ACK）。
+When the Vendor Option is correctly specified, you’ll see a subsequent TFTP RRQ packet being sent. RRQs can be replied to by either the first block of data or an error saying file not found. In a couple of cases they even receive the first packet and then the transmission is aborted by the Raspberry Pi (this happens when checking whether a file exists). The example below is just three packets: the original read request, the first data block (which is always 516 bytes containing a header and 512 bytes of data, although the last block is always less than 512 bytes and may be zero length), and the third packet (the ACK which contains a frame number to match the frame number in the data block).
 
 ```
 16:44:41.224964 IP (tos 0x0, ttl 128, id 0, offset 0, flags [none], proto UDP (17), length 49)
@@ -1734,173 +900,176 @@ Vendor-Option Option 43 包含回复的重要部分。这部分必须包含字�
     192.168.1.139.49152 > 192.168.1.1.55985: [no cksum] UDP, length 4
 ```
 
-### 已知问题
+### Known problems
 
-以太网引导模式存在一些已知问题。由于引导模式的实现在芯片本身中，除了使用仅包含 bootcode.bin 文件的 SD 卡外，没有其他解决方法。
+There are a number of known problems with the Ethernet boot mode. Since the implementation of the boot modes is in the chip itself, there are no workarounds other than to use an SD card with just the `bootcode.bin` file.
 
-#### DHCP 请求在五次尝试后超时
+#### DHCP requests time out after five tries
 
-树莓派将尝试在五秒内进行五次 DHCP 请求，总共持续 25 秒。如果服务器在此时间内无法响应，则树莓派将进入低功耗状态。除了在 SD 卡上的 bootcode.bin 之外，没有其他解决方法。
+The Raspberry Pi will attempt a DHCP request five times with five seconds in between, for a total period of 25 seconds. If the server is not available to respond in this time, then the Raspberry Pi will drop into a low-power state. There is no workaround for this other than bootcode.bin on an SD card.
 
-#### 分开子网上的 TFTP 服务器不受支持
+#### TFTP server on separate subnet not supported
 
-在树莓派 3 Model B+ (BCM2837B0) 中修复。
+Fixed in Raspberry Pi 3 Model B+ (BCM2837B0).
 
-#### DHCP 中继损坏
+#### DHCP relay broken
 
-DHCP 检查还检查跳数值是否为 1 ，而使用 DHCP 中继时不会是这个值。
+The DHCP check also checked if the hops value was `1`, which it wouldn’t be with DHCP relay.
 
-在 树莓派 3 Model B+ 中修复。
+Fixed in Raspberry Pi 3 Model B+.
 
-#### 树莓派启动字符串
+#### Raspberry Pi boot string
 
-由于计算字符串长度时出错，“Raspberry Pi Boot”字符串在 DHCP 回复中需要额外的三个空格。
+The "Raspberry Pi Boot " string in the DHCP reply requires the extra three spaces due to an error calculating the string length.
 
-在 树莓派 3 Model B+ 中修复。
+Fixed in Raspberry Pi 3 Model B+.
 
-#### DHCP UUID 常量
+#### DHCP UUID constant
 
-DHCP UUID 被设置为一个常量值。
+The DHCP UUID is set to be a constant value.
 
-在 树莓派 3 Model B+ 中修复;该值设置为 32 位序列号。
+Fixed in Raspberry Pi 3 Model B+; the value is set to the 32-bit serial number.
 
-#### ARP 检查可能在 TFTP 事务中间失败响应
+#### ARP check can fail to respond in the middle of TFTP transaction
 
-当树莓派处于初始化阶段时，它只会响应 ARP 请求;只要开始传输数据，它将无法继续响应。
+The Raspberry Pi will only respond to ARP requests when it is in the initialisation phase; once it has begun transferring data, it’ll fail to continue responding.
 
-在树莓派 3 Model B+ 中修复。
+Fixed in Raspberry Pi 3 Model B+.
 
-#### DHCP 请求/回复/确认序列未正确实现
+#### DHCP request/reply/ack sequence not correctly implemented
 
-在引导时，树莓派广播 DHCPDISCOVER 数据包。DHCP 服务器以 DHCPOFFER 数据包回复。然后树莓派继续引导而不执行 DHCPREQUEST 或等待 DHCPACK。这可能导致两个不同的设备被提供相同的 IP 地址并在未正确分配给客户端的情况下使用它。
+At boot time, Raspberry Pi broadcasts a DHCPDISCOVER packet. The DHCP server replies with a DHCPOFFER packet. The Raspberry Pi then continues booting without doing a DHCPREQUEST or waiting for DHCPACK. This may result in two separate devices being offered the same IP address and using it without it being properly assigned to the client.
 
-在这种情况下，不同的 DHCP 服务器有不同的行为。dnsmasq（取决于设置）将对 MAC 地址进行哈希处理以确定 IP 地址，并 ping 该 IP 地址以确保它尚未被使用。这降低了发生这种情况的几率，因为它需要在哈希中发生冲突。
+Different DHCP servers have different behaviours in this situation. dnsmasq (depending upon settings) will hash the MAC address to determine the IP address, and ping the IP address to make sure it isn’t already in use. This reduces the chances of this happening because it requires a collision in the hash.
 
-## GPIO 引导模式
+## GPIO boot mode
 
->**注意**
->
->GPIO 引导模式仅适用于 树莓派 3A+、3B、3B+、Compute Module 3 和 3+。 
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/boot-gpio.adoc)
 
-旧版的树莓派可以配置，允许在使用连接到 GPIO 连接器的硬件时在上电时选择引导模式。这是通过在 SoC 的 OTP 存储器中设置位来完成的。如果设置了这些位，它们将永久地分配五个 GPIO 以允许进行此选择。如果设置了 OTP 位，它们就无法取消设置。在启用此功能时，您应该仔细考虑，因为这五个 GPIO 线将始终控制引导。虽然在树莓派启动后，您可以使用这些 GPIO 进行其他功能，但必须设置它们以使其在树莓派引导时启用所需的引导模式。
+| NOTE | GPIO boot mode is only available on the Raspberry Pi 3A+, 3B, 3B+, Compute Module 3 and 3+. |
+| ------ | --------------------------------------------------------------------------------------------- |
 
-要启用 GPIO 引导模式，请将以下行添加到 config.txt 文件中：
+Earlier Raspberry Pis can be configured to allow the boot mode to be selected at power-on using hardware attached to the GPIO connector. This is done by setting bits in the OTP memory of the SoC. Once the bits are set, they permanently allocate five GPIOs to allow this selection to be made. Once the OTP bits are set, they cannot be unset. You should think carefully about enabling this, since those five GPIO lines will always control booting. Although you can use the GPIOs for some other function once the Raspberry Pi has booted, you must set them up so that they enable the desired boot modes when the Raspberry Pi boots.
+
+To enable GPIO boot mode, add the following line to the `config.txt` file:
 
 ```
 program_gpio_bootmode=n
 ```
 
-其中 n 是您希望使用的 GPIO 组。然后重新启动树莓派一次，以使用此设置对 OTP 进行编程。第 1 组是 GPIO 22-26，第 2 组是 GPIO 39-43。除非您使用的是计算模块，否则必须使用第 1 组：第 2 组中的 GPIO 仅在计算模块上可用。由于 OTP 位的排列方式，如果您首先为第 1 组编程 GPIO 引导模式，然后稍后可以选择第 2 组。反之则不成立：如果选择了第 2 组作为 GPIO 引导模式，就无法选择第 1 组。
+Where `n` is the bank of GPIOs which you wish to use. Then reboot the Raspberry Pi once to program the OTP with this setting. Bank 1 is GPIOs 22-26, Bank 2 is GPIOs 39-43. Unless you have a Compute Module, you must use bank 1: the GPIOs in Bank 2 are only available on the Compute Module. Because of the way the OTP bits are arranged, if you first program GPIO boot mode for Bank 1, you then have the option of selecting Bank 2 later. The reverse is not true: once Bank 2 has been selected for GPIO boot mode, you cannot select Bank 1.
 
-倘若启用了 GPIO 引导模式，树莓派将不再启动。您必须拉高至少一个引导模式 GPIO 引脚，以便启动树莓派。
+Once GPIO boot mode is enabled, the Raspberry Pi will no longer boot. You must pull up at least one boot-mode GPIO pin in order for the Raspberry Pi to boot.
 
-### 引脚分配
+### Pin assignments
 
-#### 树莓派 3B 和计算模块 3
+#### Raspberry Pi 3B and Compute Module 3
 
-| 引脚 1 | 引脚 2 | 引导类型                 |
-| -------- | -------- | -------------------------- |
-| 22     | 39     | SD0                      |
-| 23     | 40     | SD1                      |
-| 24     | 41     | NAND（目前不支持 Linux） |
-| 25     | 42     | SPI（目前不支持 Linux）  |
-| 26     | 43     | USB                      |
+| Bank 1 | Bank 2 | boot type                          |
+| -------- | -------- | ------------------------------------ |
+| 22     | 39     | SD0                                |
+| 23     | 40     | SD1                                |
+| 24     | 41     | NAND (no Linux support at present) |
+| 25     | 42     | SPI (no Linux support at present)  |
+| 26     | 43     | USB                                |
 
-在上表中，USB 选择 USB 设备启动模式和 USB 主机启动模式。要使用 USB 启动模式，必须在 OTP 存储器中启用它。有关更多信息，请参阅 USB 设备启动和 USB 主机启动。
+USB in the table above selects both USB device boot mode and USB host boot mode. In order to use a USB boot mode, it must be enabled in the OTP memory. For more information, see [USB device boot](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#usb-device-boot-mode) and [USB host boot](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#usb-host-boot-mode).
 
-#### 旧版树莓派 3B（带金属盖的 BCM2837B0），树莓派 3A+，3B+ 和计算模块 3+
+#### Later Raspberry Pi 3B (BCM2837B0 with the metal lid), Raspberry Pi 3A+, 3B+ and Compute Module 3+
 
-| 引脚 1 | 引脚 2 | 引导类型                  |
-| -------- | -------- | --------------------------- |
-| 20     | 37     | SD0                       |
-| 21     | 38     | SD1                       |
-| 22     | 39     | NAND（目前不支持 Linux）  |
-| 23     | 40     | SPI（目前不支持 Linux）   |
-| 24     | 41     | USB 设备                  |
-| 25     | 42     | USB 主机 - 大容量存储设备 |
-| 26     | 43     | USB 主机 - 以太网         |
+| Bank 1 | Bank 2 | boot type                          |
+| -------- | -------- | ------------------------------------ |
+| 20     | 37     | SD0                                |
+| 21     | 38     | SD1                                |
+| 22     | 39     | NAND (no Linux support at present) |
+| 23     | 40     | SPI (no Linux support at present)  |
+| 24     | 41     | USB device                         |
+| 25     | 42     | USB host - mass storage device     |
+| 26     | 43     | USB host - Ethernet                |
 
->**注意**
->
->各种引导模式按照 GPIO 线的数字顺序尝试，即 SD0，然后 SD1，然后 NAND 等等。
+| NOTE | The various boot modes are attempted in the numerical order of the GPIO lines, i.e. SD0, then SD1, then NAND and so on. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------- |
 
-### 引导流程
+### Boot flow
 
-SD0 是 Broadcom SD 卡/MMC 接口。当 SoC 中的引导 ROM 运行时，它总是将 SD0 连接到内置的 microSD 卡槽。在带有 eMMC 设备的计算模块上，SD0 连接到该设备；在计算模块 Lite 上，SD0 可在边缘连接器上使用，并连接到 CMIO 扩展板中的 microSD 卡槽。SD1 是 Arasan SD 卡/MMC 接口，还能够支持 SDIO。所有具有内置无线局域网的树莓派型号都使用 SD1 通过 SDIO 连接到无线芯片。
+SD0 is the Broadcom SD card/MMC interface. When the boot ROM within the SoC runs, it always connects SD0 to the built-in microSD card slot. On Compute Modules with an eMMC device, SD0 is connected to that; on the Compute Module Lite SD0 is available on the edge connector and connects to the microSD card slot in the CMIO carrier board. SD1 is the Arasan SD card/MMC interface which is also capable of SDIO. All Raspberry Pi models with built-in wireless LAN use SD1 to connect to the wireless chip via SDIO.
 
-GPIO 线上的默认拉电阻为 50KΩ，如 BCM2835 ARM 外围设备数据表第 102 页所述。建议使用 5KΩ的拉电阻来拉高 GPIO 线：这将使 GPIO 正常工作但不会消耗太多功率。
+The default pull resistance on the GPIO lines is 50KΩ, as documented on page 102 of the [BCM2835 ARM peripherals datasheet](https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf). A pull resistance of 5KΩ is recommended to pull a GPIO line up: this will allow the GPIO to function but not consume too much power.
 
-## NVMe SSD 引导
+## NVMe SSD boot
 
-NVMe（非易失性内存表达）是通过 PCIe 总线访问外部存储的标准。您可以通过 Compute Module 4（CM4）IO 板或树莓派 5 上的 PCIe 插槽连接 NVMe 驱动器。通过一些额外的配置，您可以从 NVMe 驱动器引导。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/boot-nvme.adoc)
 
-### 先决条件
+NVMe (Non-Volatile Memory express) is a standard for external storage access over a PCIe bus. You can connect NVMe drives via the PCIe slot on a Compute Module 4 (CM4) IO board or Raspberry Pi 5. With some additional configuration, you can boot from an NVMe drive.
 
-#### 硬件
+### Prerequisites
 
-* NVMe M.2 固态硬盘
-* 从 PCIe 转换为 M.2 标准的适配器。
-  * 对于树莓派 5，我们推荐使用 M.2 HAT+，它可以将树莓派的 PCIe FFC 插槽转换为 M 键接口。
-  * 对于 CM4，请搜索"PCI-E 3.0 ×1 通道到 M.2 NGFF M 键 SSD NVMe PCI Express 适配器卡"。
+#### Hardware
 
-要检查 NVMe 驱动器是否正确连接，请从另一个存储设备（如 SD 卡）引导您的树莓派，并运行 ls -l /dev/nvme* 。示例输出如下。
+* NVMe M.2 SSD
+* an adapter to convert from PCIe to an M.2 standard.
+
+  * For Raspberry Pi 5, we recommend the [M.2 HAT+](https://www.raspberrypi.com/documentation/accessories/m2-hat-plus.html), which converts from the Raspberry Pi’s **PCIe FFC** slot to an M Key interface.
+  * For the CM4, search for a "PCI-E 3.0 ×1 lane to M.2 NGFF M-Key SSD NVMe PCI Express adapter card"
+
+To check that your NVMe drive is connected correctly, boot your Raspberry Pi from another storage device (such as an SD card) and run `ls -l /dev/nvme*`. Example output is shown below.
 
 ```
 crw------- 1 root root 245, 0 Mar  9 14:58 /dev/nvme0
 brw-rw---- 1 root disk 259, 0 Mar  9 14:58 /dev/nvme0n1
 ```
 
-#### 软件
+#### Software
 
-运行以下命令查看您正在运行的固件版本：
+Run the following command to see what firmware you’re running:
 
 ```
 $ sudo rpi-eeprom-update
 ```
 
-对于树莓派 5，您需要在 2023 年 12 月 6 日或之后发布的固件。
+For Raspberry Pi 5, you need firmware released December 6, 2023 or later.
 
-对于 CM4，NVMe 启动支持是在 2021 年 7 月引入的。您需要自那日期以来发布的以下软件版本：
+For CM4, NVMe boot support was introduced in July 2021. You need a version of the following software released since that date:
 
-* 引导加载程序
-* VideoCore 固件
-* Raspberry Pi OS Linux 内核
+* the bootloader
+* VideoCore firmware
+* the Raspberry Pi OS Linux kernel
 
-最新的 Raspberry Pi OS 发行版包含您所需的一切。使用 Raspberry Pi Imager 将 Raspberry Pi OS 镜像安装到您的驱动器上。
+The latest Raspberry Pi OS release has everything you need. Use [Raspberry Pi Imager](https://www.raspberrypi.com/documentation/computers/getting-started.html#raspberry-pi-imager) to install a Raspberry Pi OS image onto your drive.
 
-### 编辑 EEPROM 启动顺序
+### Edit EEPROM boot order
 
-对于树莓派 5，您需要启动 Raspberry Pi OS 来编辑启动顺序。您可以从 SD 卡或 USB 驱动器引导您的树莓派进行此步骤。即使更改引导设备，EEPROM 配置也会持续存在，因为 EEPROM 配置存储在板上本身。
+For Raspberry Pi 5, you need to boot Raspberry Pi OS to edit the boot order. You can boot your Raspberry Pi from an SD card or USB drive for this step. The EEPROM configuration persists even when you change the boot device, since the EEPROM configuration is stored on the board itself.
 
-使用树莓派 配置 CLI 更新引导加载程序：
+Use the Raspberry Pi Configuration CLI to update the bootloader:
 
 ```
 $ sudo raspi-config
 ```
 
-在 Advanced Options > Bootloader Version 下，选择 Latest 。然后，使用 Finish 键或 Escape 键退出 raspi-config 。
+Under `Advanced Options` > `Bootloader Version`, choose `Latest`. Then, exit `raspi-config` with `Finish` or the **Escape** key.
 
-运行以下命令以将固件更新到最新版本：
+Run the following command to update your firmware to the latest version:
 
 ```
 $ sudo rpi-eeprom-update -a
 ```
 
-然后，使用 sudo reboot 重新启动。您的树莓派 5 应该从 NVMe 启动。
+Then, reboot with `sudo reboot`. Your Raspberry Pi 5 should boot from NVMe.
 
-对于 CM4，请使用 rpiboot 来更新引导加载程序。您可以在 USB 启动 GitHub 存储库中找到构建 rpiboot 和配置 IO 板以将 ROM 切换到 usbboot 模式的说明。
+For CM4, use `rpiboot` to update the bootloader. You can find instructions for building `rpiboot` and configuring the IO board to switch the ROM to usbboot mode in the [USB boot GitHub repository](https://github.com/raspberrypi/usbboot).
 
-对于带有 eMMC 的 CM4 版本，请确保您已将 NVMe 首选设置为启动顺序中的第一项。记得在 recovery/boot.conf 中将 NVMe 启动模式 6 添加到 BOOT_ORDER 中。
+For versions of CM4 with an eMMC, make sure you have set NVMe first in the boot order. Remember to add the NVMe boot mode `6` to `BOOT_ORDER` in `recovery/boot.conf`.
 
-当 SD 卡槽为空时，CM4 Lite 会自动从 NVMe 启动。
+CM4 Lite automatically boots from NVMe when the SD card slot is empty.
 
 ### NVMe `BOOT_ORDER`
 
-EEPROM 配置中的 BOOT_ORDER 设置控制引导行为。对于 NVMe 引导，请使用引导模式 6 。有关更多信息，请参阅树莓派引导加载程序配置。
+The `BOOT_ORDER` setting in EEPROM configuration controls boot behaviour. For NVMe boot, use boot mode `6`. For more information, see [Raspberry Pi bootloader configuration](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-bootloader-configuration).
 
-### 示例
+### Example
 
-当引导加载程序检测到 NVMe 驱动器时，UART 输出的示例如下：
+Below is an example of UART output when the bootloader detects the NVMe drive:
 
 ```
 Boot mode: SD (01) order f64
@@ -1910,13 +1079,13 @@ VID 0x144d MN Samsung SSD 970 EVO Plus 250GB
 NVME on
 ```
 
-然后它将找到一个 FAT 分区并加载 start4.elf ：
+It will then find a FAT partition and load `start4.elf`:
 
 ```
 Read start4.elf bytes  2937840 hnd 0x00050287 hash ''
 ```
 
-然后它将加载内核并启动操作系统：
+It will then load the kernel and boot the OS:
 
 ```
 MESS:00:00:07.096119:0: brfs: File read: /mfs/sd/kernel8.img
@@ -1924,7 +1093,7 @@ MESS:00:00:07.098682:0: Loading 'kernel8.img' to 0x80000 size 0x1441a00
 MESS:00:00:07.146055:0:[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd083]
 ```
 
-在 Linux 中，SSD 显示为 /dev/nvme0 ，"namespace"显示为 /dev/nvme0n1 。将有两个分区 /dev/nvme0n1p1 （FAT）和 /dev/nvme0n1p2 （EXT4）。使用 lsblk 检查分区分配情况：
+In Linux the SSD appears as `/dev/nvme0` and the "namespace" as `/dev/nvme0n1`. There will be two partitions `/dev/nvme0n1p1` (FAT) and `/dev/nvme0n1p2` (EXT4). Use `lsblk` to check the partition assignments:
 
 ```
 NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
@@ -1933,19 +1102,21 @@ nvme0n1     259:0    0 232.9G  0 disk
 └─nvme0n1p2 259:2    0 232.6G  0 part /
 ```
 
-### 故障排除
+### Troubleshooting
 
-如果启动过程失败，请在 rpi-eeprom GitHub 存储库上提交问题报告，确保附上控制台副本和启动过程中屏幕上显示的任何内容。
+If the boot process fails, please file an issue on the [rpi-eeprom GitHub repository](https://github.com/raspberrypi/rpi-eeprom), being sure to attach a copy of the console and anything displayed on the screen during boot.
 
-## HTTP 引导
+## HTTP boot
 
-网络安装功能使用以太网上的 HTTP 引导树莓派进入嵌入式树莓派 Imager。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/boot-http.adoc)
 
-除了网络安装，您还可以使用通过 HTTP 下载的文件显式引导设备，使用引导模式 7 。即使禁用了引导时的网络安装，您仍然可以使用此功能。
+The network install feature uses HTTP over Ethernet to boot the Raspberry Pi into embedded [Raspberry Pi Imager](https://www.raspberrypi.com/documentation/computers/getting-started.html#raspberry-pi-imager).
 
-例如，您可以将此添加到您的 BOOT_ORDER 作为备用启动方法，或者将其放在 GPIO 条件之后，以在 GPIO 引脚被拉低时从您自己的服务器启动 HTTP 引导。
+In addition to network install, you can explicitly boot your device with files downloaded via HTTP with [boot-mode](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#BOOT_ORDER) `7`. You can still use this even if [network install on boot is disabled](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#NET_INSTALL_ENABLED).
 
-例如，如果您将以下内容添加到您的 EEPROM 配置和 GPIO 8（其默认状态为 1 或高电平）被拉低，文件 http://downloads.raspberrypi.org:80/net_install/boot.img 和 http://downloads.raspberrypi.org:80/net_install/boot.sig 将被下载。如果启用了启动时网络安装，它将使用相同的 URL。如果 GPIO 8 未被拉低，则行为将保持不变。
+You could, for example, add this to your `BOOT_ORDER` as a fall-back boot method, or put it behind a GPIO conditional to initiate HTTP boot from your own server when a GPIO pin is pulled low.
+
+For example, if you added the following to your EEPROM config and GPIO 8 (which has a default state of 1 or HIGH) were to be pulled low, the files `http://downloads.raspberrypi.org:80/net_install/boot.img` and `http://downloads.raspberrypi.org:80/net_install/boot.sig` would be downloaded. If network install on boot were enabled, it would use the same URL. If GPIO 8 were not pulled low the behaviour would be unchanged.
 
 ```
 [gpio8=0]
@@ -1954,73 +1125,80 @@ HTTP_HOST=downloads.raspberrypi.org
 NET_INSTALL_ENABLED=0
 ```
 
-boot.img 和 boot.sig 签名文件是包含引导文件系统的 RAM 磁盘。有关更多详细信息，请参阅 boot_ramdisk。
+`boot.img` and the `boot.sig` signature file is a ram disk containing a boot file system. For more details, see [boot_ramdisk](https://www.raspberrypi.com/documentation/computers/config_txt.html#boot_ramdisk).
 
-如果启用了安全启动并且未设置 HTTP_HOST，则 BOOT_ORDER 中的 HTTP 将被忽略。
+HTTP in the `BOOT_ORDER` will be ignored if secure boot is enabled and [HTTP_HOST](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#HTTP_HOST) is not set.
 
-### 要求
+### Requirements
 
-要使用 HTTP 引导，请更新到 2022 年 3 月 10 日或之后发布的引导加载程序。HTTP 引导需要有线以太网连接。
+To use HTTP boot, [update](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#bootloader_update_stable) to a bootloader released 10th March 2022 or later. HTTP boot requires a wired Ethernet connection.
 
-要使用自定义 CA 证书，请更新到 2024 年 4 月 5 日或之后发布的引导加载程序。只有运行 BCM2712 CPU 的设备支持自定义 CA 证书。
+To use custom CA certificates, [update](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#bootloader_update_stable) to a bootloader released 5th April 2024 or later. Only devices running the BCM2712 CPU support custom CA certificates.
 
-### 键
+### Keys
 
-所有 HTTP 下载必须经过签名。引导加载程序包含默认主机 fw-download-alias1.raspberrypi.com 上文件的公钥。除非您设置 HTTP_HOST 并在 EEPROM 中包含公钥，否则将使用此密钥来验证网络安装映像。这使您可以在自己的服务器上托管树莓派网络安装映像。
+All HTTP downloads must be signed. The bootloader includes a public key for the files on the default host `fw-download-alias1.raspberrypi.com`. This key will be used to verify the network install image, *unless* you set [HTTP_HOST](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#HTTP_HOST) *and* include a public key in the EEPROM. This allows you to host the Raspberry Pi network install images on your own server.
 
->**警告**
->
->使用您自己的网络安装映像将需要您对映像进行签名并将您的公钥添加到 EEPROM 中。如果您之后应用公共 EEPROM 更新，您的密钥将丢失并需要重新添加。 
+| WARNING | Using your own network install image will require you to sign the image and add your public key to the EEPROM. If you then apply a public EEPROM update, your key will be lost and will need to be re-added. |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-USBBOOT 具有编程公钥所需的所有工具。
+[`USBBOOT`](https://github.com/raspberrypi/usbboot/blob/master/Readme.md) has all the tools needed to program public keys.
+
+Use the following command to add your public key to the EEPROM. `boot.conf` contains your modifications:
 
 ```
-# Add your PUBLIC key to the eeprom. boot.conf contains your modifications
-rpi-eeprom-config -c boot.conf -p mypubkey.pem -o pieeprom.upd pieeprom.original.bin
-
-# Generate signature for your eeprom
-rpi-eeprom-digest -i pieeprom.upd -o pieeprom.sig
-
-# Sign the network install image with your PRIVATE key
-# Put boot.img and boot.sig on your web server
-rpi-eeprom-digest -i boot.img -o boot.sig -k myprivkey.pem
+$ rpi-eeprom-config -c boot.conf -p mypubkey.pem -o pieeprom.upd pieeprom.original.bin
 ```
 
-### 证书
+Use the following command to generate a signature for your EEPROM:
 
-为了安全起见，网络安装使用 HTTPS 从 Raspberry Pi 网站下载 OS 映像。此功能使用我们自己的 CA 根证书包含在引导加载程序中，用于验证主机。
+```
+$ rpi-eeprom-digest -i pieeprom.upd -o pieeprom.sig
+```
 
-您可以将自己的自定义 CA 证书添加到设备的 EEPROM 中，以安全地从您自己的网站下载映像。使用 --cacertder 工具的 rpi-eeprom-config 选项添加 DER 编码的证书。您必须将证书的哈希放置在 EEPROM 配置设置中，以确保证书未被修改。
+Then, use the following command to sign the network install image with your private key:
 
-运行以下命令生成 DER 编码的证书：
+```
+$ rpi-eeprom-digest -i boot.img -o boot.sig -k myprivkey.pem
+```
+
+Finally, put `boot.img` and `boot.sig` on your web server to use your own signed network install image.
+
+### Certificates
+
+For security, Network Install uses HTTPS to download OS images from the Raspberry Pi website. This feature uses our own CA root included in the bootloader to verify the host.
+
+You can add your own custom CA certificate to your device EEPROM to securely download images from your own website. Use the `--cacertder` option of the `rpi-eeprom-config` tool to add the DER-encoded certificate. You must place a hash of the certificate in the EEPROM config settings to ensure that the certificate is not modified.
+
+Run the following command to generate a DER-encoded certificate:
 
 ```
 $ openssl x509 -in your_ca_root_cert.pem -out cert.der -outform DER
 ```
 
-然后，运行以下命令生成证书的 SHA-256 哈希：
+Then, run the following command to generate a SHA-256 hash of the certificate:
 
 ```
 $ sha256sum cert.der
 ```
 
-您应该看到类似以下内容的输出：
+You should see output similar to the following:
 
 ```
 701bd97f67b0f5483a9734e6e5cf72f9a123407b346088638f597878563193fc  cert.der
 ```
 
-接下来，更新 boot.conf 以包含证书的哈希值：
+Next, update `boot.conf` to include the hash of the certificate:
 
 ```
 $ sudo rpi-eeprom-config --edit
 ```
 
-在 [gpio8=0] 部分配置以下设置，替换为：
+Configure the following settings in the `[gpio8=0]` section, replacing:
 
-* 使用您的网站替换 <your_website> ，例如 yourserver.org
-* 使用您网站上托管的操作系统镜像路径替换 <path_to_files> ，例如 path/to/files
-* 使用上面生成的哈希值 701bd97f67b0f5483a9734e6e5cf72f9a123407b346088638f597878563193fc ，例如 <hash>
+* `<your_website>` with [your website](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#HTTP_HOST), e.g. `yourserver.org`
+* `<path_to_files>` with the [path to your OS image](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#HTTP_PATH) hosted on your website, e.g. `path/to/files`
+* `<hash>` with the hash value you generated above, e.g. `701bd97f67b0f5483a9734e6e5cf72f9a123407b346088638f597878563193fc`
 
 ```
 [all]
@@ -2036,16 +1214,16 @@ HTTP_PATH=<path_to_files>
 HTTP_CACERT_HASH=<hash>
 ```
 
-当您指定一个 HTTP_CACERT_HASH 时，网络安装会通过端口 443 上的 HTTPS 下载镜像。没有哈希值时，网络安装会通过端口 80 上的 HTTP 下载镜像。
+When you specify a `HTTP_CACERT_HASH`, Network Install downloads the image using HTTPS over port 443. Without a hash, Network install downloads the image using HTTP over port 80.
 
-最后，使用以下命令将所有内容加载到 EEPROM 中：
+Finally, use the following commands to load everything into EEPROM:
 
 ```
 $ rpi-eeprom-config -c boot.conf -p mypubkey.pem -o pieeprom.bin --cacertder cert.der pieeprom.original.bin
 $ rpi-eeprom-digest -k myprivkey.pem -i pieeprom.bin -o pieeprom.sig
 ```
 
-在网络引导期间，您的树莓派应该使用 HTTPS 而不是 HTTP。要查看由网络安装解析的完整 HTTPS URL 以进行下载，请检查引导输出：
+During network boot, your Raspberry Pi should use HTTPS instead of HTTP. To see the full HTTPS URL resolved by Network Install for the download, check the boot output:
 
 ```
 Loading boot.img ...
@@ -2053,113 +1231,781 @@ HTTP: GET request for https://yourserver.org:443/path/to/files/boot.sig
 HTTP: GET request for https://yourserver.org:443/path/to/files/boot.img
 ```
 
-### 安全引导
+### Secure boot
 
-如果启用了安全引导，则树莓派只能运行由客户私钥签名的代码。因此，如果您想要在启用安全引导的情况下使用网络安装或 HTTP 引导模式，您必须使用自己的密钥签署 boot.img 并生成 boot.sig ，并在某处托管这些文件以供下载。EEPROM 中的公钥将用于验证镜像。
+If secure boot is enabled, then the Raspberry Pi can only run code signed by the customer’s private key. So if you want to use network install or HTTP boot mode with secure boot, you must sign `boot.img` and generate `boot.sig` with your own key and host these files somewhere for download. The public key in the EEPROM will be used to verify the image.
 
-如果启用了安全启动并且未设置 HTTP_HOST，则网络安装和 HTTP 引导将被禁用。
+If secure boot is enabled and [HTTP_HOST](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#HTTP_HOST) is not set, then network install and HTTP boot will be disabled.
 
-有关安全启动的更多信息，请参阅 USBBOOT 。
+For more information about secure boot see [`USBBOOT`](https://github.com/raspberrypi/usbboot/blob/master/secure-boot-recovery/README.md).
 
-## 并行显示接口
+## Boot sequence
 
-##### [在树莓派上使用 DPI 显示器](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003471-WP/Using-a-DPI-display.pdf)
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/bootflow-legacy.adoc)
 
-在树莓派上使用 DPI 显示器
+| IMPORTANT | The following boot sequence applies to the BCM2837 and BCM2837B0 based models of Raspberry Pi only. On models prior to this, the Raspberry Pi will try SD card boot, followed by [USB device mode boot](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#usb-device-boot-mode). For the Raspberry Pi 4 and Raspberry Pi 5 boot sequence please see the [EEPROM bootflow](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#eeprom-boot-flow) section. |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-可以通过 40 针通用输入/输出(GPIO)连接器将 Display Parallel Interface (DPI)显示器连接到树莓派设备，作为使用专用 Display Serial Interface (DSI)或高清多媒体接口(HDMI)端口的替代方案。
+USB boot defaults on Raspberry Pi 3 will depend on which version is being used. See this [page](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#usb-mass-storage-boot) for information on enabling USB boot modes when not enabled by default.
 
-所有带有 40 针排针和计算模块的树莓派主板上都提供了高达 24 位并行 RGB 接口。该接口允许将并行 RGB 显示器连接到树莓派 GPIO，无论是以 RGB24（每色 8 位红、绿和蓝）还是 RGB666（每色 6 位）或 RGB565（5 位红、6 位绿和 5 位蓝）的形式。
+When the BCM2837 boots, it uses two different sources to determine which boot modes to enable. Firstly, the one-time-programmable (OTP) memory block is checked to see which boot modes are enabled. If the GPIO boot mode setting is enabled, then the relevant GPIO lines are tested to select which of the OTP-enabled boot modes should be attempted. Note that GPIO boot mode can only be used to select boot modes that are already enabled in the OTP. See [GPIO boot mode](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-boot-mode) for details on configuring GPIO boot mode. GPIO boot mode is disabled by default.
 
-该接口由 GPU 固件控制，并可以通过用户通过特殊 config.txt 参数和启用正确的 Linux 设备树叠加来进行编程。
+Next, the boot ROM checks each of the boot sources for a file called `bootcode.bin`; if it is successful it will load the code into the local 128K cache and jump to it. The overall boot mode process is as follows:
 
-### GPIO 引脚
+* BCM2837 boots
+* Read OTP to determine which boot modes to enable
+* If GPIO boot mode enabled, use GPIO boot mode to refine list of enabled boot modes
+* If enabled: check primary SD for `bootcode.bin` on GPIO 48-53
 
-树莓派 GPIO 第 0 银行可选择的一个备用功能是 DPI（显示并行接口），这是一个简单的时钟并行接口（最多 8 位的 R、G 和 B；时钟、使能、水平同步和垂直同步）。此接口在 GPIO 第 0 银行上作为备用功能 2（ALT2）可用：
+  * Success - boot
+  * Fail - timeout (five seconds)
+* If enabled: check secondary SD
 
-| GPIO   | ALT2      |
-| -------- | ----------- |
-| GPIO0  | PCLK      |
-| GPIO1  | DE        |
-| GPIO2  | LCD_VSYNC |
-| GPIO3  | LCD_HSYNC |
-| GPIO4  | DPI_D0    |
-| GPIO5  | DPI_D1    |
-| GPIO6  | DPI_D2    |
-| GPIO7  | DPI_D3    |
-| GPIO8  | DPI_D4    |
-| GPIO9  | DPI_D5    |
-| GPIO10 | DPI_D6    |
-| GPIO11 | DPI_D7    |
-| GPIO12 | DPI_D8    |
-| GPIO13 | DPI_D9    |
-| GPIO14 | DPI_D10   |
-| GPIO15 | DPI_D11   |
-| GPIO16 | DPI_D12   |
-| GPIO17 | DPI_D13   |
-| GPIO18 | DPI_D14   |
-| GPIO19 | DPI_D15   |
-| GPIO20 | DPI_D16   |
-| GPIO21 | DPI_D17   |
-| GPIO22 | DPI_D18   |
-| GPIO23 | DPI_D19   |
-| GPIO24 | DPI_D20   |
-| GPIO25 | DPI_D21   |
-| GPIO26 | DPI_D22   |
-| GPIO27 | DPI_D23   |
+  * Success - boot
+  * Fail - timeout (five seconds)
+* If enabled: check NAND
+* If enabled: check SPI
+* If enabled: check USB
 
->**注意**
->
->DPI 输出引脚上的颜色值可以以 565、666 或 24 位模式的各种方式呈现（请参阅以下表格和 output_format 参数的 dpi_output_format 部分）：
-| **模式** | **RGB 位** | **GPIO**  |
-| ----------- | ------------- | --- |
-| **27**          | **26**            | **25**  |
-| 1         | -           | - |
-| 2         | 565         | - |
-| 3         | 565         | - |
-| 4         | 565         | - |
-| 5         | 666         | - |
-| 6         | 666         | - |
-| 7         | 888         | 7 |
+  * If OTG pin == 0
 
-### 禁用其他 GPIO 外围设备
+    * Enable USB, wait for valid USB 2.0 devices (two seconds)
 
-必须禁用所有使用冲突 GPIO 引脚的其他外围叠加层。在 config.txt 中，务必注释掉或反转任何启用 I2C 或 SPI 的 dtparams：
+      * Device found:
+
+        * If device type == hub
+
+          * Recurse for each port
+        * If device type == (mass storage or LAN951x)
+
+          * Store in list of devices
+    * Recurse through each MSD
+
+      * If bootcode.bin found boot
+    * Recurse through each LAN951x
+
+      * DHCP / TFTP boot
+  * Else (device mode boot)
+
+    * Enable device mode and wait for host PC to enumerate
+    * We reply to PC with VID: `0a5c` PID: `0x2763` (Raspberry Pi 1 or Raspberry Pi 2) or `0x2764` (Raspberry Pi 3)
+
+| NOTE | * If there is no SD card inserted, the SD boot mode takes five seconds to fail. To reduce this and fall back to USB more quickly, you can either insert an SD card with nothing on it or use the GPIO bootmode OTP setting described above to only enable USB.* The default pull for the GPIOs is defined on page 102 of the [ARM Peripherals datasheet](https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf). If the value at boot time does not equal the default pull, then that boot mode is enabled.* USB enumeration is a means of enabling power to the downstream devices on a hub, then waiting for the device to pull the D+ and D- lines to indicate if it is either USB 1 or USB 2. This can take time: on some devices it can take up to three seconds for a hard disk drive to spin up and start the enumeration process. Because this is the only way of detecting that the hardware is attached, we have to wait for a minimum amount of time (two seconds). If the device fails to respond after this maximum timeout, it is possible to increase the timeout to five seconds using `program_usb_boot_timeout=1` in `config.txt`.* MSD boot takes precedence over Ethernet boot.* It is no longer necessary for the first partition to be the FAT partition, as the MSD boot will continue to search for a FAT partition beyond the first one.* The boot ROM also now supports GUID partitioning and has been tested with hard drives partitioned using Mac, Windows, and Linux.* The LAN951x is detected using the Vendor ID `0x0424` and Product ID `0xec00`: this is different to the standalone LAN9500 device, which has a product ID of `0x9500` or `0x9e00`. To use the standalone LAN9500, an I2C EEPROM would need to be added to change these IDs to match the LAN951x. |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+The primary SD card boot mode is, as standard, set to be GPIOs 49-53. It is possible to boot from the secondary SD card on a second set of pins, i.e. to add a secondary SD card to the GPIO pins. However, we have not yet enabled this ability.
+
+NAND boot and SPI boot modes do work, although they do not yet have full GPU support.
+
+The USB device boot mode is enabled by default at the time of manufacture, but the USB host boot mode is only enabled with `program_usb_boot_mode=1`. Once enabled, the processor will use the value of the OTGID pin on the processor to decide between the two modes. On any Raspberry Pi Model B/B+, the OTGID pin is driven to 0 and therefore will only boot via host mode once enabled (it is not possible to boot through device mode because the LAN951x device is in the way).
+
+The USB will boot as a USB device on the Raspberry Pi Zero or Compute Module if the OTGID pin is left floating (when plugged into a PC for example), so you can push the `bootcode.bin` into the device. The `usbboot` code for doing this is [available on GitHub](https://github.com/raspberrypi/usbboot).
+
+## EEPROM boot flow
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/bootflow-eeprom.adoc)
+
+Since Raspberry Pi 4, Raspberry Pi flagship devices use an EEPROM bootloader. The main difference between these and previous products is that the second-stage bootloader is loaded from SPI flash [EEPROM](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-boot-eeprom) instead of the `bootcode.bin` file used on previous products.
+
+### First stage bootloader
+
+The boot flow for the ROM (first stage) is as follows:
+
+* SoC powers up
+* Read OTP to determine if the `nRPIBOOT` GPIO is configured
+* If `nRPIBOOT` GPIO is high or OTP does NOT define `nRPIBOOT` GPIO
+
+  * Check OTP to see if `recovery.bin` can be loaded from SD/EMMC
+
+    * If SD recovery.bin is enabled then check primary SD/EMMC for `recovery.bin`
+
+      * Success - run `recovery.bin` and update the SPI EEPROM
+      * Fail - continue
+  * Check SPI EEPROM for second stage loader
+
+    * Success - run second stage bootloader
+    * Fail - continue
+* While True
+
+  * Attempt to load `recovery.bin` from [USB device boot](https://www.raspberrypi.com/documentation/computers/compute-module.html#flash-compute-module-emmc)
+
+    * Success - run `recovery.bin` and update the SPI EEPROM or switch to USB mass storage device mode
+    * Fail - retry USB device boot
+
+| NOTE | `recovery.bin` is a minimal second stage program used to reflash the bootloader SPI EEPROM image. |
+| ------ | ------------------------------------------------------------------------------------- |
+
+### Second stage bootloader
+
+This section describes the high-level flow of the second stage bootloader.
+
+Please see the [bootloader configuration](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-bootloader-configuration) page for more information about each boot mode, and the [boot folder](https://www.raspberrypi.com/documentation/computers/configuration.html#boot-folder-contents) page for a description of the GPU firmware files loaded by this stage.
+
+* Initialise clocks and SDRAM
+* Read the EEPROM configuration file
+* Check `PM_RSTS` register to determine if HALT is requested
+
+  * Check `POWER_OFF_ON_HALT` and `WAKE_ON_GPIO` EEPROM configuration settings
+  * If `POWER_OFF_ON_HALT` is `1` and `WAKE_ON_GPIO` is `0` then
+
+    * Use PMIC to power off system
+  * Else if `WAKE_ON_GPIO` is `1`
+
+    * Enable fall-edge interrupts on GPIO3 to wake-up if GPIO3 is pulled low
+  * Sleep
+* While True
+
+  * Read the next boot-mode from the BOOT_ORDER parameter in the EEPROM config file.
+  * If boot-mode == `RESTART`
+
+    * Jump back to the first boot-mode in the `BOOT_ORDER` field
+  * Else if boot-mode == `STOP`
+
+    * Display start.elf not found [error pattern](https://www.raspberrypi.com/documentation/computers/configuration.html#led-warning-flash-codes) and wait forever.
+  * Else if boot-mode == `SD CARD`
+
+    * Attempt to load firmware from the SD card
+
+      * Success - run the firmware
+      * Failure - continue
+  * Else if boot-mode == `NETWORK` then
+
+    * Use DHCP protocol to request IP address
+    * Load firmware from the DHCP or statically defined TFTP server
+    * If the firmware is not found or a timeout or network error occurs then continue
+  * Else if boot-mode == `USB-MSD` or boot-mode == `BCM-USB-MSD` then
+
+    * While USB discover has not timed out
+
+      * Check for USB mass storage devices
+      * If a new mass storage device is found then
+
+        * For each drive (LUN)
+
+          * Attempt to load firmware
+
+            * Success - run the firmware
+            * Failed - advance to next LUN
+  * Else if boot-mode == `NVME` then
+
+    * Scan PCIe for an NVMe device and if found
+
+      * Attempt to load firmware from the NVMe device
+
+        * Success - run the firmware
+        * Failure - continue
+  * Else if boot-mode == `RPIBOOT` then
+
+    * Attempt to load firmware using USB device mode from the USB OTG port - see [USB boot](https://github.com/raspberrypi/usbboot). There is no timeout for `RPIBOOT` mode.
+
+#### Differences on Raspberry Pi 5
+
+* The power button is used to wake up from PMIC `STANDBY` or `HALT` instead of `GPIO 3`.
+* Instead of loading `start.elf`, the firmware loads the Linux kernel. Effectively, the bootloader has an embedded version of `start.elf`.
+* USB boot is disabled by default when connected to a 3A power supply. Set `usb_max_current_enable=1` in `/boot/firmware/config.txt` to enable USB boot. Alternatively, you can press the power button a single time on a failed USB boot to temporarily enable `usb_max_current_enable` and continue booting. However, this setting will not persist after a reboot if enabled by pressing the power button.
+
+### Bootloader updates
+
+The bootloader may also be updated before the firmware is started if a `pieeprom.upd` file is found. See the [bootloader EEPROM](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-boot-eeprom) page for more information about bootloader updates.
+
+### Fail-safe OS updates (`tryboot`)
+
+The bootloader/firmware provide a one-shot flag which, if set, is cleared but causes `tryboot.txt` to be loaded instead of `config.txt`. This alternate config would specify the pending OS update firmware, cmdline, kernel and os_prefix parameters. Since the flag is cleared before starting the firmware, a crash or reset will cause the original `config.txt` file to be loaded on the next reboot.
+
+To set the `tryboot` flag, add `tryboot` after the partition number in the `reboot` command. Normally, the partition number defaults to zero but it must be specified if extra arguments are added. Always use quotes when passing arguments to `reboot`: it accepts only a single argument:
+
+```
+$ sudo reboot '0 tryboot'
+```
+
+All Raspberry Pi models support `tryboot`, however, on Raspberry Pi 4 Model B revision 1.0 and 1.1 the EEPROM must not be write protected. This is because older Raspberry Pi 4B devices have to reset the power supply (losing the tryboot state), so this is stored inside the EEPROM instead.
+
+If `secure-boot` is enabled, then `tryboot` mode will cause `tryboot.img` to be loaded instead of `boot.img`.
+
+### `tryboot_a_b` mode
+
+If the `tryboot_a_b` property in [autoboot.txt](https://www.raspberrypi.com/documentation/computers/config_txt.html#autoboot-txt) is set to `1` then `config.txt` is loaded instead of `tryboot.txt`. This is because the `tryboot` switch has already been made at a higher level (the partition), so it’s unnecessary to have a `tryboot.txt` file within alternate partition itself.
+
+The `tryboot_a_b` property is implicitly set to `1` when loading files from within a `boot.img` ramdisk.
+
+## Raspberry Pi bootloader configuration
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/eeprom-bootloader.adoc)
+
+### Edit the configuration
+
+Before editing the bootloader configuration, [update your system](https://www.raspberrypi.com/documentation/computers/os.html#update-software) to get the latest version of the `rpi-eeprom` package.
+
+To view the current EEPROM configuration, run the following command:
+
+```
+$ rpi-eeprom-config
+```
+
+To edit the current EEPROM configuration and apply the updates to latest EEPROM release, run the following command:
+
+```
+$ sudo -E rpi-eeprom-config --edit
+```
+
+For more information about the EEPROM update process, see [boot EEPROM](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-boot-eeprom).
+
+### Configuration properties
+
+This section describes all the configuration items available in the bootloader. The syntax is the same as [config.txt](https://www.raspberrypi.com/documentation/computers/config_txt.html) but the properties are specific to the bootloader. [Conditional filters](https://www.raspberrypi.com/documentation/computers/config_txt.html#conditional-filters) are also supported except for EDID.
+
+#### `BOOT_UART`
+
+If `1` then enable UART debug output on GPIO 14 and 15. Configure the receiving debug terminal at 115200bps, 8 bits, no parity bits, 1 stop bit.
+
+Default: `0`
+
+#### `UART_BAUD`
+
+Raspberry Pi 5 only.
+
+Changes the baud rate for the bootloader UART.
+
+Supported values: `9600`, `19200`, `38400`, `57600`, `115200`, `230400`, `460800`, `921600`
+
+Default: `115200`
+
+#### `WAKE_ON_GPIO`
+
+If `1` then `sudo halt` will run in a lower power mode until either GPIO3 or GLOBAL_EN are shorted to ground.
+
+This setting is not relevant on Raspberry Pi 5 because the [dedicated power button](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-button) may always be used to wakeup from `HALT` or `STANDBY`.
+
+Default: `1`
+
+#### `POWER_OFF_ON_HALT`
+
+If `1` and `WAKE_ON_GPIO=0` then `sudo halt` will switch off all PMIC outputs. This is lowest possible power state for halt but may cause problems with some HATs because 5V will still be on. `GLOBAL_EN` must be shorted to ground to boot.
+
+Raspberry Pi 400 has a dedicated power button which operates even if the processor is switched off. This behaviour is enabled by default, however, `WAKE_ON_GPIO=2` may be set to use an external GPIO power button instead of the dedicated power button.
+
+On Raspberry Pi 5 this places the PMIC in `STANDBY` mode where all outputs are switched off. There is no need to set `WAKE_ON_GPIO` and pressing the [dedicated power button](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-button) will boot the device.
+
+Default: `0`
+
+#### `BOOT_ORDER`
+
+The `BOOT_ORDER` setting allows flexible configuration for the priority of different boot modes. It is represented as a 32-bit unsigned integer where each nibble represents a boot-mode. The boot modes are attempted in lowest significant nibble to highest significant nibble order.
+
+##### `BOOT_ORDER` fields
+
+The `BOOT_ORDER` property defines the sequence for the different boot modes. It is read right to left, and up to eight digits may be defined.
+
+| Value | Mode | Description                                                                                                   |
+| ------- | ------ | --------------------------------------------------------------------------------------------------------------- |
+| `0x0`      | `SD CARD DETECT`     | Try SD then wait for card-detect to indicate that the card has changed. Deprecated now that `0xf` (`RESTART`) is available. |
+| `0x1`      | `SD CARD`     | SD card (or eMMC on Compute Module 4).                                                                        |
+| `0x2`      | `NETWORK`     | Network boot - See [Network boot server tutorial](https://www.raspberrypi.com/documentation/computers/remote-access.html#network-boot-your-raspberry-pi).                                                                                          |
+| `0x3`      | `RPIBOOT`     | RPIBOOT - See [usbboot](https://github.com/raspberrypi/usbboot).                                                                                               |
+| `0x4`      | `USB-MSD`     | USB mass storage boot - See [USB mass storage boot](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#usb-mass-storage-boot).                                                                                 |
+| `0x5`      | `BCM-USB-MSD`     | USB 2.0 boot from USB Type C socket (CM4: USB type A socket on CM4IO board). Not available on Raspberry Pi 5. |
+| `0x6`      | `NVME`     | CM4 and Pi 5 only: boot from an NVMe SSD connected to the PCIe interface. See [NVMe boot](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#nvme-ssd-boot) for more details.              |
+| `0x7`      | `HTTP`     | HTTP boot over ethernet. See [HTTP boot](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#http-boot) for more details.                                                               |
+| `0xe`      | `STOP`     | Stop and display error pattern. A power cycle is required to exit this state.                                 |
+| `0xf`      | `RESTART`     | Restart from the first boot-mode in the `BOOT_ORDER` field i.e. loop.                                                     |
+
+`RPIBOOT` is intended for use with Compute Module 4 to load a custom debug image (e.g. a Linux RAM-disk) instead of the normal boot. This should be the last boot option because it does not currently support timeouts or retries.
+
+##### `BOOT_ORDER` examples
+
+| BOOT\_ORDER | Description                                                          |
+| ---------------- | ---------------------------------------------------------------------- |
+| `0xf41`               | Try SD first, followed by USB-MSD then repeat (default if `BOOT_ORDER` is empty) |
+| `0xf14`               | Try USB first, followed by SD then repeat                            |
+| `0xf21`               | Try SD first, followed by NETWORK then repeat                        |
+| `0xf46`               | Try NVMe first, followed by USB-MSD then repeat                      |
+
+#### `MAX_RESTARTS`
+
+If the RESTART (`0xf`) boot-mode is encountered more than MAX_RESTARTS times then a watchdog reset is triggered. This isn’t recommended for general use but may be useful for test or remote systems where a full reset is needed to resolve issues with hardware or network interfaces.
+
+Default: `-1` (infinite)
+
+#### `SD_BOOT_MAX_RETRIES`
+
+The number of times that SD boot will be retried after failure before moving to the next boot-mode defined by `BOOT_ORDER`.
+
+`-1` means infinite retries.
+
+Default: `0`
+
+#### `NET_BOOT_MAX_RETRIES`
+
+The number of times that network boot will be retried after failure before moving to the next boot-mode defined by `BOOT_ORDER`.
+
+`-1` means infinite retries.
+
+Default: `0`
+
+#### `DHCP_TIMEOUT`
+
+The timeout in milliseconds for the entire DHCP sequence before failing the current iteration.
+
+Minimum: `5000`
+
+Default: `45000`
+
+#### `DHCP_REQ_TIMEOUT`
+
+The timeout in milliseconds before retrying DHCP DISCOVER or DHCP REQ.
+
+Minimum: `500`
+
+Default: `4000`
+
+#### `TFTP_FILE_TIMEOUT`
+
+The timeout in milliseconds for an individual file download via TFTP.
+
+Minimum: `5000`
+
+Default: `30000`
+
+#### `TFTP_IP`
+
+Optional dotted decimal ip address (e.g. `192.168.1.99`) for the TFTP server which overrides the server-ip from the DHCP request.
+
+This may be useful on home networks because tftpd-hpa can be used instead of dnsmasq where broadband router is the DHCP server.
+
+Default: `""`
+
+#### `TFTP_PREFIX`
+
+In order to support unique TFTP boot directories for each Raspberry Pi, the bootloader prefixes the filenames with a device-specific directory. If neither start4.elf nor start.elf are found in the prefixed directory then the prefix is cleared.
+
+On earlier models the serial number is used as the prefix, however on Raspberry Pi 4 and 5 the MAC address is no longer generated from the serial number, making it difficult to automatically create tftpboot directories on the server by inspecting DHCPDISCOVER packets. To support this the TFTP_PREFIX may be customized to either be the MAC address, a fixed value or the serial number (default).
+
+| Value | Description                  |
+| ------- | ------------------------------ |
+| 0     | Use the serial number e.g. `9ffefdef/`  |
+| 1     | Use the string specified by `TFTP_PREFIX_STR` |
+| 2     | Use the MAC address e.g. `dc-a6-32-01-36-c2/`    |
+
+Default: 0
+
+#### `TFTP_PREFIX_STR`
+
+Specify the custom directory prefix string used when `TFTP_PREFIX` is set to 1. For example:- `TFTP_PREFIX_STR=tftp_test/`
+
+Default: `""`
+
+Max length: 32 characters
+
+#### `PXE_OPTION43`
+
+Overrides the PXE Option43 match string with a different string. It’s normally better to apply customisations to the DHCP server than change the client behaviour, but this option is provided in case that’s not possible.
+
+Default: `Raspberry Pi Boot`
+
+#### `DHCP_OPTION97`
+
+In earlier releases the client GUID (Option97) was just the serial number repeated four times. By default, the new GUID format is the concatenation of the four-character code (FourCC) (`RPi4` `0x34695052` for Raspberry Pi 4 or `RPi5` `0x35695052` for Raspberry Pi 5), the board revision (e.g. `0x00c03111` or `0x00d04170`) (4-bytes), the least significant 4 bytes of the mac address and the 4-byte serial number. This is intended to be unique but also provides structured information to the DHCP server, allowing Raspberry Pi 4 and 5 computers to be identified without relying upon the Ethernet MAC OUID.
+
+Specify `DHCP_OPTION97=0` to revert the old behaviour or a non-zero hex-value to specify a custom 4-byte prefix.
+
+Default: `0x34695052`
+
+#### `MAC_ADDRESS`
+
+Overrides the Raspberry Pi Ethernet MAC address with the given value. e.g. `dc:a6:32:01:36:c2`
+
+Default: `""`
+
+#### `MAC_ADDRESS_OTP`
+
+Overrides the Raspberry Pi Ethernet MAC address with a value stored in the [Customer OTP](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#write-and-read-customer-otp-values) registers.
+
+For example, to use a MAC address stored in rows 0 and 1 of the `Customer OTP`.
+
+```
+MAC_ADDRESS_OTP=0,1
+```
+
+The first value (row 0 in the example) contains the OUI and the most significant 8 bits of the MAC address. The second value (row 1 in the example) stores the remaining 16-bits of the MAC address. This is the same format as used for the Raspberry Pi MAC address programmed at manufacture.
+
+Any two customer rows may be selected and combined in either order.
+
+The `Customer OTP` rows are OTP registers 36 to 43 in the `vcgencmd otp_dump` output so if the first two rows are programmed as follows then `MAC_ADDRESS_OTP=0,1` would give a MAC address of `e4:5f:01:20:24:7e`.
+
+```
+36:247e0000
+37:e45f0120
+```
+
+Default: `""`
+
+#### Static IP address configuration
+
+If TFTP_IP and the following options are set then DHCP is skipped and the static IP configuration is applied. If the TFTP server is on the same subnet as the client then GATEWAY may be omitted.
+
+##### `CLIENT_IP`
+
+The IP address of the client e.g. `192.168.0.32`
+
+Default: `""`
+
+##### `SUBNET`
+
+The subnet address mask e.g. `255.255.255.0`
+
+Default: `""`
+
+##### `GATEWAY`
+
+The gateway address to use if the TFTP server is on a different subnet e.g. `192.168.0.1`
+
+Default: `""`
+
+#### `DISABLE_HDMI`
+
+The [HDMI boot diagnostics](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#boot-diagnostics-on-the-raspberry-pi-4) display is disabled if `DISABLE_HDMI=1`. Other non-zero values are reserved for future use.
+
+Default: `0`
+
+#### `HDMI_DELAY`
+
+Skip rendering of the HDMI diagnostics display for up to N seconds (default 5) unless a fatal error occurs. The default behaviour is designed to avoid the bootloader diagnostics screen from briefly appearing during a normal SD/USB boot.
+
+Default: `5`
+
+#### `ENABLE_SELF_UPDATE`
+
+Enables the bootloader to update itself from a TFTP or USB mass storage device (MSD) boot filesystem.
+
+If self-update is enabled then the bootloader will look for the update files (.sig/.upd) in the boot file system. If the update image differs from the current image then the update is applied and system is reset. Otherwise, if the EEPROM images are byte-for-byte identical then boot continues as normal.
+
+Notes:
+
+* Bootloader releases prior to 2021 do not support `self-update`.
+* Prior to 2022, self-update was not enabled in SD boot. On a Raspberry Pi 4, the ROM can already load recovery.bin from the SD card. On a CM4, neither self-update nor recovery.bin have any effect and USB boot is required (see the [Compute Module EEPROM bootloader docs](https://www.raspberrypi.com/documentation/computers/compute-module.html#compute-module-eeprom-bootloader)).
+* Starting in 2022 ([beta](https://github.com/raspberrypi/rpi-eeprom/blob/master/firmware-2711/release-notes.md#2022-02-04---network-install---beta) and [stable](https://github.com/raspberrypi/rpi-eeprom/blob/master/firmware-2711/release-notes.md#2022-03-10---promote-the-2022-03-10-beta-release-to-lateststable)), self-update from an SD card is enabled.
+* For network boot make sure that the TFTP `boot` directory can be mounted via NFS and that `rpi-eeprom-update` can write to it.
+
+Default: `1`
+
+#### `FREEZE_VERSION`
+
+Previously this property was only checked by the `rpi-eeprom-update` script. However, now that self-update is enabled the bootloader will also check this property. If set to 1, this overrides `ENABLE_SELF_UPDATE` to stop automatic updates. To disable `FREEZE_VERSION` you will have to use SD card boot with recovery.bin.
+
+Custom EEPROM update scripts must also check this flag.
+
+Default: `0`
+
+#### `HTTP_HOST`
+
+If network install or HTTP boot is initiated, `boot.img` and `boot.sig` are downloaded from this server.
+
+Invalid host names will be ignored. They should only contain lower case alphanumeric characters and `-` or `.`. If `HTTP_HOST` is set then HTTPS is disabled and plain HTTP used instead. You can specify an IP address to avoid the need for a DNS lookup. Don`t include the HTTP scheme or any forward slashes in the hostname.
+
+Default: `fw-download-alias1.raspberrypi.com`
+
+#### `HTTP_PORT`
+
+You can use this property to change the port used for network install and HTTP boot. HTTPS is enabled when using the default host `fw-download-alias1.raspberrypi.com`. If `HTTP_HOST` is changed then HTTPS is disabled and plain HTTP will be used instead.
+
+When HTTPS is disabled, plain HTTP will still be used even if `HTTP_PORT` is changed to `443`.
+
+Default: `443` if HTTPS is enabled otherwise `80`
+
+#### `HTTP_PATH`
+
+The path used for network install and HTTP boot.
+
+Case-sensitive. Use forward (Linux) slashes for the path separator. Leading and trailing forward slashes are not required.
+
+If `HTTP_HOST` is not set, `HTTP_PATH` is ignored and the URL will be `https://fw-download-alias1.raspberrypi.com:443/net_install/boot.img`. If `HTTP_HOST` is set the URL will be `http://<HTTP_HOST>:<HTTP_PORT>/<HTTP_PATH>/boot.img`
+
+Default: `net_install`
+
+#### `IMAGER_REPO_URL`
+
+The embedded Raspberry Pi Imager application is configured with a JSON file downloaded at startup.
+
+You can change the URL of the JSON file used by the embedded Raspberry Pi Imager application to get it to offer your own images. You can test this with the standard [Raspberry Pi Imager](https://www.raspberrypi.com/software/) application by passing the URL via the `--repo` argument.
+
+Default: `http://downloads.raspberrypi.org/os_list_imagingutility_v3.json`
+
+#### `NET_INSTALL_ENABLED`
+
+When network install is enabled, the bootloader displays the network install screen on boot if it detects a keyboard.
+
+To enable network install, add `NET_INSTALL_ENABLED=1`, or to disable network install add `NET_INSTALL_ENABLED=0`.
+
+This setting is ignored and network install is disabled if `DISABLE_HDMI=1` is set.
+
+In order to detect the keyboard, network install must initialise the USB controller and enumerate devices. This increases boot time by approximately 1 second so it may be advantageous to disable network install in some embedded applications.
+
+Default: `1` on Raspberry Pi 4 and Raspberry Pi 400, and `0` on Compute Module 4.
+
+#### `NET_INSTALL_KEYBOARD_WAIT`
+
+If network install is enabled, the bootloader attempts to detect a keyboard and the `SHIFT` key to initiate network install. You can change the length of this wait in milliseconds with this property.
+
+Setting this to `0` disables the keyboard wait, although network install can still be initiated if no boot files are found and USB boot-mode `4` is in `BOOT_ORDER`.
+
+| NOTE | Testing suggests keyboard and SHIFT detection takes at least 750ms. |
+| ------ | --------------------------------------------------------------------- |
+
+Default: `900`
+
+#### `NETCONSOLE` - advanced logging
+
+`NETCONSOLE` duplicates debug messages to the network interface. The IP addresses and ports are defined by the `NETCONSOLE` string.
+
+| NOTE | NETCONSOLE blocks until the Ethernet link is established or a timeout occurs. The timeout value is `DHCP_TIMEOUT` although DHCP is not attempted unless network boot is requested. |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+##### Format
+
+For more information, see the [Netconsole documentation](https://wiki.archlinux.org/index.php/Netconsole).
+
+```
+src_port@src_ip/dev_name,dst_port@dst_ip/dst_mac
+E.g. 6665@169.254.1.1/,6666@/
+```
+
+In order to simplify parsing, the bootloader requires every field separator to be present. The source IP address must be specified but the following fields may be left blank and assigned default values.
+
+* src_port - 6665
+* dev_name - "" (the device name is always ignored)
+* dst_port - 6666
+* dst_ip - 255.255.255.255
+* dst_mac - 00:00:00:00:00
+
+One way to view the data is to connect the test Raspberry Pi 4 to another Raspberry Pi running WireShark and select “udp.srcport == 6665” as a filter and select **Analyze → Follow → UDP stream** to view as an ASCII log.
+
+`NETCONSOLE` should not be enabled by default because it may cause network problems. It can be enabled on demand via a GPIO filter:
+
+```
+# Enable debug if GPIO 7 is pulled low
+[gpio7=0]
+NETCONSOLE=6665@169.254.1.1/,6666@/
+```
+
+Default: `""` (not enabled)
+
+Max length: 32 characters
+
+#### `PARTITION`
+
+The `PARTITION` option may be used to specify the boot partition number, if it has not explicitly been set by the `reboot` command (e.g. `sudo reboot N`) or by `boot_partition=N` in `autoboot.txt`. This could be used to boot from a rescue partition if the user presses a button.
+
+```
+# Boot from partition 2 if GPIO 7 is pulled low
+[gpio7=0]
+PARTITION=2
+```
+
+Default: 0
+
+#### `PSU_MAX_CURRENT`
+
+Raspberry Pi 5 only.
+
+If set, this property instructions the firmware to skip USB power-delivery negotiation and assume that it is connected to a power supply with the given current rating. Typically, this would either be set to `3000` or `5000` i.e. low or high-current capable power supply.
+
+Default: `""`
+
+#### `USB_MSD_EXCLUDE_VID_PID`
+
+A list of up to four VID/PID pairs specifying devices which the bootloader should ignore. If this matches a HUB then the HUB won’t be enumerated, causing all downstream devices to be excluded. This is intended to allow problematic (e.g. very slow to enumerate) devices to be ignored during boot enumeration. This is specific to the bootloader and is not passed to the OS.
+
+The format is a comma-separated list of hexadecimal values with the VID as most significant nibble. Spaces are not allowed. E.g. `034700a0,a4231234`
+
+Default: `""`
+
+#### `USB_MSD_DISCOVER_TIMEOUT`
+
+If no USB mass storage devices are found within this timeout then USB-MSD is stopped and the next boot-mode is selected.
+
+Minimum: `5000` (5 seconds)
+
+Default: `20000` (20 seconds)
+
+#### `USB_MSD_LUN_TIMEOUT`
+
+How long to wait in milliseconds before advancing to the next LUN e.g. a multi-slot SD-CARD reader. This is still being tweaked but may help speed up boot if old/slow devices are connected as well as a fast USB-MSD device containing the OS.
+
+Minimum: `100`
+
+Default: `2000` (2 seconds)
+
+#### `USB_MSD_PWR_OFF_TIME`
+
+Raspberry Pi 4 only.
+
+When the Pi is rebooted power USB power is switched off by the hardware. A short power off time can cause problems with some USB devices so this parameter may be used to force a longer power off as though the cable was physically removed.
+
+On RaspberryPi 4 version 1.3 and older, the configurable/long power off requires the XHCI controller to be enabled so there is actually a short power off followed by a longer configurable power off. The longer configurable power off may be skipped by setting this parameter to zero.
+
+On newer revisions the hardware ensures that USB power is off from reboot and the bootloader only enables power after this timeout has elapsed. This is happens after memory is initialised ensuring that USB power is off for at least two seconds. Therefore, this parameter generally has no effect on newer hardware revisions.
+
+Minimum: `0`
+
+Maximum: `5000`
+
+Default: `1000` (1 second)
+
+#### `USB_MSD_STARTUP_DELAY`
+
+If defined, delays USB enumeration for the given timeout after the USB host controller has initialised. If a USB hard disk drive takes a long time to initialise and triggers USB timeouts then this delay can be used to give the driver additional time to initialise. It may also be necessary to increase the overall USB timeout (`USB_MSD_DISCOVER_TIMEOUT`).
+
+Minimum: `0`
+
+Maximum: `30000` (30 seconds)
+
+Default: `0`
+
+#### `VL805`
+
+Compute Module 4 only.
+
+If the `VL805` property is set to `1` then the bootloader will search for a VL805 PCIe XHCI controller and attempt to initialise it with VL805 firmware embedded in the bootloader EEPROM. This enables industrial designs to use VL805 XHCI controllers without providing a dedicated SPI EEPROM for the VL805 firmware.
+
+* On Compute Module 4 the bootloader never writes to the dedicated VL805 SPI EEPROM. This option just configures the controller to load the firmware from SDRAM.
+* Do not use this option if the VL805 XHCI controller has a dedicated EEPROM. It will fail to initialise because the VL805 ROM will attempt to use a dedicated SPI EEPROM if fitted.
+* The embedded VL805 firmware assumes the same USB configuration as Raspberry Pi 4B (two USB 3.0 ports and four USB 2.0 ports). There is no support for loading alternate VL805 firmware images, a dedicated VL805 SPI EEPROM should be used instead for such configurations.
+
+Default: `0`
+
+#### `XHCI_DEBUG`
+
+This property is a bit-field which controls the verbosity of USB debug messages for mass storage boot-mode. Enabling all of these messages generates a huge amount of log data which will slow down booting and may even cause boot to fail. For verbose logs it’s best to use `NETCONSOLE`.
+
+| Value | Log                                       |
+| ------- | ------------------------------------------- |
+| `0x1`      | USB descriptors                           |
+| `0x2`      | Mass storage mode state machine           |
+| `0x4`      | Mass storage mode state machine - verbose |
+| `0x8`      | All USB requests                          |
+| `0x10`      | Device and hub state machines             |
+| `0x20`      | All xHCI TRBs (VERY VERBOSE)              |
+| `0x40`      | All xHCI events (VERY VERBOSE)            |
+
+To combine values, add them together. For example:
+
+```
+# Enable mass storage and USB descriptor logging
+XHCI_DEBUG=0x3
+```
+
+Default: `0x0` (no USB debug messages enabled)
+
+#### `[config.txt]` section
+
+After reading `config.txt` the GPU firmware `start4.elf` reads the bootloader EEPROM config and checks for a section called `[config.txt]`. If the `[config.txt]` section exists then the contents from the start of this section to the end of the file is appended in memory, to the contents of the `config.txt` file read from the boot partition. This can be used to automatically apply settings to every operating system, for example, dtoverlays.
+
+| WARNING | If you configure the bootloader with an invalid configuration that fails to boot, you must re-flash the bootloader EEPROM with a valid configuration to boot. |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+| TIP | Some configuration properties live in `config.txt`. For more information about those properties, see [configuration properties](https://www.raspberrypi.com/documentation/computers/config_txt.html#configuration-properties). |
+| ----- | -------------------------------------------------------------------------------------------- |
+
+## Display Parallel Interface (DPI)
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc)
+
+##### [Using a DPI Display on the Raspberry Pi](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003471-WP/Using-a-DPI-display.pdf)
+
+Using a DPI Display on the Raspberry Pi
+
+Display Parallel Interface (DPI) displays can be connected to Raspberry Pi devices via the 40-pin general-purpose input/output (GPIO) connector as an alternative to using the dedicated Display Serial Interface (DSI) or High-Definition Multimedia Interface (HDMI) ports.
+
+An up-to-24-bit parallel RGB interface is available on all Raspberry Pi boards with the 40 way header and the Compute Modules. This interface allows parallel RGB displays to be attached to the Raspberry Pi GPIO either in RGB24 (8 bits for red, green and blue) or RGB666 (6 bits per colour) or RGB565 (5 bits red, 6 green, and 5 blue).
+
+This interface is controlled by the GPU firmware and can be programmed by a user via special `config.txt` parameters and by enabling the correct Linux Device Tree overlay.
+
+### GPIO pins
+
+One of the alternate functions selectable on Bank 0 of the Raspberry Pi GPIO is DPI (Display Parallel Interface) which is a simple clocked parallel interface (up to 8 bits of R, G and B; clock, enable, hsync, and vsync). This interface is available as alternate function 2 (ALT2) on GPIO Bank 0:
+
+| GPIO | ALT2 |
+| ------ | ------ |
+| `GPIO0`     | `PCLK`     |
+| `GPIO1`     | `DE`     |
+| `GPIO2`     | `LCD_VSYNC`     |
+| `GPIO3`     | `LCD_HSYNC`     |
+| `GPIO4`     | `DPI_D0`     |
+| `GPIO5`     | `DPI_D1`     |
+| `GPIO6`     | `DPI_D2`     |
+| `GPIO7`     | `DPI_D3`     |
+| `GPIO8`     | `DPI_D4`     |
+| `GPIO9`     | `DPI_D5`     |
+| `GPIO10`     | `DPI_D6`     |
+| `GPIO11`     | `DPI_D7`     |
+| `GPIO12`     | `DPI_D8`     |
+| `GPIO13`     | `DPI_D9`     |
+| `GPIO14`     | `DPI_D10`     |
+| `GPIO15`     | `DPI_D11`     |
+| `GPIO16`     | `DPI_D12`     |
+| `GPIO17`     | `DPI_D13`     |
+| `GPIO18`     | `DPI_D14`     |
+| `GPIO19`     | `DPI_D15`     |
+| `GPIO20`     | `DPI_D16`     |
+| `GPIO21`     | `DPI_D17`     |
+| `GPIO22`     | `DPI_D18`     |
+| `GPIO23`     | `DPI_D19`     |
+| `GPIO24`     | `DPI_D20`     |
+| `GPIO25`     | `DPI_D21`     |
+| `GPIO26`     | `DPI_D22`     |
+| `GPIO27`     | `DPI_D23`     |
+
+| NOTE | There are various ways that the colour values can be presented on the DPI output pins in either 565, 666, or 24-bit modes (see the following table and the `output_format` part of the `dpi_output_format` parameter below): |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+| **Mode**  | **RGB bits**    | **GPIO**  |
+| --- | ----- | --- |
+| **27**  | **26**    | **25**  |
+| 1 | -   | - |
+| 2 | 565 | - |
+| 3 | 565 | - |
+| 4 | 565 | - |
+| 5 | 666 | - |
+| 6 | 666 | - |
+| 7 | 888 | 7 |
+
+### Disable other GPIO peripherals
+
+All other peripheral overlays that use conflicting GPIO pins must be disabled. In `config.txt`, take care to comment out or invert any dtparams that enable I2C or SPI:
 
 ```
 dtparam=i2c_arm=off
 dtparam=spi=off
 ```
 
-### 配置显示器
+### Configure a display
 
-内核模式设置（KMS）通用显示接口使输出到任意显示器成为可能，只要您有适当的驱动程序。
+The [Kernel Mode Setting (KMS)](https://en.wikipedia.org/wiki/Direct_Rendering_Manager#Kernel_mode_setting) generic display interface enables output to arbitrary displays, as long as you have an appropriate driver.
 
-#### 自动检测
+#### Auto detect
 
-自动检测允许您的树莓派在不需要手动配置设备树叠加的情况下连接显示器。自动检测默认情况下已启用。您可以通过将以下行添加到 config.txt 来启用显示器自动检测：
+Auto detect allows your Raspberry Pi to connect with a display without a manually configured device tree overlay. Auto detection is enabled by default. You can enable display auto detect by adding the following line to `config.txt`:
 
 ```
-`display_auto_detect=1`
+display_auto_detect=1
 ```
 
-用 0 替换 1 以禁用自动检测。当您连接启用自动检测的官方树莓派显示器时，KMS 会自动确定显示器型号并配置适当的显示设置。
+Replace the `1` with a `0` to disable auto detect. When you connect the official Raspberry Pi display with auto detect enabled, KMS determines the display model automatically and configures the appropriate display settings.
 
-#### 手动配置显示器
+#### Manually configure a display
 
->**注意**
->
->在 Raspberry Pi OS Bookworm 或更高版本中，以前用于设置 DPI 的 dpi_output_format 和 dpi_timings 条目在 config.txt 中已被 vc4-kms-dpi-generic 覆盖。 
+| NOTE | In Raspberry Pi OS *Bookworm* or later, the `dpi_output_format` and `dpi_timings` entries in `config.txt` previously used to set up DPI have been superseded by the `vc4-kms-dpi-generic` overlay. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------- |
 
-要使用官方树莓派显示器之外的任何显示器，必须在 config.txt 中指定一个 dtoverlay 条目。面板制造商应在 Linux 内核代码中为您的显示器配置时间，并提供一个覆盖来启用这些设置。请参阅 Adafruit Kippah 显示器条目以获取示例。以下示例演示了如何在您的 /boot/firmware/config.txt 文件中为 Kippah 显示器设置 dtoverlay 条目：
+To use any display other than the official Raspberry Pi display, you must specify a `dtoverlay` entry in `config.txt`. The panel manufacturer should configure timings for your display in Linux kernel code and provide an overlay to enable those settings. See the [Adafruit Kippah display entry](https://github.com/raspberrypi/linux/blob/rpi-6.1.y/arch/arm/boot/dts/overlays/vc4-kms-kippah-7inch-overlay.dts) for an example. The following example demonstrates how to set a `dtoverlay` entry for the Kippah display in your [`/boot/firmware/config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html#what-is-config-txt) file:
 
 ```
 dtoverlay=vc4-kms-kippah-7inch-overlay
 ```
 
-显示定时通常在内核中定义，但您也可以在提供的 panel-dpi 驱动程序中定义它们。如果您的面板在内核代码中缺乏定义的覆盖，您可以使用 panel-dpi 驱动程序将显示定时作为参数定义。这使您能够为任何显示器手动配置设备树条目。
+Display timings are usually defined in the kernel, but you can also define them in the provided `panel-dpi` driver. If your panel lacks a defined overlay in kernel code, you can use the `panel-dpi` driver to define display timings as parameters. This enables you to manually configure a device tree entry for any display.
 
-以下示例演示了如何使用设备树参数定义时间：
+The following example demonstrates how you can define timings using device tree parameters:
 
 ```
 dtoverlay=vc4-kms-v3d
@@ -2168,771 +2014,809 @@ dtparam=vactive=640,vfp=25,vsync=10,vbp=16
 dtparam=clock-frequency=32000000,rgb666-padhi
 ```
 
->**注意**
->
->设备树行长度不得超过 80 个字符。当设置需要超过 80 个字符的行时，请将该参数的赋值拆分成多行。 
+| NOTE | Device tree line length must not exceed 80 characters. When a setting requires a line longer than 80 characters, split the assignment of that parameter across multiple lines. |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-参数显示树定义支持以下选项：
+Parameter display tree definitions support the following options:
 
-| 选项 | 说明                                               |
-| ------ | ---------------------------------------------------- |
-| `clock-frequency`     | 显示时钟频率 (Hz)                                  |
-| `hactive`     | 水平活动像素                                       |
-| `hfp`     | 水平前廊                                           |
-| `hsync`     | 水平同步脉冲宽度                                   |
-| `hbp`     | 水平背廊                                           |
-| `vactive`     | 垂直活动线                                         |
-| `vfp`     | 垂直前廊                                           |
-| `vsync`     | 垂直同步脉冲宽度                                   |
-| `vbp`     | 垂直后肩                                           |
-| `hsync-invert`     | 水平同步低电平                                     |
-| `vsync-invert`     | 垂直同步低电平                                     |
-| `de-invert`     | 数据使能低电平                                     |
-| `pixclk-invert`     | 负边沿像素时钟                                     |
-| `width-mm`     | 在毫米中定义屏幕宽度                               |
-| `height-mm`     | 在毫米中定义屏幕高度                               |
-| `rgb565`     | 在 GPIOs 0-19 上更改为 RGB565 输出                 |
-| `rgb666-padhi`     | 在 GPIO 0-9、12-17 和 20-25 上更改为 RGB666 输出   |
-| `rgb888`     | 在 GPIO 0-27 上更改为 RGB888 输出                  |
-| `bus-format`     | 覆盖 MEDIA_BUS_FMT_*值的总线格式，也被 rgbXXX 覆盖 |
-| `backlight-gpio`     | 定义要用于背光控制的 GPIO（默认值：无）            |
+| Option | Description                                                                                              |
+| -------- | ---------------------------------------------------------------------------------------------------------- |
+| `clock-frequency`       | Display clock frequency (Hz)                                                                             |
+| `hactive`       | Horizontal active pixels                                                                                 |
+| `hfp`       | Horizontal front porch                                                                                   |
+| `hsync`       | Horizontal sync pulse width                                                                              |
+| `hbp`       | Horizontal back porch                                                                                    |
+| `vactive`       | Vertical active lines                                                                                    |
+| `vfp`       | Vertical front porch                                                                                     |
+| `vsync`       | Vertical sync pulse width                                                                                |
+| `vbp`       | Vertical back porch                                                                                      |
+| `hsync-invert`       | Horizontal sync active low                                                                               |
+| `vsync-invert`       | Vertical sync active low                                                                                 |
+| `de-invert`       | Data Enable active low                                                                                   |
+| `pixclk-invert`       | Negative edge pixel clock                                                                                |
+| `width-mm`       | Defines the screen width in millimetres                                                                  |
+| `height-mm`       | Defines the screen height in millimetres                                                                 |
+| `rgb565`       | Change to RGB565 output on GPIOs 0-19                                                                    |
+| `rgb666-padhi`       | Change to RGB666 output on GPIOs 0-9, 12-17, and 20-25                                                   |
+| `rgb888`       | Change to RGB888 output on GPIOs 0-27                                                                    |
+| `bus-format`       | Override the bus format for a MEDIA\_BUS\_FMT\_\* value, also overridden by rgbXXX overrides |
+| `backlight-gpio`       | Defines a GPIO to be used for backlight control (default value: none)                                    |
 
-## 通用输入/输出（GPIO）
+## GPIO and the 40-pin header
 
-通用输入/输出（GPIO）引脚可配置为通用输入、通用输出，或者作为最多六个特殊备用设置之一，其功能取决于引脚。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/gpio-on-raspberry-pi.adoc)
 
-BCM2835 上有三个 GPIO bank。每个 bank 都有自己的 VDD 输入引脚。在树莓派上，所有 GPIO bank 都由 3.3V 供电。
+You can find a 40-pin GPIO (general-purpose input/output) header on all current Raspberry Pi boards. The GPIO headers on all boards have a 0.1in (2.54mm) pin pitch.
 
->**警告**
->
->将 GPIO 连接到高于 3.3V 的电压可能会摧毁 SoC 内部的 GPIO 块。
+| NOTE | The header is unpopulated (has no headers) on Zero and Pico devices that lack the "H" suffix. |
+| ------ | ----------------------------------------------------------------------------------------------- |
 
-在树莓派的 P1 引脚上提供了来自 Bank 0 的引脚选择。
+![GPIO pinout diagram](https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png?hash=df7d7847c57a1ca6d5b2617695de6d46)
 
-### GPIO 引脚
+General Purpose I/O (GPIO) pins can be configured as either general-purpose input, general-purpose output, or as one of up to six special alternate settings, the functions of which are pin-dependent.
 
-BCM2835 封装上的 GPIO 连接有时在外设数据表中被称为“pads” — 一种半导体设计术语，意思是“芯片连接到外部世界”。
+![GPIO layout](https://www.raspberrypi.com/documentation/computers/images/GPIO.png?hash=335edaa0c254546813319d80556f842f)
 
-这些 pads 是可配置的 CMOS 推挽输出驱动器/输入缓冲器。可用于基于寄存器的控制设置：
+| NOTE | The GPIO pin numbering scheme is not in numerical order. GPIO pins 0 and 1 are present on the board (physical pins 27 and 28), but are reserved for advanced use. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-* 内部上拉/下拉使能/禁用
-* 输出驱动强度
-* 输入施密特触发滤波
+### Outputs
 
-#### 通电状态
+A GPIO pin designated as an output pin can be set to high (3.3V) or low (0V).
 
-所有 GPIO 引脚在上电复位时恢复为通用输入。还应用了默认的拉电流状态，这些状态在 Arm 外设数据表的备用功能表中有详细说明。大多数 GPIO 引脚都有默认的拉电流状态。
+### Inputs
 
-### 中断
+A GPIO pin designated as an input pin can be read as high (3.3V) or low (0V). This is made easier with the use of internal pull-up or pull-down resistors. Pins GPIO2 and GPIO3 have fixed pull-up resistors, but for other pins this can be configured in software.
 
-当配置为通用输入时，每个 GPIO 引脚可以配置为 Arm 的中断源。可配置多个中断生成源：
+### View a GPIO pinout for your Raspberry Pi
 
-* 电平敏感（高/低）
-* 上升/下降沿
-* 异步上升/下降沿
+A GPIO reference can be accessed on your Raspberry Pi by opening a terminal window and running the command `pinout`. This tool is provided by the [GPIO Zero](https://gpiozero.readthedocs.io/) Python library, which is installed by default in Raspberry Pi OS.
 
-等级中断会保持中断状态，直到系统软件清除了该等级（例如，通过为生成中断的附加外围设备提供服务）。
+| WARNING | While connecting simple components to GPIO pins is safe, be careful how you wire things up. LEDs should have resistors to limit the current passing through them. Do not use 5V for 3.3V components. Do not connect motors directly to the GPIO pins, instead use an [H-bridge circuit or a motor controller board](https://projects.raspberrypi.org/en/projects/physical-computing/14). |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
-正常的上升/下降沿检测在检测中具有少量的同步。在系统时钟频率下，引脚在三个周期窗口内进行采样，生成中断的标准是在稳定的转换中，即记录为 1 0 0 或 0 1 1。异步检测绕过此同步，以便检测非常窄的事件。
+### Permissions
 
-### 替代功能
-
-几乎所有的 GPIO 引脚都有替代功能。 SoC 内部的外围模块可以选择出现在一组 GPIO 引脚中的一个或多个上，例如，I2C 总线可以配置为至少三个单独的位置。 当引脚配置为替代功能时，仍然适用 Pad 控制，如驱动强度或施密特触发。
-
-### 电压规格
-
-下表列出了针对 BCM2835、BCM2836、BCM2837 和 RP3A0 系列产品（例如树莓派 Zero 或树莓派 3+）的 GPIO 引脚的各种电压规格。有关计算模块的信息，请参阅相关数据表。
-
-| 符号   | 参数          | 条件        | 最小 | 典型 | 最大 | 单元   |
-| -------- | --------------- | ------------- | ------ | ------ | ------ | -------- |
-| V~IL~  | 输入低电压    | -           | -    | -    | 0.9  | V      |
-| V~IH~  | 输入高电压^a^ | -           | 1.6  | -    | -    | V      |
-| 我~IL~ | 输入泄漏电流  | TA = +85◦C | -    | -    | 5    | 微安   |
-| C~IN~  | 输入电容      | -           | -    | 5    | -    | pF     |
-| V~OL~  | 输出低电压^b^ | IOL = -2mA  | -    | -    | 0.14 | V      |
-| V~OH~  | 输出高电压^b^ | IOH = 2mA   | 3.0  | -    | -    | V      |
-| I~OL~  | 输出低电流^c^ | 电压 = 0.4V | 18   | -    | -    | 毫安   |
-| I~OH~  | 输出高电流^c^ | VO = 2.3V   | 17   | -    | -    | 毫安   |
-| 上拉   | 上拉电阻      | -           | 50   | -    | 65   | 千欧姆 |
-| 树莓派 | 下拉电阻      | -           | 50   | -    | 65   | 千欧姆 |
-
-^a^ 滞后启用 ^b^ 默认驱动强度（8mA） ^c^ 最大驱动强度（16mA）
-
-下表列出了基于 BCM2711 的产品（例如树莓派 4 和树莓派 400）的 GPIO 引脚的电压规格。有关计算模块的信息，您应查看相关的数据表。
-
-| 符号       | 参数          | 条件          | 最小值 | 典型的 | 最大 | 单位 |
-| ------------ | --------------- | --------------- | -------- | -------- | ------ | ------ |
-| 输入低电压 | 输入低电压    | -             | -      | -      | 0.8  | V    |
-| 输入高电压 | 输入高电压^a^ | -             | 2.0    | -      | -    | V    |
-| I~IL~      | 输入漏电流    | TA = +85℃    | -      | -      | 10   | 微安 |
-| V~OL~      | 输出低电压^b^ | IOL = -4 毫安 | -      | -      | 0.4  | V    |
-| V~OH~      | 输出高电压^b^ | IOH = 4 毫安  | 2.6    | -      | -    | V    |
-| I~OL~      | 输出低电流^c^ | VO = 0.4V     | 7      | -      | -    | 毫安 |
-| 我~氧化氢~ | 输出高电流^c^ | VO = 2.6 伏   | 7      | -      | -    | 毫安 |
-| R~PU~      | 上拉电阻      | -             | 33     | -      | 73   | kΩ  |
-| R~PD~      | 下拉电阻      | -             | 33     | -      | 73   | kΩ  |
-
-^a^ 磁滞启用 ^b^ 默认驱动强度 (4mA) ^c^ 最大驱动强度 (8mA)
-
-## GPIO 引脚控制
-
-GPIO 驱动强度并不表示最大电流，而是在该电流下垫还能满足规格要求。您应该设置 GPIO 驱动强度以匹配所连接的设备，以确保设备能正常工作。
-
-### 驱动强度是如何控制的
-
-在垫子内部有许多并联的驱动器。如果驱动强度设置低（0b000），则大多数驱动器都是三态的，因此它们不会对输出电流产生影响。如果增加驱动强度，将会并联更多驱动器。图表显示了这种行为。
-
->**警告**
->
->对于树莓派 4、树莓派 400 和计算模块 4，当前级别是图表中显示值的一半。
-
-
-![GPIO drive strength diagram](https://www.raspberrypi.com/documentation/computers/images/pi_gpio_drive_strength_diagram.png)
-
-### 当前值代表什么意思？
-
->**注意**
->
->当前值指定了在该值以下的最大电流下，焊盘仍将符合规格。
-
-* 当前值不是垫子将提供的电流，也不是电流限制。
-
-垫子输出是电压源：
-
-* 如果设置为高电平，垫子将尝试将输出驱动到电压轨（3.3V）
-* 如果设置为低电平，则该引脚将尝试将输出引脚接地（0V）
-
-该引脚将尝试将输出引脚驱动至高电平或低电平。成功取决于连接的要求。如果该引脚短接到地，它将无法驱动至高电平。它将尝试提供尽可能多的电流，电流仅受内部电阻限制。
-
-如果该引脚被驱动至高电平并短接到地，它将在适当的时间内失效。如果将其连接到 3.3V 并驱动至低电平，情况也是如此。
-
-符合规范取决于保证的电压电平。由于垫是数字的，有两个电压电平，高电平和低电平。I/O 端口有两个参数，用于处理输出电平：
-
-* V~OL~，最大低电平电压（3.3V VDD IO 时为 0.14V）
-* V~OH~，最小高电平电压（3.3V VDD IO 时为 3.0V）
-
-V~OL~=0.14V 意味着如果输出为低，则<= 0.14V。V~OH~=3.0V 意味着如果输出为高，则>= 3.0V。
-
-例如，16mA 的驱动强度意味着如果您将引脚设置为高，可以吸取高达 16mA，并且输出电压保证>=V~OH~。这也意味着如果您设置为 2mA 的驱动强度并吸取 16mA，则电压将不会是 V~OH~而是更低。实际上，它可能不够高，无法被外部设备视为高电平。
-
-GPIO 引脚的物理特性有更多信息。
-
->**注意**
->
->在计算模块设备上，可以将 VDD IO 从标准的 3.3V 更改。在这种情况下，V~OL~和 V~OH~将根据 GPIO 部分的表格进行更改。
-
-
-### 为什么我不能将所有引脚都设置为最大电流？
-
-* 树莓派 3.3V 供电设计时每个 GPIO 引脚的最大电流为~3mA。如果您将每个引脚负载为 16mA，则总电流为 272mA。3.3V 供电将在该负载水平下崩溃。
-* 大电流峰值将会发生，特别是在具有电容负载时。峰值将在附近的所有其他引脚之间反弹。这很可能会干扰 SD 卡，甚至 SDRAM 的行为。
-
-### 什么是安全电流？
-
-所有电路板的电子元件设计为 16mA。这是一个安全值，不会损坏设备。即使您将驱动强度设置为 2mA，然后负载使其输出 16mA，也不会损坏设备。除此之外，没有保证的最大安全电流。
-
-### GPIO 地址
-
-* 0x 7e10 002c PADS（GPIO 0-27）
-* 0x 7e10 0030 PADS（GPIO 28-45）
-* 0x 7e10 0034 PADS（GPIO 46-53）
-
-| 位    | 字段名称 | 说明                              | 类型 | 重置 |
-| ------- | ---------- | ------------------------------------ | ------ | ------ |
-| 31:24 | PASSWRD  | 写入时必须为 0x5A；意外写保护密码  | W    | 0    |
-| 23:5  |          | 保留 - 写为 0，读取时不关心        |      |      |
-| 4     | SLEW     | 斜率；0 = 斜率受限；1 = 斜率不受限 | RW   | 1    |
-| 3     | HYST     | 启用输入滞后; 0 = 禁用; 1 = 启用   | RW   | 1    |
-| 2:0   | DRIVE    | 驱动强度，请参见下面的列表         | RW   | 3    |
-
-要注意同时切换输出（SSO）的限制，这些限制取决于设备，还取决于 PCB 的质量和布局，去耦电容的数量和质量，焊盘上的负载类型（电阻，电容）以及树莓派无法控制的其他因素。
-
-### 驱动强度列表
-
-* 0 = 2 毫安
-* 1 = 4 毫安
-* 2 = 6 毫安
-* 3 = 8 毫安
-* 4 = 10 毫安
-* 5 = 12 毫安
-* 6 = 14 毫安
-* 7 = 16 毫安
-
-## 树莓派的工业用途
-
-树莓派经常作为另一产品的一部分使用。本文档描述了一些额外的功能，可用于使用树莓派的其他功能。
-
-### 一次性可编程设置
-
-##### [在树莓派单板计算机上使用一次性可编程存储器](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003611-WP/Using-the-One-time-programmable-memory-on-Raspberry-Pi-single-board-computers.pdf)
-
-在树莓派单板计算机上使用一次性可编程存储器
-
-所有树莓派单板计算机（SBCs）都有一个内置的一次性可编程（OTP）存储器区域，实际上是主 SoC 的一部分。正如其名称所示，OTP 存储器只能写入一次（即，二进制 0 可以更改为 1）。只要某个位被更改为 1，就永远无法恢复为 0。看待 OTP 的一种方式是将每个位视为保险丝。编程涉及故意烧断保险丝 - 这是一个不可逆的过程，因为您无法进入芯片内部进行更换！
-
-本白皮书假定树莓派正在运行 Raspberry Pi OS，并且已完全更新到最新的固件和内核。
-
-有许多可以使用的 OTP 值。要查看所有 OTP 值的列表，您可以使用：
+In order to use the GPIO ports, your user must be a member of the `gpio` group. The default user account is a member by default, but you must add other users manually using the following command:
 
 ```
-vcgencmd otp_dump
+$ sudo usermod -a -G gpio <username>
 ```
 
-从此转储中提取的一些有趣行。
+### GPIO pads
 
-* 28 - 序列号
-* 29 - 序列号的补码
-* 30 - 板子修订号
+The GPIO connections on the BCM2835 package are sometimes referred to in the peripherals data sheet as "pads" — a semiconductor design term meaning "chip connection to outside world".
 
-此外，在 36 到 43（包括）之间，有八行 32 位可供客户使用。
+The pads are configurable CMOS push-pull output drivers/input buffers. Register-based control settings are available for:
 
->**注意**
->
->在 BCM2712 设备上，这些数字是不同的。第 31 行是序列号，第 32 行是板子修订号。客户行是 77 到 84（包括）。 
+* Internal pull-up / pull-down enable/disable
+* Output [drive strength](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pads-control)
+* Input Schmitt-trigger filtering
 
-这些行中的一些可以使用 vcmailbox 进行编程。这是一个 Linux 驱动程序接口，用于处理行的编程。要做到这一点，请参考文档和 vcmailbox 示例应用程序。
+#### Power-on states
 
-vcmailbox 应用程序可以直接从 Raspberry Pi OS 命令行中使用。一个示例用法是：
+All GPIO pins revert to general-purpose inputs on power-on reset. The default pull states are also applied, which are detailed in the alternate function table in the Arm peripherals datasheet. Most GPIOs have a default pull applied.
+
+### Interrupts
+
+Each GPIO pin, when configured as a general-purpose input, can be configured as an interrupt source to the Arm. Several interrupt generation sources are configurable:
+
+* Level-sensitive (high/low)
+* Rising/falling edge
+* Asynchronous rising/falling edge
+
+Level interrupts maintain the interrupt status until the level has been cleared by system software (e.g. by servicing the attached peripheral generating the interrupt).
+
+The normal rising/falling edge detection has a small amount of synchronisation built into the detection. At the system clock frequency, the pin is sampled with the criteria for generation of an interrupt being a stable transition within a three-cycle window, i.e. a record of 1 0 0 or 0 1 1. Asynchronous detection bypasses this synchronisation to enable the detection of very narrow events.
+
+### Alternative functions
+
+Almost all of the GPIO pins have alternative functions. Peripheral blocks internal to the SoC can be selected to appear on one or more of a set of GPIO pins, for example the I2C buses can be configured to at least three separate locations. [Pad control](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pads-control), such as drive strength or Schmitt filtering, still applies when the pin is configured as an alternate function.
+
+Some functions are available on all pins, others on specific pins:
+
+* PWM (pulse-width modulation)
+
+  * Software PWM available on all pins
+  * Hardware PWM available on GPIO12, GPIO13, GPIO18, GPIO19
+* SPI
+
+  * SPI0: MOSI (GPIO10); MISO (GPIO9); SCLK (GPIO11); CE0 (GPIO8), CE1 (GPIO7)
+  * SPI1: MOSI (GPIO20); MISO (GPIO19); SCLK (GPIO21); CE0 (GPIO18); CE1 (GPIO17); CE2 (GPIO16)
+* I2C
+
+  * Data: (GPIO2); Clock (GPIO3)
+  * EEPROM Data: (GPIO0); EEPROM Clock (GPIO1)
+* Serial
+
+  * TX (GPIO14); RX (GPIO15)
+
+### Voltage specifications
+
+Two 5V pins and two 3.3V pins are present on the board, as well as a number of ground pins (GND), which can not be reconfigured. The remaining pins are all general-purpose 3.3V pins, meaning outputs are set to 3.3V and inputs are 3.3V-tolerant.
+
+The table below gives the various voltage specifications for the GPIO pins for BCM2835, BCM2836, BCM2837 and RP3A0-based products (e.g. Raspberry Pi Zero or Raspberry Pi 3+). For information about Compute Modules you should see the [relevant datasheets](https://www.raspberrypi.com/documentation/computers/compute-module.html#specifications).
+
+| Symbol | Parameter              | Conditions      | Min | Typical | Max  | Unit |
+| -------- | ------------------------ | ----------------- | ----- | --------- | ------ | ------ |
+| V~IL~  | Input Low Voltage      | -               | -   | -       | 0.9  | V    |
+| V~IH~  | Input high voltage^a^  | -               | 1.6 | -       | -    | V    |
+| I~IL~  | Input leakage current  | TA \= +85◦C | -   | -       | 5    | µA  |
+| C~IN~  | Input capacitance      | -               | -   | 5       | -    | pF   |
+| V~OL~  | Output low voltage^b^  | IOL \= -2mA  | -   | -       | 0.14 | V    |
+| V~OH~  | Output high voltage^b^ | IOH \= 2mA   | 3.0 | -       | -    | V    |
+| I~OL~  | Output low current^c^  | VO \= 0.4V   | 18  | -       | -    | mA   |
+| I~OH~  | Output high current^c^ | VO \= 2.3V   | 17  | -       | -    | mA   |
+| R~PU~  | Pullup resistor        | -               | 50  | -       | 65   | kΩ  |
+| R~PD~  | Pulldown resistor      | -               | 50  | -       | 65   | kΩ  |
+
+^a^ Hysteresis enabled
+^b^ Default drive strength (8mA)
+^c^ Maximum drive strength (16mA)
+
+The table below gives the voltage specifications for the GPIO pins on BCM2711-based products (e.g. Raspberry Pi 4 and Raspberry Pi 400). For information about Compute Modules you should see the [relevant datasheets](https://www.raspberrypi.com/documentation/computers/compute-module.html#specifications).
+
+| Symbol | Parameter              | Conditions      | Min | Typical | Max | Unit |
+| -------- | ------------------------ | ----------------- | ----- | --------- | ----- | ------ |
+| V~IL~  | Input Low Voltage      | -               | -   | -       | 0.8 | V    |
+| V~IH~  | Input high voltage^a^  | -               | 2.0 | -       | -   | V    |
+| I~IL~  | Input leakage current  | TA \= +85◦C | -   | -       | 10  | µA  |
+| V~OL~  | Output low voltage^b^  | IOL \= -4mA  | -   | -       | 0.4 | V    |
+| V~OH~  | Output high voltage^b^ | IOH \= 4mA   | 2.6 | -       | -   | V    |
+| I~OL~  | Output low current^c^  | VO \= 0.4V   | 7   | -       | -   | mA   |
+| I~OH~  | Output high current^c^ | VO \= 2.6V   | 7   | -       | -   | mA   |
+| R~PU~  | Pullup resistor        | -               | 33  | -       | 73  | kΩ  |
+| R~PD~  | Pulldown resistor      | -               | 33  | -       | 73  | kΩ  |
+
+^a^ Hysteresis enabled
+^b^ Default drive strength (4mA)
+^c^ Maximum drive strength (8mA)
+
+## GPIO pads control
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/gpio-pad-controls.adoc)
+
+GPIO drive strengths do not indicate a maximum current, but a maximum current under which the pad will still meet the specification. You should set the GPIO drive strengths to match the device being attached in order for the device to work correctly.
+
+### Control drive strength
+
+Inside the pad are a number of drivers in parallel. If the drive strength is set low (`0b000`), most of these are tri-stated so they do not add anything to the output current. If the drive strength is increased, more and more drivers are put in parallel. The diagram shows that behaviour.
+
+| WARNING | For Raspberry Pi 4, Raspberry Pi 400 and Compute Module 4 the current level is half the value shown in the diagram. |
+| --------- | --------------------------------------------------------------------------------------------------------------------- |
+
+![GPIO drive strength diagram](https://www.raspberrypi.com/documentation/computers/images/pi_gpio_drive_strength_diagram.png?hash=466ec669893a20d65c4f54da5aea9e3f)
+
+### Current value
+
+The current value specifies the maximum current under which the pad will still meet the specification.
+
+Current value is *not* the current that the pad will deliver, and is *not* a current limit.
+
+The pad output is a voltage source:
+
+* If set high, the pad will try to drive the output to the rail voltage (3.3V)
+* If set low, the pad will try to drive the output to ground (0V)
+
+The pad will try to drive the output high or low. Success will depend on the requirements of what is connected. If the pad is shorted to ground, it will not be able to drive high. It will try to deliver as much current as it can, and the current is only limited by the internal resistance.
+
+If the pad is driven high and it is shorted to ground, in due time it will fail. The same holds true if you connect it to 3.3V and drive it low.
+
+Meeting the specification is determined by the guaranteed voltage levels. Because the pads are digital, there are two voltage levels, high and low. The I/O ports have two parameters which deal with the output level:
+
+* V~OL~, the maximum low-level voltage (0.14V at 3.3V VDD IO)
+* V~OH~, the minimum high-level voltage (3.0V at 3.3V VDD IO)
+
+V~OL~=0.14V means that if the output is Low, it will be <= 0.14V. V~OH~=3.0V means that if the output is High, it will be >= 3.0V.
+
+As an example, a drive strength of 16mA means that if you set the pad high, you can draw up to 16mA, and the output voltage is guaranteed to be >=V~OH~. This also means that if you set a drive strength of 2mA and you draw 16mA, the voltage will **not** be V~OH~ but lower. In fact, it may not be high enough to be seen as high by an external device.
+
+There is more information on the [physical characteristics](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio) of the GPIO pins.
+
+| NOTE | On the Compute Module devices, it is possible to change the VDD IO from the standard 3.3V. In this case, V~OL~ and V~OH~ will change according to the table in the [GPIO](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio) section. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+
+The Raspberry Pi 3.3V supply was designed with a maximum current of ~3mA per GPIO pin. If you load each pin with 16mA, the total current is 272mA. The 3.3V supply will collapse under that level of load. Big current spikes will happen, especially if you have a capacitive load. Spikes will bounce around all the other pins near them. This is likely to cause interference with the SD card, or even the SDRAM behaviour.
+
+### Safe current
+
+All the electronics of the pads are designed for 16mA. This is a safe value under which you will not damage the device. Even if you set the drive strength to 2mA and then load it so 16mA comes out, this will not damage the device. Other than that, there is no guaranteed maximum safe current.
+
+### GPIO addresses
+
+* 0x 7e10 002c PADS (GPIO 0-27)
+* 0x 7e10 0030 PADS (GPIO 28-45)
+* 0x 7e10 0034 PADS (GPIO 46-53)
+
+| Bits  | Field name | Description                                                         | Type | Reset |
+| ------- | ------------ | --------------------------------------------------------------------- | ------ | ------- |
+| 31:24 | PASSWRD    | Must be 0x5A when writing; accidental write protect password        | W    | 0     |
+| 23:5  |            | **Reserved** - Write as 0, read as don’t care                                  |      |       |
+| 4     | SLEW       | Slew rate; 0 \= slew rate limited; 1 \= slew rate not limited | RW   | 0x1   |
+| 3     | HYST       | Enable input hysteresis; 0 \= disabled; 1 \= enabled          | RW   | 0x1   |
+| 2:0   | DRIVE      | Drive strength, see breakdown list below                            | RW   | 0x3   |
+
+Beware of Simultaneous Switching Outputs (SSO) limitations which are device-dependent as well as dependent on the quality and layout of the PCB, the amount and quality of the decoupling capacitors, the type of load on the pads (resistance, capacitance), and other factors beyond the control of Raspberry Pi.
+
+### Drive strength list
+
+* 0 = 2mA
+* 1 = 4mA
+* 2 = 6mA
+* 3 = 8mA
+* 4 = 10mA
+* 5 = 12mA
+* 6 = 14mA
+* 7 = 16mA
+
+## Industrial use of the Raspberry Pi
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/raspberry-pi-industrial.adoc)
+
+Raspberry Pi is often used as part of another product. This documentation describes some extra facilities available to use other capabilities of your Raspberry Pi.
+
+### One-time programmable settings
+
+##### [Using the one-time programmable memory on Raspberry Pi single-board computers](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003611-WP/Using-the-One-time-programmable-memory-on-Raspberry-Pi-single-board-computers.pdf)
+
+Using the one-time programmable memory on Raspberry Pi single-board computers
+
+All Raspberry Pi single-board computers (SBCs) have an inbuilt area of one-time programmable (OTP) memory, which is actually part of the main system on a chip (SoC). As its name implies, OTP memory can be written to (i.e. a binary 0 can be changed to a 1) only once. Once a bit has been changed to 1, it can never be returned to 0. One way of looking at the OTP is to consider each bit as a fuse. Programming it involves deliberately blowing the fuse — an irreversible process, as you cannot get inside the chip to replace it!
+
+This whitepaper assumes that the Raspberry Pi is running the Raspberry Pi operating system (OS), and is fully up-to-date with the latest firmware and kernels.
+
+There are a number of OTP values that can be used. To see a list of all the [OTP values](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#otp-register-and-bit-definitions), run the following command:
 
 ```
-vcmailbox 0x00010004 8 8 0 0
+$ vcgencmd otp_dump
 ```
 
-…将返回类似以下内容：
+Some interesting lines from this dump are:
+
+* 28 - Serial number
+* 29 - Ones complement of serial number
+* 30 - Board revision number
+
+Also, from 36 to 43 (inclusive), there are eight rows of 32 bits available for the customer.
+
+| NOTE | On BCM2712 devices these numbers are different. Row 31 is the serial number and row 32 is the board revision number. The customer rows are 77 to 84 inclusive. |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+Some of these rows can be programmed with `vcmailbox`. This is a Linux driver interface to the firmware which will handle the programming of the rows. To do this, please refer to the [documentation](https://github.com/raspberrypi/firmware/wiki/Mailbox-property-interface), and the vcmailbox [example application](https://github.com/raspberrypi/userland/blob/master/host_applications/linux/apps/vcmailbox/vcmailbox.c).
+
+The vcmailbox application can be used directly from the command line on Raspberry Pi OS. An example usage would be:
+
+```
+$ vcmailbox 0x00010004 8 8 0 0
+```
+
+…which will return something like:
 
 ```
 0x00000020 0x80000000 0x00010004 0x00000008 0x800000008 0xnnnnnnnn 0x00000000 0x00000000
 ```
 
-以上使用邮箱属性接口 GET_BOARD_SERIAL ，请求大小为 8 字节，响应大小为 8 字节（发送两个整数作为请求 0, 0）。对此的响应将是两个整数（0x00000020 和 0x80000000），后跟标签代码、请求长度、响应长度（第 31 位设置为指示它是响应），然后是 64 位序列号（其中 MS 32 位始终为 0）。
+The above uses the [mailbox property interface](https://github.com/raspberrypi/firmware/wiki/Mailbox-property-interface) `GET_BOARD_SERIAL` with a request size of 8 bytes and response size of 8 bytes (sending two integers for the request 0, 0). The response to this will be two integers (0x00000020 and 0x80000000) followed by the tag code, the request length, the response length (with the 31st bit set to indicate that it is a response) then the 64-bit serial number (where the MS 32 bits are always 0).
 
-### 编写和读取客户 OTP 值
+### Write and read customer OTP values
 
->**警告**
->
->OTP 值是一次性可编程的。如果将位从 0 更改为 1，就无法再更改回来。 
+| WARNING | The OTP values are one-time programmable. Once a bit has been changed from 0 to 1, it can’t be changed back. |
+| --------- | --------------------------------------------------------------------------------------------------------------- |
 
-要设置客户 OTP 值，您需要使用 SET_CUSTOMER_OTP （0x38021）标记，如下所示：
-
-```
-vcmailbox 0x00038021 [8 + number * 4] [8 + number * 4] [start_num] [number] [value] [value] [value] ...
-```
-
-* start_num = 从 0-7 编程的第一行
-* number = 要编程的行数
-* value = 要编程的每个值
-
-因此，要将 OTP 客户行 4、5 和 6 编程为分别为 0x11111111、0x22222222、0x33333333，您可以使用：
+To set the customer OTP values you will need to use the `SET_CUSTOMER_OTP` (0x38021) tag as follows:
 
 ```
-vcmailbox 0x00038021 20 20 4 3 0x11111111 0x22222222 0x33333333
+$ vcmailbox 0x00038021 [8 + number * 4] [8 + number * 4] [start_num] [number] [value] [value] [value] ...
 ```
 
-然后将编程行 40、41 和 42。
+* `start_num` = the first row to program from 0-7
+* `number` = number of rows to program
+* `value` = each value to program
 
-要读取值，您可以使用：
+So, to program OTP customer rows 4, 5, and 6 to 0x11111111, 0x22222222, 0x33333333 respectively, you would use:
 
 ```
-vcmailbox 0x00030021 20 20 4 3 0 0 0
+$ vcmailbox 0x00038021 20 20 4 3 0x11111111 0x22222222 0x33333333
 ```
 
- 这应该显示:
+This will then program rows 40, 41, and 42.
+
+To read the values back, you can use:
+
+```
+$ vcmailbox 0x00030021 20 20 4 3 0 0 0
+```
+
+This should display:
 
 ```
 0x0000002c 0x80000000 0x00030021 0x00000014 0x80000014 0x00000000 0x00000003 0x11111111 0x22222222 0x33333333
 ```
 
-如果您想将此功能集成到您自己的代码中，您应该能够通过使用 vcmailbox.c 代码作为示例来实现这一点。
+If you’d like to integrate this functionality into your own code, you should be able to achieve this by using the vcmailbox.c code as an example.
 
-### 在非 BCM2712 设备上锁定 OTP
+### Locking OTP on non-BCM2712 devices
 
-可以锁定 OTP 更改，以避免它们被再次编辑。
+It is possible to lock the OTP changes to avoid them being edited again.
 
-可以使用 OTP 写邮箱的特殊参数来完成此操作：
-
-```
-vcmailbox 0x00038021 8 8 0xffffffff 0xaffe0000
-```
-
-只要锁定，客户的 OTP 值将无法再被更改。请注意，此锁定操作是不可逆转的。
-
-### 在 BCM2712 设备上锁定 OTP
-
-可以使用以下命令将客户区域标记为只读。
+This can be done using a special argument with the OTP write mailbox:
 
 ```
-vcmailbox 0x00030086 4 4 0
+$ vcmailbox 0x00038021 8 8 0xffffffff 0xaffe0000
 ```
 
-OTP 仅在设备重置时被锁定，因此需要在每次启动时重新应用 OTP 锁定。
+Once locked, the customer OTP values can no longer be altered. Note that this locking operation is irreversible.
 
-### 在非 BCM2712 设备上使客户 OTP 位不可读
+### Locking OTP on BCM2712 devices
 
-可以通过在 OTP 写邮箱中使用特殊参数来完全阻止读取客户 OTP 位。
-
-```
-vcmailbox 0x00038021 8 8 0xffffffff 0xaffebabe
-```
-
-这个操作对绝大多数用户来说可能没有用，而且是不可逆转的。
-
-### 在 BCM2712 设备上的客户 MAC 地址
-
-在 BCM2712 设备上，以太网、Wi-Fi 和蓝牙 MAC 地址设置在 OTP 存储器中。这些值可以随客户值而更改。
-
-获取客户 MAC 地址 vcmailbox 0x00030082/3/4 6 6 0 0 ，其中 2 是以太网，3 是 Wi-Fi，4 是蓝牙。
-
- 例子…
+The customer region can be marked as read only with the following command.
 
 ```
-vcmailbox 0x00030083 6 6 0 0
+$ vcmailbox 0x00030086 4 4 0
+```
+
+OTP is only locked until the device is reset, so OTP locks need to be reapplied on every boot.
+
+### Making customer OTP bits unreadable on non-BCM2712 devices
+
+It is possible to prevent the customer OTP bits from being read at all. This can be done using a special argument with the OTP write mailbox:
+
+```
+$ vcmailbox 0x00038021 8 8 0xffffffff 0xaffebabe
+```
+
+This operation is unlikely to be useful for the vast majority of users, and is irreversible.
+
+### Customer MAC addresses on BCM2712 devices
+
+On BCM2712 devices the Ethernet, Wi-Fi and Bluetooth MAC addresses are set in OTP memory. These values can change with customer values.
+
+Get customer mac address `vcmailbox 0x00030082/3/4 6 6 0 0`, where 2 is Ethernet, 3 is Wi-Fi and 4 is Bluetooth:
+
+```
+$ vcmailbox 0x00030083 6 6 0 0
 0x00000020 0x80000000 0x00030083 0x00000006 0x80000006 0xddccbbaa 0x0000ffee 0x00000000
 ```
 
-为了设置客户端 MAC 地址，必须将其作为两个 32 位字发送，字节顺序正确。您可以运行一个命令来检查它是否格式正确。
-
- 例子…
+In order to set a customer MAC address, it has to be sent as two 32 words with the bytes in the right order. You can run a command to check it’s formatted properly:
 
 ```
-vcmailbox 0x00030085 6 6 0x44332211 0x6655
+$ vcmailbox 0x00030085 6 6 0x44332211 0x6655
 ```
 
-检查日志，查看 MAC 地址是否符合预期。
+Check the log to see if the MAC address matches your expectations:
 
 ```
-sudo vclog -m
+$ sudo vclog -m
 1057826.701: read mac address 11:22:33:44:55:66
 ```
 
-多播地址不被视为有效。MAC 地址中最重要的八位中最不重要的位是多播位，因此请确保未设置该位。
+A multicast address is not considered valid. The least significant bit in the most significant octet of a MAC address is the multicast bit, so make sure this is not set.
 
-然后可以使用命令 vcmailbox 0x00038082/3/4 6 6 <row1> <row0> 设置客户端 MAC。
-
- 示例...
+You can then set the customer MAC address with the command `vcmailbox 0x00038082/3/4 6 6 <row1> <row0>`:
 
 ```
-vcmailbox 0x00038082 6 6 0x44332211 0x6655
+$ vcmailbox 0x00038082 6 6 0x44332211 0x6655
 ```
 
-如果客户 MAC 地址设置为 ff:ff:ff:ff:ff:ff，则会被忽略。
+If a customer MAC address is set to `ff:ff:ff:ff:ff:ff`, then it’s ignored.
 
-### 设备特定的私钥
+### Device-specific private key
 
-使用 Broadcom BCM2712 处理器的设备具有 16 行 OTP 数据（512 位），以支持文件系统加密。不使用 BCM2712 的设备可用 8 行 OTP（256 位）作为设备特定私钥。
+Devices that use the Broadcom BCM2712 processor have 16 rows of OTP data (512 bits) to support filesystem encryption. Devices that do not use BCM2712 have 8 rows of OTP (256 bits) available for use as a device-specific private key.
 
-可以使用类似于用于管理客户 OTP 行的 vcmailbox 命令来编程和读取这些行。如果不需要安全启动/文件系统加密，则设备私钥行可用于存储通用信息。
+These rows can be programmed and read using similar `vcmailbox` commands to those used for managing customer OTP rows. If secure-boot / file-system encryption is not required, then the device private key rows can be used to store general-purpose information.
 
-* 设备私钥行只能通过 vcmailbox 命令读取，该命令需要访问 /dev/vcio ，该访问受限于 Raspberry Pi OS 上的 video 组。
-* 树莓派计算机没有硬件保护的密钥存储。建议与安全启动一起使用此功能，以限制对这些数据的访问。
-* 树莓派 OS 不支持加密的根文件系统。
+* The device private key rows can only be read via the `vcmailbox` command which requires access to `/dev/vcio` which is restricted to the `video` group on Raspberry Pi OS.
+* Raspberry Pi computers do not have a hardware protected key store. It is recommended that this feature is used in conjunction with [Secure Boot](https://github.com/raspberrypi/usbboot/blob/master/secure-boot-example/README.md) in order to restrict access to this data.
+* Raspberry Pi OS does not support an encrypted root-filesystem.
 
-有关开源磁盘加密的更多信息，请参阅 Cryptsetup。
+See [Cryptsetup](https://gitlab.com/cryptsetup/cryptsetup) for more information about open-source disk encryption.
 
-#### 键编程脚本 rpi-otp-private-key
+#### Program a key into OTP with `rpi-otp-private-key`
 
-该 rpi-otp-private-key 脚本包装了设备私钥 vcmailbox API，使得在 OpenSSL 格式中更易于读写密钥。
+The [`rpi-otp-private-key`](https://github.com/raspberrypi/rpi-eeprom/blob/master/tools/rpi-otp-private-key) script wraps the device private key `vcmailbox` APIs to make it easier to read and write a key in the OpenSSL format.
 
->**注意**
->
->该 usbboot 存储库包含您需要的所有工具，包括 rpi-eeprom 作为 Git 子模块。
+| NOTE | The [`usbboot`](https://github.com/raspberrypi/usbboot) repository contains all the tools you need, including [`rpi-eeprom`](https://github.com/raspberrypi/rpi-eeprom) as a Git submodule. |
+| ------ | --------------------------------------------------------------------------------- |
 
-将 32 字节密钥读取为 64 字符十六进制数：
+Read the 32-byte key as a 64-character hex number:
 
 ```
-cd usbboot/tools
-rpi-otp-private-key
+$ cd usbboot/tools
+$ rpi-otp-private-key
 ```
 
- 示例输出：
+Example output:
 
 ```
 f8dbc7b0a4fcfb1d706e298ac9d0485c2226ce8df7f7596ac77337bd09fbe160
 ```
 
-将 32 字节随机生成的数字写入设备私钥。
+Writes a 32-byte randomly generated number to the device private key.
 
->**警告**
->
->该操作无法撤销。
-
-```
-# rpi-otp-private-key -w $(openssl rand -hex 32)
-```
-
->**注意**
->
->要指定要使用的 OTP 行数，请传递 -l <word count> 。要指定密钥存储中的起始位置，请传递 `-o <word offset>` 。 
-
-#### 用于读取/写入密钥的邮箱 API。
-
-阅读所有行。
+| WARNING | This operation cannot be undone. |
+| --------- | ---------------------------------- |
 
 ```
-vcmailbox 0x00030081 40 40 0 8 0 0 0 0 0 0 0 0
+$ rpi-otp-private-key -w $(openssl rand -hex 32)
 ```
 
- 示例输出：
+| NOTE | To specify the number of OTP rows to use, pass `-l <word count>`. To specify a start location in the key store, pass `-o <word offset>`. |
+| ------ | ------------------------------------------------------------------------------------------------------- |
+
+#### Mailbox API for reading/writing the key
+
+Read all of the rows.
+
+```
+$ vcmailbox 0x00030081 40 40 0 8 0 0 0 0 0 0 0 0
+```
+
+Example output:
 
 ```
 0x00000040 0x80000000 0x00030081 0x00000028 0x80000028 0x00000000 0x00000008 0xf8dbc7b0 0xa4fcfb1d 0x706e298a 0xc9d0485c 0x2226ce8d 0xf7f7596a 0xc77337bd 0x09fbe160 0x00000000
 ```
 
-写入所有行（用关键数据替换末尾的八个零）：
+Write all of the row (replace the trailing eight zeros with the key data):
 
 ```
-vcmailbox 0x00038081 40 40 0 8 0 0 0 0 0 0 0 0
+$ vcmailbox 0x00038081 40 40 0 8 0 0 0 0 0 0 0 0
 ```
 
-在上一个示例中写下显示的密钥：
+Write the key shown in the previous example:
 
 ```
-vcmailbox 0x38081 40 40 0 8 0xf8dbc7b0 0xa4fcfb1d 0x706e298a 0xc9d0485c 0x2226ce8d 0xf7f7596a 0xc77337bd 0x09fbe160
+$ vcmailbox 0x38081 40 40 0 8 0xf8dbc7b0 0xa4fcfb1d 0x706e298a 0xc9d0485c 0x2226ce8d 0xf7f7596a 0xc77337bd 0x09fbe160
 ```
 
-## OTP 寄存器和位定义
+## OTP register and bit definitions
 
-树莓派系列使用的所有 SoC 都具有内置的一次性可编程 (OTP) 存储器块。少数位置具有出厂编程数据。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/otp-bits.adoc)
 
- OTP 存储器大小：
+All SoCs used by the Raspberry Pi range have a inbuilt one-time programmable (OTP) memory block. A few locations have factory-programmed data.
 
-* 非 BCM2712 设备：66 个 32 位值
-* BCM2712 设备：192 个 32 位值
+OTP memory size:
 
-用于显示 OTP 内容的 vcgencmd 是：
+* non-BCM2712 devices: 66 32-bit values
+* BCM2712 devices: 192 32-bit values
+
+To display the contents of the OTP, run the following command:
 
 ```
-vcgencmd otp_dump
+$ vcgencmd otp_dump
 ```
 
-### 非 BCM2712 设备上的 OTP 寄存器
+### OTP registers on non-BCM2712 devices
 
-此列表包含寄存器的公开信息。如果某个寄存器或位未在此处定义，则表示其不是公开的。
+This list contains the publicly available information on the registers. If a register or bit is not defined here, then it is not public.
 
-16 OTP 控制寄存器 - BCM2711
+`16`OTP control register - BCM2711
 
-* 位 26：禁用 VC JTAG
-* 位 27：禁用 VC JTAG
+* Bit 26: disables VC JTAG
+* Bit 27: disables VC JTAG
 
-  17 引导模式寄存器
+`17`bootmode register
 
-* 位 1：将振荡器频率设置为 19.2MHz
-* 位 3：启用 SDIO 引脚上的上拉电阻
-* 位 15：禁用 ROM RSA 密钥 0 -（如果设置，则启用安全启动）（BCM2711）
-* 位 19：启用 GPIO 引导模式
-* 位 20：设置要检查 GPIO 引导模式的银行
-* 位 21：启用从 SD 卡引导
-* 位 22：设置要引导的银行
-* 位 28：启用 USB 设备引导
-* 位 29：启用 USB 主机引导（以太网和大容量存储）
+* Bit 1: sets the oscillator frequency to 19.2MHz
+* Bit 3: enables pull ups on the SDIO pins
+* Bit 15: disables ROM RSA key 0 - (secure boot enabled if set) (BCM2711)
+* Bit 19: enables GPIO bootmode
+* Bit 20: sets the bank to check for GPIO bootmode
+* Bit 21: enables booting from SD card
+* Bit 22: sets the bank to boot from
+* Bit 28: enables USB device booting
+* Bit 29: enables USB host booting (ethernet and mass storage)
 
->**注意**
->
->在 BCM2711 上，引导模式由引导加载程序 EEPROM 配置定义，而不是 OTP。 
+| NOTE | On BCM2711 the bootmode is defined by the [bootloader EEPROM configuration](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-bootloader-configuration) instead of OTP. |
+| ------ | ------------------------------------------------------------ |
 
-18 引导模式寄存器的副本
+`18`copy of bootmode register
 
-  28 序列号
+`28`serial number
 
-  29 ~(序列号)
+`29`~(serial number)
 
-30 修订代码 ^1^
+`30`​[revision code](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-revision-codes) ^1^
 
-33 板上修订版扩展 - 其含义取决于板型。这可通过设备树在 /proc/device-tree/chosen/rpi-boardrev-ext 中获得，出于测试目的，可以通过在 config.txt 中设置 board_rev_ext 来临时覆盖此 OTP 值。
+`33`board revision extended - the meaning depends on the board model. This is available via device-tree in `/proc/device-tree/chosen/rpi-boardrev-ext` and for testing purposes this OTP value can be temporarily overridden by setting `board_rev_ext` in `config.txt`.
 
-* 计算模块 4
-  * 位 30：计算模块是否安装了 Wi-Fi 模块
-    * 0 - 无线网络
-    * 1 - 无 Wi-Fi
-  * 位 31: 计算模块是否安装了 EMMC 模块
+* Compute Module 4
+
+  * Bit 30: Whether the Compute Module has a Wi-Fi module fitted
+
+    * 0 - Wi-Fi
+    * 1 - No Wi-Fi
+  * Bit 31: Whether the Compute Module has an EMMC module fitted
+
     * 0 - EMMC
-    * 1 - 无 EMMC（精简版）
-* 树莓派 400
-  * 位 0-7：piwiz 使用的默认键盘国家代码
-36-43 客户 OTP 值
+    * 1 - No EMMC (Lite)
+* Raspberry Pi 400
 
-  45 MPG2 解码密钥
+  * Bits 0-7: The default keyboard country code used by [piwiz](https://github.com/raspberrypi-ui/piwiz)
 
-  46 WVC1 解码密钥
+`36-43`​[customer OTP values](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#industrial-use-of-the-raspberry-pi)
 
+`45`MPG2 decode key
 
-47-54 用于安全启动的 RSA 公钥的 SHA256
+`46`WVC1 decode key
 
-55 安全启动标志（由引导加载程序保留使用）
+`47-54`SHA256 of RSA public key for secure-boot
 
-56-63 256 位设备特定私钥
+`55`secure-boot flags (reserved for use by the bootloader)
 
-64-65 MAC 地址；如果设置，系统将优先使用此地址，而不是基于序列号自动生成的地址
+`56-63`256-bit device-specific private key
 
-66 高级引导寄存器（非 BCM2711）
+`64-65`MAC address; if set, system will use this in preference to the automatically generated address based on the serial number
 
-* 位 0-6：ETH_CLK 输出引脚的 GPIO
-* 位 7：启用 ETH_CLK 输出
-* 位 8-14：LAN_RUN 输出引脚的 GPIO
-* 位 15：启用 LAN_RUN 输出
-* 位 24：延长 USB HUB 超时参数
-* 位 25：ETH_CLK 频率:
+`66`advanced boot register (not BCM2711)
+
+* Bits 0-6: GPIO for ETH_CLK output pin
+* Bit 7: enables ETH_CLK output
+* Bits 8-14: GPIO for LAN_RUN output pin
+* Bit 15: enables LAN_RUN output
+* Bit 24: extends USB HUB timeout parameter
+* Bit 25: ETH_CLK frequency:
+
   * 0 - 25MHz
   * 1 - 24MHz
 
-^1^还包含用于禁用过压、OTP 编程和 OTP 读取的位。
+^1^Also contains bits to disable overvoltage, OTP programming, and OTP reading.
 
-### BCM2712 设备上的 OTP 寄存器
+### OTP Registers on BCM2712 devices
 
-此列表包含寄存器的公开信息。如果某个寄存器或位未在此处定义，则其不是公开的。
+This list contains the publicly available information on the registers. If a register or bit is not defined here, then it is not public.
 
-  22 引导模式寄存器
+`22`bootmode register
 
-* 位 1：从 SD 卡启动
-* 位 2-4：从 SPI EEPROM 启动（以及使用的 GPIO）
-* 位 10：禁用从 SD 卡启动
-* 位 11: 禁用从 SPI 引导
-* 位 12: 禁用从 USB 引导
+* Bit 1: Boot from SD card
+* Bits 2-4: Booting from SPI EEPROM (and which GPIOs)
+* Bit 10: Disable booting from SD card
+* Bit 11: Disable booting from SPI
+* Bit 12: Disable booting from USB
 
-23 引导模式寄存器的副本
+`23`copy of bootmode register
 
-  29 高级引导模式
+`29`advanced boot mode
 
-* 位 0-7：用于 SD 卡检测的 GPIO
-* 位 8-15：用于 RPIBOOT 的 GPIO
+* Bits 0-7: GPIO for SD card detect
+* Bits 8-15: GPIO to use for RPIBOOT
 
-31 序列号的低 32 位
+`31`lower 32 bits of serial number
 
-  32 主板版本
+`32`​[board revision](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-revision-codes)
 
-33 主板属性 - 其含义取决于主板型号。这可通过设备树在 /proc/device-tree/chosen/rpi-boardrev-ext 中获取
+`33`board attributes - the meaning depends on the board model. This is available via device-tree in `/proc/device-tree/chosen/rpi-boardrev-ext`
 
-35 序列号的高 32 位 完整的 64 位序列号可在 /proc/device-tree/serial-number 中找到
+`35`upper 32 bits of serial number The full 64 bit serial number is available in `/proc/device-tree/serial-number`
 
-50-51 以太网 MAC 地址 这将传递到设备树中的操作系统，例如 /proc/device-tree/axi/pcie@120000/rp1/ethernet@100000/local-mac-address
+`50-51`Ethernet MAC address This is passed to the operating system in the Device Tree, e.g. `/proc/device-tree/axi/pcie@120000/rp1/ethernet@100000/local-mac-address`
 
-52-53 Wi-Fi MAC 地址 这将传递到设备树中的操作系统，例如 /proc/device-tree/axi/mmc@1100000/wifi@1/local-mac-address
+`52-53`Wi-Fi MAC address This is passed to the operating system in the Device Tree, e.g. `/proc/device-tree/axi/mmc@1100000/wifi@1/local-mac-address`
 
-54-55 蓝牙 MAC 地址 这是传递给操作系统的设备树中的内容，例如 /proc/device-tree/soc/serial@7d50c000/bluetooth/local-bd-address
+`54-55`Bluetooth MAC address This is passed to the operating system in the Device Tree, e.g. `/proc/device-tree/soc/serial@7d50c000/bluetooth/local-bd-address`
 
-77-84 客户 OTP 值
+`77-84`​[customer OTP values](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#industrial-use-of-the-raspberry-pi)
 
-86board 国家 - piwiz 使用的默认键盘国家代码 如果设置，可通过设备树在 /proc/device-tree/chosen/rpi-country-code 中获取
+86board country - The default keyboard country code used by [piwiz](https://github.com/raspberrypi-ui/piwiz) If set, this is available via Device Tree in `/proc/device-tree/chosen/rpi-country-code`
 
-87-88 客户以太网 MAC 地址，如果设置，将覆盖 OTP 行 50-51
+`87-88`​[customer Ethernet MAC address](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#industrial-use-of-the-raspberry-pi) Overrides OTP rows 50-51 if set
 
-89-90 客户 Wi-Fi MAC 地址，如果设置，将覆盖 OTP 行 52-53
+`89-90`​[customer Wi-Fi MAC address](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#industrial-use-of-the-raspberry-pi) Overrides OTP rows 52-53 if set
 
-89-90 客户蓝牙 MAC 地址，如果设置，将覆盖 OTP 行 54-55
+`89-90`​[customer Bluetooth MAC address](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#industrial-use-of-the-raspberry-pi) Overrides OTP rows 54-55 if set
 
-109-114 工厂设备 UUID 目前是一个 16 位数字 id，应与设备上的条形码匹配。使用零字符填充并进行 c40 编码。
+`109-114`Factory device UUID Currently a 16-digit numerical id which should match the bar code on the device. Padded with zero characters and c40 encoded.
 
-通过设备树在 /proc/device-tree/chosen/rpi-duid 中可用。
+This is available via device-tree in `/proc/device-tree/chosen/rpi-duid`.
 
-## 树莓派连接器用于 PCIe
+## Raspberry Pi connector for PCIe
 
-![Raspberry Pi connector for PCIe](https://www.raspberrypi.com/documentation/computers/images/pcie.jpg)
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/pcie.adoc)
 
-树莓派连接器用于 PCIe
+![Raspberry Pi connector for PCIe](https://www.raspberrypi.com/documentation/computers/images/pcie.jpg?hash=35b4d5db3702574625f0e1e9686cdd51)
 
-树莓派 5 在板的右侧有一个 FPC 连接器。该连接器为快速外围设备提供了一个 PCIe Gen 2.0 ×1 接口。
+Raspberry Pi connector for PCIe
 
-要连接 PCIe HAT+设备，请将其连接到您的树莓派。您的树莓派应该会自动检测到该设备。要连接非 HAT+设备，请将其连接到您的树莓派，然后手动启用 PCIe。
+Raspberry Pi 5 has an FPC connector on the right-hand side of the board. This connector breaks out a PCIe Gen 2.0 ×1 interface for fast peripherals.
 
-有关 PCIe FPC 连接器引脚布局及创建第三方设备、配件和 HAT 所需的其他详细信息，请参阅 Raspberry Pi Connector for PCIe 标准文档。应与 Raspberry Pi HAT+ 规范一起阅读。
+To connect a PCIe [HAT+ device](https://datasheets.raspberrypi.com/hat/hat-plus-specification.pdf), connect it to your Raspberry Pi. Your Raspberry Pi should automatically detect the device. To connect a non-HAT+ device, connect it to your Raspberry Pi, then [manually enable PCIe](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#enable-pcie).
 
->**注意**
->
->目前不支持枚举位于交换机后面的 PCIe 设备。 
+For more information about the PCIe FPC connector pinout and other details needed to create third-party devices, accessories, and HATs, see the [Raspberry Pi Connector for PCIe](https://datasheets.raspberrypi.com/pcie/pcie-connector-standard.pdf) standards document. It should be read alongside the [Raspberry Pi HAT+ Specification](https://datasheets.raspberrypi.com/hat/hat-plus-specification.pdf).
 
-### 启用 PCIe
+| NOTE | Enumeration of PCIe devices behind a switch is [not currently supported](https://github.com/raspberrypi/firmware/issues/1833). |
+| ------ | -------------------------------------------------- |
 
-默认情况下，除非连接到 HAT+ 设备，否则 PCIe 连接器不会被启用。要启用连接器，请将以下行添加到 /boot/firmware/config.txt ：
+### Enable PCIe
+
+By default, the PCIe connector is not enabled unless connected to a HAT+ device. To enable the connector, add the following line to `/boot/firmware/config.txt`:
 
 ```
 dtparam=pciex1
 ```
 
-使用 sudo reboot 重新启动，以使配置更改生效。
+Reboot with `sudo reboot` for the configuration changes to take effect.
 
->**注意**
->
->您还可以使用别名 nvme 。 
+| NOTE | You can also use the alias `nvme`. |
+| ------ | ------------------------------ |
 
-### 从 PCIe 启动
+### Boot from PCIe
 
-默认情况下，树莓派设备不会从 PCIe 存储启动。要启用从 PCIe 启动，请更改引导加载程序配置中的 BOOT_ORDER 。使用以下命令编辑 EEPROM 配置：
+By default, Raspberry Pi devices do not boot from PCIe storage. To enable boot from PCIe, change the `BOOT_ORDER` in the bootloader configuration. Edit the EEPROM configuration with the following command:
 
 ```
 $ sudo rpi-eeprom-config --edit
 ```
 
-用以下行替换 BOOT_ORDER 行：
+Replace the `BOOT_ORDER` line with the following line:
 
 ```
 BOOT_ORDER=0xf416
 ```
 
-要从非 HAT+ 设备启动，请添加以下行：
+To boot from a non-HAT+ device, also add the following line:
 
 ```
 PCIE_PROBE=1
 ```
 
-保存更改后，使用 sudo reboot 重新启动您的树莓派以更新 EEPROM。
+After saving your changes, reboot your Raspberry Pi with `sudo reboot` to update the EEPROM.
 
 ### PCIe Gen 3.0
 
->**警告**
->
->树莓派 5 未获 Gen 3.0 速度认证。PCIe Gen 3.0 连接可能不稳定。 
+| WARNING | The Raspberry Pi 5 is not certified for Gen 3.0 speeds. PCIe Gen 3.0 connections may be unstable. |
+| --------- | --------------------------------------------------------------------------------------------------- |
 
-#### 通过 config.txt
+#### via `config.txt`
 
-该连接已获得 Gen 2.0 速度认证（5 GT/sec），但您可以强制使用 Gen 3.0（10 GT/sec）速度。要启用 PCIe Gen 3.0 速度，请将以下行添加到 /boot/firmware/config.txt ：
+The connection is certified for Gen 2.0 speeds (5 GT/sec), but you can force Gen 3.0 (10 GT/sec) speeds. To enable PCIe Gen 3.0 speeds, add the following line to `/boot/firmware/config.txt`:
 
 ```
 dtparam=pciex1_gen=3
 ```
 
-使用 sudo reboot 重新启动您的树莓派以使这些设置生效。
+Reboot your Raspberry Pi with `sudo reboot` for these settings to take effect.
 
-#### 通过 raspi-config
+#### via `raspi-config`
 
-运行以下命令以打开树莓派配置 CLI：
+Run the following command to open the Raspberry Pi Configuration CLI:
 
 ```
 $ sudo raspi-config
 ```
 
-完成以下步骤以启用 PCIe Gen 3.0 速度：
+Complete the following steps to enable PCIe Gen 3.0 speeds:
 
-1. 选择 Advanced Options 。
-2. 选择 PCIe Speed 。
-3. 选择 Yes 以启用 PCIe Gen 3 模式。
-4. 选择 Finish 以退出。
+1. Select `Advanced Options`.
+2. Select `PCIe Speed`.
+3. Choose `Yes` to enable PCIe Gen 3 mode.
+4. Select `Finish` to exit.
 
-使用 sudo reboot 重新启动您的树莓派，以使这些设置生效。
+Reboot your Raspberry Pi with `sudo reboot` for these settings to take effect.
 
-## 电源按钮
+## Power button
 
->**注意**
->
->本节仅适用于带有电源按钮的树莓派型号，例如树莓派 5。 
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/power-button.adoc)
 
-当您首次将树莓派插入电源时，它将自动打开并启动操作系统，无需按按钮。
+| NOTE | This section only applies to Raspberry Pi models with a power button, such as the Raspberry Pi 5. |
+| ------ | --------------------------------------------------------------------------------------------------- |
 
-如果您运行 Raspberry Pi Desktop，则可以通过简短按下电源按钮来启动干净的关机。 一个窗口将出现，询问您是否要关机、重新启动或注销。
+When you plug your Raspberry Pi into power for the first time, it will automatically turn on and boot into the operating system without having to push the button.
 
-选择一个选项或再次按下电源按钮以启动干净的关机。
+If you run Raspberry Pi Desktop, you can initiate a clean shutdown by briefly pressing the power button. A window will appear asking whether you want to shutdown, reboot, or logout.
 
->**注意**
->
->如果您运行 Raspberry Pi Desktop，则可以快速连续按两次电源按钮来关闭。 如果您运行没有桌面的 Raspberry Pi OS Lite，请按一次电源按钮来启动关机。
+Select an option or press the power button again to initiate a clean shutdown.
 
-### 重新启动
+| NOTE | If you run Raspberry Pi Desktop, you can press the power button twice in quick succession to shut down. If you run Raspberry Pi OS Lite without a desktop, press the power button a single time to initiate a shutdown. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-如果树莓派主板已关闭，但仍连接电源，则按下电源按钮会重新启动主板。
+### Restart
 
->**注意**
->
->重置电源管理集成电路（PMIC）也可以重新启动主板。连接 HAT 可以重置 PMIC。在连接 HAT 之前，始终将设备与电源断开连接。 
+If the Raspberry Pi board is turned off, but still connected to power, pressing the power button restarts the board.
 
-### 强制关机
+| NOTE | Resetting the Power Management Integrated Circuit (PMIC) can also restart the board. Connecting a HAT can reset the PMIC. Always disconnect your device from the power supply before connecting a HAT. |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-要强制关机，请按住电源按钮。
+### Hard shutdown
 
-### 添加您自己的电源按钮
+To force a hard shutdown, press and hold the power button.
 
-![The J2 jumper on Raspberry Pi 5](https://www.raspberrypi.com/documentation/computers/images/j2.jpg)
+### Add your own power button
 
- J2 跳线
+![The J2 jumper on Raspberry Pi 5](https://www.raspberrypi.com/documentation/computers/images/j2.jpg?hash=00e7c33a44c6f752d7818627617a44fb)
 
-J2 跳线位于 RTC 电池连接器和板边之间。这个引脚允许您通过添加一个常开（NO）瞬时开关来为树莓派 5 添加自己的电源按钮。简短地关闭此开关将执行与板载电源按钮相同的操作。
+The J2 jumper
 
-## 电源供应
+The J2 jumper is located between the RTC battery connector and the board edge. This breakout allows you to add your own power button to Raspberry Pi 5 by adding a Normally Open (NO) momentary switch bridging the two pads. Briefly closing this switch will perform the same actions as the onboard power button.
 
-树莓派型号的电源供应要求有所不同。所有型号都需要 5.1V 的供应，但根据型号，所需的电流通常会增加。直到树莓派 3 型号，所有型号都需要一个 micro USB 电源连接器，而树莓派 4、树莓派 400 和树莓派 5 使用 USB-C 连接器。
+## Power supply
 
-每个树莓派耗的电流取决于连接的外围设备。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/power-supplies.adoc)
 
-### 推荐的电源供应
+The power supply requirements differ by Raspberry Pi model. All models require a 5.1V supply, but the current required generally increases according to model. All models up to the Raspberry Pi 3 require a micro USB power connector, while Raspberry Pi 4, Raspberry Pi 400, and Raspberry Pi 5 use a USB-C connector.
 
-对于树莓派 1、树莓派 2 和 树莓派 3，我们建议使用 2.5A 微型 USB 电源适配器。对于树莓派 4 和树莓派 400，我们建议使用 3A USB-C 电源适配器。对于树莓派 5，我们建议使用 27W USB-C 电源适配器。
+The current consumed by each Raspberry Pi depends on the peripherals connected.
 
->**注意**
->
->所有型号的树莓派都不支持 USB-PPS。 
+### Recommended power supplies
 
->**注意**
->
->如果您使用第三方 USB-PD 多端口电源适配器，在连接树莓派时插入其他设备会导致电源适配器和树莓派间重新协商。如果树莓派已上电，这将无缝进行。如树莓派已关机，此重新协商可能导致树莓派启动。 
+For Raspberry Pi 1, Raspberry Pi 2, and Raspberry Pi 3, we recommend the [2.5A micro USB supply](https://www.raspberrypi.com/products/micro-usb-power-supply/). For Raspberry Pi 4 and Raspberry Pi 400, we recommend the [3A USB-C Supply for Raspberry Pi 4](https://www.raspberrypi.com/products/type-c-power-supply/). For Raspberry Pi 5, we recommend the [27W USB-C Power Supply](https://www.raspberrypi.com/products/27w-power-supply/).
 
-### 通过以太网（PoE）连接器
+| NOTE | No Raspberry Pi models support USB-PPS. |
+| ------ | ----------------------------------------- |
 
-![The PoE connector,width=](https://www.raspberrypi.com/documentation/computers/images/poe.jpg)
+| NOTE | If you use a third-party USB-PD multi-port power supply, plugging an additional device into the supply when your Raspberry Pi is connected causes a renegotiation between the supply and the Raspberry Pi. If the Raspberry Pi is powered, this happens seamlessly. If the Raspberry Pi is powered down, this renegotiation may cause the Raspberry Pi to boot. |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-树莓派 5 PoE 标头
+### Power over Ethernet (PoE) connector
 
-树莓派 5 上的以太网插孔支持 IEEE 802.3at-2009 PoE 标准，支持 PoE+。
+![The PoE connector,width=](https://www.raspberrypi.com/documentation/computers/images/poe.jpg?hash=c85522d9ada495cda39eb5e7198205a5)
 
-树莓派 4B 和 Pi 3B+上的以太网插孔支持 IEEE 802.3af-2003 PoE 标准，可提供 PoE 功能。
+Raspberry Pi 5 PoE header
 
-所有具有 PoE 功能的树莓派型号都需要一个 HAT 来通过以太网端口提取电源。对于支持 PoE 的型号，我们推荐 PoE HAT。对于支持 PoE+的型号，我们推荐 PoE+ HAT。
+The Ethernet jack on Raspberry Pi 5 is PoE+ capable, supporting the IEEE 802.3at-2009 PoE standard.
 
-### 典型功率需求
+The Ethernet jack on Raspberry Pi 4B and Pi 3B+ is PoE capable, supporting the IEEE 802.3af-2003 PoE standard.
 
-| 产品                    | 推荐的电源供应器电流容量 | 最大总 USB 外围设备电流吸收                  | 典型裸板活动电流消耗 |
-| ------------------------- | -------------------------- | ---------------------------------------------- | ------------------------ |
-|树莓派1 Model A  | 700 毫安                 | 500 毫安                                     | 200 毫安               |
-| 树莓派 1 型 B           | 1.2A                     | 500 毫安                                     | 500 毫安               |
-| 树莓派 1 Model A+ | 700 毫安                 | 500 毫安                                     | 180 毫安               |
-| 树莓派 1 型 B+          | 1.8A                     | 1.2A                                         | 330 毫安               |
-| 树莓派 2 型 B           | 1.8A                     | 1.2A                                         | 350 毫安               |
-| 树莓派 3 Model B  | 2.5A                     | 1.2A                                         | 400 毫安               |
-| 树莓派 3 Model A+ | 2.5A                     | 受电源、主板和连接器额定值的限制。           | 350 毫安               |
-| 树莓派 3 型 B+          | 2.5A                     | 1.2A                                         | 500 毫安               |
-| 树莓派 4 型 B           | 3.0A                     | 1.2A                                         | 600 毫安               |
-| 树莓派 5          | 5.0A                     | 1.6 安培（如果使用 3 安培电源则为 600 毫安） | 800 毫安               |
-| 树莓派 400        | 3.0A                     | 1.2A                                         | 800 毫安               |
-| 树莓派 Zero       | 1.2A                     | 仅受电源、板和连接器额定值限制               | 100 毫安               |
-| 树莓派 Zero W           | 1.2A                     | 仅受电源、板和连接器额定值限制。             | 150 毫安               |
-| 树莓派 Zero 2 W         | 2A                       | 仅受电源、板和连接器额定值限制。             | 350 毫安               |
+All Raspberry Pi models with a PoE-capable Ethernet jack require a HAT to draw power through the Ethernet port. For models that support PoE, we recommend the [PoE HAT](https://www.raspberrypi.com/products/poe-hat/). For models that support PoE+, we recommend the [PoE+ HAT](https://www.raspberrypi.com/products/poe-plus-hat/).
 
->**注意**
->
->树莓派 5 在连接到 5A、+5V（25W）的功率适配器时，为下游 USB 外设提供 1.6A 的电源。当连接到任何其他兼容的电源时，树莓派 5 将限制下游 USB 设备的电流为 600mA。
+### Typical power requirements
 
-大多数树莓派提供足够的电流给 USB 外设，以供应大多数 USB 设备，包括键盘、鼠标和适配器。然而，一些设备需要额外的电流，包括调制解调器、外部磁盘和高功率天线。要连接功率要求超过上表规定值的 USB 设备，请使用外部供电的 USB 集线器。
+| Product                 | Recommended PSU current capacity | Maximum total USB peripheral current draw          | Typical bare-board active current consumption |
+| ------------------------- | ---------------------------------- | ---------------------------------------------------- | ----------------------------------------------- |
+| Raspberry Pi 1 Model A  | 700mA                            | 500mA                                              | 200mA                                         |
+| Raspberry Pi 1 Model B  | 1.2A                             | 500mA                                              | 500mA                                         |
+| Raspberry Pi 1 Model A+ | 700mA                            | 500mA                                              | 180mA                                         |
+| Raspberry Pi 1 Model B+ | 1.8A                             | 1.2A                                               | 330mA                                         |
+| Raspberry Pi 2 Model B  | 1.8A                             | 1.2A                                               | 350mA                                         |
+| Raspberry Pi 3 Model B  | 2.5A                             | 1.2A                                               | 400mA                                         |
+| Raspberry Pi 3 Model A+ | 2.5A                             | Limited by PSU, board, and connector ratings only. | 350mA                                         |
+| Raspberry Pi 3 Model B+ | 2.5A                             | 1.2A                                               | 500mA                                         |
+| Raspberry Pi 4 Model B  | 3.0A                             | 1.2A                                               | 600mA                                         |
+| Raspberry Pi 5          | 5.0A                             | 1.6A (600mA if using a 3A power supply)            | 800mA                                         |
+| Raspberry Pi 400        | 3.0A                             | 1.2A                                               | 800mA                                         |
+| Raspberry Pi Zero       | 1.2A                             | Limited by PSU, board, and connector ratings only  | 100mA                                         |
+| Raspberry Pi Zero W     | 1.2A                             | Limited by PSU, board, and connector ratings only. | 150mA                                         |
+| Raspberry Pi Zero 2 W   | 2A                               | Limited by PSU, board, and connector ratings only. | 350mA                                         |
 
-随着您在树莓派上使用各种接口，其功率需求会增加。GPIO 引脚的总和可以安全地吸收 50mA；每个引脚可以单独吸收高达 16mA。HDMI 端口使用 50mA。摄像头模块需要 250mA。USB 键盘和鼠标的电流范围可以从 100mA 到 1000mA 不等。检查您计划连接到树莓派的设备的功率评级，并相应购买电源适配器。如果不确定，请使用外部供电的 USB 集线器。
+| NOTE | The Raspberry Pi 5 provides 1.6A of power to downstream USB peripherals when connected to a power supply capable of 5A at +5V (25W). When connected to any other compatible power supply, the Raspberry Pi 5 restricts downstream USB devices to 600mA of power. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
-您可以使用 vcgencmd 检查 USB 端口的电源输出状态。
+Most Raspberry Pis provide enough current to USB peripherals to power most USB devices, including keyboards, mice, and adapters. However, some devices require additional current, including modems, external disks, and high-powered antenna. To connect a USB device with power requirements that exceed the values specified in the table above, connect it using an externally-powered USB hub.
+
+The power requirements of the Raspberry Pi increase as you make use of the various interfaces on the Raspberry Pi. Combined, the GPIO pins can draw 50mA safely; each pin can individually draw up to 16mA. The HDMI port uses 50mA. The Camera Module requires 250mA. USB keyboards and mice can take as little as 100mA or as much as 1000mA. Check the power rating of the devices you plan to connect to the Raspberry Pi and purchase a power supply accordingly. If you’re not sure, use an externally-powered USB hub.
+
+Run the following command to check the status of power output to the USB ports:
 
 ```
-vcgencmd get_config usb_max_current_enable
+$ vcgencmd get_config usb_max_current_enable
 ```
 
-以下表格描述了不同树莓派型号在各种工作负载期间所吸收的功率量（安培）：
+The following table describes the amount of power (in amps) drawn by different Raspberry Pi models during various workloads:
 
-|                   |      | 树莓派 1B+ | 树莓派 2B | 树莓派 3B | 树莓派 Zero | 树莓派 4B |
-| ------------------- | ------ | ------------------ | ----------- | ----------- | ------------- | ----------- |
-| 引导              | 最大 | 0.26             | 0.40      | 0.75      | 0.20        | 0.85      |
-|                   | 平均 | 0.22             | 0.22      | 0.35      | 0.15        | 0.7       |
-| 空闲              | 平均 | 0.20             | 0.22      | 0.30      | 0.10        | 0.6       |
-| 视频播放（H.264） | 最大 | 0.30             | 0.36      | 0.55      | 0.23        | 0.85      |
-|                   | 平均 | 0.22             | 0.28      | 0.33      | 0.16        | 0.78      |
-| 压力              | 最大 | 0.35             | 0.82      | 1.34      | 0.35        | 1.25      |
-|                   | 平均 | 0.32             | 0.75      | 0.85      | 0.23        | 1.2       |
-| 停止当前          |      |                  |           | 0.10      | 0.055       | 0.023     |
+|                        |     | Raspberry Pi 1B+ | Raspberry Pi 2B | Raspberry Pi 3B | Raspberry Pi Zero | Raspberry Pi 4B |
+| ------------------------ | ----- | ------------------ | ----------------- | ----------------- | ------------------- | ----------------- |
+| Boot                   | Max | 0.26             | 0.40            | 0.75            | 0.20              | 0.85            |
+|                        | Avg | 0.22             | 0.22            | 0.35            | 0.15              | 0.7             |
+| Idle                   | Avg | 0.20             | 0.22            | 0.30            | 0.10              | 0.6             |
+| Video playback (H.264) | Max | 0.30             | 0.36            | 0.55            | 0.23              | 0.85            |
+|                        | Avg | 0.22             | 0.28            | 0.33            | 0.16              | 0.78            |
+| Stress                 | Max | 0.35             | 0.82            | 1.34            | 0.35              | 1.25            |
+|                        | Avg | 0.32             | 0.75            | 0.85            | 0.23              | 1.2             |
+| Halt current           |     |                  |                 | 0.10            | 0.055             | 0.023           |
 
->**注意**
->
->这些测量使用了标准的 Raspberry Pi OS 镜像（截至 2016 年 2 月 26 日，或 2019 年 6 月对于树莓派 4），在室温下进行，树莓派连接到 HDMI 显示器，USB 键盘和 USB 鼠标。树莓派 3 Model B 连接到无线局域网接入点，树莓派 4 连接到以太网。所有这些功耗测量均为近似值，不考虑来自额外 USB 设备的功耗；如果连接了多个额外的 USB 设备或 HAT 到树莓派，功耗很容易超过这些测量值。 
+| NOTE | These measurements used a standard Raspberry Pi OS image (current as of 26 Feb 2016, or June 2019 for the Raspberry Pi 4), at room temperature, with the Raspberry Pi connected to a HDMI monitor, USB keyboard, and USB mouse. The Raspberry Pi 3 Model B was connected to a wireless LAN access point, the Raspberry Pi 4 was connected to Ethernet. All these power measurements are approximate and do not take into account power consumption from additional USB devices; power consumption can easily exceed these measurements if multiple additional USB devices or a HAT are connected to the Raspberry Pi. |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-##### [树莓派4 和计算模块 4 上的额外 PMIC 功能](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-004340-WP/Extra-PMIC-features-on-Raspberry-Pi-4-and-Compute-Module-4.pdf)
+##### [Extra PMIC features on Raspberry Pi 4 and Compute Module 4](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-004340-WP/Extra-PMIC-features-on-Raspberry-Pi-4-and-Compute-Module-4.pdf)
 
-树莓派 4 和计算模块 4 上的额外 PMIC 功能
+Extra PMIC features on Raspberry Pi 4 and Compute Module 4
 
-树莓派 4 和 CM4 上使用了许多不同的 PMIC 设备。所有的 PMIC 都提供了除电压供应之外的额外功能。本文描述了如何在软件中访问这些功能。
+A number of different PMIC devices have been used on both Raspberry Pi 4 and CM4. All the PMICs provide extra functionality alongside that of voltage supply. This document describes how to access these features in software.
 
-#### 降低树莓派 5 在关机状态下的功率
+#### Decrease Raspberry Pi 5 wattage when turned off
 
-默认情况下，树莓派 5 在关闭状态时消耗约 1W 到 1.4W 的功率。这可以通过手动编辑 EEPROM 配置来降低，使用 sudo rpi-eeprom-config -e 。将设置更改为以下内容：
+By default, the Raspberry Pi 5 consumes around 1W to 1.4W of power when turned off. This can be decreased by manually editing the EEPROM configuration with `sudo rpi-eeprom-config -e`. Change the settings to the following:
 
 ```
 BOOT_UART=1
@@ -2940,116 +2824,112 @@ POWER_OFF_ON_HALT=1
 BOOT_ORDER=0xf416
 ```
 
-这应该将关机时的功耗降低到约 0.01W。
+This should drop the power consumption when powered down to around 0.01W.
 
-### 电源供应警告
+### Power supply warnings
 
-自 2014 年树莓派 B+（除 Zero 系列外）的所有型号上，都有低电压检测电路，可检测供电电压是否低于 4.63V（±5%）。这将导致内核日志中增加一个条目。
+On all models of Raspberry Pi since the Raspberry Pi B+ (2014) except the Zero range, there is low-voltage detection circuitry that will detect if the supply voltage drops below 4.63V (±5%). This will result in an entry being added to the kernel log.
 
-如果看到警告，请切换到更高质量的电源和电缆。低质量的电源可能会损坏存储器或导致树莓派内部出现不可预测的行为。
+If you see warnings, switch to a higher quality power supply and cable. Low quality power supplies can corrupt storage or cause unpredictable behaviour within the Raspberry Pi.
 
-电压可能因多种原因而下降。您可能已经插入了太多高需求的 USB 设备。电源可能不足。或者电源线可能使用了太细的导线。
+Voltages can drop for a variety of reasons. You may have plugged in too many high-demand USB devices. The power supply could be inadequate. Or the power supply cable could use wires that are too thin.
 
-##### [制作更具弹性的文件系统](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003610-WP/Making-a-more-resilient-file-system.pdf)
+##### [Making a more resilient file system](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003610-WP/Making-a-more-resilient-file-system.pdf)
 
-制作更具弹性的文件系统
+Making a more resilient file system
 
-树莓派设备经常被用作数据存储和监控设备，通常用于可能发生突然断电的地方。与任何计算设备一样，断电会导致存储损坏。
+Raspberry Pi devices are frequently used as data storage and monitoring devices, often in places where sudden power-downs may occur. As with any computing device, power dropouts can cause storage corruption.
 
-这份白皮书提供了一些选项，说明如何通过选择适当的文件系统和设置来防止数据损坏，在这种和其他情况下确保数据完整性。
+This white paper provides some options on how to prevent data corruption under these and other circumstances by selecting appropriate file systems and setups to ensure data integrity.
 
-### 电源和 Raspberry Pi OS
+### Power supplies and Raspberry Pi OS
 
-引导加载程序通过设备树 /proc/device-tree/chosen/power 传递有关电源供应的信息。用户通常不会直接阅读这些信息。
+The bootloader passes information about the power supply via device-tree `/proc/device-tree/chosen/power`. Users will typically not read this directly.
 
-最大电流（mA）
+max_currentThe max current in mA
 
-PDOs 的转储 - 高级用户的调试
+uspd_power_data_objectsA dump of the PDOs - debug for advanced users
 
-是否将电流限制器设置为高或低
+usb_max_current_enableWhether the current limiter was set to high or low
 
-检测到 USB 过流在将控制权转移给操作系统之前是否发生任何 USB 过流
+usb_over_current_detectedWhether any USB over current occurred during boot before transferring control to the OS
 
-复位事件 PMIC 复位原因，例如看门狗、过压或欠压、过温
+reset_eventThe PMIC reset reason e.g. watchdog, over- or under-voltage, over-temperature
 
-PMIC 具有内置 ADC，可以测量供电电压 EXT5V_V 等内容。使用以下命令查看 ADC 测量值:
+The PMIC has built-in ADCs that, among other things, can measure the supply voltage `EXT5V_V`. Use the following command to view ADC measurements:
 
 ```
-vcgencmd pmic_read_adc
+$ vcgencmd pmic_read_adc
 ```
 
->**注意**
->
->您无法看到连接到 5V 的 USB 电流或其他任何内容，因为这会绕过 PMIC。您不应该期望这些内容加起来等于电源供应的瓦特数。但是，监视核心电压等内容可能会很有用。 
+You can’t see USB current or anything else connected directly to 5V, because this bypasses the PMIC. You should not expect this to add up to the wattage of the source power supply. However, it can be useful to monitor things like the core voltage.
 
-### 反向供电
+### Back-powering
 
-USB 规范要求 USB 设备不得向上游设备提供电流。如果 USB 设备确实向上游设备提供电流，则称为反向供电。通常情况下，当连接了制作不良的供电 USB 集线器时会发生这种情况，并且将导致供电 USB 集线器向主机树莓派供电。这不被推荐，因为通过集线器向树莓派供电的电源将绕过树莓派内置的保护电路，使其在电涌事件中容易受损。
+The USB specification requires that USB devices must not supply current to upstream devices. If a USB device does supply current to an upstream device, then this is called back-powering. Often this happens when a badly-made powered USB hub is connected, and will result in the powered USB hub supplying power to the host Raspberry Pi. This is not recommended since the power being supplied to the Raspberry Pi via the hub will bypass the protection circuitry built into the Raspberry Pi, leaving it vulnerable to damage in the event of a power surge.
 
-## 实时时钟（RTC）
+## Real Time Clock (RTC)
 
-树莓派 5 包含一个 RTC 模块。这可以通过位于 USB-C 电源连接器右侧的板上的 J5（BAT）连接器用电池供电。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/rtc.adoc)
 
-![The J5 battery connector](https://www.raspberrypi.com/documentation/computers/images/j5.png)
+The Raspberry Pi 5 includes an RTC module. This can be battery powered via the J5 (BAT) connector on the board located to the right of the USB-C power connector.
 
-J5 电池连接器
+![The J5 battery connector](https://www.raspberrypi.com/documentation/computers/images/j5.png?hash=70853cc7a9a01cd836ed8351ece14d59)
 
-您可以设置唤醒闹钟，将板子切换到非常低功耗状态（约 3mA）。当闹钟时间到达时，板子将重新上电。这对于像延时摄影这样的周期性工作非常有用。
+The J5 battery connector
 
-要支持唤醒闹钟的低功耗模式，请编辑引导加载程序配置：
+You can set a wake alarm which will switch the board to a very low-power state (approximately 3mA). When the alarm time is reached, the board will power back on. This can be useful for periodic jobs like time-lapse imagery.
+
+To support the low-power mode for wake alarms, edit the bootloader configuration:
 
 ```
 $ sudo -E rpi-eeprom-config --edit
 ```
 
-添加以下两行。
+adding the following two lines.
 
 ```
 POWER_OFF_ON_HALT=1
 WAKE_ON_GPIO=0
 ```
 
-您可以使用以下功能进行测试：
+You can test the functionality with:
 
 ```
 $ echo +600 | sudo tee /sys/class/rtc/rtc0/wakealarm
 $ sudo halt
 ```
 
-这将使板卡进入非常低功耗状态，然后在 10 分钟后唤醒并重新启动。
+That will halt the board into a very low-power state, then wake and restart after 10 minutes.
 
-RTC 还提供引导时的时间，例如在 dmesg 中，用于缺乏 NTP 访问的用例：
+The RTC also provides the time on boot e.g. in `dmesg`, for use cases that lack access to NTP:
 
 ```
 [    1.295799] rpi-rtc soc:rpi_rtc: setting system clock to 2023-08-16T15:58:50 UTC (1692201530)
 ```
 
->**注意**
->
->即使未连接备用电池到 J5 连接器，RTC 仍然可用。 
+| NOTE | The RTC is still usable even when there is no backup battery attached to the J5 connector. |
+| ------ | -------------------------------------------------------------------------------------------- |
 
-### 添加备用电池
+### Add a backup battery
 
-![Lithium-manganese rechargeable RTC battery](https://www.raspberrypi.com/documentation/computers/images/rtc-battery.jpg)
+![Lithium-manganese rechargeable RTC battery](https://www.raspberrypi.com/documentation/computers/images/rtc-battery.jpg?hash=1a1bf655f9bce54c3b4c0a345f3e025c)
 
-锂锰可充电 RTC 电池
+Lithium-manganese rechargeable RTC battery
 
-官方电池部件是可充电的锰酸锂硬币电池，带有预装的双引脚 JST-SH 插头和粘贴式安装垫。当板子的主电源断开时，这适用于为 RTC 供电。由于关机时的电流吸收为个位数µA，保持时间为几个月。
+The official battery part is a rechargeable lithium manganese coin cell, with a pre-fitted two-pin JST-SH plug and an adhesive mounting pad. This is suitable for powering the RTC when the main power supply for the board is disconnected. Since the current draw when powered down measures in single-digit µA, the retention time measures in months.
 
->**注意**
->
->我们不建议为 RTC 使用主要（非可充电）锂电池。RTC 备份电流消耗高于大多数专用 RTC 模块，将导致使用寿命缩短。
+| NOTE | We do not recommend using a primary (non-rechargeable) lithium cell for the RTC. The RTC backup current consumption is higher than most dedicated RTC modules and will result in a short service life. |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
+| WARNING | Do not use a Lithium Ion cell for the RTC. |
+| --------- | -------------------------------------------- |
 
->**警告**
->
->不要给 RTC 使用锂离子电池。
+### Enable battery charging
 
-### 启用电池充电
+The RTC is equipped with a constant-current (3mA) constant-voltage charger.
 
-RTC 配备了恒流（3mA）恒压充电器。
-
-默认情况下禁用电池充电。有 sysfs 个文件显示充电电压和限制：
+Charging of the battery is disabled by default. There are `sysfs` files that show the charging voltage and limits:
 
 ```
 /sys/devices/platform/soc/soc:rpi_rtc/rtc/rtc0/charging_voltage:0
@@ -3057,253 +2937,260 @@ RTC 配备了恒流（3mA）恒压充电器。
 /sys/devices/platform/soc/soc:rpi_rtc/rtc/rtc0/charging_voltage_min:1300000
 ```
 
-为了以设定电压充电，请将 rtc_bbat_vchg 添加到 /boot/firmware/config.txt ：
+To charge the battery at a set voltage, add [`rtc\_bbat\_vchg`](https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README#L279) to `/boot/firmware/config.txt`:
 
 ```
 dtparam=rtc_bbat_vchg=3000000
 ```
 
-使用 sudo reboot 重新启动以使用新的电压设置。检查 sysfs 文件，确保充电电压已正确设置。
+Reboot with `sudo reboot` to use the new voltage setting. Check the `sysfs` files to ensure that the charging voltage was correctly set.
 
-### 禁用电池充电
+### Disable battery charging
 
-要停止充电，请从 config.txt 中删除包含 rtc_bbat_vchg 的任何行。
+To stop charging, remove any lines that contain [`rtc\_bbat\_vchg`](https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README#L279) from `config.txt`.
 
-## 串行外围接口（SPI）
+## Serial peripheral interface (SPI)
 
-树莓派计算机配备了多个 SPI 总线。SPI 可用于连接各种外围设备 - 显示器，网络控制器（以太网，CAN 总线），UART 等。这些设备最好由内核设备驱动程序支持，但 spidev API 允许用户空间驱动程序用多种语言编写。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/spi-bus-on-raspberry-pi.adoc)
 
-### SPI 硬件
+Raspberry Pi computers are equipped with a number of [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus) buses. SPI can be used to connect a wide variety of peripherals - displays, network controllers (Ethernet, CAN bus), UARTs, etc. These devices are best supported by kernel device drivers, but the `spidev` API allows userspace drivers to be written in a wide array of languages.
 
-树莓派 Zero、1、2 和 3 都有三个 SPI 控制器：
+### SPI hardware
 
-* SPI0 具有两个硬件芯片选择信号，在所有树莓派的引脚上都可以找到；还有一种仅适用于计算模块的备用映射。
-* SPI1，具有三个硬件芯片选择，适用于除旧版树莓派 1 Model A 和 Model B 之外的所有的树莓派型号。
-* SPI2，也具有三个硬件芯片选择，仅适用于计算模块 1、3 和 3+。
+Raspberry Pi Zero, 1, 2 and 3 have three SPI controllers:
 
-在树莓派 4、400 和 Compute Module 4 上，有四个额外的 SPI 总线：SPI3 到 SPI6，每个总线都有两个硬件芯片选择。这些额外的 SPI 总线可通过某些 GPIO 引脚的备用功能分配使用。有关更多信息，请参阅 BCM2711 Arm 外围设备数据表。
+* `SPI0`, with two hardware chip selects, is available on the header of all Raspberry Pis; there is also an alternate mapping that is only available on Compute Modules.
+* `SPI1`, with three hardware chip selects, is available on all Raspberry Pi models except the original Raspberry Pi 1 Model A and Model B.
+* `SPI2`, also with three hardware chip selects, is only available on Compute Module 1, 3 and 3+.
 
-BCM2835 Arm 外围设备数据表中的第 10 章描述了主控制器。第 2.3 章描述了辅助控制器。
+On the Raspberry Pi 4, 400 and Compute Module 4 there are four additional SPI buses: SPI3 to SPI6, each with two hardware chip selects. These extra SPI buses are available via alternate function assignments on certain GPIO pins. For more information, see the [BCM2711 Arm peripherals](https://datasheets.raspberrypi.com/bcm2711/bcm2711-peripherals.pdf) datasheet.
 
-#### 引脚/GPIO 映射
+Chapter 10 in the [BCM2835 Arm peripherals](https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf) datasheet describes the main controller. Chapter 2.3 describes the auxiliary controller.
+
+#### Pin/GPIO mappings
 
 ##### SPI0
 
-| SPI 功能 | 标头引脚 | Broadcom 引脚名称 | Broadcom 引脚功能 |
-| ---------- | ---------- | ------------------- | ------------------- |
-| MOSI     | 19       | GPIO10            | SPI0_MOSI         |
-| MISO     | 21       | GPIO09            | SPI0_MISO         |
-| SCLK     | 23       | GPIO11            | SPI0_SCLK         |
-| CE0      | 24       | GPIO08            | SPI0_CE0_N        |
-| CE1      | 26       | GPIO07            | SPI0_CE1_N        |
+| SPI function | Header pin | Broadcom pin name | Broadcom pin function |
+| -------------- | ------------ | ------------------- | ----------------------- |
+| `MOSI`             | 19         | `GPIO10`                  | `SPI0_MOSI`                      |
+| `MISO`             | 21         | `GPIO09`                  | `SPI0_MISO`                      |
+| `SCLK`             | 23         | `GPIO11`                  | `SPI0_SCLK`                      |
+| `CE0`             | 24         | `GPIO08`                  | `SPI0_CE0_N`                      |
+| `CE1`             | 26         | `GPIO07`                  | `SPI0_CE1_N`                      |
 
-##### SPI0 备用映射（仅适用于计算模块，除 CM4 外）
+##### SPI0 alternate mapping (Compute Modules only, except CM4)
 
-| SPI 功能 | Broadcom 引脚名称 | Broadcom 引脚功能 |
-| ---------- | ------------------- | ------------------- |
-| MOSI     | GPIO38            | SPI0_MOSI         |
-| MISO     | GPIO37            | SPI0_MISO         |
-| SCLK     | GPIO39            | SPI0_SCLK         |
-| CE0      | GPIO36            | SPI0_CE0_N        |
-| CE1      | GPIO35            | SPI0_CE1_N        |
+| SPI function | Broadcom pin name | Broadcom pin function |
+| -------------- | ------------------- | ----------------------- |
+| `MOSI`             | `GPIO38`                  | `SPI0_MOSI`                      |
+| `MISO`             | `GPIO37`                  | `SPI0_MISO`                      |
+| `SCLK`             | `GPIO39`                  | `SPI0_SCLK`                      |
+| `CE0`             | `GPIO36`                  | `SPI0_CE0_N`                      |
+| `CE1`             | `GPIO35`                  | `SPI0_CE1_N`                      |
 
 ##### SPI1
 
-| SPI 功能 | 标头引脚 | Broadcom 引脚名称 | Broadcom 引脚功能 |
-| ---------- | ---------- | ------------------- | ------------------- |
-| MOSI     | 38       | GPIO20            | SPI1_MOSI         |
-| MISO     | 35       | GPIO19            | SPI1_MISO         |
-| SCLK     | 40       | GPIO21            | SPI1_SCLK         |
-| CE0      | 12       | GPIO18            | SPI1_CE0_N        |
-| CE1      | 11       | GPIO17            | SPI1_CE1_N        |
-| CE2      | 36       | GPIO16            | SPI1_CE2_N        |
+| SPI function | Header pin | Broadcom pin name | Broadcom pin function |
+| -------------- | ------------ | ------------------- | ----------------------- |
+| `MOSI`             | 38         | `GPIO20`                  | `SPI1_MOSI`                      |
+| `MISO`             | 35         | `GPIO19`                  | `SPI1_MISO`                      |
+| `SCLK`             | 40         | `GPIO21`                  | `SPI1_SCLK`                      |
+| `CE0`             | 12         | `GPIO18`                  | `SPI1_CE0_N`                      |
+| `CE1`             | 11         | `GPIO17`                  | `SPI1_CE1_N`                      |
+| `CE2`             | 36         | `GPIO16`                  | `SPI1_CE2_N`                      |
 
-##### SPI2（仅限计算模块，不包括 CM4）
+##### SPI2 (Compute Modules only, except CM4)
 
-| SPI 功能 | Broadcom 引脚名称 | Broadcom 引脚功能 |
-| ---------- | ------------------- | ------------------- |
-| MOSI     | GPIO41            | SPI2_MOSI         |
-| MISO     | GPIO40            | SPI2_MISO         |
-| SCLK     | GPIO42            | SPI2_SCLK         |
-| CE0      | GPIO43            | SPI2_CE0_N        |
-| CE1      | GPIO44            | SPI2_CE1_N        |
-| CE2      | GPIO45            | SPI2_CE2_N        |
+| SPI function | Broadcom pin name | Broadcom pin function |
+| -------------- | ------------------- | ----------------------- |
+| `MOSI`             | `GPIO41`                  | `SPI2_MOSI`                      |
+| `MISO`             | `GPIO40`                  | `SPI2_MISO`                      |
+| `SCLK`             | `GPIO42`                  | `SPI2_SCLK`                      |
+| `CE0`             | `GPIO43`                  | `SPI2_CE0_N`                      |
+| `CE1`             | `GPIO44`                  | `SPI2_CE1_N`                      |
+| `CE2`             | `GPIO45`                  | `SPI2_CE2_N`                      |
 
-##### SPI3（仅限 BCM2711）
+##### SPI3 (BCM2711 only)
 
-| SPI 功能 | 标头引脚 | Broadcom 引脚名称 | Broadcom 引脚功能 |
-| ---------- | ---------- | ------------------- | ------------------- |
-| MOSI     | 03       | GPIO02            | SPI3_MOSI         |
-| MISO     | 28       | GPIO01            | SPI3_MISO         |
-| SCLK     | 05       | GPIO03            | SPI3_SCLK         |
-| CE0      | 27       | GPIO00            | SPI3_CE0_N        |
-| CE1      | 18       | GPIO24            | SPI3_CE1_N        |
+| SPI function | Header pin | Broadcom pin name | Broadcom pin function |
+| -------------- | ------------ | ------------------- | ----------------------- |
+| `MOSI`             | 03         | `GPIO02`                  | `SPI3_MOSI`                      |
+| `MISO`             | 28         | `GPIO01`                  | `SPI3_MISO`                      |
+| `SCLK`             | 05         | `GPIO03`                  | `SPI3_SCLK`                      |
+| `CE0`             | 27         | `GPIO00`                  | `SPI3_CE0_N`                      |
+| `CE1`             | 18         | `GPIO24`                  | `SPI3_CE1_N`                      |
 
-##### SPI4（仅限 BCM2711）
+##### SPI4 (BCM2711 only)
 
-| SPI 功能 | 标头引脚 | Broadcom 引脚名称 | Broadcom 引脚功能 |
-| ---------- | ---------- | ------------------- | ------------------- |
-| MOSI     | 31       | GPIO06            | SPI4_MOSI         |
-| MISO     | 29       | GPIO05            | SPI4_MISO         |
-| SCLK     | 26       | GPIO07            | SPI4_SCLK         |
-| CE0      | 07       | GPIO04            | SPI4_CE0_N        |
-| CE1      | 22       | GPIO25            | SPI4_CE1_N        |
+| SPI function | Header pin | Broadcom pin name | Broadcom pin function |
+| -------------- | ------------ | ------------------- | ----------------------- |
+| `MOSI`             | 31         | `GPIO06`                  | `SPI4_MOSI`                      |
+| `MISO`             | 29         | `GPIO05`                  | `SPI4_MISO`                      |
+| `SCLK`             | 26         | `GPIO07`                  | `SPI4_SCLK`                      |
+| `CE0`             | 07         | `GPIO04`                  | `SPI4_CE0_N`                      |
+| `CE1`             | 22         | `GPIO25`                  | `SPI4_CE1_N`                      |
 
-##### SPI5（仅限 BCM2711）
+##### SPI5 (BCM2711 only)
 
-| SPI 功能 | 标头引脚 | Broadcom 引脚名称 | Broadcom 引脚功能 |
-| ---------- | ---------- | ------------------- | ------------------- |
-| MOSI     | 08       | GPIO14            | SPI5_MOSI         |
-| MISO     | 33       | GPIO13            | SPI5_MISO         |
-| SCLK     | 10       | GPIO15            | SPI5_SCLK         |
-| CE0      | 32       | GPIO12            | SPI5_CE0_N        |
-| CE1      | 37       | GPIO26            | SPI5_CE1_N        |
+| SPI function | Header pin | Broadcom pin name | Broadcom pin function |
+| -------------- | ------------ | ------------------- | ----------------------- |
+| `MOSI`             | 08         | `GPIO14`                  | `SPI5_MOSI`                      |
+| `MISO`             | 33         | `GPIO13`                  | `SPI5_MISO`                      |
+| `SCLK`             | 10         | `GPIO15`                  | `SPI5_SCLK`                      |
+| `CE0`             | 32         | `GPIO12`                  | `SPI5_CE0_N`                      |
+| `CE1`             | 37         | `GPIO26`                  | `SPI5_CE1_N`                      |
 
-##### SPI6（仅限 BCM2711）
+##### SPI6 (BCM2711 only)
 
-| SPI 功能 | 标头引脚 | Broadcom 引脚名称 | Broadcom 引脚功能 |
-| ---------- | ---------- | ------------------- | ------------------- |
-| MOSI     | 38       | GPIO20            | SPI6_MOSI         |
-| MISO     | 35       | GPIO19            | SPI6_MISO         |
-| SCLK     | 40       | GPIO21            | SPI6_SCLK         |
-| CE0      | 12       | GPIO18            | SPI6_CE0_N        |
-| CE1      | 13       | GPIO27            | SPI6_CE1_N        |
+| SPI function | Header pin | Broadcom pin name | Broadcom pin function |
+| -------------- | ------------ | ------------------- | ----------------------- |
+| MOSI         | 38         | GPIO20            | SPI6\_MOSI         |
+| MISO         | 35         | GPIO19            | SPI6\_MISO         |
+| SCLK         | 40         | GPIO21            | SPI6\_SCLK         |
+| CE0          | 12         | GPIO18            | SPI6\_CE0\_N    |
+| CE1          | 13         | GPIO27            | SPI6\_CE1\_N    |
 
-#### 主模式
+#### Master modes
 
-信号名称缩写
+Signal name abbreviations:
 
-```
-SCLK - serial clock
-CE   - chip enable (often called chip select)
-MOSI - master out slave in
-MISO - master in slave out
-MOMI - master out master in
-```
+SCLKserial clock
 
-##### 标准模式
+CEchip enable (often called chip select)
 
-在标准 SPI 模式下，外围设备实现标准的三线串行协议（SCLK、MOSI 和 MISO）。
+MOSImaster out slave in
 
-##### 双向模式
+MISOmaster in slave out
 
-在双向 SPI 模式下，实现了相同的 SPI 标准，只是在数据传输时使用单根线（MOMI），而不是标准模式中使用的两根线（MISO 和 MOSI）。在此模式下，MOSI 引脚充当 MOMI 引脚。
+MOMImaster out master in
 
-##### 低速串行接口（LoSSI）模式
+##### Standard mode
 
-LoSSI 标准允许向外围设备（LCD）发出命令，并与其之间传输数据。LoSSI 命令和参数为 8 位长，但额外使用一位来指示字节是命令还是参数/数据。对于数据，将此额外位设置为高位，对于命令，将其设置为低位。生成的 9 位值被串行化到输出。LoSSI 通常与 MIPI DBI 类型 C 兼容的 LCD 控制器一起使用。
+In Standard SPI mode the peripheral implements the standard three-wire serial protocol (SCLK, MOSI and MISO).
 
->**注意**
->
->一些命令会触发 SPI 控制器的自动读取，因此这种模式不能用作多功能 9 位 SPI。
+##### Bidirectional mode
 
-#### 传输模式
+In bidirectional SPI mode the same SPI standard is implemented, except that a single wire is used for data (MOMI) instead of the two used in standard mode (MISO and MOSI). In this mode, the MOSI pin serves as MOMI pin.
 
-* 轮询
-* 中断
+##### Low speed serial interface (LoSSI) mode
+
+The LoSSI standard allows issuing of commands to peripherals (LCD) and to transfer data to and from them. LoSSI commands and parameters are 8 bits long, but an extra bit is used to indicate whether the byte is a command or parameter/data. This extra bit is set high for data and low for a command. The resulting 9-bit value is serialised to the output. LoSSI is commonly used with [MIPI DBI](http://mipi.org/specifications/display-interface) type C compatible LCD controllers.
+
+| NOTE | Some commands trigger an automatic read by the SPI controller, so this mode cannot be used as a multipurpose 9-bit SPI. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------- |
+
+#### Transfer modes
+
+* Polled
+* Interrupt
 * DMA
 
-#### 速度
+#### Speed
 
-CLK 寄存器的时钟分频器 (CDIV) 字段设置 SPI 时钟速度：
+The clock divider (CDIV) field of the CLK register sets the SPI clock speed:
 
-```
-SCLK = Core Clock / CDIV
-```
+SCLKCore Clock / CDIV
 
-如果 CDIV 设置为 0，则除数为 65536。除数必须是 2 的倍数，奇数向下取整。请注意，由于模拟电气问题 (上升时间、驱动强度等)，并非所有可能的时钟速率都可用。
+If CDIV is set to 0, the divisor is 65536. The divisor must be a multiple of 2, with odd numbers rounded down. Note that not all possible clock rates are usable because of analogue electrical issues (rise times, drive strengths, etc).
 
-有关更多信息，请参阅 Linux 驱动程序部分。
+See the [Linux driver](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#driver) section for more info.
 
-#### 芯片选择
+#### Chip selects
 
-在 DMA 模式下操作时，与 CS 线自动断言和去断言相关的设置和保持时间如下：
+Setup and hold times related to the automatic assertion and de-assertion of the CS lines when operating in DMA mode are as follows:
 
-* 在传输的第一个字节的 msb 之前至少提前三个核心时钟周期，CS 线将被断言。
-* CS 线将在最后一个时钟脉冲的下降沿后不早于一个核心时钟周期取消断言。
+* The CS line will be asserted at least three core clock cycles before the msb of the first byte of the transfer.
+* The CS line will be de-asserted no earlier than one core clock cycle after the trailing edge of the final clock pulse.
 
-### SPI 软件
+### SPI software
 
-#### Linux 驱动
+#### Linux driver
 
-默认的 Linux 驱动程序是 spi-bcm2835 。
+The default Linux driver is `spi-bcm2835`.
 
-SPI0 默认情况下被禁用。要启用它，请使用 raspi-config，或确保 dtparam=spi=on 一行没有被注释掉在 /boot/firmware/config.txt 中。默认情况下，它使用两个芯片选择线，但可以使用 dtoverlay=spi0-1cs 将其减少到一个。还有 dtoverlay=spi0-2cs ；没有任何参数时，它等同于 dtparam=spi=on 。
+SPI0 is disabled by default. To enable it, use [raspi-config](https://www.raspberrypi.com/documentation/computers/configuration.html#raspi-config), or ensure the line `dtparam=spi=on` is not commented out in [`/boot/firmware/config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html#what-is-config-txt). By default it uses two chip select lines, but this can be reduced to one using `dtoverlay=spi0-1cs`. There is also `dtoverlay=spi0-2cs`; without any parameters it is equivalent to `dtparam=spi=on`.
 
-要启用 SPI1，您可以使用 1、2 或 3 个芯片选择线，在每种情况下添加：
+To enable SPI1, you can use 1, 2 or 3 chip select lines. Add the appropriate lines to `/boot/firmware/config.txt`:"
 
 ```
-dtoverlay=spi1-1cs  #1 chip select
-dtoverlay=spi1-2cs  #2 chip select
-dtoverlay=spi1-3cs  #3 chip select
+#1 chip select
+dtoverlay=spi1-1cs
+#2 chip select
+dtoverlay=spi1-2cs
+#3 chip select
+dtoverlay=spi1-3cs
 ```
 
-…到 /boot/firmware/config.txt 文件。类似的叠加层也适用于 SPI2、SPI3、SPI4、SPI5 和 SPI6。
+Similar overlays exist for SPI2, SPI3, SPI4, SPI5 and SPI6.
 
-由于某些限制，驱动程序不使用硬件芯片选择线。相反，它可以使用任意数量的 GPIO 作为软件/GPIO 芯片选择。这意味着您可以自由选择任何空闲的 GPIO 作为 CS 线，所有这些 SPI 叠加层都包括该控制 - 详细信息请参见 /boot/firmware/overlays/README ，或运行（例如） dtoverlay -h spi0-2cs （ dtoverlay -a | grep spi 可能有助于列出所有内容）。
+The driver does not make use of the hardware chip select lines because of some limitations. Instead, it can use an arbitrary number of GPIOs as software/GPIO chip selects. This means you are free to choose any spare GPIO as a CS line, and all of these SPI overlays include that control - see `/boot/firmware/overlays/README` for details, or run (for example) `dtoverlay -h spi0-2cs` (`dtoverlay -a | grep spi` might be helpful to list them all).
 
-##### 速度
+##### Speed
 
-驱动程序支持所有作为核心时钟的偶数整数除数的速度，尽管如上所述，并非所有这些速度都会由于 GPIO 和连接的设备的限制而支持数据传输。作为经验法则，超过 50MHz 的任何速度都不太可能工作，但您的情况可能有所不同。
+The driver supports all speeds which are even integer divisors of the core clock, although as said above not all of these speeds will support data transfer due to limits in the GPIOs and in the devices attached. As a rule of thumb, anything over 50MHz is unlikely to work, but your mileage may vary.
 
-##### 支持的模式位
+##### Supported mode bits
 
-```
-SPI_CPOL    - clock polarity
-SPI_CPHA    - clock phase
-SPI_CS_HIGH - chip select active high
-SPI_NO_CS   - 1 device per bus, no Chip select
-SPI_3WIRE   - bidirectional mode, data in and out pin shared
-```
+SPI_CPOLclock polarity
 
-双向模式，也称为 3 线模式，由 spi-bcm2835 内核模块支持。请注意，在此模式下， spi_transfer 结构体的 tx 或 rx 字段必须是 NULL 指针之一，因为只支持半双工通信。否则，传输将失败。 spidev_test.c 源代码未正确考虑这一点，因此在 3 线模式下根本无法工作。
+SPI_CPHAclock phase
 
-##### 每字支持的位数
+SPI_CS_HIGHchip select active high
 
-* 8 - 普通
-* 9 - 这是使用 LoSSI 模式支持的
+SPI_NO_CS1 device per bus, no Chip select
 
-##### 传输模式
+SPI_3WIREbidirectional mode, data in and out pin shared
 
-所有 SPI 总线都支持中断模式。SPI0 和 SPI3-6 还支持 DMA 传输。
+Bidirectional mode, also called 3-wire mode, is supported by the `spi-bcm2835` kernel module. Please note that in this mode, either the `tx` or `rx` field of the `spi_transfer` struct must be a NULL pointer, since only half-duplex communication is possible. Otherwise, the transfer will fail. The `spidev_test.c` source code does not consider this correctly, and therefore does not work at all in 3-wire mode.
 
-##### SPI 驱动程序延迟
+##### Supported bits per word
 
-该线程讨论延迟问题。
+* 8 - normal
+* 9 - supported using LoSSI mode
+
+##### Transfer modes
+
+Interrupt mode is supported on all SPI buses. SPI0, and SPI3-6 also support DMA transfers.
+
+##### SPI driver latency
+
+This [thread](https://forums.raspberrypi.com/viewtopic.php?f=44&t=19489) discusses latency problems.
 
 #### spidev
 
-spidev 提供了基于 ioctl 的用户空间接口，用于单独的 SPI CS 线。设备树用于指示 CS 线是由内核驱动模块驱动还是由 spidev 代表用户管理；不能同时执行两者。请注意，树莓派自己的内核对于使用设备树启用 spidev 更为宽松 - 上游内核会打印关于这种用法的警告，并最终可能完全阻止它。
+`spidev` presents an `ioctl`-based userspace interface to individual SPI CS lines. Device Tree is used to indicate whether a CS line is going to be driven by a kernel driver module or managed by `spidev` on behalf of the user; it is not possible to do both at the same time. Note that Raspberry Pi’s own kernels are more relaxed about the use of Device Tree to enable `spidev` - the upstream kernels print warnings about such usage, and ultimately may prevent it altogether.
 
-##### 使用 C 中的 spidev
+##### Use `spidev` from C
 
-Linux 文档中有一个回送测试程序，可用作起点。请参阅故障排除部分。
+There is a loopback test program in the Linux documentation that can be used as a starting point. See the [Troubleshooting](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#troubleshooting-spi-hardware) section.
 
-##### 使用 Python 中的 spidev
+##### Use `spidev` from Python
 
-有几个 Python 库可提供对 spidev 的访问，包括 spidev （ pip install spidev -请参阅 https://pypi.org/project/spidev/）和 SPI-Py （https://github.com/lthiery/SPI-Py）。
+There are several Python libraries that provide access to `spidev`, including `spidev` (`pip install spidev` - see [https://pypi.org/project/spidev/](https://pypi.org/project/spidev/)) and `SPI-Py` ([https://github.com/lthiery/SPI-Py](https://github.com/lthiery/SPI-Py)).
 
-##### 从诸如 bash 之类的 shell 使用 spidev
+##### Use `spidev` from a shell such as bash
 
-```
-# Write binary 1, 2 and 3
-echo -ne "\x01\x02\x03" > /dev/spidev0.0
-```
-
-#### 其他 SPI 库
-
-有其他用户空间库可通过直接操作硬件来提供 SPI 控制：不建议这样做。
-
-### 故障排除
-
-#### 回环测试
-
-这可以用来测试 SPI 发送和接收。在 MOSI 和 MISO 之间放一根导线。它不测试 CE0 和 CE1。
+The following command writes binary 1, 2, and 3:
 
 ```
-wget https://raw.githubusercontent.com/raspberrypi/linux/rpi-6.1.y/tools/spi/spidev_test.c
-gcc -o spidev_test spidev_test.c
-./spidev_test -D /dev/spidev0.0
+$ echo -ne "\x01\x02\x03" > /dev/spidev0.0
+```
+
+#### Other SPI libraries
+
+There are other user space libraries that provide SPI control by directly manipulating the hardware: this is not recommended.
+
+### Troubleshooting
+
+#### Loopback test
+
+This can be used to test SPI send and receive. Put a wire between MOSI and MISO. It does not test CE0 and CE1.
+
+```
+$ wget https://raw.githubusercontent.com/raspberrypi/linux/rpi-6.1.y/tools/spi/spidev_test.c
+$ gcc -o spidev_test spidev_test.c
+$ ./spidev_test -D /dev/spidev0.0
 spi mode: 0
 bits per word: 8
 max speed: 500000 Hz (500 KHz)
@@ -3317,83 +3204,86 @@ DE AD BE EF BA AD
 F0 0D
 ```
 
-上面的一些内容是从 elinux SPI 页面复制过来的，该页面也从这里借鉴。两者都受 CC-SA 许可证保护。
+Some of the content above has been copied from [the elinux SPI page](https://elinux.org/RPi_SPI), which also borrows from here. Both are covered by the CC-SA licence.
 
-## 通用串行总线（USB）
+## Universal Serial Bus (USB)
 
-一般来说，Linux 支持的每个设备都可以与树莓派一起使用，尽管旧版树莓派 4 之前的型号存在一些限制。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/usb-bus-on-raspberry-pi.adoc)
 
-### 最大功率输出
+In general, every device supported by Linux can be used with a Raspberry Pi, although there are some limitations for models prior to Raspberry Pi 4.
 
-与所有计算机一样，树莓派上的 USB 端口提供有限的功率。通常，USB 设备的问题是由功率问题引起的。为了排除问题的原因是功率不足，将您的 USB 设备连接到树莓派使用有源集线器。
+### Maximum power output
 
-| 型号                 | USB 端口的最大功率输出                                      |
-| ---------------------- | ------------------------------------------------------------- |
-| 树莓派 Zero, 1 | 每个端口 500 毫安^1^                                        |
-| 树莓派 2, 3, 4 | 所有端口总共 1200 毫安                                      |
-| 树莓派 5             | 如果使用 3A 电源，则为 600mA，如果使用 5A 电源，则为 1600mA |
+As with all computers, the USB ports on the Raspberry Pi supply a limited amount of power. Often problems with USB devices are caused by power issues. To rule out insufficient power as the cause of the problem, connect your USB devices to the Raspberry Pi using a powered hub.
 
-1. 对于旧版树莓派 1 Model B，每个端口的限制为 100mA。
+| Model                | Max power output of USB ports                           |
+| ---------------------- | --------------------------------------------------------- |
+| Raspberry Pi Zero, 1 | 500mA per port^1^                                       |
+| Raspberry Pi 2, 3, 4 | 1200mA total across all ports                           |
+| Raspberry Pi 5       | 600mA if using a 3A supply, 1600mA if using a 5A supply |
 
-### 树莓派 5
+1. For the original Raspberry Pi 1 Model B the limit is 100mA per port.
 
-树莓派 5 需要一款能够提供 3A 的高质量 USB-C 电源适配器（+5V，15W）才能启动。然而，使用这样的电源会限制外围设备的电流。如果您在首次启动时使用无法提供 5A 的+5V 电源，操作系统将警告您外围设备的电流将被限制在 600mA。
+### Raspberry Pi 5
 
-对于希望驱动高功率外围设备（如硬盘和固态硬盘）并保留峰值工作负载余量的用户，应使用支持 USB-PD 的电源适配器，能够提供 5A 的+5V（25W）。如果树莓派 5 固件检测到这样的电源，它会增加外围设备的 USB 电流限制至 1.6A，为下游 USB 设备提供额外的 5W 电力，并为板载设备提供额外的 5W 电力预算。
+The Raspberry Pi 5 requires a good quality USB-C power supply capable of delivering 3A at +5V (15W) in order to boot. However, using such a supply will restrict current draw to peripherals. If you are using a power supply that cannot provide 5A at +5V on first boot you will be warned by the operating system that the current draw to peripherals will be restricted to 600mA.
 
->**注意**
->
->USB 端口和风扇头共享电源预算。 
+For users who wish to drive high-power peripherals like hard drives and SSDs, while retaining margin for peak workloads, a USB-PD enabled power supply capable of supplying a 5A at +5V (25W) should be used. If the Raspberry Pi 5 firmware detects such a supply, it increases the USB current limit for peripherals to 1.6A, providing 5W of extra power for downstream USB devices, and 5W of extra onboard power budget.
 
-### 树莓派 4
+| NOTE | The power budget is shared between the USB ports and the fan header. |
+| ------ | ---------------------------------------------------------------------- |
 
-树莓派 4 提供两个 USB 3.0 端口和两个 USB 2.0 端口，这些端口连接到 VL805 USB 控制器。所有四个端口上的 USB 2.0 线路连接到 VL805 内的单个 USB 2.0 集线器。这限制了 USB 1.1 和 USB 2.0 设备的总可用带宽与单个 USB 2.0 端口相同。
+### Raspberry Pi 4
 
-在树莓派 4 上，以前型号上使用的 USB 控制器位于 USB 类型 C 端口上，并且默认情况下已禁用。
+Raspberry Pi 4 offers two USB 3.0 ports and two USB 2.0 ports which are connected to a VL805 USB controller. The USB 2.0 lines on all four ports are connected to a single USB 2.0 hub within the VL805. This limits the total available bandwidth for USB 1.1 and USB 2.0 devices to that of a single USB 2.0 port.
 
-### 树莓派 Zero, 1, 2 和 3
+On Raspberry Pi 4, the USB controller used on previous models is located on the USB type C port and is disabled by default.
 
-树莓派 1 Model B+、树莓派2 和树莓派 3 主板提供四个 USB 2.0 端口。树莓派 Zero 主板具有一个 micro USB On-The-Go（OTG）端口。
+### Raspberry Pi Zero, 1, 2 and 3
 
-旧版的树莓派 4 之前的型号上的 USB 控制器仅对某些设备提供基本级别的支持，这会带来更高的软件处理开销。它还仅支持一个根 USB 端口：所有连接设备的流量都会被导向这个单一总线，其最大速度为 480Mbps。
+Raspberry Pi 1 Model B+, Raspberry Pi 2, and Raspberry Pi 3 boards offer four USB 2.0 ports. Raspberry Pi Zero boards have one micro USB on-the-go (OTG) port.
 
-USB 2.0 规范定义了三种设备速度 - 低速、全速和高速。大多数鼠标和键盘是低速，大多数 USB 声音设备是全速，而大多数视频设备（网络摄像头或视频捕捉设备）是高速。
+The USB controller on models prior to Raspberry Pi 4 has only a basic level of support for certain devices, which presents a higher software processing overhead. It also supports only one root USB port: all traffic from connected devices is funnelled down this single bus, which operates at a maximum speed of 480Mbps.
 
-通常，连接多个高速 USB 设备到树莓派上不会出现问题。
+The USB 2.0 specification defines three device speeds - low, full and high. Most mice and keyboards are low speed, most USB sound devices are full speed, and most video devices (webcams or video capture) are high speed.
 
-与低速和全速设备通信时产生的软件开销意味着同时活动的低速和全速设备数量存在限制。连接到树莓派的这些类型设备数量较少不会造成问题。
+Generally, there are no issues with connecting multiple high speed USB devices to a Raspberry Pi.
 
-### 已知的 USB 问题
+The software overhead incurred when talking to low- and full-speed devices means that there are limitations on the number of simultaneously active low- and full-speed devices. Small numbers of these types of devices connected to a Raspberry Pi will cause no issues.
 
-#### 与 USB 3.0 集线器的互操作性
+### Known USB issues
 
-使用 USB 3.0 集线器与全速或低速设备（包括大多数鼠标和键盘）存在问题。大多数 USB 3.0 集线器硬件中的错误意味着旧版树莓派 4 之前的型号无法与连接到 USB 3.0 集线器的全速或低速设备通信。
+#### Interoperability with USB 3.0 hubs
 
-USB 2.0 高速设备，包括 USB 2.0 集线器，当通过 USB 3.0 集线器连接时可以正常运行。
+There is an issue with USB 3.0 hubs in conjunction with the use of full- or low-speed devices, including most mice and keyboards. A bug in most USB 3.0 hub hardware means that the models prior to Raspberry Pi 4 cannot talk to full or low speed devices connected to a USB 3.0 hub.
 
-避免将低速或全速设备连接到 USB 3.0 集线器。作为解决方法，将 USB 2.0 集线器插入 USB 3.0 集线器的下游端口，并连接低速设备，或者在树莓派和 USB 3.0 集线器之间使用 USB 2.0 集线器，然后将低速设备插入 USB 2.0 集线器。
+USB 2.0 high speed devices, including USB 2.0 hubs, operate correctly when connected via a USB 3.0 hub.
 
-#### USB 1.1 网络摄像头
+Avoid connecting low or full speed devices into a USB 3.0 hub. As a workaround, plug a USB 2.0 hub into the downstream port of the USB 3.0 hub and connect the low-speed device, or use a USB 2.0 hub between the Raspberry Pi and the USB 3.0 hub, then plug low-speed devices into the USB 2.0 hub.
 
-旧版网络摄像头可能是全速设备。由于这些设备传输大量数据并产生额外的软件开销，可靠的操作不能保证。作为解决方法，请尝试以较低分辨率使用摄像头。
+#### USB 1.1 webcams
 
-#### 神秘的 USB 声卡
+Old webcams may be full-speed devices. Because these devices transfer a lot of data and incur additional software overhead, reliable operation is not guaranteed. As a workaround, try to use the camera at a lower resolution.
 
-昂贵的发烧友级声卡通常使用大量的 USB 带宽。无法保证与 96kHz/192kHz DAC 的可靠操作。作为解决方法，强制输出流为 CD 音质（44.1kHz/48kHz 16 位）将带宽降低到可靠水平。
+#### Esoteric USB sound cards
 
-#### 单 TT USB 集线器
+Expensive audiophile sound cards typically use large amounts of USB bandwidth. Reliable operation with 96kHz/192kHz DACs is not guaranteed. As a workaround, forcing the output stream to be CD quality (44.1kHz/48kHz 16-bit) will reduce the stream bandwidth to reliable levels.
 
-USB 2.0 和 3.0 集线器具有一种用于与连接到其下游端口的全速或低速设备通信的机制，称为事务转换器（TT）。该设备缓冲来自主机的高速请求，并将它们以全速或低速传输到下游设备。USB 规范允许两种集线器配置：单 TT（所有端口共用一个 TT）和多 TT（每个端口一个 TT）。由于硬件限制，如果将太多全速或低速设备插入单个 TT 集线器，则这些设备可能表现不可靠。建议使用多 TT 集线器与多个全速和低速设备进行接口。作为解决方法，将全速和低速设备分散在树莓派 自己的 USB 端口和单 TT 集线器之间。
+#### Single TT USB hubs
 
-## 树莓派修订代码
+USB 2.0 and 3.0 hubs have a mechanism for talking to full- or low-speed devices connected to their downstream ports called a transaction translator (TT). This device buffers high speed requests from the host and transmits them at full or low speed to the downstream device. Two configurations of hub are allowed by the USB specification: Single TT (one TT for all ports) and Multi TT (one TT per port). Because of a hardware limitation, if too many full- or low-speed devices are plugged into a single TT hub, the devices may behave unreliably. It is recommended to use a Multi TT hub to interface with multiple full and low speed devices. As a workaround, spread full- and low-speed devices out between the Raspberry Pi’s own USB port and the single TT hub.
 
-每个不同的 树莓派型号修订版都有一个独特的修订代码。您可以通过运行以下命令查找树莓派的修订代码：
+## Raspberry Pi revision codes
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/revision-codes.adoc)
+
+Each distinct Raspberry Pi model revision has a unique revision code. You can look up a Raspberry Pi’s revision code by running:
 
 ```
-cat /proc/cpuinfo
+$ cat /proc/cpuinfo
 ```
 
-最后三行显示硬件类型、修订代码和树莓派的唯一序列号。例如：
+The last three lines show the hardware type, the revision code, and the Raspberry Pi’s unique serial number. For example:
 
 ```
 Hardware    : BCM2835
@@ -3401,169 +3291,168 @@ Revision    : a02082
 Serial      : 00000000765fc593
 ```
 
->**注意**
->
->所有树莓派算机报告 BCM2835 ，即使是搭载 BCM2836、BCM2837、BCM2711 和 BCM2712 处理器的那些。您不应该使用此字符串来检测处理器。请使用以下信息解码修订代码，或者 cat /sys/firmware/devicetree/base/model 。 
-### 旧版修订代码
+| NOTE | All Raspberry Pi computers report `BCM2835`, even those with BCM2836, BCM2837, BCM2711, and BCM2712 processors. You should not use this string to detect the processor. Decode the revision code using the information below, or `cat /sys/firmware/devicetree/base/model`. |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-第一批树莓派型号从 0002 到 0015 被赋予了顺序十六进制修订代码：
+### Old-style revision codes
 
-| 代码 | 型号 | 修订 | RAM         | 制造商   |
-| ------ | ------ | ------ | ------------- | ---------- |
-| 0002 | B    | 1.0  | 256MB       | Egoman   |
-| 0003 | B    | 1.0  | 256MB       | Egoman   |
-| 0004 | B    | 2.0  | 256MB       | 索尼英国 |
-| 0005 | B    | 2.0  | 256MB       | 奇达     |
-| 0006 | B    | 2.0  | 256MB       | 亿高曼   |
-| 0007 | A    | 2.0  | 256MB       | 伊戈曼   |
-| 0008 | A    | 2.0  | 256MB       | 索尼英国 |
-| 0009 | A    | 2.0  | 256MB       | 奇达     |
-| 000d | B    | 2.0  | 512MB       | 埃戈曼   |
-| 000e | B    | 2.0  | 512MB       | 索尼英国 |
-| 000f | B    | 2.0  | 512MB       | Egoman   |
-| 0010 | B+   | 1.2  | 512MB       | 索尼英国 |
-| 0011 | CM1  | 1.0  | 512MB       | 索尼英国 |
-| 0012 | A+   | 1.1  | 256MB       | 索尼英国 |
-| 0013 | B+   | 1.2  | 512MB       | 嵌入式   |
-| 0014 | CM1  | 1.0  | 512MB       | 嵌入式   |
-| 0015 | A+   | 1.1  | 256MB/512MB | Embest   |
+The first set of Raspberry Pi models were given sequential hex revision codes from `0002` to `0015`:
 
-### 新版修订代码
+| Code | Model | Revision | RAM         | Manufacturer |
+| ------ | ------- | ---------- | ------------- | -------------- |
+| 0002 | B     | 1.0      | 256MB       | Egoman       |
+| 0003 | B     | 1.0      | 256MB       | Egoman       |
+| 0004 | B     | 2.0      | 256MB       | Sony UK      |
+| 0005 | B     | 2.0      | 256MB       | Qisda        |
+| 0006 | B     | 2.0      | 256MB       | Egoman       |
+| 0007 | A     | 2.0      | 256MB       | Egoman       |
+| 0008 | A     | 2.0      | 256MB       | Sony UK      |
+| 0009 | A     | 2.0      | 256MB       | Qisda        |
+| 000d | B     | 2.0      | 512MB       | Egoman       |
+| 000e | B     | 2.0      | 512MB       | Sony UK      |
+| 000f | B     | 2.0      | 512MB       | Egoman       |
+| 0010 | B+    | 1.2      | 512MB       | Sony UK      |
+| 0011 | CM1   | 1.0      | 512MB       | Sony UK      |
+| 0012 | A+    | 1.1      | 256MB       | Sony UK      |
+| 0013 | B+    | 1.2      | 512MB       | Embest       |
+| 0014 | CM1   | 1.0      | 512MB       | Embest       |
+| 0015 | A+    | 1.1      | 256MB/512MB | Embest       |
 
-使用树莓派 2 的推出，引入了新式的修订代码。每个十六进制代码的每一位代表有关修订的一部分信息：
+### New-style revision codes
+
+With the launch of the Raspberry Pi 2, new-style revision codes were introduced. Rather than being sequential, each bit of the hex code represents a piece of information about the revision:
 
 ```
 NOQuuuWuFMMMCCCCPPPPTTTTTTTTRRRR
 ```
 
-| 部分                | 代表        | 选项                  |
-| --------------------- | ------------- | ----------------------- |
-| N（位 31）          | 过压        | 0：允许过压           |
-|                     |             | 1：禁止过压           |
-| O（位 30）          | OTP 程序^1^ | 0：允许 OTP 编程      |
-|                     |             | 1：禁止 OTP 编程      |
-| Q（位 29）          | OTP 读取^1^ | 0：OTP 读取允许       |
-|                     |             | 1：OTP 阅读不允许     |
-| uuu（位 26-28）     | 未使用      | 未使用                |
-| W（位 25）          | 保修位^2^   | 0：保修有效           |
-|                     |             | 1：保修因超频作废     |
-| u（第 24 位）       | 未使用      | 未使用                |
-| F（位 23）          | 新标志      | 1：新风格修订         |
-|                     |             | 0：旧版风格修订       |
-| MMM（位 20-22）     | 内存大小    | 0：256MB              |
-|                     |             | 1：512MB              |
-|                     |             | 2：1GB                |
-|                     |             | 3：2GB                |
-|                     |             | 4：4GB                |
-|                     |             | 5：8GB                |
-| CCCC（位 16-19）    | 制造商      | 0: 索尼英国           |
-|                     |             | 1: Egoman             |
-|                     |             | 2：Embest             |
-|                     |             | 3：Sony Japan         |
-|                     |             | 4：Embest             |
-|                     |             | 5：体育场             |
-| PPPP（位 12-15）    | 处理器      | 0：BCM2835            |
-|                     |             | 1：BCM2836            |
-|                     |             | 2：BCM2837            |
-|                     |             | 3：BCM2711            |
-|                     |             | 4：BCM2712            |
-| TTTTTTTT（位 4-11） | 类型        | 0：A                  |
-|                     |             | 1：B                  |
-|                     |             | 2：A+                 |
-|                     |             | 3：B+                 |
-|                     |             | 4：2B                 |
-|                     |             | 5：阿尔法（早期原型） |
-|                     |             | 6：CM1                |
-|                     |             | 8：3B                 |
-|                     |             | 9：Zero               |
-|                     |             | a：CM3                |
-|                     |             | c：Zero W             |
-|                     |             | d：3B+                |
-|                     |             | ext: e：3A+           |
-|                     |             | f：仅限内部使用       |
-|                     |             | 10：CM3+              |
-|                     |             | 11：4B                |
-|                     |             | 12：Zero 2 W          |
-|                     |             | 13: 400               |
-|                     |             | 14：CM4               |
-|                     |             | 15：CM4S              |
-|                     |             | 16：仅限内部使用      |
-|                     |             | 17: 5                 |
-| RRRR（位 0-3）      | 修订版      | 0、1、2、等           |
+| Part                 | Represents      | Options                         |
+| ---------------------- | ----------------- | --------------------------------- |
+| N (bit 31)           | Overvoltage     | 0: Overvoltage allowed          |
+|                      |                 | 1: Overvoltage disallowed       |
+| O (bit 30)           | OTP Program^1^  | 0: OTP programming allowed      |
+|                      |                 | 1: OTP programming disallowed   |
+| Q (bit 29)           | OTP Read^1^     | 0: OTP reading allowed          |
+|                      |                 | 1: OTP reading disallowed       |
+| uuu (bits 26-28)     | Unused          | Unused                          |
+| W (bit 25)           | Warranty bit^2^ | 0: Warranty is intact           |
+|                      |                 | 1: Warranty has been voided by [overclocking](https://www.raspberrypi.com/documentation/computers/config_txt.html#overclocking-options) |
+| u (bit 24)           | Unused          | Unused                          |
+| F (bit 23)           | New flag        | 1: new-style revision           |
+|                      |                 | 0: old-style revision           |
+| MMM (bits 20-22)     | Memory size     | 0: 256MB                        |
+|                      |                 | 1: 512MB                        |
+|                      |                 | 2: 1GB                          |
+|                      |                 | 3: 2GB                          |
+|                      |                 | 4: 4GB                          |
+|                      |                 | 5: 8GB                          |
+| CCCC (bits 16-19)    | Manufacturer    | 0: Sony UK                      |
+|                      |                 | 1: Egoman                       |
+|                      |                 | 2: Embest                       |
+|                      |                 | 3: Sony Japan                   |
+|                      |                 | 4: Embest                       |
+|                      |                 | 5: Stadium                      |
+| PPPP (bits 12-15)    | Processor       | 0: BCM2835                      |
+|                      |                 | 1: BCM2836                      |
+|                      |                 | 2: BCM2837                      |
+|                      |                 | 3: BCM2711                      |
+|                      |                 | 4: BCM2712                      |
+| TTTTTTTT (bits 4-11) | Type            | 0: A                            |
+|                      |                 | 1: B                            |
+|                      |                 | 2: A+                           |
+|                      |                 | 3: B+                           |
+|                      |                 | 4: 2B                           |
+|                      |                 | 5: Alpha (early prototype)      |
+|                      |                 | 6: CM1                          |
+|                      |                 | 8: 3B                           |
+|                      |                 | 9: Zero                         |
+|                      |                 | a: CM3                          |
+|                      |                 | c: Zero W                       |
+|                      |                 | d: 3B+                          |
+|                      |                 | e: 3A+                          |
+|                      |                 | f: Internal use only            |
+|                      |                 | 10: CM3+                        |
+|                      |                 | 11: 4B                          |
+|                      |                 | 12: Zero 2 W                    |
+|                      |                 | 13: 400                         |
+|                      |                 | 14: CM4                         |
+|                      |                 | 15: CM4S                        |
+|                      |                 | 16: Internal use only           |
+|                      |                 | 17: 5                           |
+| RRRR (bits 0-3)      | Revision        | 0, 1, 2, etc.                   |
 
-^1^ 编程 OTP 位的信息。
+^1^ Information on [programming the OTP bits](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#otp-register-and-bit-definitions).
 
-^2^ 在树莓派 4 上从未设置过保修位。
+^2^ The warranty bit is never set on Raspberry Pi 4.
 
-### 使用中的新版式修订代码。
+### New-style revision codes in use
 
->**注意**
->
->此列表并非详尽无遗 - 可能存在未在此表中列出的正在使用的代码。请参阅下一节，了解如何使用修订代码识别板。
+| NOTE | This list is not exhaustive - there may be codes in use that are not in this table. Please see the next section for best practices on using revision codes to identify boards. |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-| 代码   | 型号               | 修订版 | RAM   | 制造商    |
-| -------- | -------------------- | -------- | ------- | ----------- |
-| 900021 | A+                 | 1.1    | 512MB | 索尼英国  |
-| 900032 | B+                 | 1.2    | 512MB | 索尼英国  |
-| 900092 | Zero                 | 1.2    | 512MB | 索尼英国  |
-| 900093 | Zero                 | 1.3    | 512MB | 索尼英国  |
-| 9000c1 | Zero W             | 1.1    | 512MB | 索尼英国  |
-| 9020   | 3A+                | 1.0    | 512MB | 索尼英国  |
-| 90200  | 3A+                | 1.1    | 512MB | 索尼英国  |
-| 920092 | Zero                 | 1.2    | 512MB | 恩贝斯    |
-| 920093 | Zero                 | 1.3    | 512MB | 恩贝斯特  |
-| 900061 | CM1                | 1.1    | 512MB | 索尼英国  |
-| a01040 | 2B                 | 1.0    | 1GB   | 索尼英国  |
-| a01041 | 2B                 | 1.1    | 1GB   | 索尼英国  |
-| a02082 | 3B                 | 1.2    | 1GB   | 索尼英国  |
-| a020a0 | CM3                | 1.0    | 1GB   | 索尼英国  |
-| a020d3 | 3B+                | 1.3    | 1GB   | 索尼英国  |
-| a020d4 | 3B+                | 1.4    | 1GB   | 索尼英国  |
-| a02042 | 2B（带有 BCM2837） | 1.2    | 1GB   | 索尼英国  |
-| a21041 | 2B                 | 1.1    | 1GB   | Embest    |
-| a22042 | 2B（带有 BCM2837） | 1.2    | 1GB   | Embest    |
-| a22082 | 3B                 | 1.2    | 1GB   | Embest    |
-| a220a0 | CM3                | 1.0    | 1GB   | Embest    |
-| a32082 | 3B                 | 1.2    | 1GB   | 索尼日本  |
-| a52082 | 3B                 | 1.2    | 1GB   | 体育场    |
-| a22083 | 3B                 | 1.3    | 1GB   | Embest    |
-| a02100 | CM3+               | 1.0    | 1GB   | 索尼英国  |
-| a03111 | 4B                 | 1.1    | 1GB   | 索尼英国  |
-| b03111 | 4B                 | 1.1    | 2GB   | 索尼英国  |
-| b03112 | 4B                 | 1.2    | 2GB   | 索尼英国  |
-| b03114 | 4B                 | 1.4    | 2GB   | 索尼英国  |
-| b03115 | 4B                 | 1.5    | 2GB   | 索尼英国  |
-| c03111 | 4B                 | 1.1    | 4GB   | 索尼英国  |
-| c03112 | 4B                 | 1.2    | 4GB   | 索尼英国  |
-| c03114 | 4B                 | 1.4    | 4GB   | 索尼英国  |
-| c03115 | 4B                 | 1.5    | 4GB   | 索尼英国  |
-| d03114 | 4B                 | 1.4    | 8GB   | 索尼英国  |
-| d03115 | 4B                 | 1.5    | 8GB   | 索尼英国  |
-| c03130 | 树莓派 400         | 1.0    | 4GB   | 索尼 英国 |
-| a03140 | CM4                | 1.0    | 1GB   | 英国索尼  |
-| b03140 | CM4                | 1.0    | 2GB   | 索尼英国  |
-| c03140 | CM4                | 1.0    | 4GB   | 索尼英国  |
-| d03140 | CM4                | 1.0    | 8GB   | 索尼英国  |
-| 902120 | Zero 2 W           | 1.0    | 512MB | 索尼英国  |
-| c04170 | 5                  | 1.0    | 4GB   | 索尼英国  |
-| d04170 | 5                  | 1.0    | 8GB   | 索尼英国  |
+| Code   | Model             | Revision | RAM   | Manufacturer |
+| -------- | ------------------- | ---------- | ------- | -------------- |
+| 900021 | A+                | 1.1      | 512MB | Sony UK      |
+| 900032 | B+                | 1.2      | 512MB | Sony UK      |
+| 900092 | Zero              | 1.2      | 512MB | Sony UK      |
+| 900093 | Zero              | 1.3      | 512MB | Sony UK      |
+| 9000c1 | Zero W            | 1.1      | 512MB | Sony UK      |
+| 9020e0 | 3A+               | 1.0      | 512MB | Sony UK      |
+| 9020e1 | 3A+               | 1.1      | 512MB | Sony UK      |
+| 920092 | Zero              | 1.2      | 512MB | Embest       |
+| 920093 | Zero              | 1.3      | 512MB | Embest       |
+| 900061 | CM1               | 1.1      | 512MB | Sony UK      |
+| a01040 | 2B                | 1.0      | 1GB   | Sony UK      |
+| a01041 | 2B                | 1.1      | 1GB   | Sony UK      |
+| a02082 | 3B                | 1.2      | 1GB   | Sony UK      |
+| a020a0 | CM3               | 1.0      | 1GB   | Sony UK      |
+| a020d3 | 3B+               | 1.3      | 1GB   | Sony UK      |
+| a020d4 | 3B+               | 1.4      | 1GB   | Sony UK      |
+| a02042 | 2B (with BCM2837) | 1.2      | 1GB   | Sony UK      |
+| a21041 | 2B                | 1.1      | 1GB   | Embest       |
+| a22042 | 2B (with BCM2837) | 1.2      | 1GB   | Embest       |
+| a22082 | 3B                | 1.2      | 1GB   | Embest       |
+| a220a0 | CM3               | 1.0      | 1GB   | Embest       |
+| a32082 | 3B                | 1.2      | 1GB   | Sony Japan   |
+| a52082 | 3B                | 1.2      | 1GB   | Stadium      |
+| a22083 | 3B                | 1.3      | 1GB   | Embest       |
+| a02100 | CM3+              | 1.0      | 1GB   | Sony UK      |
+| a03111 | 4B                | 1.1      | 1GB   | Sony UK      |
+| b03111 | 4B                | 1.1      | 2GB   | Sony UK      |
+| b03112 | 4B                | 1.2      | 2GB   | Sony UK      |
+| b03114 | 4B                | 1.4      | 2GB   | Sony UK      |
+| b03115 | 4B                | 1.5      | 2GB   | Sony UK      |
+| c03111 | 4B                | 1.1      | 4GB   | Sony UK      |
+| c03112 | 4B                | 1.2      | 4GB   | Sony UK      |
+| c03114 | 4B                | 1.4      | 4GB   | Sony UK      |
+| c03115 | 4B                | 1.5      | 4GB   | Sony UK      |
+| d03114 | 4B                | 1.4      | 8GB   | Sony UK      |
+| d03115 | 4B                | 1.5      | 8GB   | Sony UK      |
+| c03130 | Pi 400            | 1.0      | 4GB   | Sony UK      |
+| a03140 | CM4               | 1.0      | 1GB   | Sony UK      |
+| b03140 | CM4               | 1.0      | 2GB   | Sony UK      |
+| c03140 | CM4               | 1.0      | 4GB   | Sony UK      |
+| d03140 | CM4               | 1.0      | 8GB   | Sony UK      |
+| 902120 | Zero 2 W          | 1.0      | 512MB | Sony UK      |
+| c04170 | 5                 | 1.0      | 4GB   | Sony UK      |
+| d04170 | 5                 | 1.0      | 8GB   | Sony UK      |
 
-### 使用修订代码进行板识别
+### Using revision codes for board identification
 
-从命令行，我们可以使用以下内容来获取板的修订代码：
+From the command line we can use the following to get the revision code of the board:
 
 ```
 $ cat /proc/cpuinfo | grep Revision
 Revision      : c03111
 ```
 
-在上面的示例中，我们有一个十六进制修订代码为 c03111 。将其转换为二进制，我们得到 0 0 0 000 0 0 1 100 0000 0011 00010001 0001 。已插入空格以显示修订代码的各部分之间的边界，根据上表。
+In this example above, we have a hexadecimal revision code of `c03111`. Converting this to binary, we get `0 0 0 000 0 0 1 100 0000 0011 00010001 0001`. Spaces have been inserted to show the borders between each section of the revision code, according to the above table.
 
-从最低位开始，最低的四位（0-3）是板的修订号，因此此板的修订号为 1。接下来的八位（4-11）是板类型，在本例中为二进制 00010001 ，十六进制 11 ，因此这是个树莓派 4B。使用相同的过程，我们可以确定处理器是 BCM2711，板是由索尼英国制造的，并且具有 4GB 的 RAM。
+Starting from the lowest order bits, the bottom four (0-3) are the board revision number, so this board has a revision of 1. The next eight bits (4-11) are the board type, in this case binary `00010001`, hex `11`, so this is a Raspberry Pi 4B. Using the same process, we can determine that the processor is a BCM2711, the board was manufactured by Sony UK, and it has 4GB of RAM.
 
-#### 在程序中获取修订代码
+#### Getting the revision code in your program
 
-很明显，有很多编程语言，不可能为所有这些语言提供示例，但是这里有两个快速示例，适用于 C 和 Python 。这两个示例都使用系统调用来运行一个 bash 命令，获取 cpuinfo 并将结果传输到 awk 以恢复所需的修订代码。然后，它们使用位操作从代码中提取 New ， Model 和 Memory 字段。
+Obviously there are so many programming languages out there it’s not possible to give examples for all of them, but here are two quick examples for `C` and `Python`. Both these examples use a system call to run a bash command that gets the `cpuinfo` and pipes the result to `awk` to recover the required revision code. They then use bit operations to extract the `New`, `Model`, and `Memory` fields from the code.
 
 ```
 #include <stdio.h>
@@ -3592,7 +3481,7 @@ int main( int argc, char *argv[] )
 }
 ```
 
-在 Python 中也是一样：
+And the same in Python:
 
 ```
 import subprocess
@@ -3609,26 +3498,25 @@ if new and model == 0x11 and mem >= 3 : # Note, 3 in the mem field is 2GB
     print("We are a 4B with at least 2GB RAM!")
 ```
 
-### 修订代码使用的最佳实践
+### Best practices for revision code usage
 
-为避免在创建新的板卡版本时出现问题，请勿使用修订代码（例如 c03111 ）。
+To avoid problems when new board revisions are created, do not use the revision code (e.g. `c03111`).
 
-一个天真的实现使用支持的修订代码列表，将检测到的代码与列表进行比较，以决定设备是否受支持。当出现新的板卡版本或生产地点更改时，这种方法会中断：每次出现新的修订代码时，都会在支持的修订代码列表中创建一个新的修订代码。这将导致同一板卡类型的新修订版本被拒绝，尽管它们始终向后兼容。每次出现新的修订版本时，您都必须发布一个包含新修订代码的新支持的修订代码列表 - 这是一个繁重的开发负担。
+A naive implementation uses a list of supported revision codes, comparing the detected code with the list to decide if the device is supported. This breaks when a new board revision comes out or if the production location changes: each creates a new revision code not in the supported revision code list. This would cause rejections of new revisions of the same board type, despite the fact that they are always backwards-compatible. Every time a new revision appears, you would have to release a new supported revision code list containing the new revision code - an onerous support burden.
 
-应该使用以下方法之一：
+Instead, use one of the following approaches:
 
-* 通过板类型字段（3A、4B 等）进行过滤，该字段表示型号，但不表示修订版。
-* 通过内存量字段进行过滤，因为 RAM 大致对应于板的计算能力。
+* Filter by the board-type field (3A, 4B, etc.), which indicates the model, but not the revision.
+* Filter by the amount-of-memory field, since RAM vaguely corresponds to the computing power of a board.
 
-例如，您可以将支持限制为具有 2GB RAM 或更多的树莓派 4B 型号。前一节中的示例使用了这种推荐方法。
+For instance, you could limit support to Raspberry Pi 4B models with 2GB of RAM or more. The examples in the previous section use this recommended approach.
 
->**注意**
->
->始终检查第 23 位，即“New”标志，以确保修订代码是新版本，然后再检查其他字段。
+| NOTE | Always check bit 23, the 'New' flag, to ensure that the revision code is the new version before checking any other fields. |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------- |
 
-#### 在各个发行版中检查树莓派型号和 CPU
+#### Check Raspberry Pi model and CPU across distributions
 
-在各个 Linux 发行版中，对 /proc/cpuinfo 的支持和格式化各不相同。要在任何 Linux 发行版（包括 Raspberry Pi OS）上检查树莓派设备的型号或 CPU，请查看设备树：
+Support and formatting for `/proc/cpuinfo` varies across Linux distributions. To check the model or CPU of a Raspberry Pi device on any Linux distribution (including Raspberry Pi OS), check the device tree:
 
 ```
 $ cat /proc/device-tree/compatible | tr '\0' '\n'
@@ -3636,33 +3524,33 @@ raspberrypi,5-model-b
 brcm,bcm2712
 ```
 
-这将输出两个空值分隔的字符串值，每个字符串值包含一个逗号分隔的制造商和型号。例如，树莓派 5 会输出上述板和 CPU 字符串。这些对应以下值：
+This outputs two null-separated string values, each containing a comma-separated make and model. For instance, the Raspberry Pi 5 outputs the board and CPU strings above. These correspond to the following values:
 
-* raspberrypi （板制造商）
-* 5-model-b （板载型号）
-* brcm （CPU 制造商）
-* bcm2712 （CPU 型号）
+* `raspberrypi` (board make)
+* `5-model-b` (board model)
+* `brcm` (CPU make)
+* `bcm2712` (CPU model)
 
-树莓派型号具有以下设备树数值：
+Raspberry Pi models have the following device tree values:
 
-| 设备名称                   | 制造商 | 型号 | CPU 制造商 | CPU |
-| ---------------------------- | -------- | ------ | ------------ | ----- |
-| 树莓派 5             | `raspberrypi`       | `5-model-b`     | `brcm`           | `bcm2712`    |
-| 树莓派 400                 | `raspberrypi`       | `400`     | `brcm`           | `bcm2711`    |
-| 树莓派计算模块 4           | `raspberrypi`       | `4-compute-module`     | `brcm`           | `bcm2711`    |
-| 树莓派 4A           | `raspberrypi`       | `4-model-a`     | `brcm`           | `bcm2711`    |
-| 树莓派 4B           | `raspberrypi`       | `4-model-b`     | `brcm`           | `bcm2711`    |
-| 树莓派计算模块 3    | `raspberrypi`       | `3-compute-module`     | `brcm`           | `bcm2837`    |
-| 树莓派 3A+          | `raspberrypi`       | `3-model-a-plus`     | `brcm`           | `bcm2837`    |
-| 树莓派 3B+             | `raspberrypi`       | `3-model-b-plus`     | `brcm`           | `bcm2837`    |
-| 树莓派 3 B              | `raspberrypi`       | `3-model-b`     | `brcm`           | `bcm2837`    |
-| 树莓派 2B              | `raspberrypi`       | `2-model-b`     | `brcm`           | `bcm2836`    |
-| 树莓派计算模块             | `raspberrypi`       | `compute-module`     | `brcm`           | `bcm2835`    |
-| 树莓派 A+              | `raspberrypi`       | `model-a-plus`     | `brcm`           | `bcm2835`    |
-| 树莓派 B+              | `raspberrypi`       | `model-b-plus`     | `brcm`           | `bcm2835`    |
-| 树莓派 B Rev 2 | `raspberrypi`       | `model-b-rev2`     | `brcm`           | `bcm2835`    |
-| 树莓派 A       | `raspberrypi`       | `model-a`     | `brcm`           | `bcm2835`    |
-| 树莓派 B       | `raspberrypi`       | `model-b`     | `brcm`           | `bcm2835`    |
-| 树莓派 Zero 2 W            | `raspberrypi`       | `model-zero-2-w`     | `brcm`           | `bcm2837`    |
-| 树莓派 Zero                | `raspberrypi`       | `model-zero`     | `brcm`           | `bcm2835`    |
-| 树莓派 Zero W              | `raspberrypi`       | `model-zero-w`     | `brcm`           | `bcm2835`    |
+| Device Name                   | Make | Model | CPU Make | CPU |
+| ------------------------------- | ------ | ------- | ---------- | ----- |
+| Raspberry Pi 5                | `raspberrypi`     | `5-model-b`      | `brcm`         | `bcm2712`    |
+| Raspberry Pi 400              | `raspberrypi`     | `400`      | `brcm`         | `bcm2711`    |
+| Raspberry Pi Compute Module 4 | `raspberrypi`     | `4-compute-module`      | `brcm`         | `bcm2711`    |
+| Raspberry Pi 4 Model A        | `raspberrypi`     | `4-model-a`      | `brcm`         | `bcm2711`    |
+| Raspberry Pi 4 Model B        | `raspberrypi`     | `4-model-b`      | `brcm`         | `bcm2711`    |
+| Raspberry Pi Compute Module 3 | `raspberrypi`     | `3-compute-module`      | `brcm`         | `bcm2837`    |
+| Raspberry Pi 3 Model A+       | `raspberrypi`     | `3-model-a-plus`      | `brcm`         | `bcm2837`    |
+| Raspberry Pi 3 Model B+       | `raspberrypi`     | `3-model-b-plus`      | `brcm`         | `bcm2837`    |
+| Raspberry Pi 3 Model B        | `raspberrypi`     | `3-model-b`      | `brcm`         | `bcm2837`    |
+| Raspberry Pi 2 Model B        | `raspberrypi`     | `2-model-b`      | `brcm`         | `bcm2836`    |
+| Raspberry Pi Compute Module   | `raspberrypi`     | `compute-module`      | `brcm`         | `bcm2835`    |
+| Raspberry Pi Model A+         | `raspberrypi`     | `model-a-plus`      | `brcm`         | `bcm2835`    |
+| Raspberry Pi Model B+         | `raspberrypi`     | `model-b-plus`      | `brcm`         | `bcm2835`    |
+| Raspberry Pi Model B Rev 2    | `raspberrypi`     | `model-b-rev2`      | `brcm`         | `bcm2835`    |
+| Raspberry Pi Model A          | `raspberrypi`     | `model-a`      | `brcm`         | `bcm2835`    |
+| Raspberry Pi Model B          | `raspberrypi`     | `model-b`      | `brcm`         | `bcm2835`    |
+| Raspberry Pi Zero 2 W         | `raspberrypi`     | `model-zero-2-w`      | `brcm`         | `bcm2837`    |
+| Raspberry Pi Zero             | `raspberrypi`     | `model-zero`      | `brcm`         | `bcm2835`    |
+| Raspberry Pi Zero W           | `raspberrypi`     | `model-zero-w`      | `brcm`         | `bcm2835`    |
