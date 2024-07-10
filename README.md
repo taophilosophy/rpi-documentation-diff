@@ -6,7 +6,7 @@
 
 ## 版本说明
 
-当前版本指向 <https://github.com/raspberrypi/documentation/commit/f0511a225236d2defc8c12010c315827cb3baf7d>
+当前版本指向 <https://github.com/raspberrypi/documentation/commit/1b54ac8ba2944db915b5e4d2e0a7790a70643544>
 
 ## 版权说明
 
