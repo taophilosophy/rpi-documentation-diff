@@ -1,39 +1,44 @@
-# 键盘和鼠标
+# Keyboard and mouse
 
-## 开始使用您的键盘
+## Getting Started with your Keyboard
 
-我们的官方键盘包括三个主机 USB 接口，用于连接外部设备，如 USB 鼠标，USB 存储设备和其他 USB 控制设备。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/keyboard-and-mouse/getting-started-keyboard.adoc)
 
-该产品的 Micro USB 用于连接树莓派（通过键盘内置的 USB 集线器），可由树莓派控制并为键盘的三个 USB Type A 接口供电。
+Our official keyboard includes three host USB ports for connecting external devices, such as USB mice, USB drives, and other USB- controlled devices.
 
-![back of keyboard](https://www.raspberrypi.com/documentation/accessories/images/back-of-keyboard.png)
+The product’s micro USB port is for connection to the Raspberry Pi. Via the USB hub built into the keyboard, the Raspberry Pi controls, and provides power to, the three USB Type A ports.
 
-### 按键功能
+![back of keyboard](https://www.raspberrypi.com/documentation/accessories/images/back-of-keyboard.png?hash=88afa05d4299855919d98dfdce66b718)
 
-树莓派键盘有三个锁定键: Num Lock , Caps Lock , 和 Scroll Lock . 顶部右侧有三个 LED 指示灯，指示哪些锁定已启用。
+### Keyboard Features
 
-![num cap scroll](https://www.raspberrypi.com/documentation/accessories/images/num-cap-scroll.png)
+The Raspberry Pi keyboard has three lock keys: `Num Lock`, `Caps Lock`, and `Scroll Lock`. There are three LEDs in the top right-hand corner that indicate which locks are enabled.
 
-Num Lock 允许在字母键上使用红色数字键，有效地创建数字键盘。通过按下 Num Lock 键来启用和禁用此模式。
+![num cap scroll](https://www.raspberrypi.com/documentation/accessories/images/num-cap-scroll.png?hash=f63be14bdd84d2f47b56f52897ea9f8a)
 
-Caps Lock 允许输入大写字母；按 Shift 键以在此模式下输入小写字母。通过按 Caps Lock 键启用和禁用此模式。
+`Num Lock`Allows use of the red number keys on the letter keys, effectively creating a numeric keypad. This mode is enabled and disabled by pressing the `Num Lock` key.
 
-Scroll Lock (ScrLk) 允许使用光标键浏览网页和电子表格，无需鼠标。通过按住 Fn 键并同时按 ScrLk 键可启用或禁用此模式。
+`Caps Lock`Allows typing capital letters; press the `Shift` key to type lower-case letters in this mode. This mode is enabled and disabled by pressing the `Caps Lock` key.
 
-## 开始使用鼠标
+`Scroll Lock (ScrLk)`Allows use of the cursor keys for browsing web pages and spreadsheets without the mouse. This mode is enabled and disabled by pressing the `ScrLk` key while holding the Fn key.
 
-我们的官方鼠标有三个按钮，可以激活高质量的微动开关。滚轮用于在浏览文档和网页时快速滚动。
+## Getting Started with your Mouse
 
-![the mouse](https://www.raspberrypi.com/documentation/accessories/images/the-mouse.png)
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/keyboard-and-mouse/getting-started-mouse.adoc)
 
-使用鼠标时，请始终将其放在平坦稳定的表面上。鼠标在放置的平面上使用光学检测移动。在光滑的平面上（例如 PVC 或亚克力桌面）鼠标检测不到移动。当您在这样的平面上工作时，请把鼠标放在鼠标垫上。
+Our official mouse has three buttons, which activate high-quality micro-switches. The wheel is for quick scrolling when browsing documents and web pages.
 
-## 将所有东西连接起来
+![the mouse](https://www.raspberrypi.com/documentation/accessories/images/the-mouse.png?hash=56db76ed7ff72d0a71fe50cdaa782233)
 
-这是我们推荐的配置，可同时使用您的树莓派、官方键盘和集线器以及官方鼠标。键盘上的集线器可确保轻松访问 USB 设备，鼠标线很长，足以让您的左右手使用鼠标。
+Always place the mouse on a flat, stable surface while using it. The mouse optically detects movement on the surface on which it is placed. On featureless surfaces, e.g. PVC or acrylic table tops, the mouse cannot detect movement. When you are working on such a surface, place the mouse on a mouse mat.
 
-![everything](https://www.raspberrypi.com/documentation/accessories/images/everything.png)
+## Connecting it all Together
 
->**注意**
->
->重要的是，把电源适配器接入树莓派，再把键盘连接到树莓派。如果把电源适配器接入键盘，再通过键盘为树莓派供电，那么键盘将无法正常工作。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/keyboard-and-mouse/connecting-things.adoc)
+
+This is the configuration we recommend for using your Raspberry Pi, official keyboard and hub, and official mouse together. The hub on the keyboard ensures easy access to USB drives, and the mouse’s cable is tidy, while being long enough to allow you to use the mouse left- or right-handed.
+
+![everything](https://www.raspberrypi.com/documentation/accessories/images/everything.png?hash=0eb63e71b2106b15e5f9c08ec49604a2)
+
+| NOTE | It is important that the power supply is connected to the Raspberry Pi and the keyboard is connected to the Raspberry Pi. If the power supply were connected to the keyboard, with the Raspberry Pi powered via the keyboard, then the keyboard would not operate correctly. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
