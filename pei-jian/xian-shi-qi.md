@@ -1,185 +1,191 @@
-# 显示器
+# Display
 
-## 树莓派触摸显示屏
+## Raspberry Pi Touch Display
 
-树莓派触摸显示屏是一款可通过 DSI 连接器连接到树莓派的液晶显示屏。您可以同时使用触摸显示屏和 HDMI 显示输出。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/display/display_intro.adoc)
 
-![The Raspberry Pi 7-inch Touch Display](https://www.raspberrypi.com/documentation/accessories/images/display.png)
+The [Raspberry Pi Touch Display](https://www.raspberrypi.com/products/raspberry-pi-touch-display/) is an LCD display that connects to the Raspberry Pi using the DSI connector. You can use both the Touch Display and an HDMI display output at the same time.
 
-树莓派 7 英寸触摸显示屏
+![The Raspberry Pi 7-inch Touch Display](https://www.raspberrypi.com/documentation/accessories/images/display.png?hash=cf7f3e8467528e32864690b1fd3825c8)
 
-触摸显示屏与除了树莓派 Zero 和 Zero 2 W 外的所有树莓派型号兼容（这两款型号没有 DSI 接口）。最早的树莓派型号缺少适当的安装孔，需要额外的硬件来安装显示屏 PCB 上的支架。
+The Raspberry Pi 7-inch Touch Display
 
-该显示屏具有以下关键参数：
+The Touch Display is compatible with all models of Raspberry Pi except the Raspberry Pi Zero and Zero 2 W, which lack a DSI connector. The earliest Raspberry Pi models lack appropriate mounting holes, requiring additional mounting hardware to fit the stand-offs on the display PCB.
 
-* 800×480 RGB LCD 显示屏
-* 24 位色彩
-* 工业品质：水平 140 度视角，垂直 120 度视角
-* 10 点多点触摸触摸屏
-* 通过 I2C 接口进行 PWM 背光控制和电源控制
-* 金属框架背面带有安装点，可用于树莓派显示转换板和树莓派
-* 背光寿命：20000 小时
-* 工作温度：-20 至+70 摄氏度
-* 存储温度：-30 至+80 摄氏度
-* 对比度：500
-* 平均亮度：250 cd/m^2^
-* 视角（度）：
-  * 顶部 - 50
-  * 底部 - 70
-  * 左侧 - 70
-  * 右侧 - 70
-* 功率要求：在最大亮度下，典型值为 5V 200mA。
-* 外部尺寸：192.96 × 110.76 毫米
-* 可视区域：154.08 × 85.92 毫米
+The display has the following key features:
 
-### 安装触摸显示屏
+* 800×480 RGB LCD display
+* 24-bit colour
+* Industrial quality: 140 degree viewing angle horizontal, 120 degree viewing angle vertical
+* 10-point multi-touch touchscreen
+* PWM backlight control and power control over I2C interface
+* Metal-framed back with mounting points for Raspberry Pi display conversion board and Raspberry Pi
+* Backlight lifetime: 20000 hours
+* Operating temperature: -20 to +70 degrees centigrade
+* Storage temperature: -30 to +80 degrees centigrade
+* Contrast ratio: 500
+* Average brightness: 250 cd/m^2^
+* Viewing angle (degrees):
 
-您可以使用支架将树莓派安装在触摸显示屏背面，然后连接适当的电缆。如果有可用的机箱，您也可以将触摸显示屏安装在单独的机箱中。连接保持不变，但根据机箱的不同，您可能需要更长的电缆。
+  * Top - 50
+  * Bottom - 70
+  * Left - 70
+  * Right - 70
+* Power requirements: 200mA at 5V typical, at maximum brightness.
+* Outer dimensions: 192.96 × 110.76mm
+* Viewable area: 154.08 × 85.92mm
 
-![Image of Raspberry Pi connected to the Touch Display](https://www.raspberrypi.com/documentation/accessories/images/GPIO_power-500x333.jpg)
+### Mount the Touch Display
 
-连接到触摸显示屏的树莓派
+You can mount a Raspberry Pi to the back of the Touch Display using its stand-offs and then connect the appropriate cables. You can also mount the Touch Display in a separate chassis if you have one available. The connections remain the same, though you may need longer cables depending on the chassis.
 
-将扁平柔性电缆（FFC）的一端连接到触摸显示 PCB 上的 RPI-DISPLAY 接口。银色或金色接触点应远离显示屏。然后将另一端的 FFC 连接到树莓派上的 DISPLAY 接口。此接口的接触点应朝向树莓派。
+![Image of Raspberry Pi connected to the Touch Display](https://www.raspberrypi.com/documentation/accessories/images/GPIO_power-500x333.jpg?hash=59e71b44a3c10049850b4ef1f476834f)
 
-如果 FFC 没有完全插入或位置不正确，您将在显示屏上遇到问题。在故障排除时，特别是如果您在显示屏上看不到任何内容或显示屏只显示单一颜色时，您应始终仔细检查连接状况。
+A Raspberry Pi connected to the Touch Display
 
->**注意**
->
->触摸显示屏的机械图可供下载。
+Connect one end of the Flat Flexible Cable (FFC) to the `RPI-DISPLAY` port on the Touch Display PCB. The silver or gold contacts should face away from the display. Then connect the other end of the FFC to the `DISPLAY` port on the Raspberry Pi. The contacts on this end should face inward, towards the Raspberry Pi.
 
-### 为触摸显示屏供电
+If the FFC is not fully inserted or positioned correctly, you will experience issues with the display. You should always double check this connection when troubleshooting, especially if you don’t see anything on your display, or the display shows only a single colour.
 
-我们建议使用树莓派的 GPIO 为触摸显示屏供电。或者您可以直接使用单独的 Mirco USB 电源适配器为显示屏供电。
+| NOTE | A [mechanical drawing](https://datasheets.raspberrypi.com/display/7-inch-display-mechanical-drawing.pdf) of the Touch Display is available for download. |
+| ------ | ---------------------------------------------------- |
 
-#### 用树莓派供电
+### Power the Touch Display
 
-要使用树莓派为触摸显示屏供电，您需要在树莓派的 GPIO 上的 5V 和 GND 引脚之间以及显示屏上的 5V 和 GND 引脚之间连接两根跳线。如下图所示。
+We recommend using the Raspberry Pi’s GPIO to provide power to the Touch Display. Alternatively, you can power the display directly with a separate micro USB power supply.
 
-![Illustration of display pins](https://www.raspberrypi.com/documentation/accessories/images/display_plugs.png)
+#### Power from a Raspberry Pi
 
-显示屏的 5V 和 GND 引脚的位置
+To power the Touch Display using a Raspberry Pi, you need to connect two jumper wires between the 5V and `GND` pins on [Raspberry Pi’s GPIO](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio) and the 5V and `GND` pins on the display, as shown in the following illustration.
 
-在开始之前，请确保树莓派已关机且未连接到任何电源。将黑色跳线的一端连接到树莓派上的引脚六 ( GND )，将红色跳线的一端连接到引脚四 (5V)。如果引脚六不可用，您可以使用任何其他开放的 GND 引脚来连接黑线。如果引脚四不可用，您可以使用任何其他 5V 引脚来连接红线，例如引脚二。
+![Illustration of display pins](https://www.raspberrypi.com/documentation/accessories/images/display_plugs.png?hash=98323f7ec2cbcd1af601eebcba4cfd7b)
 
-![Illustration of Raspberry Pi headers](https://www.raspberrypi.com/documentation/accessories/images/pi_plugs.png)
+The location of the display’s 5V and `GND` pins
 
-树莓派标头的位置
+Before you begin, make sure the Raspberry Pi is powered off and not connected to any power source. Connect one end of the black jumper wire to pin six (`GND`) on the Raspberry Pi and one end of the red jumper wire to pin four (5V). If pin six isn’t available, you can use any other open `GND` pin to connect the black wire. If pin four isn’t available, you can use any other 5V pin to connect the red wire, such as pin two.
 
-接下来，将黑线的另一端连接到显示器上的 GND 引脚，将红线的另一端连接到显示器上的 5V 引脚。完成所有连接后，下次打开树莓派时，您应该会看到触摸显示屏被点亮。
+![Illustration of Raspberry Pi headers](https://www.raspberrypi.com/documentation/accessories/images/pi_plugs.png?hash=08fef8ff691009e0db1d31c56236e1d1)
 
-使用触摸显示屏上的另外三个引脚将显示器连接到早期树莓派 1 Model A 或 B。有关更多信息，请参考我们关于旧版支持的文档。
+The location of the Raspberry Pi headers
 
->**注意**
->
-> 要识别早期的树莓派，请检查 GPIO 头连接器。只有早期型号有 26 个引脚的 GPIO 头连接器；后续型号都有 40 个引脚。 
+Next, connect the other end of the black wire to the `GND` pin on the display and the other end of the red wire to the 5V pin on the display. Once all the connections are made, you should see the Touch Display turn on the next time you turn on your Raspberry Pi.
 
-#### 用 Mirco USB 电源适配器供电
+Use the other three pins on the Touch Display to connect the display to an original Raspberry Pi 1 Model A or B. Refer to our documentation on [legacy support](https://www.raspberrypi.com/documentation/accessories/display.html#legacy-support) for more information.
 
-如果您不想用树莓派为触摸显示屏供电，可用 Mirco USB 电源适配器。我们建议使用树莓派 12.5W 电源适配器，以确保显示屏正常运行。
+| NOTE | To identify an original Raspberry Pi, check the GPIO header connector. Only the original model has a 26-pin GPIO header connector; subsequent models have 40 pins. |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-如果选择使用 Mirco USB 供电，请不要把树莓派的 GPIO 引脚连接到显示器上。两个板之间唯一的连接应该是扁平柔性电缆。
+#### Power from a micro USB supply
 
+If you don’t want to use a Raspberry Pi to provide power to the Touch Display, you can use a micro USB power supply instead. We recommend using the [Raspberry Pi 12.5W power supply](https://www.raspberrypi.com/products/micro-usb-power-supply/) to make sure the display runs as intended.
 
->**警告**
->
->若使用 micro USB 线为显示器供电，并将其安装在机箱内，在使用时会无法触及显示器的 PCB 板。
+Do not connect the GPIO pins on your Raspberry Pi to the display if you choose to use micro USB for power. The only connection between the two boards should be the Flat Flexible Cable.
 
-### 使用屏幕键盘
+| WARNING | When using a micro USB cable to power the display, mount it inside a chassis that blocks access to the display’s PCB during usage. |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 
-在 Raspberry Pi OS Bookworm 及更高版本中，您可以将 wvkbd 屏幕键盘用作输入设备。要安装 wvkbd ，请运行以下命令：
+### Use an on-screen keyboard
+
+In Raspberry Pi OS Bookworm and later, you can use the [`wvkbd`](https://github.com/jjsullivan5196/wvkbd) on-screen keyboard as an input device. To install `wvkbd`, run the following command:
 
 ```
 $ sudo apt install wvkbd
 ```
 
->**技巧**
->
->在旧版 Raspberry Pi OS 发行版中，您可以使用 `matchbox-keyboard` 来代替。 
+| TIP | In Raspberry Pi OS releases prior to Bookworm, you can use `matchbox-keyboard` instead. |
+| ----- | ---------------------------------------------------------------------- |
 
-### 更改屏幕方向
+### Change screen orientation
 
-如果您想要在物理上旋转显示屏，或者将其安装在特定位置，您可以使用软件调整屏幕的方向，以更好地匹配您的设置。
+If you want to physically rotate the display, or mount it in a specific position, you can use software to adjust the orientation of the screen to better match your setup.
 
-#### 从桌面旋转屏幕
+#### Rotate screen from the desktop
 
-要从桌面环境设置屏幕方向，请从“首选项”菜单中选择“屏幕配置”。在布局编辑器中右键单击 DSI-1 显示矩形，选择“方向”，然后选择最适合您需求的选项。您还可以通过“触摸屏”选项确保触摸叠加层分配给正确的显示屏。
+To set the screen orientation from the desktop environment, select **Screen Configuration** from the **Preferences** menu. Right-click on the DSI-1 display rectangle in the layout editor, select **Orientation**, then pick the best option to fit your needs. You can also ensure that the touch overlay is assigned to the correct display with the **Touchscreen** option.
 
-![Screenshot of orientation options in screen configuration](https://www.raspberrypi.com/documentation/accessories/images/display-rotation.png)
+![Screenshot of orientation options in screen configuration](https://www.raspberrypi.com/documentation/accessories/images/display-rotation.png?hash=671b074ea0ef8287d1acfc424fdfe4d6)
 
-#### 在没有桌面的情况下旋转屏幕
+#### Rotate screen without a desktop
 
-要在缺少桌面环境的设备上设置屏幕方向，请编辑 /boot/firmware/cmdline.txt 配置文件，向系统传递一个方向。将以下行添加到 cmdline.txt ：
+To set the screen orientation on a device that lacks a desktop environment, edit the `/boot/firmware/cmdline.txt` configuration file to pass an orientation to the system. Add the following line to `cmdline.txt`:
 
 ```
 video=DSI-1:800x480@60,rotate=<rotation-value>
 ```
 
-用以下值替换 <rotation-value> 占位符，这些值对应于相对于显示器默认值的旋转度数：
+Replace the `<rotation-value>` placeholder with one of the following values, which correspond to the degree of rotation relative to the default on your display:
 
 * `0`
 * `90`
 * `180`
 * `270`
 
-例如，旋转值为 90 会将显示旋转 90 度到右侧。 180 将显示旋转 180 度，或者颠倒。
+For example, a rotation value of `90` rotates the display 90 degrees to the right. `180` rotates the display 180 degrees, or upside-down.
 
->**注意**
->
->使用 cmdline.txt 无法单独旋转 DSI 显示器，与 HDMI 显示器分开。当同时使用 DSI 和 HDMI 时，它们共享相同的旋转值。
+| NOTE | It is not possible to rotate the DSI display separately from the HDMI display with `cmdline.txt`. When you use DSI and HDMI simultaneously, they share the same rotation value. |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-#### 旋转触摸输入
+#### Rotate touch input
 
->**警告**
->
->通过设备树旋转触摸输入可能会与您的输入库发生冲突。请尽可能在您的输入库或桌面中配置触摸事件旋转。
+| WARNING | Rotating touch input via device tree can cause conflicts with your input library. Whenever possible, configure touch event rotation in your input library or desktop. |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-
-
-触摸输入的旋转与显示本身的方向无关。要更改此设置，您需要在 /boot/firmware/config.txt 中手动添加 dtoverlay 指令。在 config.txt 中添加以下行：
+Rotation of touch input is independent of the orientation of the display itself. To change this you need to manually add a `dtoverlay` instruction in [`/boot/firmware/config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html). Add the following line in `config.txt`:
 
 ```
 dtoverlay=vc4-kms-dsi-7inch,invx,invy
 ```
 
-然后，在 config.txt 中删除以下行（如果有）来禁用自动显示检测：
+Then, disable automatic display detection by removing the following line from `config.txt`, if it exists:
 
 ```
 display_auto_detect=1
 ```
 
-#### 触摸显示设备树选项参考
+```
+$ sudo apt install labwc
+```
 
-vc4-kms-dsi-7inch 叠加支持以下选项：
+<br /><br />Then, use the Raspberry Pi Configuration CLI to switch to the `labwc` window compositor. Run the following command to open `raspi-config`:<br /><br />
 
-| DT 参数 | 行动                      |
-| --------- | --------------------------- |
-| `sizex`        | 设置 X 分辨率（默认 800） |
-| `sizey`        | 设置 Y 分辨率（默认 480） |
-| `invx`        | 反转 X 坐标               |
-| `invy`        | 反转 Y 坐标               |
-| `swapxy`        | 交换 X 和 Y 坐标          |
-| `disable_touch`        | 完全禁用触摸叠加          |
+```
+$ sudo raspi-config
+```
 
-要指定这些选项，请将它们用逗号分隔添加到您的 dtoverlay 行中的 /boot/firmware/config.txt 。当存在时，布尔值默认为 true，但您可以使用后缀“=0”将其设置为 false。整数值需要一个值，例如 sizey=240 。例如，要将 X 分辨率设置为 400 像素并反转 X 和 Y 坐标，请使用以下行：
+<br /><br />Go to **Advanced Options**. Select **Wayland**, then select **labwc**. Exit `raspi-config` and reboot with `sudo reboot`. Switching to `labwc` may reset some configuration, including keyboard layout and rotation settings.
+
+#### Touch Display device tree option reference
+
+The `vc4-kms-dsi-7inch` overlay supports the following options:
+
+| DT parameter | Action                             |
+| -------------- | ------------------------------------ |
+| `sizex`             | Sets X resolution (default 800)    |
+| `sizey`             | Sets Y resolution (default 480)    |
+| `invx`             | Invert X coordinates               |
+| `invy`             | Invert Y coordinates               |
+| `swapxy`             | Swap X and Y coordinates           |
+| `disable_touch`             | Disables the touch overlay totally |
+
+To specify these options, add them, separated by commas, to your `dtoverlay` line in `/boot/firmware/config.txt`. Boolean values default to true when present, but you can set them to false with the suffix "=0". Integer values require a value, e.g. `sizey=240`. For instance, to set the X resolution to 400 pixels and invert both X and Y coordinates, use the following line:
 
 ```
 dtoverlay=vc4-kms-dsi-7inch,sizex=400,invx,invy
 ```
 
-## 旧版支持
+## Legacy Support
 
->**警告**
->
->这些说明仅适用于最老的树莓派、Model A 和 B 版本的主卡。要识别最老的树莓派，请检查 GPIO 头连接器。只有原始型号有一个 26 引脚的 GPIO 头连接器；后续型号有 40 个引脚。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/display/legacy.adoc)
 
+| WARNING | These instructions are for the original Raspberry Pi, Model A, and B, boards only. To identify an original Raspberry Pi, check the GPIO header connector. Only the original model has a 26-pin GPIO header connector; subsequent models have 40 pins. |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-树莓派 1 Model A 和 B 版本上的 DSI 连接器没有与触摸屏控制器和 DSI 控制器通信所需的 I2C 连接。为了解决这个问题，请使用显示套件附带的额外一组跳线。将 GPIO 头上的 SCL/SDA 连接到显示板上标有 SCL/SDA 的水平引脚。使用跳线电缆通过 GPIO 引脚为 Model A/B 供电。
+The DSI connector on both the Raspberry Pi 1 Model A and B boards does not have the I2C connections required to talk to the touchscreen controller and DSI controller. To work around this, use the additional set of jumper cables provided with the display kit. Connect SCL/SDA on the GPIO header to the horizontal pins marked SCL/SDA on the display board. Power the Model A/B via the GPIO pins using the jumper cables.
 
-这些主板上默认禁用了 DSI 显示自动检测。要启用检测，请在 /boot/firmware/config.txt 文件中添加以下行：
+DSI display autodetection is disabled by default on these boards. To enable detection, add the following line to the [`/boot/firmware/config.txt`](https://www.raspberrypi.com/documentation/computers/config_txt.html#what-is-config-txt) file:
 
 ```
 ignore_lcd=0
 ```
 
-请用 Mirco USB 电源适配器连接到显示屏上的 PWR IN 来供电。不要通过树莓派的 Mirco USB 为设备供电。这将超过流过保险丝的最大电流额定值，因为显示屏的消耗大约为 400mA。
+Power the setup via the `PWR IN` micro-USB connector on the display board. Do not power the setup via the Raspberry Pi’s micro-USB port. This will exceed the input polyfuse’s maximum current rating, since the display consumes approximately 400mA.
