@@ -1,163 +1,152 @@
-# 树莓派 Pico 和 Pico W
+# Raspberry Pi Pico and Pico W
 
-## 产品家族
+## The family
 
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/microcontrollers/raspberry-pi-pico/about_pico.adoc)
 
-![four picos](https://www.raspberrypi.com/documentation/microcontrollers/images/four_picos.jpg)
+![four picos](https://www.raspberrypi.com/documentation/microcontrollers/images/four_picos.jpg?hash=3f928dff64ab31c4f3b1caecf4fb83a4)
 
-树莓派 Pico 系列目前包括四款板卡；树莓派 Pico（最左侧）、Pico H（左中）、Pico W（右中）和 Pico WH（最右侧）。
+The Raspberry Pi Pico family currently consists of four boards; Raspberry Pi Pico (far left), Pico H (middle left), Pico W (middle right), and Pico WH (far right).
 
-## 树莓派 Pico 和 Pico H
+## Raspberry Pi Pico and Pico H
 
-树莓派 Pico 是一款价格低廉、性能卓越的微控制器板，具有灵活的数字接口。主要特点包括：
+Raspberry Pi Pico is a low-cost, high-performance microcontroller board with flexible digital interfaces. Key features include:
 
-* 树莓派在英国设计的 RP2040 微控制器芯片
-* 双核 Arm Cortex M0+ 处理器，灵活时钟运行高达 133 MHz
-* 264KB 的 SRAM，和 2MB 的板载闪存存储器
-* USB 1.1，具备设备和主机支持
-* 低功耗睡眠和休眠模式
-* 通过 USB 进行大容量存储的拖放式编程
-* 26 × 多功能 GPIO 引脚
-* 2 × SPI，2 × I2C，2 × UART，3 × 12 位 ADC，16 × 可控 PWM 通道
-* 芯片上准确的时钟和定时器
-* 温度传感器
-* 芯片上的加速浮点库
-* 8 个可编程 I/O（PIO）状态机，用于自定义外围支持
+* [RP2040](https://www.raspberrypi.com/documentation/microcontrollers/rp2040.html#welcome-to-rp2040) microcontroller chip designed by Raspberry Pi in the United Kingdom
+* Dual-core Arm Cortex M0+ processor, flexible clock running up to 133 MHz
+* 264kB of SRAM, and 2MB of on-board flash memory
+* USB 1.1 with device and host support
+* Low-power sleep and dormant modes
+* Drag-and-drop programming using mass storage over USB
+* 26 × multi-function GPIO pins
+* 2 × SPI, 2 × I2C, 2 × UART, 3 × 12-bit ADC, 16 × controllable PWM channels
+* Accurate clock and timer on-chip
+* Temperature sensor
+* Accelerated floating-point libraries on-chip
+* 8 × Programmable I/O (PIO) state machines for custom peripheral support
 
-树莓派 Pico 作为一个铸铁模块，可以直接焊接到载板上，而 Pico H 则带有预先焊接的引脚。
+The Raspberry Pi Pico comes as a castellated module allows soldering direct to carrier boards, while the Pico H comes with pre-soldered headers.
 
->**注意**
->
->两个板都有一个三针串行线调试（SWD）头。但是，Pico H 将其拆分为一个小的，带有键的 3 针连接器，而 Pico 则有三个铸造过孔引脚，靠近板的边缘。 
+| NOTE | Both boards have a three pin Serial Wire Debug (SWD) header. However, the Pico H has this broken out into a small, keyed, [3-pin connector](https://datasheets.raspberrypi.com/debug/debug-connector-specification.pdf) while the Pico has three castellated through-hole pins adjacent to the edge of the board. |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-### 引脚分配和设计文件
+### Pinout and design files
 
 ![pico pinout](https://www.raspberrypi.com/documentation/microcontrollers/images/pico-pinout.svg)
 
-* 下载引脚图（PDF）
-* 下载设计文件（Cadence Allegro）
-* 下载 STEP 文件
-* 下载用于树莓派 Pico 的 Fritzing 部件
-* 下载树莓派 Pico H 的 Fritzing 部件
+* Download the [Pinout Diagram](https://datasheets.raspberrypi.com/pico/Pico-R3-A4-Pinout.pdf) (PDF)
+* Download [Design Files](https://datasheets.raspberrypi.com/pico/RPi-Pico-R3-PUBLIC-20200119.zip) (Cadence Allegro)
+* Download [STEP File](https://datasheets.raspberrypi.com/pico/Pico-R3-step.zip)
+* Download [Fritzing Part](https://datasheets.raspberrypi.com/pico/Pico-R3-Fritzing.fzpz) for Raspberry Pi Pico
+* Download [Fritzing Part](https://datasheets.raspberrypi.com/pico/PicoH-Fritzing.fzpz) for Raspberry Pi Pico H
 
->**注意**
->
->有关 Fritzing 的更多信息，请访问 fritzing.org 网站。 |
+| NOTE | More information on Fritzing is available on the [fritzing.org](https://fritzing.org/) website. |
+| ------ | ------------------------------------------------------------ |
 
-树莓派 Pico W 和 Pico WH
+## Raspberry Pi Pico W and Pico WH
 
-树莓派 Pico W 添加了内置的单频 2.4GHz 无线接口（802.11n），使用 Infineon CYW43439，同时保留了 Pico 的外形因素。内置的 2.4GHz 无线接口具有以下功能：
+Raspberry Pi Pico W adds on-board single-band 2.4GHz wireless interfaces (802.11n) using the Infineon CYW43439 while retaining the Pico form factor. The on-board 2.4GHz wireless interface has the following features:
 
-* 无线（802.11n），单频（2.4 GHz）
+* Wireless (802.11n), single-band (2.4 GHz)
 * WPA3
-* 支持最多四个客户端的软接入点
-* 蓝牙 5.2
-  * 支持蓝牙 LE 中心和外围角色
-  * 支持蓝牙经典
+* Soft access point supporting up to four clients
+* Bluetooth 5.2
 
-天线是一款授权自 ABRACON（前身为 ProAnt）的板载天线。 无线接口通过 SPI 连接到 RP2040 微控制器。
+  * Support for Bluetooth LE Central and Peripheral roles
+  * Support for Bluetooth Classic
 
-由于引脚限制，一些无线接口引脚是共享的。 CLK 与 VSYS 监视器共享，因此只有在没有 SPI 事务正在进行时，才能通过 ADC 读取 VSYS。 Infineon CYW43439 DIN/DOUT 和 IRQ 都共享 RP2040 上的一个引脚。 只有在没有 SPI 事务正在进行时，才适合检查 IRQ。 该接口通常以 33MHz 运行。
+The antenna is an onboard antenna licensed from ABRACON (formerly ProAnt). The wireless interface is connected via SPI to the [RP2040](https://www.raspberrypi.com/documentation/microcontrollers/rp2040.html#welcome-to-rp2040) microcontroller.
 
-为获得最佳无线性能，天线应放置在自由空间中。例如，在天线下方或附近放置金属会降低其增益和带宽性能。在天线两侧添加接地金属可以提高天线的带宽。
+Due to pin limitations, some of the wireless interface pins are shared. The CLK is shared with VSYS monitor, so only when there isn’t an SPI transaction in progress can VSYS be read via the ADC. The Infineon CYW43439 DIN/DOUT and IRQ all share one pin on the RP2040. Only when an SPI transaction isn’t in progress is it suitable to check for IRQs. The interface typically runs at 33MHz.
 
->**注意**
->
->CYW43439 无线芯片通过 SPI 连接到 RP2040。CYW43439 支持通过此接口的 802.11 无线和蓝牙。 
+For best wireless performance, the antenna should be in free space. For instance, putting metal under or close by the antenna can reduce its performance both in terms of gain and bandwidth. Adding grounded metal to the sides of the antenna can improve the antenna’s bandwidth.
 
->**重要**
->
->默认情况下， libcyw43 获得非商业使用许可，但 Pico W 用户以及任何围绕 RP2040 和 CYW43439 构建其产品的用户都可以获得免费的商业使用许可。
+| NOTE | The CYW43439 wireless chip is connected via SPI to the RP2040.The CYW43439 supports both 802.11 wireless and Bluetooth over this interface. |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 
->**重要**
->
-> 除了标准的 BTstack 许可条款外，还提供了一份补充许可，涵盖了在树莓派 Pico W 或树莓派 Pico WH 上商业使用 BTstack 的内容。
-### 引脚分配和设计文件
+| IMPORTANT | By default `libcyw43` is licensed for non-commercial use, but Pico W users, and anyone else who builds their product around RP2040 and CYW43439, benefit from a free [commercial-use license](https://github.com/georgerobotics/cyw43-driver/blob/195dfcc10bb6f379e3dea45147590db2203d3c7b/LICENSE.RP). |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+| IMPORTANT | In addition to the [standard BTstack licensing](https://github.com/bluekitchen/btstack/blob/master/LICENSE) terms, a [supplemental licence](https://github.com/raspberrypi/pico-sdk/blob/master/src/rp2_common/pico_btstack/LICENSE.RP) which covers commercial use of BTstack with Raspberry Pi Pico W or Raspberry Pi Pico WH is provided. |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+
+### Pinout and design files
 
 ![picow pinout](https://www.raspberrypi.com/documentation/microcontrollers/images/picow-pinout.svg)
 
-* 下载引脚分配图（PDF）
-* 下载设计文件（Cadence Allegro）
-* 下载 STEP 文件
-* 下载适用于树莓派 Pico W 的 Fritzing 部件
+* Download the [Pinout Diagram](https://datasheets.raspberrypi.com/picow/PicoW-A4-Pinout.pdf) (PDF)
+* Download [Design Files](https://datasheets.raspberrypi.com/picow/RPi-PicoW-PUBLIC-20220607.zip) (Cadence Allegro)
+* Download [STEP File](https://datasheets.raspberrypi.com/picow/PicoW-step.zip)
+* Download [Fritzing Part](https://datasheets.raspberrypi.com/picow/PicoW-Fritzing.fzpz) for Raspberry Pi Pico W
 
-## 文档
+## Documentation
 
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/microcontrollers/microcontroller_docs.adoc)
 
-适用于树莓派 Pico 和其他基于 RP2040 的板的文档。
+Documentation for Raspberry Pi Pico and other RP2040-based boards.
 
-### RP2040 设备
+### RP2040 Device
 
-[ RP2040 数据表](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf)
+[RP2040 Datasheet](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf)A microcontroller by Raspberry Pi
 
-树莓派的微控制器
+[Hardware design with RP2040](https://datasheets.raspberrypi.com/rp2040/hardware-design-with-rp2040.pdf)Using RP2040 microcontrollers to build boards and products
 
-[使用 RP2040 进行硬件设计](https://datasheets.raspberrypi.com/rp2040/hardware-design-with-rp2040.pdf)
+### Raspberry Pi Pico
 
-使用 RP2040 微控制器构建板和产品
+[Raspberry Pi Pico Datasheet](https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf)An RP2040-based microcontroller board
 
-### 树莓派 Pico
+[Getting started with Raspberry Pi Pico](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf)C/C++ development with Raspberry Pi Pico and other RP2040-based microcontroller boards
 
-[树莓派 Pico 数据表](https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf)
+### Raspberry Pi Pico W
 
-基于 RP2040 的微控制器板
+[Raspberry Pi Pico W Datasheet](https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf)An RP2040-based microcontroller board with wireless
 
-[使用树莓派 Pico 入门](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf)
+[Connecting to the Internet with Raspberry Pi Pico W](https://datasheets.raspberrypi.com/picow/connecting-to-the-internet-with-pico-w.pdf)Getting Raspberry Pi Pico W online with C/C++ or MicroPython
 
-使用树莓派 Pico 和其他基于 RP2040 的微控制器开发 C/C++
+| NOTE | Documentation introducing working with Wi-Fi and Bluetooth on Raspberry Pi Pico W with C/C++ or MicroPython is presented in the [Connecting to the Internet with Raspberry Pi Pico W](https://datasheets.raspberrypi.com/picow/connecting-to-the-internet-with-pico-w.pdf) book. |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
 
-### 树莓派 Pico W
+### Software Development
 
-[Raspberry Pi Pico W 数据表](https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf)
+[Raspberry Pi Pico C/C++ SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf)Libraries and tools for C/C++ development on RP2040 microcontrollers
 
-使用基于 RP2040 的微控制器板进行无线连接
+[Raspberry Pi Pico Python SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-python-sdk.pdf)A MicroPython environment for RP2040 microcontrollers
 
-[使用树莓派 Pico W 连接互联网](https://datasheets.raspberrypi.com/picow/connecting-to-the-internet-with-pico-w.pdf)
+The API level Doxygen documentation for the Raspberry Pi Pico C/C++ SDK is also available [as a micro-site](https://rptl.io/pico-doxygen).
 
-使用 C/C++或 MicroPython 让树莓派 Pico W 联机
+| NOTE | A [one-click installer](https://github.com/raspberrypi/pico-setup-windows/releases/latest/download/pico-setup-windows-x64-standalone.exe) for the Pico C/C++ SDK for Windows 10 and Windows 11 is available. |
+| ------ | ----------------------------------------------------------------------- |
 
->**注意**
->
->在《使用 C/C++ 或 MicroPython 在树莓派 Pico W 上使用 Wi-Fi 和蓝牙》一书中介绍了如何在树莓派 Pico W 上连接互联网。 
+## Software Utilities
 
-### 软件开发
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/microcontrollers/raspberry-pi-pico/utilities.adoc)
 
-[Raspberry Pi Pico C/C++ SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf)
+### What is on your Pico?
 
-用于在 RP2040 微控制器上进行 C/C++开发的库和工具
+If you have forgotten what has been programmed into your Raspberry Pi Pico, and the program was built using our Pico C/C++ SDK, it will usually have a name and other useful information embedded into the binary. You can use the [Picotool](https://github.com/raspberrypi/picotool) command line utility to find out these details. Full instructions on how to use Picotool to do this are available in our '[getting started](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf)' documentation.
 
-[树莓派 Pico Python SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-python-sdk.pdf)
+* Go to the [Picotool Github repository](https://github.com/raspberrypi/picotool).
 
-用于 RP2040 微控制器的 MicroPython 环境
+### Debugging using another Raspberry Pi Pico
 
-Raspberry Pi Pico C/C++ SDK 的 API 级别 Doxygen 文档也可作为微型站点使用。
+You can use one Raspberry Pi Pico to debug another Pico. This is possible via `debugprobe`, an application that allows a Pico to act as a USB → SWD and UART converter.
 
->**注意**
->
->适用于 Windows 10 和 Windows 11 的 Pico C/C++ SDK 一键安装程序已经准备就绪。 
+You can find the latest release of the firmware in [the debugprobe GitHub repository](https://github.com/raspberrypi/debugprobe/releases/latest).
 
-## 软件实用工具
+Download `debugprobe_on_pico.uf2` from the latest release.
 
-### 你的 Pico 上有什么？
+Push and hold the BOOTSEL button as you plug the debugger Pico into your computer to mount a volume called "RPI-RP2".
 
-如果您忘记了在您的树莓派 Pico 中编程的内容，并且该程序是使用我们的 Pico C/C++ SDK 构建的，通常会将名称和其他有用信息嵌入到二进制文件中。您可以使用 Picotool 命令行实用程序查找这些详细信息。如何使用 Picotool 执行此操作的完整说明可在我们的“入门”文档中找到。
+Copy `debugprobe_on_pico.uf2` onto the volume. The volume will dismount automatically after the file finishes copying onto the device.
 
-* 转到 Picotool Github 存储库。
+Your Pico will reboot and now runs an updated version of the `debugprobe` firmware. It is now ready for debugging.
 
-### 使用另一个树莓派 Pico 进行调试
+| TIP | For instructions on how to use the debugger, see [Getting Started with Pico](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf). |
+| ----- | ---------------------------------------------------- |
 
-您可以使用一个树莓派 Pico 来调试另一个 Pico。这是通过 debugprobe 实现的，该应用程序允许 Pico 充当 USB → SWD 和 UART 转换器。
+### Resetting Flash memory
 
-您可以在 debugprobe GitHub 存储库中找到固件的最新版本。
+Pico’s BOOTSEL mode lives in read-only memory inside the RP2040 chip, and can’t be overwritten accidentally. No matter what, if you hold down the BOOTSEL button when you plug in your Pico, it will appear as a drive onto which you can drag a new UF2 file. There is no way to brick the board through software. However, there are some circumstances where you might want to make sure your Flash memory is empty. You can do this by dragging and dropping a special UF2 binary onto your Pico when it is in mass storage mode.
 
-从最新版本下载 debugprobe_on_pico.uf2 。
-
-在将调试器 Pico 插入计算机时，按住 BOOTSEL 按钮以挂载名为 "RPI-RP2" 的卷。
-
-将 debugprobe_on_pico.uf2 复制到卷上。文件复制到设备后，卷将自动卸载。
-
-您的 Pico 将重新启动，现在运行更新版本的 debugprobe 固件。现在可以进行调试。
-
->**技巧**
->
->有关如何使用调试器的说明，请参阅《Pico 入门指南》。 
+* Download the [UF2 file](https://datasheets.raspberrypi.com/soft/flash_nuke.uf2)
+* See the [code on Github](https://github.com/raspberrypi/pico-examples/blob/master/flash/nuke/nuke.c)
