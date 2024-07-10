@@ -1,109 +1,118 @@
-# 人工智能套件（AI Kit）
+# AI Kit
 
-## 关于
+## About
 
-![ai kit](https://www.raspberrypi.com/documentation/accessories/images/ai-kit.jpg)
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/ai-kit/about.adoc)
 
-树莓派 AI 套件
+![ai kit](https://www.raspberrypi.com/documentation/accessories/images/ai-kit.jpg?hash=b707e971611c4b204c24f05e938bcf7d)
 
-树莓派 AI 套件将树莓派 M.2 HAT+ 与 Hailo AI 加速模块捆绑在一起，可用于树莓派 5。该套件包含以下内容：
+The Raspberry Pi AI Kit
 
-* Hailo AI 模块包含神经处理单元（NPU）
-* 树莓派 M.2 HAT+，用于将 AI 模块接入您的树莓派 5
-* 模块和 M.2 HAT+ 之间预装了导热垫
-* 安装硬件套件
-* 16 毫米堆叠 GPIO 引脚
+The Raspberry Pi AI Kit bundles the [Raspberry Pi M.2 HAT+](https://www.raspberrypi.com/documentation/accessories/m2-hat-plus.html#m2-hat-plus) with a Hailo AI acceleration module for use with Raspberry Pi 5. The kit contains the following:
 
-## AI 模块功能
+* Hailo AI module containing a Neural Processing Unit (NPU)
+* Raspberry Pi M.2 HAT+, to connect the AI module to your Raspberry Pi 5
+* thermal pad pre-fitted between the module and the M.2 HAT+
+* mounting hardware kit
+* 16mm stacking GPIO header
 
-* 每秒 13 万亿次（TOPS）神经网络推理加速器，构建在 Hailo-8L 芯片周围。
-* M.2 2242 形态因子
+## AI module features
 
-## 安装
+* 13 tera-operations per second (TOPS) neural network inference accelerator built around the Hailo-8L chip.
+* M.2 2242 form factor
 
-要使用 Ai 套件，您需要：
+## Installation
 
-* 树莓派 5
+To use the AI Kit, you will need:
 
-每个 Ai 套件都配备了预安装的 Ai 模块、排线电缆、GPIO 堆叠排针和安装硬件。请按照以下说明完成安装您的 Ai 套件：
+* a Raspberry Pi 5
 
-1. 首先，请确保您的树莓派运行的软件是最新的。运行以下命令进行更新：
+Each AI Kit comes with a pre-installed AI module, ribbon cable, GPIO stacking header, and mounting hardware. Complete the following instructions to install your AI Kit:
+
+1. First, ensure that your Raspberry Pi runs the latest software. Run the following command to update:
 
     ```
     $ sudo apt update && sudo apt full-upgrade
     ```
-2. 接下来，请确保您的树莓派固件是最新的。运行以下命令查看您正在运行的固件版本：
+2. Next, [ensure that your Raspberry Pi firmware is up-to-date](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#update-the-bootloader-configuration). Run the following command to see what firmware you’re running:
 
     ```
     $ sudo rpi-eeprom-update
     ```
 
-    如果您看到的日期是 2023 年 12 月 6 日或更晚，请继续下一步。如果您看到的日期早于 2023 年 12 月 6 日，请运行以下命令打开树莓派配置 CLI：
+    If you see 6 December 2023 or a later date, proceed to the next step. If you see a date earlier than 6 December 2023, run the following command to open the Raspberry Pi Configuration CLI:
 
     ```
     $ sudo raspi-config
     ```
 
-    在 Advanced Options > Bootloader Version 下，选择 Latest 。然后，使用 Finish 键或 Escape 键退出 raspi-config 。
+    Under `Advanced Options` > `Bootloader Version`, choose `Latest`. Then, exit `raspi-config` with `Finish` or the **Escape** key.
 
-    运行以下命令以将固件更新到最新版本：
+    Run the following command to update your firmware to the latest version:
 
     ```
     $ sudo rpi-eeprom-update -a
     ```
 
-    然后，使用 sudo reboot 重新启动。
-3. 在开始安装前，请断开树莓派的电源。
-4. 为了获得最佳性能，我们建议将 Ai 套件与树莓派主动散热器一起使用。如果您有主动散热器，请在安装 Ai 套件之前安装它。![ai kit installation 01](https://www.raspberrypi.com/documentation/accessories/images/ai-kit-installation-01.png)
-5. 使用提供的四颗螺丝安装间隔柱。牢固地将 GPIO 堆叠排针压在树莓派的 GPIO 引脚顶部；只要所有引脚都能正确插入即可，方向无所谓。从 Ai 套件上断开排线电缆，并将另一端插入树莓派的 PCIe 接口。从两侧抬起排线电缆固定器，然后将带有铜接点朝向内部、朝向 USB 接口的线缆插入。确保排线电缆完全且均匀地插入 PCIe 接口，然后从两侧按下电缆固定器，将排线电缆牢固地固定在位。![ai kit installation 02](https://www.raspberrypi.com/documentation/accessories/images/ai-kit-installation-02.png)
-6. 将 AI 套件放在间隔物顶部，并使用剩下的四颗螺丝将其固定在位。![ai kit installation 03](https://www.raspberrypi.com/documentation/accessories/images/ai-kit-installation-03.png)
-7. 将排线插入 AI 套件上的插槽。从两侧抬起排线固定器，然后插入铜接点朝上的电缆。将排线完全均匀地插入接口，从两侧按下电缆固定器，牢固地固定排线电缆。![ai kit installation 04](https://www.raspberrypi.com/documentation/accessories/images/ai-kit-installation-04.png)
-8. 恭喜，现在您已成功的安装 AI 套件了。将您的树莓派接入电源；Raspberry Pi OS 可自动检测 AI 套件。![ai kit installation 05](https://www.raspberrypi.com/documentation/accessories/images/ai-kit-installation-05.png)
+    Then, reboot with `sudo reboot`.
+3. Disconnect the Raspberry Pi from power before beginning installation.
+4. For the best performance, we recommend using the AI Kit with the Raspberry Pi Active Cooler. If you have an Active Cooler, install it before installing the AI Kit.
+    ![ai kit installation 01](https://www.raspberrypi.com/documentation/accessories/images/ai-kit-installation-01.png?hash=23b2447b23b5d24675850ec595ec20ca)
+5. Install the spacers using four of the provided screws. Firmly press the GPIO stacking header on top of the Raspberry Pi GPIO pins; orientation does not matter as long as all pins fit into place. Disconnect the ribbon cable from the AI Kit, and insert the other end into the PCIe port of your Raspberry Pi. Lift the ribbon cable holder from both sides, then insert the cable with the copper contact points facing inward, towards the USB ports. With the ribbon cable fully and evenly inserted into the PCIe port, push the cable holder down from both sides to secure the ribbon cable firmly in place.
+    ![ai kit installation 02](https://www.raspberrypi.com/documentation/accessories/images/ai-kit-installation-02.png?hash=facb3c8fa8c3ae9595100a428e21560f)
+6. Set the AI Kit on top of the spacers, and use the four remaining screws to secure it in place.
+    ![ai kit installation 03](https://www.raspberrypi.com/documentation/accessories/images/ai-kit-installation-03.png?hash=913e988437b70b62dc968bd37943a3ab)
+7. Insert the ribbon cable into the slot on the AI Kit. Lift the ribbon cable holder from both sides, then insert the cable with the copper contact points facing up. With the ribbon cable fully and evenly inserted into the port, push the cable holder down from both sides to secure the ribbon cable firmly in place.
+    ![ai kit installation 04](https://www.raspberrypi.com/documentation/accessories/images/ai-kit-installation-04.png?hash=d36ff5e25c7365a1791a06cdece35289)
+8. Congratulations, you have successfully installed the AI Kit. Connect your Raspberry Pi to power; Raspberry Pi OS will automatically detect the AI Kit.
+    ![ai kit installation 05](https://www.raspberrypi.com/documentation/accessories/images/ai-kit-installation-05.png?hash=5184edeee8adf1c4dde3c14205ffa5fd)
 
->**警告**
->
->在连接或断开 M.2 插槽上的设备之前，务必先将您的树莓派断开电源。 
+| WARNING | Always disconnect your Raspberry Pi from power before connecting or disconnecting a device from the M.2 slot. |
+| --------- | --------------------------------------------------------------------------------------------------------------- |
 
-## 入门指南
+## Getting Started
 
-本指南将帮助您设置树莓派 5 与树莓派 AI 套件配合使用。这将使您能够使用 Hailo AI 神经网络加速器运行 rpicam-apps 摄像头演示。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/ai-kit/getting-started.adoc)
 
-### 先决条件
+This guide will help you set up the Raspberry Pi AI Kit with your Raspberry Pi 5. This will enable you to run `rpicam-apps` camera demos using the Hailo AI neural network accelerator.
 
-对于本指南，您将需要以下内容：
+### Prerequisites
 
-* 树莓派 5
-* 树莓派 Ai 套件，其中包括：
-  * M.2 HAT+
-  * 预装的 Hailo-8L Ai 模块
-* 64 位 Raspberry Pi OS Bookworm 系统
-* 官方树莓派摄像头（例如摄像头模块 3 或高质量摄像头）
+For this guide, you will need the following:
 
-### 硬件设置
+* a Raspberry Pi 5
+* a Raspberry Pi AI Kit, which includes:
 
-1. 将摄像头连接到您的树莓派 5 主板，按照在安装树莓派摄像头中的说明进行操作。您可以跳过电源连接，因为您需要在下一步中断开树莓派的电源。
-2. 按照安装说明将您的 AI 套件硬件连接到您的树莓派 5。
-3. 按照说明启用 PCIe Gen 3.0。这一步骤是可选的，但为了使您的 AI 套件获得最佳性能，强烈建议启用它。
-4. 安装使用 Ai 套件所需的依赖包。在终端运行以下命令：
+  * an M.2 HAT+
+  * a pre-installed Hailo-8L AI module
+* a 64-bit Raspberry Pi OS Bookworm install
+* any official Raspberry Pi camera (e.g. Camera Module 3 or High Quality Camera)
+
+### Hardware setup
+
+1. Attach the camera to your Raspberry Pi 5 board following the instructions at [Install a Raspberry Pi Camera](https://www.raspberrypi.com/documentation/accessories/camera.html#install-a-raspberry-pi-camera). You can skip reconnecting your Raspberry Pi to power, because you’ll need to disconnect your Raspberry Pi from power for the next step.
+2. Follow the [installation instructions](https://www.raspberrypi.com/documentation/accessories/ai-kit.html#ai-kit-installation) to get your AI Kit hardware connected to your Raspberry Pi 5.
+3. Follow the instructions to [enable PCIe Gen 3.0](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pcie-gen-3-0). This step is optional, but *highly recommended* to achieve the best performance with your AI Kit.
+4. Install the dependencies required to use the AI Kit. Run the following command from a terminal window:
 
     ```
     $ sudo apt install hailo-all
     ```
 
-    这将安装以下依赖项：
+    This installs the following dependencies:
 
-    * Hailo 内核设备驱动程序和固件
-    * HailoRT 中间件软件
-    * Hailo Tappas 核心后处理库
-    * rpicam-apps Hailo 后处理软件演示阶段
-5. 最后，使用 sudo reboot 重启您的树莓派，以使这些设置生效。
-6. 为确保一切正常运行，请运行以下命令：
+    * Hailo kernel device driver and firmware
+    * HailoRT middleware software
+    * Hailo Tappas core post-processing libraries
+    * The `rpicam-apps` Hailo post-processing software demo stages
+5. Finally, reboot your Raspberry Pi with `sudo reboot` for these settings to take effect.
+6. To ensure everything is running correctly, run the following command:
 
     ```
     $ hailortcli fw-control identify
     ```
 
-    如果您看到类似以下内容的输出，则已成功安装了 Ai 套件及其软件依赖包：
+    If you see output similar to the following, you’ve successfully installed the AI Kit and its software dependencies:
 
     ```
     Executing on device: 0000:01:00.0
@@ -118,7 +127,7 @@
     Product Name: HAILO-8L AI ACC M.2 B+M KEY MODULE EXT TMP
     ```
 
-    另外，您可以运行 `dmesg | grep -i hailo` 来查看内核日志，应该会产生类似以下的输出：
+    Additionally, you can run `dmesg | grep -i hailo` to check the kernel logs, which should yield output similar to the following:
 
     ```
     [    3.049657] hailo: Init module. driver version 4.17.0
@@ -137,85 +146,85 @@
     [    3.221043] hailo 0000:01:00.0: Firmware was loaded successfully
     [    3.231845] hailo 0000:01:00.0: Probing: Added board 1e60-2864, /dev/hailo0
     ```
-7. 为了确保摄像头正常运行，请运行以下命令：
+7. To ensure the camera is operating correctly, run the following command:
 
     ```
     $ rpicam-hello -t 10s
     ```
 
-    这将启动摄像头并显示一个十秒钟的预览窗口。如果您已经验证一切安装正确，就该运行一些演示了。
+    This starts the camera and shows a preview window for ten seconds. Once you have verified everything is installed correctly, it’s time to run some demos.
 
-### 演示
+### Demos
 
-rpicam-apps 摄像头应用套件实现了一个后处理框架。本节包含一些演示后处理阶段，突出了 Ai 套件的一些功能。
+The `rpicam-apps` suite of camera applications implements a [post-processing framework](https://www.raspberrypi.com/documentation/computers/camera_software.html#post-processing-with-rpicam-apps). This section contains a few demo post-processing stages that highlight some of the capabilities of the AI Kit.
 
-以下演示使用 rpicam-hello ，默认情况下显示一个预览窗口。但是，您也可以使用其他 rpicam-apps ，包括 rpicam-vid 和 rpicam-still 。您可能需要添加或修改一些命令行选项，以使演示命令与替代应用程序兼容。
+The following demos use [`rpicam-hello`](https://www.raspberrypi.com/documentation/computers/camera_software.html#rpicam-hello), which by default displays a preview window. However, you can use other `rpicam-apps` instead, including [`rpicam-vid`](https://www.raspberrypi.com/documentation/computers/camera_software.html#rpicam-vid) and [`rpicam-still`](https://www.raspberrypi.com/documentation/computers/camera_software.html#rpicam-still). You may need to add or modify some command line options to make the demo commands compatible with alternative applications.
 
-要开始，请下载演示所需的后处理 JSON 文件。这些文件确定要运行的后处理阶段，并配置每个阶段的行为。例如，您可以在对象检测演示中启用、禁用、加强或减弱时间滤波的强度。或者您可以在分割演示中启用或禁用输出蒙版绘制。
+To begin, download the post-processing JSON files required for the demos. These files determine which post-processing stages to run and configure the behaviour of each stage. For example, you can enable, disable, strengthen, or weaken the strength of the temporal filtering in the object detection demos. Or you could enable or disable the output mask drawing in the segmentation demo.
 
-要下载完整的后处理 JSON 文件集合，请克隆 rpicam-apps 存储库。运行以下命令仅拉取存储库中最新的提交，以节省空间：
+To download the entire collection of post-processing JSON files, clone the `rpicam-apps` repo. Run the following command to clone only the most recent commit from the repo, saving space:
 
 ```
 $ git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git ~/rpicam-apps
 ```
 
->**技巧**
->
->后续部分提供的命令使用此存储库中的 JSON 文件。为了便于引用这些文件，此命令在您的主文件夹中创建了克隆的 rpicam-apps 目录。如果您修改了此目录的位置，则还必须修改下面的演示命令，以引用 JSON 文件的新位置。
+| TIP | The commands provided in subsequent sections use the JSON files in this repository. To make it easy to reference these files, this command creates the cloned `rpicam-apps` directory in your home folder. If you modify the location of this directory, you must also alter the demo commands below to reference the new location of the JSON files. |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
+#### Object Detection
 
-#### 目标检测
-
-此演示显示神经网络检测到的物体周围的边界框。要禁用取景器，请使用参数 `-n`。要返回纯文本输出，说明检测到的物体，请添加参数 `-v 2`。运行以下命令在您的树莓派上尝试演示：
+This demo displays bounding boxes around objects detected by a neural network. To disable the viewfinder, use the [`-n`](https://www.raspberrypi.com/documentation/computers/camera_software.html#nopreview) flag. To return purely textual output describing the objects detected, add the `-v 2` option. Run the following command to try the demo on your Raspberry Pi:
 
 ```
 $ rpicam-hello -t 0 --post-process-file ~/rpicam-apps/assets/hailo_yolov6_inference.json --lores-width 640 --lores-height 640
 ```
 
-或者，您可以尝试另一个具有性能和效率上不同权衡的模型。
+Alternatively, you can try another model with different trade-offs in performance and efficiency.
 
-使用 Yolov8 模型运行演示，请运行以下命令：
+To run the demo with the Yolov8 model, run the following command:
 
 ```
 $ rpicam-hello -t 0 --post-process-file ~/rpicam-apps/assets/hailo_yolov8_inference.json --lores-width 640 --lores-height 640
 ```
 
-使用 YoloX 模型运行演示，请运行以下命令：
+To run the demo with the YoloX model, run the following command:
 
 ```
 $ rpicam-hello -t 0 --post-process-file ~/rpicam-apps/assets/hailo_yolox_inference.json --lores-width 640 --lores-height 640
 ```
 
-使用 Yolov5 人脸模型运行演示，请运行以下命令：
+To run the demo with the Yolov5 Person and Face model, run the following command:
 
 ```
 $ rpicam-hello -t 0 --post-process-file ~/rpicam-apps/assets/hailo_yolov5_personface.json --lores-width 640 --lores-height 640
 ```
 
-#### 图像分割
+#### Image Segmentation
 
-此演示执行对象检测，并通过在取景器图像上绘制颜色掩模来对对象进行分割。运行以下命令在您的树莓派上尝试演示：
+This demo performs object detection and segments the object by drawing a colour mask on the viewfinder image. Run the following command to try the demo on your Raspberry Pi:
 
 ```
 $ rpicam-hello -t 0 --post-process-file ~/rpicam-apps/assets/hailo_yolov5_segmentation.json --lores-width 640 --lores-height 640 --framerate 20
 ```
 
-#### 姿势估计
+#### Pose Estimation
 
-此演示执行 17 点人体姿势估计，绘制连接检测点的线条。运行以下命令在您的树莓派上尝试演示：
+This demo performs 17-point human pose estimation, drawing lines connecting the detected points. Run the following command to try the demo on your Raspberry Pi:
 
 ```
 $ rpicam-hello -t 0 --post-process-file ~/rpicam-apps/assets/hailo_yolov8_pose.json --lores-width 640 --lores-height 640
 ```
 
-### 进一步资源
+### Further Resources
 
-Hailo 还创建了一组演示，您可以在树莓派 5 上运行，可在 hailo-ai/hailo-rpi5-examples GitHub 存储库中找到。
+Hailo has also created a set of demos that you can run on a Raspberry Pi 5, available in the [hailo-ai/hailo-rpi5-examples GitHub repository](https://github.com/hailo-ai/hailo-rpi5-examples).
 
-您可以在 hailo-ai/hailo_model_zoo GitHub 存储库中找到 Hailo 广泛的模型库，其中包含大量神经网络。
+You can find Hailo’s extensive model zoo, which contains a large number of neural networks, in the [hailo-ai/hailo_model_zoo GitHub repository](https://github.com/hailo-ai/hailo_model_zoo/tree/master/docs/public_models/HAILO8L).
 
-查看 Hailo 社区论坛和开发者区，进一步讨论有关 Hailo 硬件和工具的内容。
+Check out the [Hailo community forums and developer zone](https://community.hailo.ai/) for further discussions on the Hailo hardware and tooling.
 
-## 产品简介
+## Product brief
 
-有关 Ai 套件的更多信息，包括机械规格和操作环境限制，请参阅产品简介。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/ai-kit.adoc)
+
+For more information about the AI Kit, including mechanical specifications and operating environment limitations, see the [product brief](https://datasheets.raspberrypi.com/ai-kit/raspberry-pi-ai-kit-product-brief.pdf).
