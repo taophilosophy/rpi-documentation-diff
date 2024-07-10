@@ -1,377 +1,376 @@
-# 摄像头
+# Camera
 
-## 关于摄像头模块
+## About the Camera Modules
 
-现有若干款官方的树莓派摄像头模块。最早的 500 万像素型号于 2013 年发布，随后于 2016 年发布了 800 万像素的摄像头模块 2。最新的摄像头型号是 1200 万像素的摄像头模块 3（于 2023 年发布）。最早的 500 万像素摄像头树莓派已经不再供应。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/camera/camera_hardware.adoc)
 
-所有这些摄像头都有可见光和红外版本。但摄像头模块 3 还有标准或广角 FoV 型号，总计四种不同的版本。
+There are now several official Raspberry Pi camera modules. The original 5-megapixel model was [released](https://www.raspberrypi.com/news/camera-board-available-for-sale/) in 2013, it was followed by an 8-megapixel [Camera Module 2](https://www.raspberrypi.com/products/camera-module-v2/) which was [released](https://www.raspberrypi.com/news/new-8-megapixel-camera-board-sale-25/) in 2016. The latest camera model is the 12-megapixel [Camera Module 3](https://raspberrypi.com/products/camera-module-3/) which was [released](https://www.raspberrypi.com/news/new-autofocus-camera-modules/) in 2023. The original 5MP device is no longer available from Raspberry Pi.
 
-![Camera Module 3 normal and wide angle](https://www.raspberrypi.com/documentation/accessories/images/cm3.jpg)
+All of these cameras come in visible light and infrared versions, while the Camera Module 3 also comes as a standard or wide FoV model for a total of four different variants.
 
-摄像头模块 3（左）和摄像头模块 3 广角（右）
+![Camera Module 3 normal and wide angle](https://www.raspberrypi.com/documentation/accessories/images/cm3.jpg?hash=87abd731a81318a03d494783da281fc9)
 
-![Camera Module 3 NoIR normal and wide angle](https://www.raspberrypi.com/documentation/accessories/images/cm3_noir.jpg)
+Camera Module 3 (left) and Camera Module 3 Wide (right)
 
-摄像头模块 3 NoIR（左）和摄像头模块 3 NoIR 广角（右）
+![Camera Module 3 NoIR normal and wide angle](https://www.raspberrypi.com/documentation/accessories/images/cm3_noir.jpg?hash=432695c74fd478fd59e68e91c6b8ac75)
 
-此外，分别于 2020 年和 2023 年发布了分别适用于外部镜头的 CS 或 M12 安装变种的 1200 万像素高质量摄像头。HQ 摄像头没有红外版本（但如有需要，也可以拆除红外滤镜）。
+Camera Module 3 NoIR (left) and Camera Module 3 NoIR Wide (right)
 
-![M12- and C/CS-mount versions of the HQ Camera](https://www.raspberrypi.com/documentation/accessories/images/hq.jpg)
+Additionally a 12-megapixel [High Quality Camera](https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/) with CS- or M12-mount variants for use with external lenses was [released in 2020](https://www.raspberrypi.com/news/new-product-raspberry-pi-high-quality-camera-on-sale-now-at-50/) and [2023](https://www.raspberrypi.com/news/new-autofocus-camera-modules/) respectively. There is no infrared version of the HQ Camera, however the [IR Filter can be removed](https://www.raspberrypi.com/documentation/accessories/camera.html#filter-removal) if required.
 
-HQ 摄像头，M12 安装（左）和 C/CS 安装（右）
+![M12- and C/CS-mount versions of the HQ Camera](https://www.raspberrypi.com/documentation/accessories/images/hq.jpg?hash=bac44ac498765e28c7160ac0e3907e32)
 
-最后，有全局快门相机（于 2023 年发布）。GS 相机没有红外版本（但如有需要，也可以拆除红外滤镜）。
+HQ Camera, M12-mount (left) and C/CS-mount (right)
 
-![GS Camera](https://www.raspberrypi.com/documentation/accessories/images/gs-camera.jpg)
+Finally, there is the Global Shutter camera, which was [released in 2023](http://raspberrypi.com/news/new-raspberry-pi-global-shutter-camera). There is no infrared version of the GS Camera, however the IR Filter can be removed if required.
 
- 全局快门相机
+![GS Camera](https://www.raspberrypi.com/documentation/accessories/images/gs-camera.jpg?hash=cd9e8c1e1dabd47d79800c72870af6f6)
 
->**注意**
->
->树莓派摄像头模块与所有具有 CSI 接口的树莓派计算机兼容 - 也即兼容除了树莓派 400 和 旧版 Zero 之外的所有型号。 
+Global Shutter Camera
 
-### 滚动快门还是全局快门？
+| NOTE | Raspberry Pi Camera Modules are compatible with all Raspberry Pi computers with CSI connectors - that is, all models except Raspberry Pi 400 and the 2016 launch version of Zero. |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-大多数数码相机，包括我们的摄像头模块，使用滚动快门：它们逐行扫描它们正在捕捉的图像，然后输出结果。您可能已经注意到，在某些情况下，这可能会导致失真效果；如果您曾经拍摄过旋转的螺旋桨叶片，您可能已经注意到图像在旋转而不是看起来像一个正在旋转的物体时会出现闪烁。螺旋桨叶片在相机横扫并观察场景的瞬间内有足够的时间改变位置。
+### Rolling or Global shutter?
 
-全局快门，就像我们的全局快门摄像头模块上的那个，不会这样做。它一次性捕捉场景中每个像素的光线，因此您拍摄的螺旋桨叶片照片不会受到相同的失真影响。
+Most digital cameras, including our Camera Modules, use a **rolling shutter**: they scan the image they’re capturing line-by-line, then output the results. You may have noticed that this can cause distortion effects in some settings; if you’ve ever photographed rotating propeller blades, you’ve probably spotted the image shimmering rather than looking like an object that is rotating. The propeller blades have had enough time to change position in the tiny moment that the camera has taken to swipe across and observe the scene.
 
-这有什么用呢？快速移动的物体，比如那些螺旋桨叶片，现在很容易捕捉到；我们还可以同步多台摄像头在同一时刻拍摄照片。这里有很多好处，比如在捕捉立体图像时最小化失真。（如果左眼中出现的任何运动尚未出现在右眼中，人类大脑会感到困惑。）树莓派全局快门摄像头还可以在较短的曝光时间内运行 - 在足够的光线下可达到 30 微秒 - 而滚动快门相机则无法做到，这使其在高速摄影中非常有用。
+A **global shutter**, like the one on our Global Shutter Camera Module, doesn’t do this. It captures the light from every pixel in the scene at once, so your photograph of propeller blades will not suffer from the same distortion.
 
->**注意**
->
->全局快门摄像头的图像传感器具有 6.3 毫米对角线活动感应区域，与树莓派的 HQ 摄像头大小相似。然而，像素更大，可以收集更多光线。大像素尺寸和低像素计数在机器视觉应用中非常有价值；传感器产生的像素越多，实时处理图像就越困难。为了解决这个问题，许多应用程序会缩小和裁剪图像。使用全局快门摄像头和适当的镜头放大倍率，这是不必要的，因为较低的分辨率和较大的像素尺寸意味着可以原生捕捉图像。
+Why is this useful? Fast-moving objects, like those propeller blades, are now easy to capture; we can also synchronise several cameras to take a photo at precisely the same moment in time. There are plenty of benefits here, like minimising distortion when capturing stereo images. (The human brain is confused if any movement that appears in the left eye has not appeared in the right eye yet.) The Raspberry Pi Global Shutter Camera can also operate with shorter exposure times - down to 30µs, given enough light - than a rolling shutter camera, which makes it useful for high-speed photography.
 
-## 安装树莓派摄像头
+| NOTE | The Global Shutter Camera’s image sensor has a 6.3mm diagonal active sensing area, which is similar in size to Raspberry Pi’s HQ Camera. However, the pixels are larger and can collect more light. Large pixel size and low pixel count are valuable in machine-vision applications; the more pixels a sensor produces, the harder it is to process the image in real time. To get around this, many applications downsize and crop images. This is unnecessary with the Global Shutter Camera and the appropriate lens magnification, where the lower resolution and large pixel size mean an image can be captured natively. |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
->**警告**
->
->摄像头对静电很敏感。在处理 PCB 之前请先将自己接地。如果没有接地带，水龙头或类似物品应该也行。
+## Install a Raspberry Pi camera
 
-### 连接摄像头
+| WARNING | Cameras are sensitive to static. Earth yourself prior to handling the PCB. A sink tap or similar should suffice if you don’t have an earthing strap. |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-将柔性电缆插入到树莓派上标有摄像头的接口中，该接口位于以太网口和 HDMI 口之间。电缆必须以银色接触面朝向 HDMI 口插入。要打开接口，请将接口顶部的标签向上拉，然后朝向以太网口。柔性电缆应牢固插入接口中，注意不要使电缆以太锐角度弯曲。要关闭接口，请将接口顶部部分向 HDMI 口推下，同时保持线缆位置固定。
+### Connect the Camera
 
-我们制作了一个视频来演示连接摄像头的过程。虽然视频显示的是老的树莓派 1 上的老摄像头，但对于所有摄像头模块，原理都是相同的。
+The flex cable inserts into the connector labelled CAMERA on the Raspberry Pi, which is located between the Ethernet and HDMI ports. The cable must be inserted with the silver contacts facing the HDMI port. To open the connector, pull the tabs on the top of the connector upwards, then towards the Ethernet port. The flex cable should be inserted firmly into the connector, with care taken not to bend the flex at too acute an angle. To close the connector, push the top part of the connector towards the HDMI port and down, while holding the flex cable in place.
 
-根据型号不同，摄像头可能附带一小片半透明蓝色塑料薄膜覆盖镜头。这只是为了在邮寄给您时保护镜头，需要将其轻轻剥离下来。
+We have created a video to illustrate the process of connecting the camera. The following video shows how to connect the original camera on the original Raspberry Pi 1. The principle is the same for all Raspberry Pi boards with a camera connector, though the Raspberry Pi 5 and all Raspberry Pi Zero models require a [different camera cable](https://www.raspberrypi.com/products/camera-cable/).
 
->**注意**
->
->HQ 摄像头上推荐的 6mm 和 16mm 镜头有额外的文档可用。
+Depending on the model, the camera may come with a small piece of translucent blue plastic film covering the lens. This is only present to protect the lens while it is being mailed to you, and needs to be removed by gently peeling it off.
 
-### 准备软件
+| NOTE | There is additional documentation available around fitting the recommended [6mm](https://datasheets.raspberrypi.com/hq-camera/cs-mount-lens-guide.pdf) and [16mm](https://datasheets.raspberrypi.com/hq-camera/c-mount-lens-guide.pdf) lens to the HQ Camera. |
+| ------ | --------------------------------------------------------------------------------------------------------- |
 
-在继续之前，我们建议确保您的内核、GPU 固件和应用程序都是最新的。请按照保持操作系统最新的说明。
+### Prepare the Software
 
-然后，请按照 rpicam-apps 的相关设置说明以及 Picamera2 Python 库。
+Before proceeding, we recommend ensuring that your kernel, GPU firmware and applications are all up to date. Please follow the instructions on [keeping your operating system up to date](https://www.raspberrypi.com/documentation/computers/os.html#update-software).
 
-## 硬件规格
+Then, please follow the relevant setup instructions for [`rpicam-apps`](https://www.raspberrypi.com/documentation/computers/camera_software.html#rpicam-apps), and the [Picamera2 Python library](https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf).
 
-|                    | 摄像头模块 v1                       | 摄像头模块 v2                              | 摄像头模块 3                                          | 摄像头模块 3 宽角                                     | 高清摄像头                                          | GS 摄像头                                           |
-| -------------------- | ------------------------------------- | -------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| 净价               | $25                                 | $25                                        | $25                                                   | $35                                                   | $50                                                 | $50                                                 |
-| 尺寸               | 大约 25 × 24 × 9 毫米             | 大约 25 × 24 × 9 毫米                    | 大约 25 × 24 × 11.5 毫米                            | 大约 25 × 24 × 12.4 毫米                            | 38 x 38 x 18.4mm（不包括镜头）                      | 38 x 38 x 19.8 毫米（带适配器和防尘盖为 29.5 毫米） |
-| 重量               | 3 克                                | 3g                                         | 4g                                                    | 4g                                                    | 30.4 克                                             | 34 克（带适配器和防尘盖 41 克）                     |
-| 静态分辨率         | 500 万像素                          | 800 万像素                                 | 1190 万像素                                           | 1190 万像素                                           | 1230 万像素                                         | 1.58 百万像素                                       |
-| 视频模式           | 1080p30，720p60 和 640 × 480p60/90 | 1080p47，1640 × 1232p41 和 640 × 480p206 | 2304 × 1296p56，2304 × 1296p30 HDR，1536 × 864p120 | 2304 × 1296p56，2304 × 1296p30 HDR，1536 × 864p120 | 2028 × 1080p50，2028 × 1520p40 和 1332 × 990p120 | 1456 x 1088p60                                      |
-| 传感器             | OmniVision OV5647                   | 索尼 IMX219                                | 索尼 IMX708                                           | 索尼 IMX708                                           | 索尼 IMX477                                         | 索尼 IMX296                                         |
-| 传感器分辨率       | 2592 × 1944 像素                   | 3280 × 2464 像素                          | 4608 x 2592 像素                                      | 4608 x 2592 像素                                      | 4056 x 3040 像素                                    | 1456 x 1088 像素                                    |
-| 传感器图像区域     | 3.76 × 2.74 毫米                   | 3.68 x 2.76 毫米（对角线为 4.6 毫米）      | 6.45 x 3.63 毫米（对角线 7.4 毫米）                   | 6.45 x 3.63 毫米（对角线 7.4 毫米）                   | 6.287 毫米 x 4.712 毫米（对角线 7.9 毫米）          | 6.3 毫米对角线                                      |
-| 像素大小           | 1.4 微米 × 1.4 微米                | 1.12 微米 x 1.12 微米                      | 1.4 微米 x 1.4 微米                                   | 1.4 微米 x 1.4 微米                                   | 1.55 微米 x 1.55 微米                               | 3.45 微米 x 3.45 微米                               |
-| 光学尺寸           | 1/4 英寸                            | 1/4 英寸                                   | 1/2.43 英寸                                           | 1/2.43 英寸                                           | 1/2.3 英寸                                          | 1/2.9 英寸                                          |
-| 焦点               | 固定                                | 可调                                       | 电动                                                  | 电动                                                  | 可调节                                              | 可调节                                              |
-| 景深               | 大约 1 米到∞                       | 大约 10 厘米到∞                           | 大约 10 厘米到∞                                      | 大约 5 厘米到∞                                       | 不适用                                              | 不适用                                              |
-| 焦距               | 3.60 毫米 +/- 0.01                  | 3.04 毫米                                  | 4.74 毫米                                             | 2.75 毫米                                             | 取决于镜头                                          | 取决于镜头                                          |
-| 水平视场角（FoV）  | 53.50 +/- 0.13 度                   | 62.2 度                                    | 66 度                                                 | 102 度                                                | 取决于镜头                                          | 依赖于镜头                                          |
-| 垂直视场（FoV）    | 41.41 +/- 0.11 度                   | 48.8 度                                    | 41 度                                                 | 67 度                                                 | 取决于镜头                                          | 取决于镜头                                          |
-| 焦距比（光圈）     | F2.9                                | F2.0                                       | F1.8                                                  | F2.2                                                  | 取决于镜头                                          | 取决于镜头                                          |
-| 最大曝光时间（秒） | 0.97                                | 11.76                                      | 112                                                   | 112                                                   | 670.74                                              | 15.5                                                |
-| 镜头安装           | 不适用                              | 不适用                                     | 无法适用                                              | 无法适用                                              | C/CS-或 M12 安装                                    | C/CS                                                |
-| 有无 NoIR 版本？   | 是                                  | 是                                         | 是                                                    | 是                                                    | 不                                                  | 不                                                  |
+## Hardware Specification
 
->**注意**
->
->有证据表明，摄像头模块 3 可能会以 CSI 时钟速率的谐波发射射频干扰。这种射频干扰的范围可能会干扰 GPS L1 频率（1575 MHz）。请参阅 Github 上的主题以获取详细信息和提出的解决方法。 
+|                                  | Camera Module v1                     | Camera Module v2                            | Camera Module 3                                       | Camera Module 3 Wide                                  | HQ Camera                                            | GS Camera                                           |
+| ---------------------------------- | -------------------------------------- | --------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------- |
+| Net price                        | \$25                              | \$25                                     | \$25                                               | \$35                                               | \$50                                              | \$50                                             |
+| Size                             | Around 25 × 24 × 9 mm              | Around 25 × 24 × 9 mm                     | Around 25 × 24 × 11.5 mm                            | Around 25 × 24 × 12.4 mm                            | 38 x 38 x 18.4mm (excluding lens)                    | 38 x 38 x 19.8mm (29.5mm with adaptor and dust cap) |
+| Weight                           | 3g                                   | 3g                                          | 4g                                                    | 4g                                                    | 30.4g                                                | 34g (41g with adaptor and dust cap)                 |
+| Still resolution                 | 5 Megapixels                         | 8 Megapixels                                | 11.9 Megapixels                                       | 11.9 Megapixels                                       | 12.3 Megapixels                                      | 1.58 Megapixels                                     |
+| Video modes                      | 1080p30, 720p60 and 640 × 480p60/90 | 1080p47, 1640 × 1232p41 and 640 × 480p206 | 2304 × 1296p56, 2304 × 1296p30 HDR, 1536 × 864p120 | 2304 × 1296p56, 2304 × 1296p30 HDR, 1536 × 864p120 | 2028 × 1080p50, 2028 × 1520p40 and 1332 × 990p120 | 1456 x 1088p60                                      |
+| Sensor                           | OmniVision OV5647                    | Sony IMX219                                 | Sony IMX708                                           | Sony IMX708                                           | Sony IMX477                                          | Sony IMX296                                         |
+| Sensor resolution                | 2592 × 1944 pixels                  | 3280 × 2464 pixels                         | 4608 x 2592 pixels                                    | 4608 x 2592 pixels                                    | 4056 x 3040 pixels                                   | 1456 x 1088 pixels                                  |
+| Sensor image area                | 3.76 × 2.74 mm                      | 3.68 x 2.76 mm (4.6 mm diagonal)            | 6.45 x 3.63mm (7.4mm diagonal)                        | 6.45 x 3.63mm (7.4mm diagonal)                        | 6.287mm x 4.712 mm (7.9mm diagonal)                  | 6.3mm diagonal                                      |
+| Pixel size                       | 1.4 µm × 1.4 µm                   | 1.12 µm x 1.12 µm                         | 1.4 µm x 1.4 µm                                     | 1.4 µm x 1.4 µm                                     | 1.55 µm x 1.55 µm                                  | 3.45 µm x 3.45 µm                                 |
+| Optical size                     | 1/4"                                 | 1/4"                                        | 1/2.43"                                               | 1/2.43"                                               | 1/2.3"                                               | 1/2.9"                                              |
+| Focus                            | Fixed                                | Adjustable                                  | Motorized                                             | Motorized                                             | Adjustable                                           | Adjustable                                          |
+| Depth of field                   | Approx 1 m to ∞                     | Approx 10 cm to ∞                          | Approx 10 cm to ∞                                    | Approx 5 cm to ∞                                     | N/A                                                  | N/A                                                 |
+| Focal length                     | 3.60 mm +/- 0.01                     | 3.04 mm                                     | 4.74 mm                                               | 2.75 mmm                                              | Depends on lens                                      | Depends on lens                                     |
+| Horizontal Field of View (FoV)   | 53.50 +/- 0.13 degrees               | 62.2 degrees                                | 66 degrees                                            | 102 degrees                                           | Depends on lens                                      | Depends on lens                                     |
+| Vertical Field of View (FoV)     | 41.41 +/- 0.11 degrees               | 48.8 degrees                                | 41 degrees                                            | 67 degrees                                            | Depends on lens                                      | Depends on lens                                     |
+| Focal ratio (F-Stop)             | F2.9                                 | F2.0                                        | F1.8                                                  | F2.2                                                  | Depends on lens                                      | Depends on lens                                     |
+| Maximum exposure times (seconds) | 0.97                                 | 11.76                                       | 112                                                   | 112                                                   | 670.74                                               | 15.5                                                |
+| Lens Mount                       | N/A                                  | N/A                                         | N/A                                                   | N/A                                                   | C/CS- or M12-mount                                   | C/CS                                                |
+| NoIR version available?          | Yes                                  | Yes                                         | Yes                                                   | Yes                                                   | No                                                   | No                                                  |
 
-### 机械图纸
+| NOTE | There is [some evidence](https://github.com/raspberrypi/libcamera/issues/43) to suggest that the Camera Module 3 may emit RFI at a harmonic of the CSI clock rate. This RFI is in a range to interfere with GPS L1 frequencies (1575 MHz). Please see the [thread on Github](https://github.com/raspberrypi/libcamera/issues/43) for details and proposed workarounds. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-可用的机械图纸;
+### Mechanical Drawings
 
-* 摄像头模块 2 PDF
-* 摄像头模块 3 PDF
-* 摄像头模块 3 宽 PDF
-* 摄像头模块 3 STEP 文件
-* HQ 摄像头模块（CS 接口版本）PDF
-  * CS 接口 PDF
-* HQ 摄像头模块（M12 接口版本）PDF
-* GS 摄像头模块 PDF
+Available mechanical drawings;
 
->**注意**
->
->摄像头模块 3 的板尺寸和安装孔位置与摄像头模块 2 相同。但是，由于传感器模块尺寸和位置的变化，它与树莓派 Zero Case 的摄像头盖不具备机械兼容性。
+* Camera Module 2 [PDF](https://datasheets.raspberrypi.com/camera/camera-module-2-mechanical-drawing.pdf)
+* Camera Module 3 [PDF](https://datasheets.raspberrypi.com/camera/camera-module-3-standard-mechanical-drawing.pdf)
+* Camera Module 3 Wide [PDF](https://datasheets.raspberrypi.com/camera/camera-module-3-wide-mechanical-drawing.pdf)
+* Camera Module 3 [STEP files](https://datasheets.raspberrypi.com/camera/camera-module-3-step.zip)
+* HQ Camera Module (CS-mount version) [PDF](https://datasheets.raspberrypi.com/hq-camera/hq-camera-cs-mechanical-drawing.pdf)
 
+  * The CS-mount [PDF](https://datasheets.raspberrypi.com/hq-camera/hq-camera-cs-lensmount-drawing.pdf)
+* HQ Camera Module (M12-mount version) [PDF](https://datasheets.raspberrypi.com/hq-camera/hq-camera-m12-mechanical-drawing.pdf)
+* GS Camera Module [PDF](https://datasheets.raspberrypi.com/gs-camera/gs-camera-mechanical-drawing.pdf)
 
-### 框图
+| NOTE | Board dimensions and mounting-hole positions for Camera Module 3 are identical to Camera Module 2. However, due to changes in the size and position of the sensor module, it is not mechanically compatible with the camera lid for the Raspberry Pi Zero Case. |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-树莓派 CSI 摄像头连接器的原理图。
+### Schematics
+
+Schematic of the Raspberry Pi CSI camera connector.
 
 ![camera connector](https://www.raspberrypi.com/documentation/accessories/images/RPi-S5-conn.png)
 
-其他可用的原理图;
+Other available schematics;
 
-* 摄像头模块 v2 PDF
-* 摄像头模块 v3 PDF
-* HQ 摄像头模块 PDF
+* Camera Module v2 [PDF](https://datasheets.raspberrypi.com/camera/camera-module-2-schematics.pdf)
+* Camera Module v3 [PDF](https://datasheets.raspberrypi.com/camera/camera-module-3-schematics.pdf)
+* HQ Camera Module [PDF](https://datasheets.raspberrypi.com/hq-camera/hq-camera-schematics.pdf)
 
-## 摄像头滤镜
+## Camera Filters
 
-摄像头模块 3 和 HQ 和 GS 摄像头的一些传输特性可用。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/camera/filters.adoc)
 
->**注意**
->
->这些图表可用作 PDF 文件。
+Some transmission characteristics are available for the Camera Module 3 and the HQ and GS cameras.
 
-### 摄像头模块 3
+| NOTE | These graphs are available as [a PDF](https://datasheets.raspberrypi.com/camera/camera-extended-spectral-sensitivity.pdf). |
+| ------ | --------------------------------- |
 
-Camera Module 3 是围绕 IMX708 构建的，具有以下光谱灵敏度特性。
+### Camera Module 3
 
-![Camera Module 3 Transmission Graph](https://www.raspberrypi.com/documentation/accessories/images/cm3-filter.png)
+The Camera Module 3 is built around the IMX708, which has the following spectral sensitivity characteristics.
 
-### HQ 摄像头
+![Camera Module 3 Transmission Graph](https://www.raspberrypi.com/documentation/accessories/images/cm3-filter.png?hash=b9fd642050f8dfeb52df80c2d23a528e)
 
-树莓派 HQ 摄像头没有红外切除滤镜。
+### HQ Camera
 
-![HQ Camera Transmission Graph without IR-Cut filter](https://www.raspberrypi.com/documentation/accessories/images/hq.png)
+Raspberry Pi HQ Camera without IR-Cut filter.
 
-### GS 摄像头
+![HQ Camera Transmission Graph without IR-Cut filter](https://www.raspberrypi.com/documentation/accessories/images/hq.png?hash=25eaca9e283810d0d6951e6ecd69c409)
 
-树莓派 GS 摄像头，无红外切换滤镜。
+### GS Camera
 
-![GS Camera Transmission Graph without IR-Cut filter](https://www.raspberrypi.com/documentation/accessories/images/gs.png)
+Raspberry Pi GS Camera without IR-Cut filter.
 
-### HQ 和 GS 摄像头
+![GS Camera Transmission Graph without IR-Cut filter](https://www.raspberrypi.com/documentation/accessories/images/gs.png?hash=199052f768e0b1fdcd3154510ccde6f1)
 
-HQ 和 GS 相机使用 Hoya CM500 红外滤光片。其透射特性如下图所示。
+### HQ and GS Cameras
 
-![CM500 Transmission Graph](https://www.raspberrypi.com/documentation/accessories/images/hoyacm500.png)
+The HQ and GS Cameras use a Hoya CM500 infrared filter. Its transmission characteristics are as represented in the following graph.
 
-## 滤光片拆卸
+![CM500 Transmission Graph](https://www.raspberrypi.com/documentation/accessories/images/hoyacm500.png?hash=f5a0512fff9a3def9c2152f1a7c276eb)
 
->**注意**
->
->该程序适用于 HQ 和 GS 相机。
+## Filter Removal
 
+| NOTE | This procedure applies to both the HQ and GS cameras. |
+| ------ | ------------------------------------------------------- |
 
->**警告**
->
->该步骤无法逆转：连接滤镜的粘合剂在被揭起并更换后将无法存活，而红外滤镜约 1.1 毫米厚，在被移除时可能会破裂。移除它将失去保修。然而，对一些用户来说，移除滤镜是可取的。 
+| WARNING | **This procedure cannot be reversed:**  the adhesive that attaches the filter will not survive being lifted and replaced, and while the IR filter is about 1.1mm thick, it may crack when it is removed. **Removing it will void the warranty on the product**. Nevertheless, removing the filter will be desirable to some users. |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ![FILTER ON small](https://www.raspberrypi.com/documentation/accessories/images/FILTER_ON_small.jpg)
 
-高质量摄像头和全局快门摄像头都包含一个红外滤镜，用于降低摄像头对红外光的敏感性。它使得户外照片看起来更自然。然而，可以通过移除此滤镜来增强一些自然摄影；天空、植物和水的颜色可能会受到其移除的影响。在受红外光照明的地方，摄像头也可以在没有滤镜的情况下用于夜视。
+Both the High Quality Camera and Global Shutter Camera contain an IR filter, which is used to reduce the camera’s sensitivity to infrared light. This ensures that outdoor photos look more natural. However, some nature photography can be enhanced with the removal of this filter; the colours of sky, plants, and water can be affected by its removal. The camera can also be used without the filter for night vision in a location that is illuminated with infrared light.
 
->**警告**
->
->在继续之前，请阅读所有步骤并决定是否愿意使保修失效。除非您确定愿意放弃保修，否则不要继续。
+| WARNING | Before proceeding read through all of the steps and decide whether you are willing to void your warranty. **Do not proceed** unless you are sure that you are willing to void your warranty. |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-要摘掉滤镜：
+To remove the filter:
 
-* 请在干净无尘的环境中工作，因为传感器将暴露在空气中。
-* 在主电路板底部的两个 1.5 毫米六角锁定键上拧下。小心不要让垫圈滚开。在外壳和 PCB 之间有一层略带粘性的垫片，需要用一点力气才能分开。
+* Work in a clean and dust-free environment, as the sensor will be exposed to the air.
+* Unscrew the two 1.5 mm hex lock keys on the underside of the main circuit board. Be careful not to let the washers roll away. There is a gasket of slightly sticky material between the housing and PCB which will require some force to separate.
 
 ![SCREW REMOVED small](https://www.raspberrypi.com/documentation/accessories/images/SCREW_REMOVED_small.jpg)
 
-* 将板子抬起并放在特别干净的表面上。确保传感器不会触及表面。
+* Lift up the board and place it down on a very clean surface. Make sure the sensor does not touch the surface.
 
 ![FLATLAY small](https://www.raspberrypi.com/documentation/accessories/images/FLATLAY_small.jpg)
 
-* 您可以尝试一些方法来溶解粘合剂，例如少量异丙醇、加热（~20-30 摄氏度）。
+* You may try some ways to weaken the adhesive, such as a little isopropyl alcohol and/or heat (~20-30 C).
 
 ![SOLVENT small](https://www.raspberrypi.com/documentation/accessories/images/SOLVENT_small.jpg)
 
-* 将镜头底座转过来，使其朝上，并放在桌子上。
-* 使用钢笔盖或类似软塑料物品，仅在玻璃与铝相连接的边缘处施加压力，以最大程度降低破坏滤镜的风险。胶水会断裂，滤镜会从镜头座上脱落。
+* Turn the lens mount around so that it is "looking" upwards and place it on a table.
+* Using a pen top or similar soft plastic item, push down on the filter only at the very edges where the glass attaches to the aluminium - to minimise the risk of breaking the filter. The glue will break and the filter will detach from the lens mount.
 
 ![REMOVE FILTER small](https://www.raspberrypi.com/documentation/accessories/images/REMOVE_FILTER_small.jpg)
 
-* 鉴于更换镜头会暴露传感器，此时您可以固定一个透明滤镜（例如 OHP 塑料）以最小化灰尘进入传感器腔的机会。
-* 将主机壳体放回电路板上。务必将壳体与仍留在电路板上的垫圈重新对齐。
-* 尼龙垫圈可防止电路板受损；先放置这个垫圈。接着，放置钢垫圈，可防止尼龙垫圈受损。
-* 将两个六角锁紧键拧紧。只要垫圈按正确顺序安装，就不需要拧得太紧。
+* Given that changing lenses will expose the sensor, at this point you could affix a clear filter (for example, OHP plastic) to minimize the chance of dust entering the sensor cavity.
+* Replace the main housing over the circuit board. Be sure to realign the housing with the gasket, which remains on the circuit board.
+* The nylon washer prevents damage to the circuit board; apply this washer first. Next, fit the steel washer, which prevents damage to the nylon washer.
+* Screw down the two hex lock keys. As long as the washers have been fitted in the correct order, they do not need to be screwed very tightly.
 
 ![FILTER OFF small](https://www.raspberrypi.com/documentation/accessories/images/FILTER_OFF_small.jpg)
 
->**注意**
->
->可能很难或根本不可能通过将滤镜粘回原位来使设备恢复正常光学相机的功能。 
+| NOTE | It is likely to be difficult or impossible to glue the filter back in place and return the device to functioning as a normal optical camera. |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 
+## Recommended Lenses
 
-## 推荐镜头
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/camera/lens.adoc)
 
-以下镜头建议与我们的 HQ 和 GS 摄像头一起使用。
+The following lenses are recommended for use with our HQ and GS cameras.
 
->**注意**
->
->虽然 HQ 摄像头有 C/CS 和 M12 安装版本，但 GS 摄像头仅有 C/CS 安装版本。
+| NOTE | While the HQ Camera is available in both C/CS- and M12-mount versions, the GS Camera is available only with a C/CS-mount. |
+| ------ | --------------------------------------------------------------------------------------------------------------------------- |
 
-### C/CS 镜头
+### C/CS Lenses
 
-我们推荐两款镜头，一款 6mm 广角镜头和一款 16mm 远摄镜头。这些镜头应该可以在您最近的授权经销商处购买到。
+We recommend two lenses, a 6mm wide angle lens and a 16mm telephoto lens. These lenses should be available from your nearest [Authorised Reseller](https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/).
 
-|                              | 16mm 远摄             | 6 毫米广角              |
+|                              | 16mm telephoto        | 6mm wide angle          |
 | ------------------------------ | ----------------------- | ------------------------- |
-| 分辨率                       | 10MP                  | 3MP                     |
-| 图像格式                     | 1"                    | 1/2"                    |
-| 光圈                         | F1.4 至 F16           | F1.2                    |
-| 安装                         | C                     | CS                      |
-| 视场水平°×垂直°（对角°） | HQ                    | 22.2°×16.7° (27.8°) |
+| Resolution                   | 10MP                  | 3MP                     |
+| Image format                 | 1"                    | 1/2"                    |
+| Aperture                     | F1.4 to F16           | F1.2                    |
+| Mount                        | C                     | CS                      |
+| Field of View H°×V° (D°) | HQ                    | 22.2°×16.7° (27.8°) |
 | GS                           | 17.8°×13.4° (22.3) | 45°×34° (56°)       |
-| 背焦距                       | 17.53 毫米            | 7.53 毫米               |
-| M.O.D.                       | 0.2 米                | 0.2 米                  |
-| 尺寸                         | φ39.00×50.00 毫米   | φ30×34 毫米           |
+| Back focal length            | 17.53mm               | 7.53mm                  |
+| M.O.D.                       | 0.2m                  | 0.2m                    |
+| Dimensions                   | φ39.00×50.00mm      | φ30×34mm              |
 
-### M12 镜头
+### M12 Lenses
 
 ![m12 lens](https://www.raspberrypi.com/documentation/accessories/images/m12-lens.jpg)
 
-我们推荐由高嘉光电制造的三款镜头。这些镜头应该可以从您最近的授权经销商那里购买。
+We recommend three lenses manufactured by [Gaojia Optotech](https://www.gaojiaoptotech.com/). These lenses should be available from your nearest [Authorised Reseller](https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/).
 
-|                        | 8 毫米            | 25 毫米                 | 鱼眼                     |
-| ------------------------ | ------------------- | ------------------------- | -------------------------- |
-| 分辨率                 | 12MP              | 5MP                     | 15MP                     |
-| 图像格式               | 1/1.7 英寸        | 1/2 英寸                | 1/2.3 英寸               |
-| 光圈                   | F1.8              | F2.4                    | F2.5                     |
-| 安装                   | M12               |                         |                          |
-| HQ 视场 H°×V° (D°) | 49°×36° (62°) | 14.4°×10.9° (17.9)° | 140°×102.6° (184.6°) |
+|                                 | 8mm               | 25mm                    | Fish Eye                 |
+| --------------------------------- | ------------------- | ------------------------- | -------------------------- |
+| Resolution                      | 12MP              | 5MP                     | 15MP                     |
+| Image format                    | 1/1.7"            | 1/2"                    | 1/2.3"                   |
+| Aperture                        | F1.8              | F2.4                    | F2.5                     |
+| Mount                           | M12               |                         |                          |
+| HQ Field of View H°×V° (D°) | 49°×36° (62°) | 14.4°×10.9° (17.9)° | 140°×102.6° (184.6°) |
 
-## 同步捕获
+## Synchronous Captures
 
-HQ 摄像头和全局快门摄像头都支持同步捕获。利用 XVS 引脚（垂直同步）使一台摄像头在启动帧捕获时脉冲。另一台摄像头可以监听此同步脉冲，并在另一台摄像头同时捕获帧。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/camera/synchronous_cameras.adoc)
 
-### 使用 HQ 摄像头
+Both the HQ Camera and the Global Shutter Camera, have support for synchronous captures. Making use of the XVS pin (Vertical Sync) allows one camera to pulse when a frame capture is initiated. The other camera can then listen for this sync pulse, and capture a frame at the same time as the other camera.
 
-为了正确运行，两个摄像头都需要在 XVS 线上提供 1.65V 的上拉电压，这是通过树莓派上的 3.3V 和 GND 引脚通过电位分压器创建的。
+### Using the HQ Camera
 
-![Image showing potential divider setup](https://www.raspberrypi.com/documentation/accessories/images/synchronous_camera_wiring.jpg)
+For correct operation, both cameras require a 1.65V pull up voltage on the XVS line, which is created by a potential divider through the 3.3V and GND pins on the Raspberry Pi.
 
-从两个 10kΩ 电阻器到 3.3V 和地（通过有效源阻抗为 5kΩ制造 1.65V）创建一个电位分压器。这可以连接到任一款树莓派。
+![Image showing potential divider setup](https://www.raspberrypi.com/documentation/accessories/images/synchronous_camera_wiring.jpg?hash=d48b1400c9d450ab9166cb5ec571ab63)
 
-将每个 HQ 摄像头板的 GND 和 XVS 测试点焊接在一起。
+Create a potential divider from two 10kΩ resistors to 3.3V and ground (to make 1.65V with an effective source impedance of 5kΩ). This can be connected to either Raspberry Pi.
 
-将 XVS 线连接到 1.65V 电位分压上拉电阻。
+Solder the GND and XVS test points of each HQ Camera board to each other.
 
-#### 启动两台树莓派
+Connect the XVS wires to the 1.65V potential divider pull-up.
 
-文件 /sys/module/imx477/parameters/trigger_mode 确定哪个板输出脉冲，或等待接收脉冲（源和汇）。此参数只能在超级用户模式下更改。
+#### Boot up both Raspberry Pis
 
-在水槽上运行：
+The file `/sys/module/imx477/parameters/trigger_mode` determines which board outputs pulses, or waits to receive pulses (source and sink). This parameter can only be altered in superuser mode.
 
-```
-sudo su
-echo 2 > /sys/module/imx477/parameters/trigger_mode
-exit
-```
+Run the following commands to configure the sink:
 
-在源端运行：
+[[source,console]h]
 
 ```
-sudo su
-echo 1 > /sys/module/imx477/parameters/trigger_mode
-exit
+$ sudo su
+$ echo 2 > /sys/module/imx477/parameters/trigger_mode
+$ exit
 ```
 
-启动水槽运行：
+Run the following commands to configure the source:
 
 ```
-rpicam-vid --frames 300 --qt-preview -o sink.h264
+$ sudo su
+$ echo 1 > /sys/module/imx477/parameters/trigger_mode
+$ exit
 ```
 
-启动源运行
+Run the following command to start the sink:
 
 ```
-rpicam-vid --frames 300 --qt-preview -o source.h264
+$ rpicam-vid --frames 300 --qt-preview -o sink.h264
 ```
 
-帧应该是同步的。使用 --frames 来确保捕获相同数量的帧，并且录制的长度完全相同。首先运行接收器可以确保不会丢失任何帧。
-
->**注意**
->
->需要电位分压器将 XVS 引脚拉高，同时源处于空闲状态。这可以确保在启动时不会创建或丢失任何帧。源在初始化时从低电平变为高电平，这可能会触发错误帧。
-
-### 使用 GS 摄像头
-
->**注意**
->
->全局快门（GS）摄像头也可以在同步模式下操作。然而，源摄像头将记录一帧额外的画面。确保两台摄像头捕获相同数量帧的一个更好的替代方法是使用外部触发方法。 
-
-要作为源和接收器一起运行，全局快门摄像头还需要将 XHS（水平同步）引脚连接在一起。然而，这些不需要连接到上拉电阻。
-
-与 HQ 摄像头方法相同，接线设置相同，只是您还需要将 XHS 引脚连接在一起。
-
-从两个 10kΩ 电阻器中创建一个电位分压器，连接到 3.3V 和地（以使 1.65V，有效源阻抗为 5kΩ）。这可以连接到任一树莓派。
-
-在每个板上的 XVS 测试点上焊接 2 根导线，并将这两根导线连接到 1.65V 电位分压器。
-
-将每个摄像头板的 GND 焊接在一起。还要在每个板的 XHS 测试点上焊接 2 根导线并连接它们。XHS 引脚不需要上拉。
-
-在您希望作为接收端的板上，将 MAS 焊盘的两半焊接在一起。这告诉传感器要作为接收端，并等待信号来捕获一帧。
-
-#### 启动两个树莓派。
-
-启动水槽运行：
+Run the following command to start the source:
 
 ```
-rpicam-vid --frames 300 -o sync.h264
+$ rpicam-vid --frames 300 --qt-preview -o source.h264
 ```
 
-在启动源之前允许延迟（见下面的说明）。 需要大约 > 2 秒。
+Frames should be synchronous. Use `--frames` to ensure the same number of frames are captured, and that the recordings are exactly the same length. Running the sink first ensures that no frames are missed.
 
-启动源运行：
+| NOTE | The potential divider is needed to pull up the XVS pin to high whilst the source is in an idle state. This ensures that no frames are created or lost upon startup. The source whilst initialising goes from LOW to HIGH which can trigger a false frame. |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-```
-rpicam-vid --frames 299 -o sync.h264
-```
+### Use the GS Camera
 
-```
-ffmpeg -i source.h264 -vf select="gte(n\, 1)" source.h264
-```
+| NOTE | The Global Shutter (GS) camera can also be operated in a synchronous mode. However, the source camera will record one extra frame. A much better alternative method to ensure that both cameras capture the same amount of frames is to use the [external trigger method](https://www.raspberrypi.com/documentation/accessories/camera.html#external-trigger-on-the-gs-camera). |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-## GS 相机的外部触发
+To operate as source and sink together, the Global Shutter Cameras also require connection of the XHS (horizontal sync) pins together. However, these do not need connection to a pullup resistor.
 
-全局快门（GS）相机可以通过在板上标记为 XTR 的外部触发（脉冲）连接来进行外部触发。多个相机可以连接到同一个脉冲，从而实现同步两个相机的另一种方式。
+The wiring setup is identical to the [HQ Camera method](https://www.raspberrypi.com/documentation/accessories/camera.html#using-the-hq-camera), except that you will also need to connect the XHS pins together.
 
-曝光时间等于低脉冲宽度时间加上额外的 14.26 微秒。即低脉冲为 10000 微秒时，曝光时间为 10014.26 微秒。帧速率直接受控于脉冲引脚的频率。30Hz 的 PWM 频率将导致帧速率为 30 帧每秒。
+Create a potential divider from two 10kΩ resistors to 3.3V and ground (to make 1.65V with an effective source impedance of 5kΩ). This can be connected to either Raspberry Pi.
 
-![Image showing pulse format](https://www.raspberrypi.com/documentation/accessories/images/external_trigger.jpg)
+Solder 2 wires to the XVS test points on each board and connect both of these wires together to the 1.65V potential divider.
 
-### 准备工作
+Solder the GND of each Camera board to each other. Also solder 2 wires to the XHS test points on each board and connect these. No pullup is needed for XHS pin.
 
->**警告**
->
->此修改包括移除一个 SMD 焊接部件。除非您觉得您有能力完成此修改，否则请勿尝试。在焊接到摄像头板时，请移除塑料背盖以避免损坏。 
+On the boards that you wish to act as sinks, solder the two halves of the MAS pad together. This tells the sensor to act as a sink, and will wait for a signal to capture a frame.
 
-如果您的主板上安装了晶体管 Q2（如下图中蓝色所示），那么您需要从主板上移除 R11（如下图中红色所示）。这将 GP1 连接到 XTR，如果不移除 R11，则摄像头将无法在外部触发模式下运行。组件的位置如下图所示。
+#### Boot up source and sink
 
-![Image showing resistor to be removed](https://www.raspberrypi.com/documentation/accessories/images/resistor.jpg)
-
-接下来，在 GS 摄像头板的 XTR 和 GND 的触点上焊接一根导线。请注意，XTR 是 1.8V 输入，因此您可能需要电平转换器或电位分压器。
-
-我们可以使用树莓派 Pico 来提供触发信号。将任何 Pico GPIO 引脚（此示例中使用 GP28）通过 1.5kΩ电阻连接到 XTR。还要在 XTR 和 GND 之间连接一个 1.8kΩ电阻，以将高逻辑电平降低到 1.8V。下面显示了接线图。
-
-![Image showing Raspberry Pi Pico wiring](https://www.raspberrypi.com/documentation/accessories/images/pico_wiring.jpg)
-
-#### 连接摄像头后启动树莓派
-
-通过超级用户模式启用外部触发：
+Run the following command to start the sink:
 
 ```
-sudo su
-echo 1 > /sys/module/imx296/parameters/trigger_mode
-exit
+$ rpicam-vid --frames 300 -o sync.h264
 ```
 
-#### 树莓派 Pico Mirco Python 代码
+Due to the limitations of the IMX296 sensor, the sink cannot record exactly the same number of frames as the source. **The source records one extra frame before the sink starts recording**. Because of this, you need to specify that the sink records one less frame with the `--frames` option.
+
+Wait at least two seconds before you start the source.
+
+After waiting two seconds, run the following command to start the source:
+
+```
+$ rpicam-vid --frames 299 -o sync.h264
+```
+
+Because the sink and source record a different number of frames, use `ffmpeg` to resync the videos. By dropping the first frame from the source, we then get two recordings with the same starting point and frame length:
+
+```
+$ ffmpeg -i source.h264 -vf select="gte(n\, 1)" source.h264
+```
+
+## External Trigger on the GS Camera
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/camera/external_trigger.adoc)
+
+The Global Shutter (GS) camera can be triggered externally by pulsing the external trigger (denoted on the board as XTR) connection on the board. Multiple cameras can be connected to the same pulse, allowing for an alternative way to synchronise two cameras.
+
+The exposure time is equal to the low pulse-width time plus an additional 14.26us. i.e. a low pulse of 10000us leads to an exposure time of 10014.26us. Framerate is directly controlled by how often you pulse the pin. A PWM frequency of 30Hz will lead to a framerate of 30 frames per second.
+
+![Image showing pulse format](https://www.raspberrypi.com/documentation/accessories/images/external_trigger.jpg?hash=f5c22e2145d64a40b0e40fd76f643e3f)
+
+### Preparation
+
+| WARNING | This modification includes removing an SMD soldered part. You should not attempt this modification unless you feel you are competent to complete it. When soldering to the Camera board, please remove the plastic back cover to avoid damaging it. |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+If your board has transistor Q2 fitted (shown in blue on the image below), then you will need to remove R11 from the board (shown in red). This connects GP1 to XTR and without removing R11, the camera will not operate in external trigger mode. The location of the components is displayed below.
+
+![Image showing resistor to be removed](https://www.raspberrypi.com/documentation/accessories/images/resistor.jpg?hash=821e0afb44752644b8e2da513104f330)
+
+Next, solder a wire to the touchpoints of XTR and GND on the GS Camera board. Note that XTR is a 1.8V input, so you may need a level shifter or potential divider.
+
+We can use a Raspberry Pi Pico to provide the trigger. Connect any Pico GPIO pin (GP28 is used in this example) to XTR via a 1.5kΩ resistor. Also connect a 1.8kΩ resistor between XTR and GND to reduce the high logic level to 1.8V. A wiring diagram is shown below.
+
+![Image showing Raspberry Pi Pico wiring](https://www.raspberrypi.com/documentation/accessories/images/pico_wiring.jpg?hash=bc27ec294a4d88083795db258f58aab9)
+
+#### Boot up the Raspberry Pi with the camera connected.
+
+Enable external triggering through superuser mode:
+
+```
+$ sudo su
+$ echo 1 > /sys/module/imx296/parameters/trigger_mode
+$ exit
+```
+
+#### Raspberry Pi Pico MicroPython Code
 
 ```
 from machine import Pin, PWM
@@ -389,23 +388,20 @@ pwm.freq(framerate)
 pwm.duty_u16(int((1 - (shutter - 14) / frame_length) * 65535))
 ```
 
-低脉冲宽度等于快门时间，PWM 的频率等于帧速率。
+The low pulse width is equal to the shutter time, and the frequency of the PWM equals the framerate.
 
->**注意**
->
->在这个例子中，Pin 28 用于连接到 GS 摄像头板上的 XTR 触点。
+| NOTE | In this example, Pin 28 connects to the XTR touchpoint on the GS camera board. |
+| ------ | -------------------------------------------------------------------------------- |
 
+### Operation
 
-### 操作
-
-在 Pico 上运行代码，并启动摄像头：
+Run the code on the Pico, and set the camera running:
 
 ```
-rpicam-hello -t 0 --qt-preview --shutter 3000
+$ rpicam-hello -t 0 --qt-preview --shutter 3000
 ```
 
-每次 Pico 脉冲引脚时都应生成一帧。可接受可变帧速率，并且可以通过简单地改变脉冲之间的持续时间来控制。不需要传递任何选项给 rpicam-apps 以启用外部触发器。
+Every time that the Pico pulses the pin, it should generate a frame. To control the framerate, vary the duration between pulses.
 
->**注意**
->
->运行 libcamera 应用程序时，您需要指定固定的快门持续时间（值无关紧要）。这将确保 AGC 不会尝试调整摄像头的快门速度，快门速度由外部触发脉冲控制。 
+| NOTE | When running `rpicam-apps`, always specify a fixed shutter duration to ensure the AGC does not adjust the camera’s shutter speed. The duration does not matter, since it is actually controlled by the external trigger pulse. |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
