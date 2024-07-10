@@ -1,141 +1,147 @@
-# Build 扩展板（Build HAT）
+# Build HAT
 
-## Build 扩展板（Build HAT）简介
+## About
 
-树莓派 Build 扩展板是一个附加板，可连接到树莓派的 40 引脚 GPIO 标头，与 LEGO® Education 合作设计，可轻松使用树莓派计算机控制 LEGO® Technic™ 电机和传感器。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/introduction.adoc)
 
-![build hat](https://www.raspberrypi.com/documentation/accessories/images/build-hat.jpg)
+The [Raspberry Pi Build HAT](https://raspberrypi.com/products/build-hat) is an add-on board that connects to the 40-pin GPIO header of your Raspberry Pi, which was designed in collaboration with LEGO® Education to make it easy to control LEGO® Technic™ motors and sensors with Raspberry Pi computers.
 
->**注意**
->
->可在设备兼容性部分找到受支持设备的完整列表。 
+![build hat](https://www.raspberrypi.com/documentation/accessories/images/build-hat.jpg?hash=98708c929a91f5d5edf372371b2b7c6c)
 
-它为 LEGO® Technic™ 电机和 SPIKE™ 组合中的传感器提供四个连接器。可用的传感器包括距离传感器、颜色传感器和多功能力传感器。角度电机有各种尺寸，并包括集成编码器，可查询其位置。
+| NOTE | A full list of supported devices can be found in the [Device Compatibility](https://www.raspberrypi.com/documentation/accessories/build-hat.html#device-compatibility) section. |
+| ------ | ---------------------------------------------------------------- |
 
-Build 扩展板适用于所有带有 40 针 GPIO 引脚的树莓派计算机，包括通过连接排线或其他扩展设备的树莓派 400。连接的 LEGO® Technic™ 设备可以轻松在 Python 中进行控制，同时还可以连接标准的树莓派配件，如摄像头模块。
+It provides four connectors for LEGO® Technic™ motors and sensors from the SPIKE™ Portfolio. The available sensors include a distance sensor, a colour sensor, and a versatile force sensor. The angular motors come in a range of sizes and include integrated encoders that can be queried to find their position.
 
-树莓派 Build 扩展板的电源适配器（PSU）单独出售，旨在为 Build 扩展板、树莓派计算机以及所有连接的 LEGO® Technic™ 设备供电。
+The Build HAT fits all Raspberry Pi computers with a 40-pin GPIO header, including, with the addition of a ribbon cable or other extension device, Raspberry Pi 400. Connected LEGO® Technic™ devices can easily be controlled in Python, alongside standard Raspberry Pi accessories such as a camera module.
 
-![psu](https://www.raspberrypi.com/documentation/accessories/images/psu.jpg)
+The Raspberry Pi Build HAT power supply (PSU), which is [available separately](https://raspberrypi.com/products/build-hat-power-supply), is designed to power both the Build HAT and Raspberry Pi computer along with all connected LEGO® Technic™ devices.
 
-从 LEGO® Education 经销商单独提供的 SPIKE™ Prime 套装 45678 和 SPIKE™ Prime 扩展套装 45681 中，包含一组由 Build 扩展板支持的实用元件。
+![psu](https://www.raspberrypi.com/documentation/accessories/images/psu.jpg?hash=b1bafd5ae45d03c691dda612eae68798)
 
-受支持设备的完整列表
+The LEGO® Education SPIKE™ Prime Set 45678 and SPIKE™ Prime Expansion Set 45681, available separately from LEGO® Education resellers, include a collection of useful elements supported by the Build HAT.
 
->**注意**
->
->该 HAT 与所有 40 针 GPIO 树莓派板块兼容，包括树莓派 4 和树莓派 Zero。通过添加排线电缆或其他延伸设备，也可与树莓派 400 一起使用。 
+| NOTE | The HAT works with all 40-pin GPIO Raspberry Pi boards, including Raspberry Pi 4 and Raspberry Pi Zero. With the addition of a ribbon cable or other extension device, it can also be used with Raspberry Pi 400. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-* 控制 SPIKE™ Portfolio 中包含的 4 个 LEGO® Technic™ 电机和传感器。
-* 控制您的 LEGO® Technic™ 设备的易于使用的 Python 库
-* 适用于带有 40 针 GPIO 引脚的任何树莓派计算机
-* Onboard RP2040 微控制器管理 LEGO® Technic™设备的低级控制
-* 单独提供外部 8V PSU 以为 Build 扩展板和树莓派供电
+* Controls up to 4 LEGO® Technic™ motors and sensors included in the SPIKE™ Portfolio
+* Easy-to-use [Python library](https://buildhat.readthedocs.io/) to control your LEGO® Technic™ devices
+* Fits onto any Raspberry Pi computer with a 40-pin GPIO header
+* Onboard [RP2040](https://www.raspberrypi.com/documentation/microcontrollers/rp2040.html) microcontroller manages low-level control of LEGO® Technic™ devices
+* External 8V PSU [available separately](https://raspberrypi.com/products/build-hat-power-supply) to power both Build HAT and Raspberry Pi
 
->**注意**
->
->由于不支持通过 GPIO 引脚供电，Build 扩展板不能为树莓派 400 供电 。
+| NOTE | The Build HAT cannot power the Raspberry Pi 400, since it does not support power supply over the GPIO headers. |
+| ------ | ---------------------------------------------------------------------------------------------------------------- |
 
-## 准备您的 Build 扩展板
+## Prepare your Build HAT
 
->**注意**
->
->在开始使用您的树莓派 Build 扩展板之前，您应该设置您的树莓派，使用 Raspberry Pi Imager 安装最新版本的操作系统。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/preparing-build-hat.adoc)
 
-将 9mm 的间隔柱连接到板的底部。将树莓派 Build 扩展板安装到您的树莓派上。确保将其正确放置。与其他扩展板不同，所有组件都在底部，为顶部的面包板或乐高® 元件留出空间。
+| NOTE | Before starting to work with your Raspberry Pi Build HAT you should [set up](https://www.raspberrypi.com/documentation/computers/getting-started.html#setting-up-your-raspberry-pi) your Raspberry Pi, [install](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system) the latest version of the operating system using [Raspberry Pi Imager](https://www.raspberrypi.com/downloads/). |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 
-![fitting build hat](https://www.raspberrypi.com/documentation/accessories/images/fitting-build-hat.gif)
+Attach 9mm spacers to the bottom of the board. Seat the Raspberry Pi Build HAT onto your Raspberry Pi. Make sure you put it on the right way up. Unlike other HATs, all the components are on the bottom, leaving room for a breadboard or LEGO® elements on top.
 
-### 访问 GPIO 引脚
+![fitting build hat](https://www.raspberrypi.com/documentation/accessories/images/fitting-build-hat.gif?hash=929b2b4879e4a3d3a7ad5081809fa4ba)
 
-如果您想使用树莓派的 GPIO 引脚，您可以添加一个可选的高头并使用 15 毫米间隔柱。
+### Access the GPIO Pins
 
-![tall headers](https://www.raspberrypi.com/documentation/accessories/images/tall-headers.png)
+If you want to access the GPIO pins of the Raspberry Pi, you can add an optional tall header and use 15 mm spacers.
 
-下面的引脚是 Build 扩展板本身使用的，您不应该连接其他东西到这些引脚上。
+![tall headers](https://www.raspberrypi.com/documentation/accessories/images/tall-headers.png?hash=95d6f32dec4094416cdbfaa362410725)
 
-| GPIO    | 使用      | 状态   |
-| --------- | ----------- | -------- |
-| GPIO0/1 | ID 识别器 |        |
-| GPIO4   | 重置      |        |
-| GPIO14  | 发送      |        |
-| GPIO15  | 接收      |        |
-| GPIO16  | RTS       | 未使用 |
-| GPIO17  | CTS       | 未使用 |
+The following pins are used by the Build HAT itself and you should not connect anything to them.
 
-### 设置您的树莓派
+| GPIO    | Use     | Status |
+| --------- | --------- | -------- |
+| GPIO0/1 | ID prom |        |
+| GPIO4   | Reset   |        |
+| GPIO14  | Tx      |        |
+| GPIO15  | Rx      |        |
+| GPIO16  | RTS     | unused |
+| GPIO17  | CTS     | unused |
 
-树莓派启动后，通过单击 Raspberry 菜单按钮，然后选择“首选项”，再选择“Raspberry Pi 配置”来打开 Raspberry Pi 配置工具。
+### Set up your Raspberry Pi
 
-单击“接口”选项卡，并按照下面所示调整串行设置：
+Once the Raspberry Pi has booted, open the Raspberry Pi Configuration tool by clicking on the Raspberry Menu button and then selecting "Preferences" and then "Raspberry Pi Configuration".
 
-![setting up](https://www.raspberrypi.com/documentation/accessories/images/setting-up.png)
+Click on the "interfaces" tab and adjust the Serial settings as shown below:
 
-#### 使用您的无头树莓派
+![setting up](https://www.raspberrypi.com/documentation/accessories/images/setting-up.png?hash=6c6c522cf51dd6d8e0bd06d39f49f500)
 
-如果您正在无头运行您的树莓派并使用 raspi-config ，请从第一个菜单中选择“接口选项”。
+#### Use your Raspberry Pi headless
 
-![raspi config 1](https://www.raspberrypi.com/documentation/accessories/images/raspi-config-1.png)
+If you are running your Raspberry Pi headless and using `raspi-config`, select "Interface Options" from the first menu.
 
-然后选择“P6 串行端口”。
+![raspi config 1](https://www.raspberrypi.com/documentation/accessories/images/raspi-config-1.png?hash=89492f1233dedb9cdb1589256744d875)
 
-![raspi config 2](https://www.raspberrypi.com/documentation/accessories/images/raspi-config-2.png)
+Then "P6 Serial Port".
 
-禁用串行控制台：
+![raspi config 2](https://www.raspberrypi.com/documentation/accessories/images/raspi-config-2.png?hash=08f1dc42212a007ffeeb6a9d98d6c0be)
 
-![raspi config 3](https://www.raspberrypi.com/documentation/accessories/images/raspi-config-3.png)
+Disable the serial console:
 
-并启用串口。
+![raspi config 3](https://www.raspberrypi.com/documentation/accessories/images/raspi-config-3.png?hash=ec94440de42b2aa66e6b55e87cc2459d)
 
-![raspi config 4](https://www.raspberrypi.com/documentation/accessories/images/raspi-config-4.png)
+And enable the serial port hardware.
 
-最终设置应该看起来像这样。
+![raspi config 4](https://www.raspberrypi.com/documentation/accessories/images/raspi-config-4.png?hash=9f559ca55fa956d3480e115ee5679be7)
 
-![raspi config 5](https://www.raspberrypi.com/documentation/accessories/images/raspi-config-5.png)
+The final settings should look like this.
 
-如果您已经进行了任何更改，此时需要重新启动。
+![raspi config 5](https://www.raspberrypi.com/documentation/accessories/images/raspi-config-5.png?hash=90b69d8b96f0a410cd6b85c7594f508d)
 
-### 为 Build 扩展板供电
+You will need to reboot at this point if you have made any changes.
 
-连接外部电源 — 推荐使用官方树莓派 Build 扩展板电源 — 但是凡是可靠的 +8V±10% 电源，能够通过 DC 5521 中心正枪形连接器（5.5mm × 2.1mm × 11mm）提供 48W 的电源，都可以为 Build 扩展板供电。除非您正在使用树莓派 400，否则无需额外再将树莓派接入电源。
+### Power the Build HAT
 
->**注意**
->
->旧版 HAT 无法为树莓派 400 供电，因为它不支持通过 GPIO 引脚取电。 
+Connect an external power supply — the [official Raspberry Pi Build HAT power supply](https://raspberrypi.com/products/build-hat-power-supply) is recommended — however any reliable +8V±10% power supply capable of supplying 48W via a DC 5521 centre positive barrel connector (5.5mm × 2.1mm × 11mm) will power the Build HAT. You don’t need to connect an additional USB power supply to the Raspberry Pi as well, unless you are using a Raspberry Pi 400.
 
-![powering build hat](https://www.raspberrypi.com/documentation/accessories/images/powering-build-hat.gif)
+| NOTE | The Build HAT can not power the Raspberry Pi 400 as it does not support being powered via the GPIO headers. |
+| ------ | ------------------------------------------------------------------------------------------------------------- |
 
->**注意**
->
->乐高® Technic™ 电机非常强大；因此，为了驱动它们，您需要外部的 8V 电源。如果您想从电机编码器和 SPIKE™ 力传感器读取数据，您可以通过您树莓派的 USB 电源接口以平常的方式为您的树莓派和 Build 扩展板供电。与电机一样，SPIKE™颜色和距离传感器需要外部电源供应。 
+![powering build hat](https://www.raspberrypi.com/documentation/accessories/images/powering-build-hat.gif?hash=227d69a9a1e933151914a385a219f9e7)
 
-您可以选择使用 Python 或 .NET 与 Build 扩展板一起使用。
+| NOTE | The LEGO® Technic™ motors are very powerful; so to drive them you’ll need an external 8V power supply. If you want to read from motor encoders and the SPIKE™ force sensor, you can power your Raspberry Pi and Build HAT the usual way, via your Raspberry Pi’s USB power socket. The SPIKE™ colour and distance sensors, like the motors, require an [external power supply](https://raspberrypi.com/products/build-hat-power-supply). |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-## 使用 Python 操作 Build 扩展板
+You have the choice to use Build HAT with Python or .NET.
 
-### 安装 Python 库
+## Use the Build HAT from Python
 
-安装 Build HAT Python 库。打开终端，然后输入，
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/py-installing-software.adoc)
+
+### Install the Build HAT Python Library
+
+To install the Build HAT Python library, open a terminal window and run the following command:
 
 ```
 $ sudo apt install python3-build-hat
 ```
 
-有关 Build HAT Python 库的更多信息，请参阅 ReadTheDocs。
+Raspberry Pi OS versions prior to *Bookworm* do not have access to the library with `apt`. Instead, run the following command to install the library using `pip`:
 
-### 使用 Python 控制电机
+```
+$ sudo pip3 install buildhat
+```
 
-有许多电机可以与 Build 扩展板一起使用
+For more information about the Build HAT Python Library see [ReadTheDocs](https://buildhat.readthedocs.io/).
 
-#### 连接电机
+### Use Motors from Python
 
-将电机连接到 Build 扩展板上的接口 A。 LPF2 连接器需要正确插入。 如果连接器无法轻松滑入，请旋转 180 度后重试。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/py-motors.adoc)
 
-![connect motor](https://www.raspberrypi.com/documentation/accessories/images/connect-motor.gif)
+There are [a number of motors](https://www.raspberrypi.com/documentation/accessories/build-hat.html#device-compatibility) that work with the Build HAT.
 
-#### 使用电机
+#### Connect a Motor
 
-启动 Thonny IDE。添加以下代码：
+Connect a motor to port A on the Build HAT. The LPF2 connectors need to be inserted the correct way up. If the connector doesn’t slide in easily, rotate by 180 degrees and try again.
+
+![connect motor](https://www.raspberrypi.com/documentation/accessories/images/connect-motor.gif?hash=a8e7c413aa470e3a5d85059fa170ab70)
+
+#### Work with Motors
+
+Start the [Thonny IDE](https://thonny.org/). Add the program code below:
 
 ```
 from buildhat import Motor
@@ -145,29 +151,29 @@ motor_a = Motor('A')
 motor_a.run_for_seconds(5)
 ```
 
-通过单击播放/运行按钮来运行程序。如果这是自树莓派启动以来首次运行 Build 扩展板程序，那么在固件复制到板上时会有几秒钟的暂停。您应该看到红色 LED 熄灭，绿色 LED 点亮。以后再执行 Python 程序就不会有这种暂停了。
+Run the program by clicking the play/run button. If this is the first time you’re running a Build HAT program since the Raspberry Pi has booted, there will be a few seconds pause while the firmware is copied across to the board. You should see the red LED extinguish and the green LED illuminate. Subsequent executions of a Python program will not require this pause.
 
-![blinking light](https://www.raspberrypi.com/documentation/accessories/images/blinking-light.gif)
+![blinking light](https://www.raspberrypi.com/documentation/accessories/images/blinking-light.gif?hash=db99f6501e955b2832f80fa975ca42e3)
 
-您的电机应该顺时针转动 5 秒钟。
+Your motor should turn clockwise for 5 seconds.
 
-![turning motor](https://www.raspberrypi.com/documentation/accessories/images/turning-motor.gif)
+![turning motor](https://www.raspberrypi.com/documentation/accessories/images/turning-motor.gif?hash=1300a4c765178f6863a8b6a8e311a1e2)
 
-更改代码的最后一行并重新运行。
+Change the final line of your program and re-run.
 
 ```
 motor_a.run_for_seconds(5, speed=50)
 ```
 
-电机现在应该转得更快。再做一个改变：
+The motor should now turn faster. Make another change:
 
 ```
 motor_a.run_for_seconds(5, speed=-50)
 ```
 
-电机应该向相反方向（逆时针）转动
+The motor should turn in the opposite (anti-clockwise) direction
 
-点击 Thonny 中的加号按钮创建一个新程序。添加以下代码：
+Create a new program by clicking on the plus button in Thonny. Add the code below:
 
 ```
 from buildhat import Motor
@@ -178,21 +184,22 @@ while True:
     print("Position: ", motor_a.get_aposition())
 ```
 
-运行程序。拿起电机并转动轴。您应该看到在 Thonny REPL 中打印的数字在变化。
+Run the program. Grab the motor and turn the shaft. You should see the numbers printed in the Thonny REPL changing.
 
-### 使用 Python 中的传感器
+### Use Sensors from Python
 
-有许多传感器可与 Build 扩展板一起使用。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/py-sensors.adoc)
 
-#### 使用传感器
+There is a [large range of sensors](https://www.raspberrypi.com/documentation/accessories/build-hat.html#device-compatibility) that work with the Build HAT.
 
-将彩色传感器连接到 Build 扩展板的 B 接口，将力传感器连接到 C 端口。
+#### Work with Sensors
 
->**注意**
->
->如果您不打算驱动电机，则无需外部电源，可以使用标准 USB 电源为您的树莓派供电。 
+Connect a Colour sensor to port B on the Build HAT, and a Force sensor to port C.
 
-创建另一个新程序：
+| NOTE | If you’re not intending to drive a motor, then you don’t need an external power supply and you can use a standard USB power supply for your Raspberry Pi. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+Create another new program:
 
 ```
 from signal import pause
@@ -213,89 +220,91 @@ button.when_released = handle_released
 pause()
 ```
 
-运行它，并将一个彩色物体（LEGO®元素最理想）放在颜色传感器前，然后按下力传感器压杆。传感器的 LED 应该亮起，并且最接近的颜色名称应该显示在 thonny REPL 中。
+Run it and hold a coloured object (LEGO® elements are ideal) in front of the colour sensor and press the Force sensor plunger. The sensor’s LED should switch on and the name of the closest colour should be displayed in the Thonny REPL.
 
-## 使用来自 .NET 的 Build 扩展板
+## Use the Build HAT from .NET
 
-### 安装 .NET 框架
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/net-installing-software.adoc)
 
-在树莓派上无法用 APT 安装从微软获取的 .NET 框架。但是，您可以参照微软的官方说明来安装 .NET 框架。这还有一个简化的第三方途径可以将 .NET 工具链安装到您的树莓派上。
+### Install the .NET Framework
 
->**警告**
->
->安装脚本以 APT 运行。您应该先阅读它，并确保您理解它在做什么。如果您有任何疑问，应该按照官方说明手动操作。
+The .NET framework from Microsoft is not available via `apt` on Raspberry Pi. However, you can follow the [official instructions](https://docs.microsoft.com/en-us/dotnet/iot/deployment) from Microsoft to install the .NET framework. Alternatively, there is a simplified [third party route](https://www.petecodes.co.uk/install-and-use-microsoft-dot-net-5-with-the-raspberry-pi/) to get the .NET toolchain on to your Raspberry Pi.
+
+| WARNING | The installation script is run as `root`. You should read it first and make sure you understand what it is doing. If you are at all unsure you should follow the [official instructions](https://docs.microsoft.com/en-us/dotnet/iot/deployment) manually. |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ```
 $ wget -O - https://raw.githubusercontent.com/pjgpetecodes/dotnet5pi/master/install.sh | sudo bash
 ```
 
-安装 .NET 框架后，您可以创建您的项目：
+After installing the .NET framework you can create your project:
 
 ```
 $ dotnet new console --name buildhat
 ```
 
-这将在 buildhat 子目录中创建一个默认程序，我们需要在该目录中才能继续：
+This creates a default program in the `buildhat` subdirectory, and we need to be in that directory in order to continue:
 
 ```
 $ cd buildhat
 ```
 
-您现在需要安装以下 NuGet 软件包：
+You will now need to install the following nuget packages:
 
 ```
 $ dotnet add package System.Device.Gpio --version 2.1.0
 $ dotnet add package Iot.Device.Bindings --version 2.1.0
 ```
 
-### 运行 C# 代码
+### Run C# Code
 
-您可以使用 dotnet run 命令运行程序。现在让我们试一下，确保一切正常。它应该打印出 "Hello World!"
+You can run the program with the `dotnet run` command. Let’s try it now to make sure everything works. It should print "Hello World!"
 
 ```
 $ dotnet run
 Hello World!
 ```
 
-(在接下来的说明中，当指示“运行程序”时，您只需重新运行 dotnet run )
+(When instructed to "run the program" in the instructions that follow, you will simply rerun `dotnet run`)
 
-### 编辑 C# 代码
+### Edit C# Code
 
-在下面的说明中，您将编辑生成的 C# 程序文件 buildhat/Program.cs ，该文件是在运行上述命令时生成的。
+In the instructions below, you will be editing the file `buildhat/Program.cs`, the C# program which was generated when you ran the above commands.
 
-任何文本编辑器都可以用来编辑 C# 代码，包括预装的 Geany IDE/文本编辑器。Visual Studio Code（通常称为 "VS Code"）也是一个流行的替代方案。
+Any text editor will work to edit C# code, including Geany, the IDE/Text Editor that comes pre-installed. [Visual Studio Code](https://code.visualstudio.com/docs/setup/raspberry-pi/) (often called "VS Code") is also a popular alternative.
 
-### 使用 .NET 从 Build 扩展板进行操作
+### Use the Build HAT from .NET
 
-树莓派 Build 扩展板在 LEGO® 术语中被称为"Brick"，您可以使用 Build 扩展板串行协议直接与之通信
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/net-brick.adoc)
 
-您可以按照以下方式创建一个 brick 对象
+The Raspberry Pi Built HAT is referred to "Brick" in LEGO® parlance and you can talk directly to it from .NET using the [Build HAT Serial Protocol](https://datasheets.raspberrypi.com/build-hat/build-hat-serial-protocol.pdf).
+
+You can create a `brick` object as below,
 
 ```
 Brick brick = new("/dev/serial0");
 ```
 
-但是您需要记住在代码结尾处处理 brick 。
+but you need to remember to dispose of the `brick` at the end of your code.
 
 ```
 brick.Dispose();
 ```
 
->**警告**
->
->如果您不调用 `brick.Dispose()` ，您的程序将不会停止。 
+| WARNING | If you do not call `brick.Dispose()` your program will not terminate. |
+| --------- | ------------------------------------------------------ |
 
-如果您想避免在最后调用 brick.Dispose ，那么请使用 using 语句创建您的模块：
+If you want to avoid calling `brick.Dispose` at the end, then create your brick with the `using` statement:
 
 ```
 using Brick brick = new("/dev/serial0");
 ```
 
-在这种情况下，当程序结束时，您的砖将被自动处理。
+In this case, when reaching the end of the program, your brick will be automatically disposed.
 
-#### 显示信息
+#### Display Build HAT information
 
-您可以收集各种软件版本、签名和输入电压：
+You can gather the various software versions, the signature, and the input voltage:
 
 ```
 var info = brick.BuildHatInformation;
@@ -304,20 +313,19 @@ Console.WriteLine($"{BitConverter.ToString(info.Signature)}");
 Console.WriteLine($"Vin = {brick.InputVoltage.Volts} V");
 ```
 
->**注意**
->
->输入电压仅在启动时读取一次，之后就不再读取。 
+| NOTE | The input voltage is read only once at boot time and is not read again afterwards. |
+| ------ | ------------------------------------------------------------------------------------ |
 
-#### 获取传感器和电机详细信息
+#### Getting sensors and motors details
 
-函数 GetSensorType ， GetSensor 将允许您检索连接传感器上的任何信息。
+The functions `GetSensorType`, `GetSensor` will allow you to retrieve any information on connected sensor.
 
 ```
 SensorType sensor = brick.GetSensorType((SensorPort)i);
 Console.Write($"Port: {i} {(Brick.IsMotor(sensor) ? "Sensor" : "Motor")} type: {sensor} Connected: ");
 ```
 
-在这个例子中，您也可以使用 IsMotor 静态函数来检查连接的元素是传感器还是电机。
+In this example, you can as well use the `IsMotor` static function to check if the connected element is a sensor or a motor.
 
 ```
 if (Brick.IsActiveSensor(sensor))
@@ -331,13 +339,13 @@ else
 }
 ```
 
-ActiveSensor 具有一系列高级属性和功能，可以帮助理解传感器的每个元素。还可以从砖块中调用原始功能。这将允许您选择特定模式并执行高级场景。虽然这是可能的，但电机和传感器类已经被创建，以使您的生活更轻松。
+`ActiveSensor` have a collection of advanced properties and functions allowing to understand every element of the sensor. It is also possible to call the primitive functions from the brick from them. This will allow you to select specific modes and do advance scenarios. While this is possible, motor and sensor classes have been created to make your life easier.
 
-#### 事件
+#### Events
 
-大多数传感器在其特殊属性上实现事件。您可以简单地订阅 PropertyChanged 和 PropertyUpdated 。当值发生变化时，将触发更改的事件，而在成功更新属性时将触发更新的事件。根据使用的模式，一些属性可能会一直在后台更新，而另一些则偶尔更新。
+Most sensors implements events on their special properties. You can simply subscribe to `PropertyChanged` and `PropertyUpdated`. The changed one will be fired when the value is changing while the updated one when there is a success update to the property. Depending on the modes used, some properties may be updated in the background all the time while some others occasionally.
 
-当颜色变化或电机位置变化时，您可能只对此感兴趣，将其用作转速表。在这种情况下， PropertyChanged 就是您需要的！
+You may be interested only when a colour is changing or the position of the motor is changing, using it as a tachometer. In this case, the `PropertyChanged` is what you need!
 
 ```
 Console.WriteLine("Move motor on Port A to more than position 100 to stop this test.");
@@ -366,42 +374,44 @@ void MotorPropertyEvent(object? sender, PropertyChangedEventArgs e)
 }
 ```
 
-#### 等待初始化
+#### Wait for initialization
 
-砖块在初始化之前可能需要很长时间。已实现等待连接传感器的功能。
+The brick can take a long time before it initializes. A wait for a sensor to be connected has been implemented.
 
 ```
 brick.WaitForSensorToConnect(SensorPort.PortB);
 ```
 
-如果要实现诸如在一段时间后警告用户并重试等高级功能，也需要一段 CancellationToken 时间。
+It does as well take a `CancellationToken` if you want to implement advance features like warning the user after some time and retrying.
 
-### 使用 .NET 中的电机
+### Use Motors from .NET
 
-有两种类型的电机，被动电机和主动电机。主动电机将提供详细位置、绝对位置和速度，而被动电机只能通过速度来控制。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/net-motors.adoc)
 
-有一组常见的函数可用于控制电机的速度。有两个重要的函数： SetPowerLimit 和 SetBias ：
+There are two types of motors, the **passive** ones and the **active** ones. Active motors will provide detailed position, absolute position and speed while passive motors can only be controlled with speed.
+
+A common set of functions to control the speed of the motors are available. There are 2 important ones: `SetPowerLimit` and `SetBias`:
 
 ```
 train.SetPowerLimit(1.0);
 train.SetBias(0.2);
 ```
 
-只接受从 0.0 到 1.0 的值。功率限制是一种方便的方法，可以按比例减少最大功率。
+The accepted values are only from 0.0 to 1.0. The power limit is a convenient ay to reduce in proportion the maximum power.
 
-添加到正电机驱动值并从负电机驱动值中减去的当前端口的偏置值集。这可以用来补偿大多数直流电机在完全转动之前需要一定量驱动的事实。
+The bias value sets for the current port which is added to positive motor drive values and subtracted from negative motor drive values. This can be used to compensate for the fact that most DC motors require a certain amount of drive before they will turn at all.
 
-当创建电机时，默认值为功率限制为 0.7，偏置为 0.3。
+The default values when a motor is created is 0.7 for the power limit and 0.3 for the bias.
 
-#### 被动电机
+#### Passive Motors
 
-![Train motor](https://www.raspberrypi.com/documentation/accessories/images/train-motor.png)
+![Train motor](https://www.raspberrypi.com/documentation/accessories/images/train-motor.png?hash=45e2bbc3373b91434b8c75071c6f18cd)
 
-训练电机，来自 Bricklink 的图像
+Train motor, [Image from Bricklink](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88011-1&name=Train%20Motor&category=%5BPower%20Functions%5D%5BPowered%20Up%5D#T=S&O={%22iconly%22:0})
 
-典型的被动电机是火车和较旧的 Powered Up 电机。 Speed 属性可以设置和读取。它既是目标，也是同时测量速度的传感器，因为这些传感器没有测量它们的方法。该值范围为 -100 到 +100。
+The typical passive motor is a train and older Powered Up motors. The `Speed` property can be set and read. It is the target and the measured speed at the same time as those sensors do not have a way to measure them. The value is from -100 to +100.
 
-控制 Start 、 Stop 和 SetSpeed 的功能也可用。以下是如何使用它的示例：
+Functions to control `Start`, `Stop` and `SetSpeed` are also available. Here is an example of how to use it:
 
 ```
 Console.WriteLine("This will run the motor for 20 secondes incrementing the PWM");
@@ -426,19 +436,18 @@ Console.WriteLine("Stop the train");
 train.Stop();
 ```
 
->**注意**
->
->在火车启动后，您可以调整速度，电机会相应调整。 
+| NOTE | Once the train is started, you can adjust the speed and the motor will adjust accordingly. |
+| ------ | -------------------------------------------------------------------------------------------- |
 
-#### 活动电机
+#### Active Motors
 
-![Active motor](https://www.raspberrypi.com/documentation/accessories/images/active-motor.png)
+![Active motor](https://www.raspberrypi.com/documentation/accessories/images/active-motor.png?hash=4f7f24df8bd5349ffa4a6055d71a4919)
 
-活动电机，来自 Bricklink 的图片
+Active motor, [Image from Bricklink](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88014-1&name=Technic%20XL%20Motor&category=%5BPower%20Functions%5D%5BPowered%20Up%5D#T=S&O={%22iconly%22:0})
 
-活动马达具有 Speed ， AbsolutePosition ， Position 和 TargetSpeed 作为特殊属性。即使马达停止运行，它们也会持续读取。
+Active motors have `Speed`, `AbsolutePosition`, `Position` and `TargetSpeed` as special properties. They are read continuously even when the motor is stopped.
 
-代码片段显示了如何获取马达，启动它们并读取属性：
+The code snippet shows how to get the motors, start them and read the properties:
 
 ```
 brick.WaitForSensorToConnect(SensorPort.PortA);
@@ -465,11 +474,10 @@ active.Stop();
 active2.Stop();
 ```
 
->**注意**
->
->在需要时不要忘记启停您的马达。
+| NOTE | Don’t forget to start and stop your motors when needed. |
+| ------ | ---------------------------------------------------------- |
 
-高级功能适用于活动电机。您可以请求移动几秒钟，到特定位置，到特定绝对位置。以下是一些示例：
+Advance features are available for active motors. You can request to move for seconds, to a specific position, a specific absolute position. Here are couple of examples:
 
 ```
 // From the previous example, this will turn the motors back to their initial position:
@@ -481,7 +489,7 @@ active.MoveToPosition(0, true);
 active2.MoveToPosition(0, true);
 ```
 
-每个功能都允许您阻塞或不阻塞线程，直到操作完成。请注意，对于绝对位置和相对位置移动，存在几度的容差。
+Each function allow you to block or not the thread for the time the operation will be performed. Note that for absolute and relative position moves, there is a tolerance of few degrees.
 
 ```
 brick.WaitForSensorToConnect(SensorPort.PortA);
@@ -504,15 +512,17 @@ active.MoveToAbsolutePosition(-180, PositionWay.Shortest, true);
 active.Float();
 ```
 
-您可以将电机放置在浮动位置，意味着它不再受任何约束。这是一种模式，您可以在将电机用作转速计时使用，移动它并读取位置。如果电机仍受约束，您可能无法移动它。
+You can place the motor in a float position, meaning, there are no more constrains on it. This is a mode that you can use when using the motor as a tachometer, moving it and reading the position. If you still have constrains on the motors, you may not be able to move it.
 
-### 使用 .NET 中的传感器
+### Use Sensors from .NET
 
-就像对于电机一样，您有主动和被动传感器。最近的传感器是主动的。被动的是灯光和简单按钮。主动传感器包括距离或颜色传感器，以及小型的 3x3 像素显示屏。
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/net-sensors.adoc)
 
-#### 按钮/触摸被动传感器
+Like for motors, you have active and passive sensors. Most recent sensors are active. The passive one are lights and simple buttons. Active ones are distance or colour sensors, as well as small 3×3 pixel displays.
 
-按钮/触摸被动传感器具有一个特定属性 IsPressed 。当按钮被按下时，该属性设置为 true。这里是一个带有事件的完整示例：
+#### Button/Touch Passive Sensor
+
+The button/touch passive sensor have one specific property `IsPressed`. The property is set to true when the button is pressed. Here is a complete example with events:
 
 ```
 brick.WaitForSensorToConnect(SensorPort.PortA);
@@ -539,13 +549,13 @@ void ButtonPropertyEvent(object? sender, PropertyChangedEventArgs e)
 }
 ```
 
-#### 被动光
+#### Passive Light
 
-![Passive light](https://www.raspberrypi.com/documentation/accessories/images/passive-light.png)
+![Passive light](https://www.raspberrypi.com/documentation/accessories/images/passive-light.png?hash=cf48cfe5f8d00496aa67d1ed716e6ddc)
 
-被动光，来自 Bricklink 的图像
+Passive light, [Image from Bricklink](https://www.bricklink.com/v2/catalog/catalogitem.page?P=22168c01&name=Electric,%20Light%20Unit%20Powered%20Up%20Attachment&category=%5BElectric,%20Light%20&%20Sound%5D#T=C&C=11)
 
-被动光是火车灯。它们可以打开，您可以控制它们的亮度。
+The passive light are the train lights. They can be switched on and you can controlled their brightness.
 
 ```
 brick.WaitForSensorToConnect(SensorPort.PortA);
@@ -560,23 +570,23 @@ Thread.Sleep(2000);
 light.Off()
 ```
 
-#### 主动传感器
+#### Active Sensor
 
-主动传感器类是一个通用类，所有主动传感器都继承自它，包括主动马达。它们包含一组关于它们如何连接到 Build 扩展板、模式、详细组合模式、硬件、软件版本以及一个名为 ValueAsString 的特定属性。字符串值包含最后一次测量的字符串集合。测量到达时，枚举将包含 `P0C0: ， +23 ， -42` 和 0 。这样做是为了如果您正在使用高级模式并自行管理组合模式和命令，您将能够获得测量值。
+The active sensor class is a generic one that all the active sensor inherit including active motors. They contains a set of properties regarding how they are connected to the Build HAT, the modes, the detailed Combi modes, the hardware, software versions and a specific property called `ValueAsString`. The value as string contains the last measurement as a collection of strings. A measurement arrives like `P0C0: +23 -42 0`, the enumeration will contains `P0C0:`, `+23`, `-42` and `0`. This is made so if you are using advance modes and managing yourself the Combi modes and commands, you’ll be able to get the measurements.
 
-所有活动传感器都可以运行特定的测量模式或组合模式。您可以通过高级模式使用 SelectModeAndRead 和 SelectCombiModesAndRead 功能设置一个您想要持续拥有的特定模式。重要的是要理解更改模式或设置新模式将停止先前的模式。
+All active sensor can run a specific measurement mode or a Combi mode. You can setup one through the advance mode using the `SelectModeAndRead` and `SelectCombiModesAndRead` functions with the specific mode(s) you’d like to continuously have. It is important to understand that changing the mode or setting up a new mode will stop the previous mode.
 
-可以在组合模式中组合的模式列在 CombiModes 属性中。当您设置其中一个模式时，传感器的所有属性将自动更新。
+The modes that can be combined in the Combi mode are listed in the `CombiModes` property. Al the properties of the sensors will be updated automatically when you’ll setup one of those modes.
 
 #### WeDo Tilt Sensor
 
-![WeDo Tilt sensor](https://www.raspberrypi.com/documentation/accessories/images/wedo-tilt.png)
+![WeDo Tilt sensor](https://www.raspberrypi.com/documentation/accessories/images/wedo-tilt.png?hash=83605c1b3fc4c579b417ba2f9ad74de6)
 
-WeDo Tilt sensor，来自 Bricklink 的图像
+WeDo Tilt sensor, [Image from Bricklink](https://www.bricklink.com/v2/catalog/catalogitem.page?S=45305-1&name=WeDo%202.0%20Tilt%20Sensor&category=%5BEducational%20&%20Dacta%5D%5BWeDo%5D#T=S&O={%22iconly%22:0})
 
-WeDo Tilt Sensor 具有特殊 Tilt 属性。类型是一个点，其中 X 是 X 倾斜，Y 是 Y 倾斜。数值范围从 -45 到 +45，它们被限制在这些值并表示度数。
+WeDo Tilt Sensor has a special `Tilt` property. The type is a point with X is the X tilt and Y is the Y tilt. The values goes from -45 to + 45, they are caped to those values and represent degrees.
 
-您可以使用 ContinuousMeasurement 属性为该传感器设置连续测量。
+You can set a continuous measurement for this sensor using the `ContinuousMeasurement` property.
 
 ```
 brick.WaitForSensorToConnect(SensorPort.PortA);
@@ -591,13 +601,13 @@ while(!console.KeyAvailable)
 }
 ```
 
-#### WeDo 距离传感器
+#### WeDoDistance Sensor
 
-![WeDo Distance sensor](https://www.raspberrypi.com/documentation/accessories/images/wedo-distance.png)
+![WeDo Distance sensor](https://www.raspberrypi.com/documentation/accessories/images/wedo-distance.png?hash=97b4594548fae6f272fb66b815d57f0e)
 
-WeDo 距离传感器，来自 Bricklink 的图像
+WeDo Distance sensor, [Image from Bricklink](https://www.bricklink.com/v2/catalog/catalogitem.page?S=45304-1&name=WeDo%202.0%20Motion%20Sensor&category=%5BEducational%20&%20Dacta%5D%5BWeDo%5D#T=S&O={%22iconly%22:0})
 
-WeDo 距离传感器通过 Distance 属性以毫米为单位提供距离
+WeDo Distance Sensor gives you a distance in millimetres with the Distance property.
 
 ```
 brick.WaitForSensorToConnect(SensorPort.PortA);
@@ -610,13 +620,13 @@ while(!console.KeyAvailable)
 }
 ```
 
-#### SPIKE Prime 力传感器
+#### SPIKE Prime Force Sensor
 
-![spike force sensor](https://www.raspberrypi.com/documentation/accessories/images/spike-force.png)
+![spike force sensor](https://www.raspberrypi.com/documentation/accessories/images/spike-force.png?hash=00c39c3c0c78f50f22a387914dbd14e1)
 
-Spike 力传感器，来自 Bricklink 的图片
+Spike Force Sensor, [Image from Bricklink](https://www.bricklink.com/v2/catalog/catalogitem.page?P=37312c01&name=Electric%20Sensor,%20Force%20-%20Spike%20Prime&category=%5BElectric%5D#T=C&C=11)
 
-这个力传感器测量施加在其上的压力，以及是否被按下。这两个属性可以通过 Force 和 IsPressed 属性访问。
+This force sensor measure the pressure applies on it and if it is pressed. The two properties can be access through `Force` and `IsPressed` properties.
 
 ```
 brick.WaitForSensorToConnect(SensorPort.PortA);
@@ -629,13 +639,13 @@ while(!force.IsPressed)
 }
 ```
 
-#### SPIKE Essential 3x3 Color Light Matrix
+#### SPIKE Essential 3×3 Colour Light Matrix
 
-![spike 3x3 matrix](https://www.raspberrypi.com/documentation/accessories/images/3x3matrix.png)
+![spike 3×3 matrix](https://www.raspberrypi.com/documentation/accessories/images/3x3matrix.png?hash=e9e1cdd646b22cfd0d3bd09b97394377)
 
-spike 3x3 matrix, [Image from Bricklink](https://www.bricklink.com/v2/catalog/catalogitem.page?P=45608c01&name=Electric,%203%20x%203%20Color%20Light%20Matrix%20-%20SPIKE%20Prime&category=%5BElectric%5D#T=C)
+spike 3×3 matrix, [Image from Bricklink](https://www.bricklink.com/v2/catalog/catalogitem.page?P=45608c01&name=Electric,%203%20x%203%20Color%20Light%20Matrix%20-%20SPIKE%20Prime&category=%5BElectric%5D#T=C)
 
-这是一个带有 9 个不同 LED 的小型 3x3 显示屏，可以单独控制。该类公开了控制屏幕的功能。以下是一个使用它们的示例：
+This is a small 3×3 display with 9 different LEDs that can be controlled individually. The class exposes functions to be able to control the screen. Here is an example using them:
 
 ```
 brick.WaitForSensorToConnect(SensorPort.PortA);
@@ -661,23 +671,23 @@ Span<LedColor> col = stackalloc LedColor[9] { LedColor.White, LedColor.White, Le
 matrix.DisplayColorPerPixel(brg, col);
 ```
 
-#### SPIKE Prime 颜色传感器和颜色和距离传感器
+#### SPIKE Prime Colour Sensor and Colour and Distance Sensor
 
- SPIKE 颜色传感器：
+SPIKE colour sensor:
 
-![spike color sensor](https://www.raspberrypi.com/documentation/accessories/images/spike-color.png)
+![spike color sensor](https://www.raspberrypi.com/documentation/accessories/images/spike-color.png?hash=416c9a57308a1190b3a739ef89945c0c)
 
-SPIKE 颜色传感器，来自 Bricklink 的图像
+spike colour sensor, [Image from Bricklink](https://www.bricklink.com/v2/catalog/catalogitem.page?P=37308c01&name=Electric%20Sensor,%20Color%20-%20Spike%20Prime&category=%5BElectric%5D#T=C&C=11)
 
-颜色和距离传感器：
+Colour and distance sensor:
 
-![Color distance sensor](https://www.raspberrypi.com/documentation/accessories/images/color-distance.png)
+![Colour distance sensor](https://www.raspberrypi.com/documentation/accessories/images/color-distance.png?hash=cc8150aa44c484eea159b5f70d8ab256)
 
-颜色距离传感器，来自 Bricklink 的图像
+Color distance sensor, [Image from Bricklink](https://www.bricklink.com/v2/catalog/catalogitem.page?P=bb0891c01&name=Electric%20Sensor,%20Color%20and%20Distance%20-%20Boost&category=%5BElectric%5D#T=C&C=1)
 
-这些颜色传感器具有多种属性和功能。您可以获得 Color ， ReflectedLight 和 AmbiantLight 。
+Those colour sensor has multiple properties and functions. You can get the `Color`, the `ReflectedLight` and the `AmbiantLight`.
 
-除此之外，颜色和距离传感器可以测量 Distance ，并具有物体 Counter 。它将自动计算进出范围的物体数量。这可以用来计算通过传感器前方的物体。距离限制在 0 到 10 厘米之间。
+On top of this, the Colour and Distance sensor can measure the `Distance` and has an object `Counter`. It will count automatically the number of objects which will go in and out of the range. This does allow to count objects passing in front of the sensor. The distance is limited from 0 to 10 centimetres.
 
 ```
 brick.WaitForSensorToConnect(SensorPort.PortC);
@@ -699,17 +709,16 @@ while (!Console.KeyAvailable)
 }
 ```
 
->**注意**
->
->为了更好地测量，不建议以非常快的方式更改测量模式，颜色集成可能无法正确完成。此示例为您展示了可以使用传感器做什么。此类不实现连续测量模式。您可以通过高级模式使用 SelectModeAndRead 函数设置一个连续拥有的特定模式。重要的是要理解更改模式或设置新模式将停止先前的模式。 
+| NOTE | For better measurement, it is not recommended to change the measurement mode in a very fast way, the colour integration may not be done in a proper way. This example gives you the full spectrum of what you can do with the sensor. Also, this class do not implement a continuous measurement mode. You can setup one through the advance mode using the `SelectModeAndRead` function with the specific mode you’d like to continuously have. It is important to understand that changing the mode or setting up a new mode will stop the previous mode. |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-#### SPIKE Prime 超声波距离传感器
+#### SPIKE Prime Ultrasonic Distance Sensor
 
-![spike distance sensor](https://www.raspberrypi.com/documentation/accessories/images/spike-distance.png)
+![Spike distance sensor](https://www.raspberrypi.com/documentation/accessories/images/spike-distance.png?hash=42a524aab9242bf860bf744f2dcf0e63)
 
-钉距传感器，来自 Bricklink 的图像
+Spike distance sensor, [Image from Bricklink](https://www.bricklink.com/v2/catalog/catalogitem.page?P=37316c01&name=Electric%20Sensor,%20Distance%20-%20Spike%20Prime&category=%5BElectric%5D#T=C&C=11)
 
-这是一个距离传感器，它实现了一个 Distance 属性，可以提供毫米距离。这个还有一个 ContinuousMeasurement 模式可用。
+This is a distance sensor and it does implement a `Distance` property that will give the distance in millimetre. A `ContinuousMeasurement` mode is also available on this one.
 
 ```
 brick.WaitForSensorToConnect(SensorPort.PortA);
@@ -722,53 +731,58 @@ while(!console.KeyAvailable)
 }
 ```
 
-## 更多资源
+## Further Resources
 
-您可以下载有关文档
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/links-to-other.adoc)
 
-* [树莓派 Build HAT 串行协议](https://datasheets.raspberrypi.com/build-hat/build-hat-serial-protocol.pdf)
-* [树莓派 Build HAT Python 库](https://datasheets.raspberrypi.com/build-hat/build-hat-python-library.pdf)
+You can download documentation on the,
 
-Python 库文档的详细信息也可以在 ReadTheDocs 上找到。您可以在 .NET IoT Github 存储库中找到有关 .NET 库的更多信息。
+* [Raspberry Pi Build HAT Serial Protocol](https://datasheets.raspberrypi.com/build-hat/build-hat-serial-protocol.pdf)
+* [Raspberry Pi Build HAT Python Library](https://datasheets.raspberrypi.com/build-hat/build-hat-python-library.pdf)
 
-您还可以关注树莓派基金会的项目，
+and full details of the Python Library documentation can also be found [on ReadTheDocs](https://buildhat.readthedocs.io/). You can find more information on the .NET library in the [.NET IoT](https://github.com/dotnet/iot/tree/main/src/devices/BuildHat) Github repository.
 
-* [ 乐高® 游戏控制器](https://projects.raspberrypi.org/en/projects/lego-game-controller)
-* [ 乐高® 机器人车](https://projects.raspberrypi.org/en/projects/lego-robot-car)
-* [ 乐高® 绘图仪](https://projects.raspberrypi.org/en/projects/lego-plotter)
-* [ 乐高® 机器人脸](https://projects.raspberrypi.org/en/projects/lego-robot-face)
-* [ 乐高® 数据仪表板](https://projects.raspberrypi.org/en/projects/lego-data-dash)
+You can also follow along with projects from the Raspberry Pi Foundation,
 
-## 设备兼容性
+* [LEGO® Game Controller](https://projects.raspberrypi.org/en/projects/lego-game-controller)
+* [LEGO® Robot Car](https://projects.raspberrypi.org/en/projects/lego-robot-car)
+* [LEGO® Plotter](https://projects.raspberrypi.org/en/projects/lego-plotter)
+* [LEGO® Robot Face](https://projects.raspberrypi.org/en/projects/lego-robot-face)
+* [LEGO® Data Dash](https://projects.raspberrypi.org/en/projects/lego-data-dash)
 
-Build 扩展板库支持 SPIKE™组合中包含的所有乐高® Technic™设备，以及来自乐高® Mindstorms 机器人发明家套件和其他使用 PoweredUp 连接器的设备。
+## Device Compatibility
 
->**重要**
->
->包含 Maker Plate 的 SPIKE™ Prime Expansion Set 的产品代码为 45681。原始 Expansion Set 为 45680，不包括 Maker Plate。 
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/compat.adoc)
 
-| 说明               | 颜色      | 乐高物品编号                     | 在固件中支持 | 在 Python 中支持 | 替代编号       | BrickLink | 可用于                                                                                  | 设置数字            | 类             | 类型   | 设备标识 |
-| --------------------- | ----------- | ---------------------------------- | -------------- | ------------------ | ---------------- | ----------- | ----------------------------------------------------------------------------------------- | --------------------- | ---------------- | -------- | ---------- |
-| 大角度电机          | 白色/青色 | 45602                            | 是的         | 是的             | 45602          | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?S=45602-1#T=S&O=%7B%22iconly%22:0%7D)          | SPIKE Prime Set, SPIKE Prime Expansion Set                                              | 45678, 45680        | 电机           | 活动   | 31       |
-| 中型角度电机        | 白色/青色 | 45603                            | 是           | 是的             | 45603          | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?S=45603-1#T=S&O=%7B%22iconly%22:0%7D)          | SPIKE Prime Set                                                                         | 45678               | 电机           | 主动   | 30       |
-| 中等角度电机        | 白色/灰色 | 6299646, 6359216, 6386708        | 是           | 是               | 436655         | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?P=54696c01&idColor=86#T=C&C=86)          | Mindstorms 机器人发明家                                                                 | 51515               | 电机           | 主动的 | 4B       |
-| 小型角动力电机      | 白色/青色 | 45607, 6296520                   | 是的         | 是的             |                | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?P=45607c01)          | SPIKE Essentials Set                                                                    |                     | 电机           | 主动   | 41       |
-| 光/颜色传感器       | 白色/黑色 | 6217705                          | 是的         | 是的             |                | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?P=37308c01&idColor=11#T=C&C=11)          | SPIKE Prime Set, SPIKE Prime Expansion Set, Mindstorms Robot Inventor, SPIKE Essentials | 45678, 45680, 51515 | 颜色传感器     | 主动   | 3D       |
-| 距离传感器          | 白色/黑色 | 6302968                          | 是           | 是               |                | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?P=37316c01&idColor=11#T=C&C=11)          | SPIKE Prime Set, Mindstorms Robot Inventor                                              | 45678, 51515        | DistanceSensor | 主动   | 3E       |
-| 系统中型电机        | 白色/灰色 | 45303, 6138854, 6290182, 6127110 | 是的         | 是的             |                |           | Wedo 2.0，乐高点子钢琴，应用程序控制的蝙蝠车                                            | 76112               |                | 被动   | 1        |
-| 力传感器            | 白/黑     | 6254354                          | 是的         | 是的             | 45606          | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?P=37312c01&idColor=11#T=C&C=11)          | SPIKE Prime Set                                                                         | 45678               | 力传感器       | 主动   | 3F       |
-| 3×3 LED            | 白色/青色 | 45608, 6297023                   | 是           | 是的             |                | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?P=45608c01)          | SPIKE Essentials                                                                        |                     | 矩阵           | 主动   | 40       |
-| 系统列车电机        | 黑色      | 88011                            | 是的         | 是的             | 28740, 88011-1 | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88011-1#T=S&O=%7B%22iconly%22:0%7D)          | 货运火车，迪士尼火车和车站，客运列车                                                    |                     |                | 被动   | 2        |
-| 供电 LED 灯         | 黑色      | 88005                            | 是的         |                  |                | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88005-1#T=S&O=%7B%22iconly%22:0%7D)          |                                                                                         |                     |                | 被动   | 8        |
-| 中等线性电机        | 白色/灰色 | 88008                            | 是           | 是               | 26913, 88008-1 | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88008-1#T=S&O=%7B%22iconly%22:0%7D)          | 提升, 机器人指挥官                                                                      |                     | 电机           | 主动 | 26       |
-| 技术大电机          | 灰色/灰色 | 88013                            | 是的         | 是的             | 22169          | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88013-1#T=S&O=%7B%22iconly%22:0%7D)          |                                                                                         |                     |                | 主动   | 2E       |
-| Technic XL 电机     | 灰色/灰色 | 88014                            | 是的         | 是的             | 22172, 88014   | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88014-1#T=S&O=%7B%22iconly%22:0%7D)          |                                                                                         |                     |                | 主动 | 2F       |
-| 颜色 + 距离传感器   | 白色/灰色 | 88007                            | 部分         | ？               | 26912          | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88007-1#T=S&O=%7B%22iconly%22:0%7D)          |                                                                                         |                     |                | 主动   | 25       |
-| WeDo 2.0 运动传感器 | 白色/灰色 | 45304, 6138855                   |              |                  | 5003423-1      | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?S=9583-1#T=S&O=%7B%22iconly%22:0%7D%7D)          |                                                                                         |                     |                | 主动   | 35       |
-| WeDo 2.0 倾斜传感器 | 白色/灰色 | 45305, 6138856                   |              |                  | 5003423-1      | [ 链接](https://www.bricklink.com/v2/catalog/catalogitem.page?S=9584-1#T=S&O=%7B%22iconly%22:0%7D)          |                                                                                         |                     |                | 主动   | 34       |
+The Build HAT library supports all the LEGO® Technic™ devices included in the SPIKE™ Portfolio, along with those from the LEGO® Mindstorms Robot Inventor kit and other devices that use a PoweredUp connector.
 
-## 机械图纸
+| IMPORTANT | The product code for the SPIKE™ Prime Expansion Set that includes the Maker Plate is 45681. The original Expansion Set is 45680 and does not include the Maker Plate. |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
-树莓派 Build 扩展板的机械图纸。
+| Description              | Colour      | LEGO Item Number                 | Supported in FW | Supported in Python | Alt Number     | BrickLink | Available In                                                                            | Set Numbers         | Class          | Type    | Device ID |
+| -------------------------- | ------------- | ---------------------------------- | ----------------- | --------------------- | ---------------- | ----------- | ----------------------------------------------------------------------------------------- | --------------------- | ---------------- | --------- | ----------- |
+| Large Angular Motor      | White/Cyan  | 45602                            | Yes             | Yes                 | 45602          | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?S=45602-1#T=S&O={%22iconly%22:0})          | SPIKE Prime Set, SPIKE Prime Expansion Set                                              | 45678, 45680        | Motor          | Active  | 31        |
+| Medium Angular Motor     | White/Cyan  | 45603                            | Yes             | Yes                 | 45603          | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?S=45603-1#T=S&O={%22iconly%22:0})          | SPIKE Prime Set                                                                         | 45678               | Motor          | Active  | 30        |
+| Medium Angular Motor     | White/Grey  | 6299646, 6359216, 6386708        | Yes             | Yes                 | 436655         | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?P=54696c01&idColor=86#T=C&C=86)          | Mindstorms Robot Inventor                                                               | 51515               | Motor          | Active  | 4B        |
+| Small Angular Motor      | White/Cyan  | 45607, 6296520                   | Yes             | Yes                 |                | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?P=45607c01)          | SPIKE Essentials Set                                                                    |                     | Motor          | Active  | 41        |
+| Light/Colour sensor      | White/Black | 6217705                          | Yes             | Yes                 |                | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?P=37308c01&idColor=11#T=C&C=11)          | SPIKE Prime Set, SPIKE Prime Expansion Set, Mindstorms Robot Inventor, SPIKE Essentials | 45678, 45680, 51515 | ColorSensor    | Active  | 3D        |
+| Distance Sensor          | White/Black | 6302968                          | Yes             | Yes                 |                | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?P=37316c01&idColor=11#T=C&C=11)          | SPIKE Prime Set, Mindstorms Robot Inventor                                              | 45678, 51515        | DistanceSensor | Active  | 3E        |
+| System medium motor      | White/Grey  | 45303, 6138854, 6290182, 6127110 | Yes             | Yes                 |                |           | Wedo 2.0, LEGO Ideas Piano, App controlled Batmobile                                    | 76112               |                | Passive | 1         |
+| Force Sensor             | White/Black | 6254354                          | Yes             | Yes                 | 45606          | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?P=37312c01&idColor=11#T=C&C=11)          | SPIKE Prime Set                                                                         | 45678               | ForceSensor    | Active  | 3F        |
+| 3×3 LED                 | White/Cyan  | 45608, 6297023                   | Yes             | Yes                 |                | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?P=45608c01)          | SPIKE Essentials                                                                        |                     | Matrix         | Active  | 40        |
+| System train motor       | Black       | 88011                            | Yes             | Yes                 | 28740, 88011-1 | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88011-1#T=S&O={%22iconly%22:0})          | Cargo Train, Disney Train and Station, Passenger Train                                  |                     |                | Passive | 2         |
+| PoweredUp LED lights     | Black       | 88005                            | Yes             |                     |                | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88005-1#T=S&O={%22iconly%22:0})          |                                                                                         |                     |                | Passive | 8         |
+| Medium linear motor      | White/Grey  | 88008                            | Yes             | Yes                 | 26913, 88008-1 | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88008-1#T=S&O={%22iconly%22:0})          | Boost, Droid Commander                                                                  |                     | Motor          | Active  | 26        |
+| Technic large motor      | Grey/Grey   | 88013                            | Yes             | Yes                 | 22169          | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88013-1#T=S&O={%22iconly%22:0})          |                                                                                         |                     |                | Active  | 2E        |
+| Technic XL motor         | Grey/Grey   | 88014                            | Yes             | Yes                 | 22172, 88014   | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88014-1#T=S&O={%22iconly%22:0})          |                                                                                         |                     |                | Active  | 2F        |
+| Colour + distance sensor | White/Grey  | 88007                            | Partial         | ?                   | 26912          | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?S=88007-1#T=S&O={%22iconly%22:0})          |                                                                                         |                     |                | Active  | 25        |
+| WeDo 2.0 Motion sensor   | White/Grey  | 45304, 6138855                   |                 |                     | 5003423-1      | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?S=9583-1#T=S&O={%22iconly%22:0}})          |                                                                                         |                     |                | Active  | 35        |
+| WeDo 2.0 Tilt sensor     | White/Grey  | 45305, 6138856                   |                 |                     | 5003423-1      | [Link](https://www.bricklink.com/v2/catalog/catalogitem.page?S=9584-1#T=S&O={%22iconly%22:0})          |                                                                                         |                     |                | Active  | 34        |
 
-![mech build hat](https://www.raspberrypi.com/documentation/accessories/images/mech-build-hat.png)
+## Mechanical Drawings
+
+Edit this [on GitHub](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/accessories/build-hat/mech.adoc)
+
+Mechanical drawing of the Raspberry Pi Build HAT.
+
+![mech build hat](https://www.raspberrypi.com/documentation/accessories/images/mech-build-hat.png?hash=40e1cb1b18511fffcfdcd32baf9db40f)
